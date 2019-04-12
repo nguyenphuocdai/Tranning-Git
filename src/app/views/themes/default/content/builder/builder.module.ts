@@ -16,7 +16,7 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { CoreModule } from '../../../../../core/core.module';
 // Builder component
 import { BuilderComponent } from './builder.component';
-
+import { BuilderFieldComponent } from './builder-field/builder-field.component';
 @NgModule({
 	imports: [
 		CommonModule,
@@ -30,12 +30,12 @@ import { BuilderComponent } from './builder.component';
 		RouterModule.forChild([
 			{
 				path: '',
-				component: BuilderComponent
+				component: BuilderFieldComponent
 			}
 		])
 	],
 	providers: [],
-	declarations: [BuilderComponent]
+	declarations: [BuilderComponent, BuilderFieldComponent]
 })
 export class BuilderModule {
 }

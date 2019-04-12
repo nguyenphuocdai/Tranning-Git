@@ -23,29 +23,29 @@ const routes: Routes = [
 				path: 'my-page', // <= Page URL
 				component: MyPageComponent // <= Page component registration
 		   	},
-			{
-				path: 'mail',
-				loadChildren: 'app/views/pages/apps/mail/mail.module#MailModule'
-			},
-			{
-				path: 'ecommerce',
-				loadChildren: 'app/views/pages/apps/e-commerce/e-commerce.module#ECommerceModule',
-				// canActivate: [NgxPermissionsGuard],
-				// data: {
-				//  	permissions: {
-				//  		only: ['accessToECommerceModule'],
-				//  		redirectTo: 'error/403'
-				// 	}
-				// }
-			},
-			{
-				path: 'ngbootstrap',
-				loadChildren: 'app/views/pages/ngbootstrap/ngbootstrap.module#NgbootstrapModule'
-			},
-			{
-				path: 'material',
-				loadChildren: 'app/views/pages/material/material.module#MaterialModule'
-			},
+			// {
+			// 	path: 'mail',
+			// 	loadChildren: 'app/views/pages/apps/mail/mail.module#MailModule'
+			// },
+			// {
+			// 	path: 'ecommerce',
+			// 	loadChildren: 'app/views/pages/apps/e-commerce/e-commerce.module#ECommerceModule',
+			// 	// canActivate: [NgxPermissionsGuard],
+			// 	// data: {
+			// 	//  	permissions: {
+			// 	//  		only: ['accessToECommerceModule'],
+			// 	//  		redirectTo: 'error/403'
+			// 	// 	}
+			// 	// }
+			// },
+			// {
+			// 	path: 'ngbootstrap',
+			// 	loadChildren: 'app/views/pages/ngbootstrap/ngbootstrap.module#NgbootstrapModule'
+			// },
+			// {
+			// 	path: 'material',
+			// 	loadChildren: 'app/views/pages/material/material.module#MaterialModule'
+			// },
 			{
 				path: 'user-management',
 				loadChildren: 'app/views/pages/user-management/user-management.module#UserManagementModule'
