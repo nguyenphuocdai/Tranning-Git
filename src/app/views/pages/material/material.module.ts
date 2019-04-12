@@ -97,6 +97,8 @@ import { PaginatorComponent } from './data-table/paginator/paginator.component';
 import { SortHeaderComponent } from './data-table/sort-header/sort-header.component';
 import { MaterialTableComponent } from './data-table/material-table/material-table.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DragDropComponent } from './common-behaviors/drag-drop/drag-drop.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
 	{
@@ -253,6 +255,7 @@ const routes: Routes = [
 @NgModule({
 	imports: [
 		// material modules
+		DragDropModule,
 		MatInputModule,
 		MatFormFieldModule,
 		MatDatepickerModule,
@@ -297,7 +300,7 @@ const routes: Routes = [
 		CodePreviewModule,
 		RouterModule.forChild(routes)
 	],
-	exports: [RouterModule],
+	exports: [RouterModule ,DragDropComponent],
 	entryComponents: [
 		PizzaPartyComponent,
 		DialogComponent,
@@ -357,7 +360,8 @@ const routes: Routes = [
 		TreeComponent,
 		BottomSheetComponent,
 		BottomSheetExampleComponent,
-		RipplesComponent
+		RipplesComponent,
+		DragDropComponent
 	]
 })
 export class MaterialModule {}

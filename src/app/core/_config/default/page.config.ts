@@ -9,6 +9,9 @@ export class PageConfig {
 		'my-page': { // <= add page URL
 			page: { title: 'My page', desc: 'My page desc' } // <= Page name and description
 		},
+		'builder-field': { // <= add page URL
+			page: { title: 'Builder', desc: 'Builder for field-form' } // <= Page name and description
+		},
 		// ngbootstrap: {
 		// 	accordion: {
 		// 		page: {title: 'Accordion', desc: ''}
@@ -211,9 +214,9 @@ export class PageConfig {
 		// 		page: {title: 'Roles', desc: ''}
 		// 	}
 		// },
-		builder: {
-			page: {title: 'Layout Builder', desc: ''}
-		},
+		// builder: {
+		// 	page: {title: 'Layout Builder', desc: ''}
+		// },
 		header: {
 			actions: {
 				page: {title: 'Actions', desc: 'Actions example page'}

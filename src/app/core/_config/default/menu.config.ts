@@ -361,11 +361,18 @@ export class MenuConfig {
 					icon: 'flaticon-line-graph' // <= Choose the icon
 				},
 				{
-					title: 'Layout Builder',
+					title: 'Field Builder', // <= Title of the page
+					desc: 'Field Builder for Basic', // <= Description of the page
 					root: true,
-					icon: 'flaticon2-expand',
-					page: 'builder'
+					page: 'builder-field', // <= URL
+					icon: 'flaticon-line-graph' // <= Choose the icon
 				},
+				// {
+				// 	title: 'Layout Builder',
+				// 	root: true,
+				// 	icon: 'flaticon2-expand',
+				// 	page: 'builder'
+				// },
 				// {section: 'Components'},
 				// {
 				// 	title: 'Google Material',

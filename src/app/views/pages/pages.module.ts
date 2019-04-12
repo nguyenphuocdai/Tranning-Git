@@ -1,3 +1,4 @@
+import { MaterialModule } from './material/material.module';
 // Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,10 +14,11 @@ import { PartialsModule } from '../partials/partials.module';
 import { UserManagementModule } from './user-management/user-management.module';
 import { CoreModule } from '../../core/core.module';
 import { MyPageComponent } from './my-page/my-page.component';
+import { BuilderComponent } from './builder/builder.component';
 
 @NgModule({
-	declarations: [MyPageComponent],
-	exports: [],
+	declarations: [MyPageComponent, BuilderComponent],
+	exports: [BuilderComponent],
 	imports: [
 		CommonModule,
 		HttpClientModule,
@@ -24,6 +26,7 @@ import { MyPageComponent } from './my-page/my-page.component';
 		NgbModule,
 		CoreModule,
 		PartialsModule,
+		MaterialModule,
 		// MailModule,
 		// ECommerceModule,
 		UserManagementModule,

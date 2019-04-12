@@ -9,6 +9,7 @@ import { AuthGuard } from '../../../core/auth';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 // My Component
 import { MyPageComponent } from './../../pages/my-page/my-page.component';
+import { BuilderComponent } from './../../pages/builder/builder.component';
 
 const routes: Routes = [
 	{
@@ -19,9 +20,14 @@ const routes: Routes = [
 			{
 				path: 'dashboard',
 				loadChildren: 'app/views/pages/dashboard/dashboard.module#DashboardModule'
-			},{
+			},
+			{
 				path: 'my-page', // <= Page URL
 				component: MyPageComponent // <= Page component registration
+			   },
+			   {
+				path: 'builder-field', // <= Page URL
+				component: BuilderComponent // <= Page component registration
 		   	},
 			// {
 			// 	path: 'mail',
