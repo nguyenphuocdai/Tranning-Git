@@ -1,3 +1,4 @@
+import { TreeFieldComponent } from './common-behaviors/tree-field/tree-field.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -99,6 +100,8 @@ import { MaterialTableComponent } from './data-table/material-table/material-tab
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DragDropComponent } from './common-behaviors/drag-drop/drag-drop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ModalBottomSheetComponent } from './controls/modal-bottom-sheet/modal-bottom-sheet.component';
+import { ModalDialogComponent } from './controls/modal-dialog/modal-dialog.component';
 
 const routes: Routes = [
 	{
@@ -300,7 +303,14 @@ const routes: Routes = [
 		CodePreviewModule,
 		RouterModule.forChild(routes)
 	],
-	exports: [RouterModule ,DragDropComponent],
+	exports: [
+		RouterModule ,
+		DragDropComponent,
+		TreeFieldComponent,
+		MatExpansionModule,
+		MatFormFieldModule,
+		MatInputModule
+	],
 	entryComponents: [
 		PizzaPartyComponent,
 		DialogComponent,
@@ -309,7 +319,9 @@ const routes: Routes = [
 		Modal3Component,
 		IconComponent,
 		TreeComponent,
-		BottomSheetExampleComponent
+		BottomSheetExampleComponent,
+		ModalBottomSheetComponent,
+		ModalDialogComponent
 	],
 	providers: [
 		MatIconRegistry,
@@ -358,10 +370,13 @@ const routes: Routes = [
 		MaterialTableComponent,
 		DefaultFormsComponent,
 		TreeComponent,
+		TreeFieldComponent,
 		BottomSheetComponent,
 		BottomSheetExampleComponent,
 		RipplesComponent,
-		DragDropComponent
+		DragDropComponent,
+		ModalBottomSheetComponent,
+		ModalDialogComponent
 	]
 })
 export class MaterialModule {}
