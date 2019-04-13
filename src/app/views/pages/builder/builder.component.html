@@ -1,1 +1,33 @@
-<kt-drag-drop></kt-drag-drop>
+<!-- <button mat-raised-button (click)="openDialog()">Open file</button> -->
+<div class="col-md-3">
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Basic
+            </mat-panel-title>
+            <mat-panel-description>
+              Choosen component
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!-- tree data in panel -->
+          <!-- <kt-tree></kt-tree> -->
+           <!-- tree data in panel -->
+           <kt-drag-drop></kt-drag-drop>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Advance
+            </mat-panel-title>
+            <mat-panel-description>
+              Choosen component
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+</div>
