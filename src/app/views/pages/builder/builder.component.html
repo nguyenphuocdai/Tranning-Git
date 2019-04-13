@@ -1,33 +1,86 @@
-<!-- <button mat-raised-button (click)="openDialog()">Open file</button> -->
-<div class="col-md-3">
-    <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Basic
-            </mat-panel-title>
-            <mat-panel-description>
-              Choosen component
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <!-- tree data in panel -->
-          <!-- <kt-tree></kt-tree> -->
-           <!-- tree data in panel -->
-           <kt-drag-drop></kt-drag-drop>
-        </mat-expansion-panel>
+<div class="container-fluid">
+	<!-- I can use kt-notice selector -->
+	<div class="alert fade show" role="alert">
+		<div class="alert-text">
+			<div class="kt-form__actions kt-form__actions kt-align-right">
+				<button
+					mat-raised-button
+					color="primary"
+					(click)="openSnackBar()"
+				>
+					Submit</button
+				>&nbsp;
+				<button mat-raised-button type="reset">
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+	<!-- I can use kt-notice selector -->
+	<div class="row">
+		<div class="col-md-3">
+			<mat-accordion>
+				<mat-expansion-panel>
+					<mat-expansion-panel-header>
+						<mat-panel-title>
+							Basic
+						</mat-panel-title>
+						<mat-panel-description>
+							Choosen component
+						</mat-panel-description>
+					</mat-expansion-panel-header>
+					<!-- tree data in panel -->
+					<!-- <kt-tree></kt-tree> -->
+					<!-- tree data in panel -->
+					<kt-drag-drop></kt-drag-drop>
+				</mat-expansion-panel>
 
-        <mat-expansion-panel (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Advance
-            </mat-panel-title>
-            <mat-panel-description>
-              Choosen component
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-      </mat-accordion>
+				<mat-expansion-panel
+					(opened)="panelOpenState = true"
+					(closed)="panelOpenState = false"
+				>
+					<mat-expansion-panel-header>
+						<mat-panel-title>
+							Advance
+						</mat-panel-title>
+						<mat-panel-description>
+							Choosen component
+						</mat-panel-description>
+					</mat-expansion-panel-header>
+
+					<p>I'm visible because I am open</p>
+				</mat-expansion-panel>
+			</mat-accordion>
+		</div>
+
+		<div class="col-md-9">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+							<span class="kt-portlet__head-icon kt-hide">
+								<i class="la la-gear"></i>
+							</span>
+							<h3 class="kt-portlet__head-text">
+								Preview Layout
+							</h3>
+						</div>
+					</div>
+				</div>
+				<!--Begin::Form-->
+				<form class="kt-form">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+							<div class="form-group kt-form__group">
+								<mat-form-field class="example-full-width">
+									<input matInput placeholder="Enter Label" />
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!--End::Form-->
+			</div>
+		</div>
+	</div>
 </div>

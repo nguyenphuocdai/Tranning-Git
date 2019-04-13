@@ -304,12 +304,13 @@ const routes: Routes = [
 		RouterModule.forChild(routes)
 	],
 	exports: [
-		RouterModule ,
+		RouterModule,
 		DragDropComponent,
 		TreeFieldComponent,
 		MatExpansionModule,
 		MatFormFieldModule,
-		MatInputModule
+		MatInputModule,
+		MatButtonModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,

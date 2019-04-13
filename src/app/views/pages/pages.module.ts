@@ -17,7 +17,10 @@ import { MyPageComponent } from './my-page/my-page.component';
 import { BuilderComponent } from './builder/builder.component';
 
 @NgModule({
-	declarations: [MyPageComponent, BuilderComponent],
+	declarations: [
+		MyPageComponent,
+		BuilderComponent
+	],
 	exports: [BuilderComponent],
 	imports: [
 		CommonModule,
