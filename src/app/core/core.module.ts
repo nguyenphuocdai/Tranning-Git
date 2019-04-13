@@ -6,6 +6,7 @@ import { ContentAnimateDirective, HeaderDirective, MenuDirective, StickyDirectiv
 // Metronic Pipes
 // Metornic Services
 import { FirstLetterPipe, GetObjectPipe, JoinPipe, OffcanvasDirective, SafePipe, ScrollTopDirective, SparklineChartDirective, TabClickEventDirective, TimeElapsedPipe, ToggleDirective } from './_base/metronic';
+import { TruncateStrPipe } from './_base/metronic/pipes/truncate-str.pipe';
 
 @NgModule({
 	imports: [CommonModule],
@@ -26,6 +27,7 @@ import { FirstLetterPipe, GetObjectPipe, JoinPipe, OffcanvasDirective, SafePipe,
 		GetObjectPipe,
 		SafePipe,
 		FirstLetterPipe,
+		TruncateStrPipe
 	],
 	exports: [
 		// directives
@@ -44,6 +46,7 @@ import { FirstLetterPipe, GetObjectPipe, JoinPipe, OffcanvasDirective, SafePipe,
 		GetObjectPipe,
 		SafePipe,
 		FirstLetterPipe,
+		TruncateStrPipe
 	],
 	providers: []
 })

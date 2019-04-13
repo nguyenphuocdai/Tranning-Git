@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-3" *ngFor="let item of listProject">
+    <mat-card class="kt-card">
+      <mat-card-header>
+        <div mat-card-avatar class="kt-header-image"></div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src={{item.image}} alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p class="text-justify">
+          {{item.about | truncate : 150 : true}}
+      </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+</div>

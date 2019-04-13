@@ -21,7 +21,9 @@ import { BuilderComponent } from './builder/builder.component';
 		MyPageComponent,
 		BuilderComponent
 	],
-	exports: [BuilderComponent],
+	exports: [
+		BuilderComponent
+	],
 	imports: [
 		CommonModule,
 		HttpClientModule,
