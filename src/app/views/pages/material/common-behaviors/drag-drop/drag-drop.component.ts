@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material';
+import { ModalDialogComponent } from '../../controls/modal-dialog/modal-dialog.component';
 
 @Component({
   selector: 'kt-drag-drop',
@@ -7,47 +9,39 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./drag-drop.component.scss']
 })
 export class DragDropComponent implements OnInit {
-
-  constructor() {
+  data = {
+		animal: "panda"
+  };
+  constructor(public dialog: MatDialog) {
 
   }
   movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
+    'Text Field',
+    'Auto Complete',
+    'Check box',
+    'Date Picker',
+    'Slider',
+    'Slide Toggle',
+    'Radio Button',
+    'Select Option'
   ];
-
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
+    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    // open dialog when drag
+    this.dialog.open(ModalDialogComponent, {
+			data: this.data,
+			width: '70%',
+			panelClass: ''
+		});
   }
+  // openDialog() {
+	// 	this.dialog.open(ModalDialogComponent, {
+	// 		data: this.data,
+	// 		width: '80%',
+	// 		panelClass: ''
+	// 	});
+	// }
 }
