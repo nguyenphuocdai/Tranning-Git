@@ -1,42 +1,166 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Favorite food" value="Sushi">
-                </mat-form-field>
-              </form>
-        </div>
-        <div class="col-md-6">
-            <!-- <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Favorite food" value="Sushi">
-                </mat-form-field>
-              </form> -->
-        </div>
-    </div>
-  </div>
-  
-  <mat-nav-list>
-    <a href="https://keep.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Keep</span>
-      <span mat-line>Add to a note</span>
-    </a>
-    
-    <a href="https://docs.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Docs</span>
-      <span mat-line>Embed in a document</span>
-    </a>
-    
-    <a href="https://plus.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Plus</span>
-      <span mat-line>Share with your friends</span>
-    </a>
-    
-    <a href="https://hangouts.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Hangouts</span>
-      <span mat-line>Show to your coworkers</span>
-    </a>
-    </mat-nav-list>
-    
-  
+<div class="container-fluid ">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+							<span class="kt-portlet__head-icon kt-hide">
+								<i class="la la-gear"></i>
+							</span>
+							<h3 class="kt-portlet__head-text">
+								Default Form Layout
+							</h3>
+						</div>
+					</div>
+				</div>
+				<!--Begin::Form-->
+				<form class="kt-form">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+							<!--Begin::Label-->
+							<div class="form-group kt-form__group">
+								<mat-form-field class="example-full-width">
+									<input matInput placeholder="Enter Label" />
+									<mat-hint align="start"
+										>Please enter Label</mat-hint
+									>
+								</mat-form-field>
+							</div>
+							<!--End::Label-->
+
+							<!--Begin::Place Holder-->
+							<div class="form-group kt-form__group">
+								<mat-form-field class="example-full-width">
+									<input
+										matInput
+										placeholder="Place Holder"
+										type="text"
+									/>
+									<mat-hint align="start"
+										>Please enter Place Holder</mat-hint
+									>
+								</mat-form-field>
+							</div>
+							<!--End::Place Holder-->
+
+							<!--Begin::Description-->
+							<div class="form-group kt-form__group">
+								<mat-form-field class="example-full-width">
+									<input matInput placeholder="Description" />
+									<mat-hint align="start"
+										>Please enter Description</mat-hint
+									>
+								</mat-form-field>
+							</div>
+							<!--End::Description-->
+
+							<!--Begin::Default Value-->
+							<div class="form-group kt-form__group">
+								<mat-form-field class="example-full-width">
+									<input
+										matInput
+										placeholder="Value Default"
+									/>
+									<mat-hint align="start"
+										>Please enter Value Default</mat-hint
+									>
+								</mat-form-field>
+							</div>
+							<!--End::Default Value-->
+
+							<!--Begin::Select-->
+							<div class="form-group kt-form__group">
+								<mat-form-field>
+									<mat-select
+										placeholder="Toppings"
+										[formControl]="toppings"
+										multiple
+									>
+										<mat-select-trigger>
+											{{
+												toppings.value
+													? toppings.value[0]
+													: ""
+											}}
+											<span
+												*ngIf="
+													toppings.value?.length > 1
+												"
+												class="example-additional-selection"
+											>
+												(+{{
+													toppings.value.length - 1
+												}}
+												{{
+													toppings.value?.length === 2
+														? "other"
+														: "others"
+												}})
+											</span>
+										</mat-select-trigger>
+										<mat-option
+											*ngFor="let topping of toppingList"
+											[value]="topping"
+											>{{ topping }}</mat-option
+										>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<!--End::Select-->
+						</div>
+					</div>
+				</form>
+				<!--End::Form-->
+				<!-- </div> -->
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+							<span class="kt-portlet__head-icon kt-hide">
+								<i class="la la-gear"></i>
+							</span>
+							<h3 class="kt-portlet__head-text">
+								Preview Layout
+							</h3>
+						</div>
+					</div>
+				</div>
+				<!--Begin::Form-->
+				<form class="kt-form">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+							<div class="form-group kt-form__group">
+								<mat-form-field class="example-full-width">
+									<input matInput placeholder="Enter Label" />
+								</mat-form-field>
+							</div>
+						</div>
+						<div
+							class="kt-portlet__foot kt-portlet__foot--border-top-0"
+						>
+							<div
+								class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0"
+							>
+								<button
+									mat-raised-button
+									color="primary"
+									(click)="openSnackBar()"
+								>
+									Submit</button
+								>&nbsp;
+								<button mat-raised-button type="reset">
+									Cancel
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!--End::Form-->
+			</div>
+		</div>
+	</div>
+</div>
