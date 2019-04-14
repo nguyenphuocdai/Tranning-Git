@@ -206,14 +206,22 @@ export class PageConfig {
 		// 		page: {title: 'Orders', desc: ''}
 		// 	}
 		// },
-		// 'user-management': {
-		// 	users: {
-		// 		page: {title: 'Users', desc: ''}
-		// 	},
-		// 	roles: {
-		// 		page: {title: 'Roles', desc: ''}
-		// 	}
-		// },
+		'user-management': {
+			users: {
+				page: {title: 'Users', desc: ''}
+			},
+			roles: {
+				page: {title: 'Roles', desc: ''}
+			}
+		},
+		'solution-management': {
+			users: {
+				page: {title: 'Solution', desc: ''}
+			},
+			roles: {
+				page: {title: 'List', desc: ''}
+			}
+		},
 		// builder: {
 		// 	page: {title: 'Layout Builder', desc: ''}
 		// },

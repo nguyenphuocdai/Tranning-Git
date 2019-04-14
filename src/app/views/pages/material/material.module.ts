@@ -312,7 +312,11 @@ const routes: Routes = [
 		MatExpansionModule,
 		MatFormFieldModule,
 		MatInputModule,
-		MatButtonModule
+		MatButtonModule,
+		MatAutocompleteModule,
+		MatSliderModule,
+		MatIconModule,
+		MatCheckboxModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,

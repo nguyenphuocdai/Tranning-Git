@@ -665,6 +665,22 @@ export class MenuConfig {
 						}
 					]
 				},
+				{
+					title: 'Solution Management',
+					root: true,
+					bullet: 'dot',
+					icon: 'flaticon2-delivery-package',
+					submenu: [
+						{
+							title: 'Solution',
+							page: 'solution-management/solution'
+						},
+						{
+							title: 'List solution roles',
+							page: 'solution-management/list-role'
+						}
+					]
+				},
 				// {section: 'Custom'},
 				// {
 				// 	title: 'Error Pages',

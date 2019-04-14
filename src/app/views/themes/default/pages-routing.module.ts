@@ -57,6 +57,10 @@ const routes: Routes = [
 				loadChildren: 'app/views/pages/user-management/user-management.module#UserManagementModule'
 			},
 			{
+				path: 'solution-management',
+				loadChildren: 'app/views/pages/solution-management/solution-management.module#SolutionManagementModule'
+			},
+			{
 				path: 'builder',
 				loadChildren: 'app/views/themes/default/content/builder/builder.module#BuilderModule'
 			},
