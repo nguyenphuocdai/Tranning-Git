@@ -24,7 +24,7 @@ export class SolutionListComponent implements OnInit {
 		});
 	}
 	handleCardListClick(event) {
-    console.log(event);
-    this.handleOpenModal();
+		console.log(event);
+		this.handleOpenModal();
 	}
 }
