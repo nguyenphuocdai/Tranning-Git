@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3" *ngFor="let item of listProject">
+  <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let item of listProject">
     <mat-card class="kt-card">
       <mat-card-header>
         <div mat-card-avatar class="kt-header-image"></div>
@@ -18,5 +18,12 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  
+    <div class="col-md-3 col-sm-6 col-xs-12" (click)="handleCardListclick()">
+      <mat-card class="kt-card kt-card--height-100 kt-card--border kt-cursor-pointer">
+        <div class="kt-icon-center">
+          <p>New Solution</p>
+          <i class="flaticon2-plus"></i>
+        </div>
+      </mat-card>
+    </div>
 </div>

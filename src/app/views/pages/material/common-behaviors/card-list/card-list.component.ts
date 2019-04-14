@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
 	selector: "kt-card-list",
@@ -6,6 +6,9 @@ import { Component, OnInit } from "@angular/core";
 	styleUrls: ["./card-list.component.scss"]
 })
 export class CardListComponent implements OnInit {
+
+	@Output('eventCardListclick') eventCardListclick = new EventEmitter();
+
 	listProject = [
 		{
 			id: 0,
@@ -29,7 +32,9 @@ export class CardListComponent implements OnInit {
 				"Minim reprehenderit consequat adipisicing est consectetur. Aliqua consectetur sint qui sit ex eu et nulla ut quis et ex cupidatat. Ut labore laboris velit excepteur irure laboris commodo id quis voluptate veniam elit nostrud. Sit dolore laboris duis enim sint culpa ut.\r\n"
 		}
 	];
-
+	handleCardListclick(){
+		this.eventCardListclick.emit({handleModal : true});
+	}
 	constructor() {}
 
 	ngOnInit() {}

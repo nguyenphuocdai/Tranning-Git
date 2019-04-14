@@ -1,7 +1,36 @@
 .kt-card {
-    max-width: 400px;
-  }
-  .kt-header-image {
-    background-image: url('https://kirankumarbommana.files.wordpress.com/2014/07/projectmanagement.jpg');
-    background-size: cover;
-  }
+	max-width: 400px;
+	& .kt-icon-center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		flex-direction: column;
+		& i {
+			font-size: 2.5rem;
+			color: #ddd;
+		}
+		& p {
+			font-size: 2rem;
+			font-weight: 600;
+			opacity: 0.5;
+		}
+	}
+}
+.kt-header-image {
+	background-image: url("https://kirankumarbommana.files.wordpress.com/2014/07/projectmanagement.jpg");
+	background-size: cover;
+}
+
+.kt-card--height-100 {
+	height: 100%;
+}
+.row {
+	.kt-card--border {
+		border: 2px dashed #ddd;
+		box-shadow: unset;
+	}
+	& .kt-cursor-pointer {
+		cursor: pointer;
+	}
+}
