@@ -1,0 +1,11 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+.example-full-width {
+    width: 100%;
+}
+
+.kt-checkbox-inline > mat-checkbox {
+    padding-right: 20px;
+}
