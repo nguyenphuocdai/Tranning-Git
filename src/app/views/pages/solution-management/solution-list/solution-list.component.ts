@@ -1,3 +1,4 @@
+import { Solution } from './../../../../core/auth/_models/solution.model';
 import { CardListComponent } from "./../../material/common-behaviors/card-list/card-list.component";
 import { SolutionModalDialogComponent } from "./../controls/solution-modal-dialog/solution-modal-dialog.component";
 import { Component, OnInit, ViewChild } from "@angular/core";
@@ -14,7 +15,10 @@ export class SolutionListComponent implements OnInit {
 	data = {
 		a: 2
 	};
-	ngOnInit() {}
+	listProject: Solution[] = [];
+	ngOnInit() {
+		this.listProject = JSON.parse(localStorage.getItem("listSolution")); 
+	}
 
 	handleOpenModal() {
 		this.dialog.open(SolutionModalDialogComponent, {

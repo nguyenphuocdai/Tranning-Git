@@ -43,13 +43,19 @@
 						>
 						<div class="col-lg-6 example-container">
 							<mat-form-field>
-								<input
+								<textarea
+									matInput
+									placeholder="Enter description"
+									name="description"
+									formControlName="description"
+								></textarea>
+								<!-- <input
 									matInput
 									type="text"
 									placeholder="Enter description"
 									name="description"
 									formControlName="description"
-								/>
+								/> -->
 								<mat-hint align="start"
 									>Please enter description</mat-hint
 								>
@@ -88,7 +94,7 @@
 								mat-raised-button
 								color="accent"
 							>
-								Submit </button
+								Submit</button
 							>&nbsp;
 							<button
 								class="kt-button--width-100"
