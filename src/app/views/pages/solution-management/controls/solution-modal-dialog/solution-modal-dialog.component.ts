@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Solution } from "../../../../../core/auth";
 
-//fix after
+// fix after
 export class State {
 	constructor(
 		public name: string,
@@ -71,7 +71,7 @@ export class SolutionModalDialogComponent implements OnInit {
 			reader.onload = (_imgsrc: any) => { // called once readAsDataURL is completed
 				console.log(event);
         this.url = _imgsrc.target.result;
-      }
+      };
     }
   }
 	ngOnInit() {
@@ -80,7 +80,7 @@ export class SolutionModalDialogComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
 
-		//after fix
+		// after fix
 		let temp = localStorage.getItem("listSolution");
 		if (temp) {
 			return;
@@ -92,7 +92,7 @@ export class SolutionModalDialogComponent implements OnInit {
 		this.dialogRef.close();
 	}
 
-	onSubmit(e){
+	onSubmit(e) {
 		this.loading = true;
 
 		let data = {...this.rfSolution.value, image: this.url};

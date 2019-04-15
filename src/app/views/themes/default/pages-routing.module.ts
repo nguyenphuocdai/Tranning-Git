@@ -33,17 +33,17 @@ const routes: Routes = [
 			// 	path: 'mail',
 			// 	loadChildren: 'app/views/pages/apps/mail/mail.module#MailModule'
 			// },
-			// {
-			// 	path: 'ecommerce',
-			// 	loadChildren: 'app/views/pages/apps/e-commerce/e-commerce.module#ECommerceModule',
-			// 	// canActivate: [NgxPermissionsGuard],
-			// 	// data: {
-			// 	//  	permissions: {
-			// 	//  		only: ['accessToECommerceModule'],
-			// 	//  		redirectTo: 'error/403'
-			// 	// 	}
-			// 	// }
-			// },
+			{
+				path: 'ecommerce',
+				loadChildren: 'app/views/pages/apps/e-commerce/e-commerce.module#ECommerceModule',
+				// canActivate: [NgxPermissionsGuard],
+				// data: {
+				//  	permissions: {
+				//  		only: ['accessToECommerceModule'],
+				//  		redirectTo: 'error/403'
+				// 	}
+				// }
+			},
 			// {
 			// 	path: 'ngbootstrap',
 			// 	loadChildren: 'app/views/pages/ngbootstrap/ngbootstrap.module#NgbootstrapModule'

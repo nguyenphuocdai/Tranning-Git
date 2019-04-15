@@ -15,6 +15,7 @@ import { UserManagementModule } from './user-management/user-management.module';
 import { CoreModule } from '../../core/core.module';
 import { MyPageComponent } from './my-page/my-page.component';
 import { BuilderComponent } from './builder/builder.component';
+import { ECommerceModule } from './apps/e-commerce/e-commerce.module';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,7 @@ import { BuilderComponent } from './builder/builder.component';
 		PartialsModule,
 		MaterialModule,
 		// MailModule,
-		// ECommerceModule,
+		ECommerceModule,
 		UserManagementModule,
 	],
 	providers: []

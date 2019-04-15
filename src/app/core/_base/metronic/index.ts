@@ -19,3 +19,5 @@ export { TimeElapsedPipe } from './pipes/time-elapsed.pipe';
 // Services
 export { DataTableService } from './services/datatable.service';
 export { TranslationService } from './services/translation.service';
+// Server
+export { FakeApiService } from './server/fake-api/fake-api.service';
