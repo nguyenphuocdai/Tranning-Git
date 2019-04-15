@@ -35,7 +35,7 @@ import { CoreModule } from './core/core.module';
 // Partials
 import { PartialsModule } from './views/partials/partials.module';
 // Metronic Services
-import { DataTableService, FakeApiService } from './core/_base/metronic';
+import { DataTableService } from './core/_base/metronic';
 // Layout Services
 import { LayoutConfigService, LayoutRefService, MenuAsideService, MenuConfigService, MenuHorizontalService, PageConfigService, SplashScreenService, SubheaderService,
 	KtDialogService } from './core/_base/layout';
@@ -86,10 +86,10 @@ export function hljsLanguages(): HighlightLanguage[] {
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
-		environment.isMockEnabled ? HttpClientInMemoryWebApiModule.forRoot(FakeApiService, {
-			passThruUnknownUrl: true,
-			dataEncapsulation: false
-		}) : [],
+		// environment.isMockEnabled ? HttpClientInMemoryWebApiModule.forRoot(FakeApiService, {
+		// 	passThruUnknownUrl: true,
+		// 	dataEncapsulation: false
+		// }) : [],
 		NgxPermissionsModule.forRoot(),
 		PartialsModule,
 		CoreModule,
