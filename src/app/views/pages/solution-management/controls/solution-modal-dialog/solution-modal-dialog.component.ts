@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Solution } from "../../../../../core/auth";
 
 //fix after
 export class State {
@@ -18,7 +19,10 @@ export class State {
 })
 export class SolutionModalDialogComponent implements OnInit {
 	url = "";
+	rfSolution: FormGroup;
 	stateCtrl: FormControl;
+	loading: boolean = false;
+	listSolution: Solution[] = [];
 	states: State[] = [
 		{
 			name: "Arkansas",
@@ -68,9 +72,30 @@ export class SolutionModalDialogComponent implements OnInit {
       }
     }
   }
-	ngOnInit() {}
+	ngOnInit() {
+		this.rfSolution = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    });
+
+	}
 
 	handleCancel() {
 		this.dialogRef.close();
+	}
+
+	onSubmit(e){
+		this.loading = true;
+
+		let data = {...this.rfSolution.value, image: this.url};
+		this.listSolution.push(data);
+		localStorage.setItem("listSolution", JSON.stringify(this.listSolution));
+
+		setTimeout(() => {
+			this.loading = false;
+			this.dialogRef.close();
+		},3000);
+
+		console.log(data);
 	}
 }

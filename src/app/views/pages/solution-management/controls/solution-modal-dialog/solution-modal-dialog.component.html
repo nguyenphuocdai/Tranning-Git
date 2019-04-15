@@ -13,14 +13,24 @@
 			</div>
 		</div>
 		<!--begin::Form-->
-		<form class="kt-form">
+		<form
+			class="kt-form"
+			novalidate
+			(ngSubmit)="onSubmit($event)"
+			[formGroup]="rfSolution"
+		>
 			<div class="kt-portlet__body">
 				<div class="kt-form__section kt-form__section--first">
 					<div class="form-group kt-form__group row">
 						<label class="col-lg-3 col-form-label">Name:</label>
 						<div class="col-lg-6 example-container">
 							<mat-form-field>
-								<input matInput placeholder="Enter full name" />
+								<input
+									matInput
+									placeholder="Enter name"
+									name="name"
+									formControlName="name"
+								/>
 								<mat-hint align="start"
 									>Please enter your solution name</mat-hint
 								>
@@ -35,8 +45,10 @@
 							<mat-form-field>
 								<input
 									matInput
-									type="email"
+									type="text"
 									placeholder="Enter description"
+									name="description"
+									formControlName="description"
 								/>
 								<mat-hint align="start"
 									>Please enter description</mat-hint
@@ -48,7 +60,7 @@
 					<div class="form-group kt-form__group row">
 						<label class="col-lg-3 col-form-label">Image:</label>
 						<div class="col-lg-6 example-container">
-							<div class="kt-form__group">
+							<div class="kt-form__group" *ngIf="url">
 								<img [src]="url" height="200" />
 							</div>
 							<input
@@ -67,10 +79,19 @@
 					<div class="row">
 						<div class="col-lg-3"></div>
 						<div class="col-lg-6">
-							<button mat-raised-button color="accent">
-								Submit</button
+							<button
+								[ngClass]="{
+									'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading
+								}"
+								class="kt-button--width-100"
+								type="submit"
+								mat-raised-button
+								color="accent"
+							>
+								Submit </button
 							>&nbsp;
 							<button
+								class="kt-button--width-100"
 								mat-raised-button
 								type="reset"
 								(click)="handleCancel()"
