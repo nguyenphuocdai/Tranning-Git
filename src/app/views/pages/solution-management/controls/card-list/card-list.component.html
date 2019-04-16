@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let item of listProject">
+  <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let item of listSolution">
     <mat-card class="kt-card">
       <mat-card-header>
         <div mat-card-avatar class="kt-header-image"></div>
@@ -13,7 +13,7 @@
       </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button class="mat-raised-button mat-accent">DETAIL</button>
+        <button mat-button class="mat-raised-button mat-accent" (click)="handleNavigate(item)">DETAIL</button>
         <button mat-button class="mat-button mat-warn">REMOVE</button>
       </mat-card-actions>
     </mat-card>
