@@ -1,56 +1,66 @@
-import { MaterialModule } from './../material/material.module';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SolutionListComponent } from './solution-list/solution-list.component';
-import { SolutionEditComponent } from './solution-edit/solution-edit.component';
-import { SolutionManagementComponent } from './solution-management.component';
-import { Routes, RouterModule } from '@angular/router';
-import { SolutionListRoleComponent } from './solution-list-role/solution-list-role.component';
-import { SolutionModalDialogComponent } from './controls/solution-modal-dialog/solution-modal-dialog.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoreModule } from './../../../core/core.module';
+import { TruncateStrPipe } from './../../../core/_base/metronic/pipes/truncate-str.pipe';
+import { MaterialModule } from "./../material/material.module";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { SolutionListComponent } from "./solution-list/solution-list.component";
+import { SolutionEditComponent } from "./solution-edit/solution-edit.component";
+import { SolutionManagementComponent } from "./solution-management.component";
+import { Routes, RouterModule } from "@angular/router";
+import { SolutionListRoleComponent } from "./solution-list-role/solution-list-role.component";
+import { SolutionModalDialogComponent } from "./controls/solution-modal-dialog/solution-modal-dialog.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { PortletModule } from "../../partials/content/general/portlet/portlet.module";
+import { PartialsModule } from "../../partials/partials.module";
+import { CardListComponent } from "./controls/card-list/card-list.component";
 
 const routes: Routes = [
 	{
-		path: '',
+		path: "",
 		component: SolutionManagementComponent,
 		children: [
 			{
-				path: '',
-				redirectTo: 'solution',
-				pathMatch: 'full'
+				path: "",
+				redirectTo: "solution",
+				pathMatch: "full"
 			},
 			{
-				path: 'solution',
+				path: "solution",
 				component: SolutionListComponent
 			},
 			// access by admin
 			{
-				path: 'list-role',
+				path: "list-role",
 				component: SolutionListRoleComponent
+			},
+			{
+				path: "solution-edit/:id",
+				component: SolutionEditComponent
 			}
 		]
 	}
 ];
 
 @NgModule({
-  declarations: [
-    SolutionManagementComponent,
-    SolutionListComponent,
+	declarations: [
+		SolutionManagementComponent,
+		SolutionListComponent,
 		SolutionEditComponent,
 		SolutionListRoleComponent,
-		SolutionModalDialogComponent
+		SolutionModalDialogComponent,
+		CardListComponent
 	],
-	entryComponents : [
-		SolutionModalDialogComponent
-	],
-  imports: [
+	entryComponents: [SolutionModalDialogComponent],
+	imports: [
 		CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+		FormsModule,
+		ReactiveFormsModule,
 		RouterModule.forChild(routes),
-		MaterialModule
-  ]
+		MaterialModule,
+		PortletModule,
+		PartialsModule,
+		CoreModule
+	]
 })
-
-export class SolutionManagementModule { }
+export class SolutionManagementModule {}

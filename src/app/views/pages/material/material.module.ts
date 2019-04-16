@@ -1,4 +1,3 @@
-import { CardListComponent } from './common-behaviors/card-list/card-list.component';
 import { TreeFieldComponent } from './common-behaviors/tree-field/tree-field.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -308,7 +307,6 @@ const routes: Routes = [
 		RouterModule,
 		DragDropComponent,
 		TreeFieldComponent,
-		CardListComponent,
 		MatExpansionModule,
 		MatFormFieldModule,
 		MatInputModule,
@@ -316,7 +314,11 @@ const routes: Routes = [
 		MatAutocompleteModule,
 		MatSliderModule,
 		MatIconModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		MatTabsModule,
+		MaterialTableComponent,
+		MatMenuModule,
+		MatCardModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
@@ -384,7 +386,6 @@ const routes: Routes = [
 		DragDropComponent,
 		ModalBottomSheetComponent,
 		ModalDialogComponent,
-		CardListComponent
 	]
 })
 export class MaterialModule {}

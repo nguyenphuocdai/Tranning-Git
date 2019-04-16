@@ -1,12 +1,12 @@
 export class BaseBuilderModel {
     // Basic
-    _id: number;
-    _name: string;
-    _description: string;
+    id: number;
+    name: string;
+    description: string;
     // Edit
-    _isEditMode: boolean = false;
+    isEditMode: boolean = false;
 	// Log
-	_userId: number = 0;
-	_createdDate: string;
-	_updatedDate: string;
+	userId: number = 0;
+	createdDate: string;
+	updatedDate: string;
 }
