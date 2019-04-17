@@ -1,5 +1,5 @@
 import { LayoutConfigService } from "../../../../../core/_base/layout/services/layout-config.service";
-import { Solution } from "../../../../../core/auth";
+import { SolutionModel } from "../../../../../core/auth";
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class CardListComponent implements OnInit {
 	@Output("eventCardListclick") eventCardListclick = new EventEmitter();
-	@Input("listSolution") listSolution: Solution[] = [];
+	@Input("listSolution") listSolution: SolutionModel[] = [];
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,

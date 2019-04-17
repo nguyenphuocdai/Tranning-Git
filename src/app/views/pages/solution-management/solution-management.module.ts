@@ -1,5 +1,5 @@
+import { SmStepperComponent } from './controls/sm-stepper/sm-stepper.component';
 import { CoreModule } from './../../../core/core.module';
-import { TruncateStrPipe } from './../../../core/_base/metronic/pipes/truncate-str.pipe';
 import { MaterialModule } from "./../material/material.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -9,7 +9,6 @@ import { SolutionManagementComponent } from "./solution-management.component";
 import { Routes, RouterModule } from "@angular/router";
 import { SolutionListRoleComponent } from "./solution-list-role/solution-list-role.component";
 import { SolutionModalDialogComponent } from "./controls/solution-modal-dialog/solution-modal-dialog.component";
-import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PortletModule } from "../../partials/content/general/portlet/portlet.module";
 import { PartialsModule } from "../../partials/partials.module";
@@ -49,7 +48,8 @@ const routes: Routes = [
 		SolutionEditComponent,
 		SolutionListRoleComponent,
 		SolutionModalDialogComponent,
-		CardListComponent
+		CardListComponent,
+		SmStepperComponent
 	],
 	entryComponents: [SolutionModalDialogComponent],
 	imports: [

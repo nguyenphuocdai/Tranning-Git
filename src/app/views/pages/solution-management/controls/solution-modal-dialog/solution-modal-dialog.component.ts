@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Solution } from "../../../../../core/auth";
+import { SolutionModel } from "../../../../../core/auth";
 
 // fix after
 export class State {
@@ -18,33 +18,101 @@ export class State {
 	styleUrls: ["./solution-modal-dialog.component.scss"]
 })
 export class SolutionModalDialogComponent implements OnInit {
-	url = "";
+	/**
+	 * Public variable
+	 */
+	previewImage = "";
 	rfSolution: FormGroup;
 	stateCtrl: FormControl;
 	loading: boolean = false;
-	listSolution: Solution[] = [];
-	states: Solution[];
+	listSolution: SolutionModel[] = [];
+	states: SolutionModel[];
+
 	constructor(
-		public dialogRef: MatDialogRef<SolutionModalDialogComponent>,
+		public _dialogRef: MatDialogRef<SolutionModalDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
 		console.log(data);
 	}
+
+	ngOnInit() {
+		this.initialize();
+	}
+
+	/**
+	 * Init component
+	 */
+	initialize() {
+		// after fix
+		this.createForm();
+		let temp = localStorage.getItem("listSolution");
+		if (temp) {
+			return;
+		}
+		this.states = JSON.parse(temp);
+	}
+
+	/**
+	 * Close modal
+	 */
+	handleCancel() {
+		this._dialogRef.close();
+	}
+
+	/**
+	 * Submit Form
+	 * @param event
+	 */
+
+	onSubmit(event) {
+		this.loading = true;
+		if (this.rfSolution.invalid) {
+			return;
+		}
+
+		let data = { ...this.rfSolution.value, image: this.previewImage };
+		this.listSolution.push(data);
+		localStorage.setItem("listSolution", JSON.stringify(this.listSolution));
+
+		setTimeout(() => {
+			this.loading = false;
+			this._dialogRef.close();
+		}, 3000);
+
+		console.log(data);
+	}
+
+	/**
+	 * choosen image
+	 * @param event
+	 */
 	onSelectFile(event) {
-		this.url = "";
+		/*
+			reset image in form control
+		*/
+		this.previewImage = "";
+		this.rfSolution.patchValue({
+			image: null
+		});
+
 		if (event.target.files && event.target.files[0]) {
 			let reader = new FileReader();
 
 			reader.readAsDataURL(event.target.files[0]); // read file as data url
 
 			reader.onload = (_imgsrc: any) => {
-				// called once readAsDataURL is completed
 				console.log(event);
-				this.url = _imgsrc.target.result;
+				this.previewImage = _imgsrc.target.result;
+				this.rfSolution.patchValue({
+					image: this.previewImage
+				});
 			};
 		}
 	}
-	ngOnInit() {
+	/**
+	 * Create Form rfSolution
+	 */
+	createForm() {
 		this.rfSolution = new FormGroup({
 			name: new FormControl("", [
 				Validators.required,
@@ -53,35 +121,8 @@ export class SolutionModalDialogComponent implements OnInit {
 			description: new FormControl("", [
 				Validators.required,
 				Validators.minLength(3)
-			])
+			]),
+			image: new FormControl(null, [Validators.required])
 		});
-
-		// after fix
-		let temp = localStorage.getItem("listSolution");
-		if (temp) {
-			return;
-		}
-		this.states = JSON.parse(temp);
-	}
-
-	handleCancel() {
-		this.dialogRef.close();
-	}
-
-	onSubmit(e) {
-		this.loading = true;
-		if (this.rfSolution.invalid) {
-			return;
-		}
-		let data = { ...this.rfSolution.value, image: this.url };
-		this.listSolution.push(data);
-		localStorage.setItem("listSolution", JSON.stringify(this.listSolution));
-
-		setTimeout(() => {
-			this.loading = false;
-			this.dialogRef.close();
-		}, 3000);
-
-		console.log(data);
 	}
 }
