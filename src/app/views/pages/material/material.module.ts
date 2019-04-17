@@ -32,7 +32,6 @@ import {
 	MatSortModule,
 	MatSidenavModule,
 	MatSnackBarModule,
-	MatStepperModule,
 	MatToolbarModule,
 	MatDividerModule,
 	MatTabsModule,
@@ -50,6 +49,8 @@ import {
 	MatBottomSheetRef,
 	MAT_DATE_LOCALE,
 	MAT_DATE_FORMATS,
+	MatHorizontalStepper,
+	MatStepperModule,
 
 } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -318,7 +319,9 @@ const routes: Routes = [
 		MatTabsModule,
 		MaterialTableComponent,
 		MatMenuModule,
-		MatCardModule
+		MatCardModule,
+		MatHorizontalStepper,
+		MatStepperModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
