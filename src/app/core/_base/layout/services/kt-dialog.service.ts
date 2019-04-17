@@ -1,7 +1,7 @@
 // Angular
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 // RxJS
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class KtDialogService {
@@ -10,7 +10,11 @@ export class KtDialogService {
 
 	// Public properties
 	constructor() {
-		this.ktDialog = new KTDialog({'type': 'loader', 'placement': 'top center', 'message': 'Loading ...'});
+		this.ktDialog = new KTDialog({
+			type: "loader",
+			placement: "top center",
+			message: "Loading ..."
+		});
 	}
 
 	show() {
