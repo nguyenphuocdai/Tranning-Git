@@ -1,24 +1,63 @@
 <kt-portlet>
-	<kt-portlet-header [title]="getComponentTitle()" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+	<kt-portlet-header
+		[title]="getComponentTitle()"
+		[class]="'kt-portlet__head--lg'"
+		[viewLoading$]="loading$"
+	>
 		<ng-container ktPortletTools>
-			<a [routerLink]="['../../solution']" class="btn btn-secondary kt-margin-r-10" mat-raised-button matTooltip="Back to the users list">
+			<a
+				[routerLink]="['../../solution']"
+				class="btn btn-secondary kt-margin-r-10"
+				mat-raised-button
+				matTooltip="Back to the users list"
+			>
 				<i class="la la-arrow-left"></i>
 				<span class="kt-hidden-mobile">Back</span>
 			</a>
-			<a href="javascript:;" class="btn btn-secondary kt-margin-r-10" (click)="reset()" [disabled]="selectedTab !== 0" mat-raised-button matTooltip="Reset changes">
+			<a
+				href="javascript:;"
+				class="btn btn-secondary kt-margin-r-10"
+				(click)="reset()"
+				[disabled]="selectedTab !== 0"
+				mat-raised-button
+				matTooltip="Reset changes"
+			>
 				<i class="la la-cog"></i>
 				<span class="kt-hidden-mobile">Reset</span>
 			</a>
-			<a href="javascript:;" class="btn btn-primary kt-margin-r-10" color="primary" (click)="onSumbit(false)" mat-raised-button matTooltip="Save & Continue">
-				<span class="kt-hidden-mobile">Save</span>
+			<a
+				*ngIf="!isShowFormEdit"
+				href="javascript:;"
+				class="btn btn-secondary kt-margin-r-10"
+				(click)="onShowFormEdit(true)"
+				mat-raised-button
+				matTooltip="Edit solution"
+			>
+				<i class="la la-edit"></i>
+				<span class="kt-hidden-mobile">Edit</span>
+			</a>
+			<a
+				*ngIf="isShowFormEdit"
+				href="javascript:;"
+				class="btn btn-secondary kt-margin-r-10"
+				(click)="onShowFormEdit(false)"
+				mat-raised-button
+				matTooltip="Cancel edit solution"
+			>
+				<i class="la la-remove"></i>
+				<span class="kt-hidden-mobile">Cancel</span>
 			</a>
 			<button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
 				<mat-icon>more_vert</mat-icon>
 			</button>
 			<mat-menu #menu="matMenu">
-				<button mat-menu-item color="primary" (click)="onSumbit(true)">Save & Exit</button>
+				<button mat-menu-item color="primary" (click)="onSumbit(true)">
+					Save & Exit
+				</button>
 				<button mat-menu-item color="primary">Save & Duplicate</button>
-				<button mat-menu-item color="primary" (click)="onSumbit(false)">Save & Continue</button>
+				<button mat-menu-item color="primary" (click)="onSumbit(false)">
+					Save & Continue
+				</button>
 			</mat-menu>
 		</ng-container>
 	</kt-portlet-header>
@@ -27,59 +66,146 @@
 		<mat-tab-group [(selectedIndex)]="selectedTab">
 			<mat-tab>
 				<ng-template mat-tab-label>
-					<i class="mat-tab-label-icon fa fa-user"></i>
+					<i class="mat-tab-label-icon la la-cube"></i>
 					Basic info
 				</ng-template>
 				<ng-template matTabContent>
-					<!--begin::Form-->
-					<div *ngIf="solution">
-						<form [formGroup]="solutionForm" class="kt-form kt-form--group-seperator-dashed">
+					<!--Begin::FormEdit-->
+					<ng-container *ngIf="solution && isShowFormEdit">
+						<div class="col-md-6 mx-auto">
+							<form
+								class="kt-form"
+								novalidate
+								(ngSubmit)="onSubmit($event)"
+								[formGroup]="rfSolution"
+							>
+								<div class="kt-portlet__body">
+									<div
+										class="kt-form__section kt-form__section--first"
+									>
+										<div
+											class="form-group kt-form__group row"
+										>
+											<label
+												class="col-lg-3 col-form-label"
+												>Name:</label
+											>
+											<div
+												class="col-lg-6 example-container"
+											>
+												<mat-form-field>
+													<input
+														matInput
+														placeholder="Enter name"
+														name="name"
+														formControlName="name"
+													/>
+													<mat-hint align="start"
+														>Please enter your
+														solution name</mat-hint
+													>
+												</mat-form-field>
+											</div>
+										</div>
+										<div
+											class="form-group kt-form__group row"
+										>
+											<label
+												class="col-lg-3 col-form-label"
+												>Description:</label
+											>
+											<div
+												class="col-lg-6 example-container"
+											>
+												<mat-form-field>
+													<textarea
+														rows="5"
+														cols="30"
+														matInput
+														placeholder="Enter description"
+														name="description"
+														formControlName="description"
+													></textarea>
+													<mat-hint align="start"
+														>Please enter
+														description</mat-hint
+													>
+												</mat-form-field>
+											</div>
+										</div>
 
-							<kt-alert *ngIf="hasFormErrors" type="warn" [showCloseButton]="true" [duration]="10000" (close)="onAlertClose($event)">
-								Oh snap! Change a few things up and try submitting again.
-							</kt-alert>
-							<div class="kt-form__section kt-form__section--first">
-								<div class="form-group kt-form__group row">
-									<div class="col-lg-4 kt-margin-bottom-20-mobile">
-										<mat-form-field class="mat-form-field-fluid">
-											<input matInput placeholder="Enter Username" formControlName="name"/>
-											<mat-error>Username is
-												<strong>required</strong>
-											</mat-error>
-											<mat-hint align="start">Please enter
-												<strong>Username</strong>
-											</mat-hint>
-										</mat-form-field>
-									</div>
-									<div class="col-lg-4 kt-margin-bottom-20-mobile">
-										<mat-form-field class="mat-form-field-fluid">
-											<input matInput placeholder="Enter Full Name" formControlName="description"/>
-											<mat-error>Full Name is
-												<strong>required</strong>
-											</mat-error>
-											<mat-hint align="start">Please enter
-												<strong>Full Name</strong>
-											</mat-hint>
-										</mat-form-field>
-									</div>
-
-									<div class="col-lg-4 kt-margin-bottom-20-mobile">
-										<mat-form-field class="mat-form-field-fluid">
-											<input type="email" matInput placeholder="Enter Email" formControlName="image"/>
-											<mat-error>Email is
-												<strong>required</strong>
-											</mat-error>
-											<mat-hint align="start">Please enter
-												<strong>Email</strong>
-											</mat-hint>
-										</mat-form-field>
+										<div
+											class="form-group kt-form__group row"
+										>
+											<label
+												class="col-lg-3 col-form-label"
+												>Image:</label
+											>
+											<div
+												class="col-lg-6 example-container"
+											>
+												<div
+													class="kt-form__group"
+													*ngIf="previewImage"
+												>
+													<img
+														[src]="previewImage"
+														height="200"
+													/>
+												</div>
+												<input
+													type="file"
+													(change)="
+														onSelectFile($event)
+													"
+													accept="image/x-png,image/jpeg"
+												/>
+												<mat-hint align="start"
+													>Please choosen image
+													solution</mat-hint
+												>
+											</div>
+										</div>
 									</div>
 								</div>
+								<div class="kt-portlet__foot">
+									<div
+										class="kt-form__actions kt-form__actions"
+									>
+										<div class="row">
+											<div class="col-lg-3"></div>
+											<div class="col-lg-6">
+												<button
+													[ngClass]="{
+														'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading
+													}"
+													class="kt-button--width-100"
+													type="submit"
+													mat-raised-button
+													color="accent"
+													[disabled]="
+														!rfSolution.valid
+													"
+												>
+													Save
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</ng-container>
+					<!--End::FormEdit-->
 
+					<ng-container *ngIf="solution && !isShowFormEdit">
+						<div class="row">
+							<div class="col-md-6">
+								<kt-sm-stepper></kt-sm-stepper>
 							</div>
-						</form>
-					</div>
-					<!--end::Form-->
+							<div class="col-md-6"></div>
+						</div>
+					</ng-container>
 				</ng-template>
 			</mat-tab>
 			<mat-tab [disabled]="!user || !user.id">

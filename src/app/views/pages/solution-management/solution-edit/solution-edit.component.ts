@@ -1,5 +1,5 @@
 import { filter } from "rxjs/operators";
-import { Solution } from "./../../../../core/auth/_models/solution.model";
+import { SolutionModel } from "./../../../../core/auth/_models/solution.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -38,8 +38,9 @@ import {
 })
 export class SolutionEditComponent implements OnInit, OnDestroy {
 	// Public properties
-
-	solution: Solution;
+	previewImage: string = "";
+	isShowFormEdit: boolean = false;
+	solution: SolutionModel;
 	user: User;
 	userId$: Observable<number>;
 	oldUser: User;
@@ -50,7 +51,7 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 	soicialNetworksSubject = new BehaviorSubject<SocialNetworks>(
 		new SocialNetworks()
 	);
-	solutionForm: FormGroup;
+	rfSolution: FormGroup;
 	hasFormErrors: boolean = false;
 	// Private properties
 	private subscriptions: Subscription[] = [];
@@ -99,7 +100,6 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 
 					this.initSolution();
 				}
-				console.log(this.solution);
 			}
 		);
 		this.subscriptions.push(routeSubscription);
@@ -116,13 +116,16 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 	 * Create form
 	 */
 	createForm() {
-		this.solutionForm = this.solutionFB.group({
+		this.rfSolution = this.solutionFB.group({
 			name: [this.solution.name, Validators.required],
 			description: [this.solution.description, Validators.required],
 			image: [this.solution.image, Validators.required]
 		});
+		this.previewImage = this.solution.image;
 	}
-
+	onShowFormEdit(isShow: boolean = false) {
+		this.isShowFormEdit = isShow;
+	}
 	/**
 	 * Redirect to list
 	 *
@@ -132,22 +135,22 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
 	}
 
-	/**
-	 * Refresh user
-	 *
-	 * @param isNew: boolean
-	 * @param id: number
-	 */
-	refreshUser(isNew: boolean = false, id = 0) {
-		let url = this.router.url;
-		if (!isNew) {
-			this.router.navigate([url], { relativeTo: this.activatedRoute });
-			return;
-		}
+	// /**
+	//  * Refresh user
+	//  *
+	//  * @param isNew: boolean
+	//  * @param id: number
+	//  */
+	// refreshUser(isNew: boolean = false, id = 0) {
+	// 	let url = this.router.url;
+	// 	if (!isNew) {
+	// 		this.router.navigate([url], { relativeTo: this.activatedRoute });
+	// 		return;
+	// 	}
 
-		url = `${this.layoutConfigService.getCurrentMainRoute()}/user-management/users/edit/${id}`;
-		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
-	}
+	// 	url = `${this.layoutConfigService.getCurrentMainRoute()}/user-management/users/edit/${id}`;
+	// 	this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
+	// }
 
 	/**
 	 * Reset
@@ -156,9 +159,9 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		this.user = Object.assign({}, this.oldUser);
 		this.createForm();
 		this.hasFormErrors = false;
-		this.solutionForm.markAsPristine();
-		this.solutionForm.markAsUntouched();
-		this.solutionForm.updateValueAndValidity();
+		this.rfSolution.markAsPristine();
+		this.rfSolution.markAsUntouched();
+		this.rfSolution.updateValueAndValidity();
 	}
 
 	/**
@@ -168,9 +171,9 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 	 */
 	onSumbit(withBack: boolean = false) {
 		this.hasFormErrors = false;
-		const controls = this.solutionForm.controls;
+		const controls = this.rfSolution.controls;
 		/** check form */
-		if (this.solutionForm.invalid) {
+		if (this.rfSolution.invalid) {
 			Object.keys(controls).forEach(controlName =>
 				controls[controlName].markAsTouched()
 			);
@@ -180,101 +183,91 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		const editedUser = this.prepareUser();
+		const editedSolution = this.prepareSolution();
+		/** handle edit solution */
 
-		if (editedUser.id > 0) {
-			this.updateUser(editedUser, withBack);
-			return;
-		}
+		// if (editedSolution.id > 0) {
+		// 	this.updateUser(editedSolution, withBack);
+		// 	return;
+		// }
 
-		this.addUser(editedUser, withBack);
+		// this.addUser(editedSolution, withBack);
 	}
 
 	/**
 	 * Returns prepared data for save
 	 */
-	prepareUser(): User {
-		const controls = this.solutionForm.controls;
-		const _user = new User();
-		_user.clear();
-		_user.roles = this.rolesSubject.value;
-		_user.address = this.addressSubject.value;
-		_user.socialNetworks = this.soicialNetworksSubject.value;
-		_user.accessToken = this.user.accessToken;
-		_user.refreshToken = this.user.refreshToken;
-		_user.pic = this.user.pic;
-		_user.id = this.user.id;
-		_user.username = controls["username"].value;
-		_user.email = controls["email"].value;
-		_user.fullname = controls["fullname"].value;
-		_user.occupation = controls["occupation"].value;
-		_user.phone = controls["phone"].value;
-		_user.companyName = controls["companyName"].value;
-		_user.password = this.user.password;
-		return _user;
+	prepareSolution(): SolutionModel {
+		const controls = this.rfSolution.controls;
+		const _solution = new SolutionModel();
+		_solution.clear();
+		_solution.name = controls["name"].value;
+		_solution.description = controls["description"].value;
+		_solution.image = controls["image"].value;
+		return _solution;
 	}
 
-	/**
-	 * Add User
-	 *
-	 * @param _user: User
-	 * @param withBack: boolean
-	 */
-	addUser(_user: User, withBack: boolean = false) {
-		this.store.dispatch(new UserOnServerCreated({ user: _user }));
-		const addSubscription = this.store
-			.pipe(select(selectLastCreatedUserId))
-			.subscribe(newId => {
-				const message = `New user successfully has been added.`;
-				this.layoutUtilsService.showActionNotification(
-					message,
-					MessageType.Create,
-					5000,
-					true,
-					true
-				);
-				if (newId) {
-					if (withBack) {
-						this.goBackWithId();
-					} else {
-						this.refreshUser(true, newId);
-					}
-				}
-			});
-		this.subscriptions.push(addSubscription);
-	}
+	// /**
+	//  * Add User
+	//  *
+	//  * @param _user: User
+	//  * @param withBack: boolean
+	//  */
+	// addUser(_user: User, withBack: boolean = false) {
+	// 	this.store.dispatch(new UserOnServerCreated({ user: _user }));
+	// 	const addSubscription = this.store
+	// 		.pipe(select(selectLastCreatedUserId))
+	// 		.subscribe(newId => {
+	// 			const message = `New user successfully has been added.`;
+	// 			this.layoutUtilsService.showActionNotification(
+	// 				message,
+	// 				MessageType.Create,
+	// 				5000,
+	// 				true,
+	// 				true
+	// 			);
+	// 			if (newId) {
+	// 				if (withBack) {
+	// 					this.goBackWithId();
+	// 				} else {
+	// 					this.refreshUser(true, newId);
+	// 				}
+	// 			}
+	// 		});
+	// 	this.subscriptions.push(addSubscription);
+	// }
 
-	/**
-	 * Update user
-	 *
-	 * @param _user: User
-	 * @param withBack: boolean
-	 */
-	updateUser(_user: User, withBack: boolean = false) {
-		// Update User
-		// tslint:disable-next-line:prefer-const
+	// /**
+	//  * Update user
+	//  *
+	//  * @param _user: User
+	//  * @param withBack: boolean
+	//  */
+	// updateUser(_user: User, withBack: boolean = false) {
+	// 	// Update User
+	// 	// tslint:disable-next-line:prefer-const
 
-		const updatedUser: Update<User> = {
-			id: _user.id,
-			changes: _user
-		};
-		this.store.dispatch(
-			new UserUpdated({ partialUser: updatedUser, user: _user })
-		);
-		const message = `User successfully has been saved.`;
-		this.layoutUtilsService.showActionNotification(
-			message,
-			MessageType.Update,
-			5000,
-			true,
-			true
-		);
-		if (withBack) {
-			this.goBackWithId();
-		} else {
-			this.refreshUser(false);
-		}
-	}
+	// 	const updatedUser: Update<User> = {
+	// 		id: _user.id,
+	// 		changes: _user
+	// 	};
+	// 	this.store.dispatch(
+	// 		new UserUpdated({ partialUser: updatedUser, user: _user })
+	// 	);
+	// 	const message = `User successfully has been saved.`;
+	// 	this.layoutUtilsService.showActionNotification(
+	// 		message,
+	// 		MessageType.Update,
+	// 		5000,
+	// 		true,
+	// 		true
+	// 	);
+	// 	if (withBack) {
+	// 		this.goBackWithId();
+	// 	} else {
+	// 		this.refreshUser(false);
+	// 	}
+	// }
 
 	/**
 	 * Returns component title
@@ -289,14 +282,14 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		return result;
 	}
 
-	/**
-	 * Close Alert
-	 *
-	 * @param $event: Event
-	 */
-	onAlertClose($event) {
-		this.hasFormErrors = false;
-	}
+	// /**
+	//  * Close Alert
+	//  *
+	//  * @param $event: Event
+	//  */
+	// onAlertClose($event) {
+	// 	this.hasFormErrors = false;
+	// }
 
 	/**
 	 * Destroy subscriptions
