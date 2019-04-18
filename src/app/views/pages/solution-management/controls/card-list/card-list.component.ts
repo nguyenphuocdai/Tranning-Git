@@ -1,3 +1,5 @@
+import { DialogConfirmComponent } from "./../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
+import { MatDialog } from "@angular/material";
 import { LayoutConfigService } from "../../../../../core/_base/layout/services/layout-config.service";
 import { SolutionModel } from "../../../../../core/auth";
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
@@ -14,7 +16,8 @@ export class CardListComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
-		private layoutConfigService: LayoutConfigService
+		private layoutConfigService: LayoutConfigService,
+		private dialog: MatDialog
 	) {}
 
 	ngOnInit() {}
@@ -36,5 +39,24 @@ export class CardListComponent implements OnInit {
 			item.name
 		}`;
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
+	}
+
+	/**
+	 * Open Dialog Confirm
+	 */
+
+	onRemove(item): void {
+		let title = "Alert Confirm";
+		let message = "Are you sure delete item this?";
+
+		let dialogRef = this.dialog.open(DialogConfirmComponent, {
+			width: "400px",
+			data: { title: title, message: message, itemDelete: item }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log("The dialog was closed");
+			console.log(result);
+		});
 	}
 }
