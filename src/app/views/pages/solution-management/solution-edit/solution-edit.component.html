@@ -201,38 +201,43 @@
 					<ng-container *ngIf="solution && !isShowFormEdit">
 						<div class="row">
 							<div class="col-md-6">
-								<kt-sm-stepper></kt-sm-stepper>
+								<div class="row">
+									<div class="col-md-6 kt-padding-b-20">
+										<kt-card-list-module></kt-card-list-module>
+									</div>
+								</div>
+								<!-- <kt-sm-stepper></kt-sm-stepper> -->
 							</div>
 							<div class="col-md-6"></div>
 						</div>
 					</ng-container>
 				</ng-template>
 			</mat-tab>
-			<mat-tab [disabled]="!user || !user.id">
+			<!-- <mat-tab [disabled]="!user || !user.id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fa fa-address-book"></i>
 					User address
 				</ng-template>
 				<ng-template matTabContent>
-					<!-- <kt-address [(addressSubject)]="addressSubject"></kt-address> -->
+					<kt-address [(addressSubject)]="addressSubject"></kt-address>
 				</ng-template>
-			</mat-tab>
-			<mat-tab [disabled]="!user || !user.id">
+			</mat-tab> -->
+			<!-- <mat-tab [disabled]="!user || !user.id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fab fa-facebook"></i>
 					Social Nerworks
 				</ng-template>
 				<ng-template matTabContent>
-					<!-- <kt-social-networks [(socialNetworksSubject)]="soicialNetworksSubject"></kt-social-networks> -->
+					<kt-social-networks [(socialNetworksSubject)]="soicialNetworksSubject"></kt-social-networks>
 				</ng-template>
-			</mat-tab>
-			<mat-tab *ngIf="user" [disabled]="!user || !user.id">
+			</mat-tab> -->
+			<!-- <mat-tab *ngIf="user" [disabled]="!user || !user.id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fa fa-unlock"></i>
 					User roles
 				</ng-template>
 				<ng-template matTabContent>
-					<!-- <kt-user-roles-list [(rolesSubject)]="rolesSubject"></kt-user-roles-list> -->
+					<kt-user-roles-list [(rolesSubject)]="rolesSubject"></kt-user-roles-list>
 				</ng-template>
 			</mat-tab>
 			<mat-tab *ngIf="user" [disabled]="!user || !user.id">
@@ -241,9 +246,9 @@
 					Change password
 				</ng-template>
 				<ng-template matTabContent>
-					<!-- <kt-change-password [userId]="user.id"></kt-change-password> -->
+					<kt-change-password [userId]="user.id"></kt-change-password>
 				</ng-template>
-			</mat-tab>
+			</mat-tab> -->
 		</mat-tab-group>
 	</kt-portlet-body>
 </kt-portlet>

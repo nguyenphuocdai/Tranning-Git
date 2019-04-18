@@ -1,5 +1,6 @@
-import { SmStepperComponent } from './controls/sm-stepper/sm-stepper.component';
-import { CoreModule } from './../../../core/core.module';
+import { DialogConfirmComponent } from "./../../../core/material-services/dialog-confirm/dialog-confirm.component";
+import { SmStepperComponent } from "./controls/sm-stepper/sm-stepper.component";
+import { CoreModule } from "./../../../core/core.module";
 import { MaterialModule } from "./../material/material.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -13,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PortletModule } from "../../partials/content/general/portlet/portlet.module";
 import { PartialsModule } from "../../partials/partials.module";
 import { CardListComponent } from "./controls/card-list/card-list.component";
+import { CardListModuleComponent } from "./controls/card-list-module/card-list-module.component";
 
 const routes: Routes = [
 	{
@@ -49,9 +51,11 @@ const routes: Routes = [
 		SolutionListRoleComponent,
 		SolutionModalDialogComponent,
 		CardListComponent,
-		SmStepperComponent
+		SmStepperComponent,
+		CardListModuleComponent,
+		DialogConfirmComponent
 	],
-	entryComponents: [SolutionModalDialogComponent],
+	entryComponents: [SolutionModalDialogComponent, DialogConfirmComponent],
 	imports: [
 		CommonModule,
 		FormsModule,
@@ -60,7 +64,7 @@ const routes: Routes = [
 		MaterialModule,
 		PortletModule,
 		PartialsModule,
-		CoreModule
+		CoreModule,
 	]
 })
 export class SolutionManagementModule {}

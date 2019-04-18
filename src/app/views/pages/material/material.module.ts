@@ -51,6 +51,8 @@ import {
 	MAT_DATE_FORMATS,
 	MatHorizontalStepper,
 	MatStepperModule,
+	MatToolbar,
+	MatToolbarRow,
 
 } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -321,7 +323,10 @@ const routes: Routes = [
 		MatMenuModule,
 		MatCardModule,
 		MatHorizontalStepper,
-		MatStepperModule
+		MatStepperModule,
+		MatToolbar,
+		MatToolbarRow,
+		MatDialogModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,

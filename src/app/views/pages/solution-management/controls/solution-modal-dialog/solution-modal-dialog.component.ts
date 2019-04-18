@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { SolutionModel } from "../../../../../core/auth";
 
@@ -109,6 +109,7 @@ export class SolutionModalDialogComponent implements OnInit {
 			};
 		}
 	}
+
 	/**
 	 * Create Form rfSolution
 	 */

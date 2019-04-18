@@ -3,7 +3,6 @@ import { SolutionModel } from "./../../../../core/auth/_models/solution.model";
 import { SolutionModalDialogComponent } from "./../controls/solution-modal-dialog/solution-modal-dialog.component";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material";
-import { Subscription } from "rxjs";
 
 @Component({
 	selector: "kt-solution-list",
@@ -11,10 +10,7 @@ import { Subscription } from "rxjs";
 	styleUrls: ["./solution-list.component.scss"]
 })
 export class SolutionListComponent implements OnInit, OnDestroy {
-	constructor(
-		public dialog: MatDialog,
-		private snackbarService: KtSnackBarService
-	) {}
+	constructor(public dialog: MatDialog) {}
 	data = {
 		a: 2
 	};
