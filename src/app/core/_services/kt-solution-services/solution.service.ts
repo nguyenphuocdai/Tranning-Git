@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { AppSettings } from "./../../_constant/app-setting";
+import { AppSettings } from "../../_constant/app-setting";
 import { Injectable } from "@angular/core";
 import { SolutionModel } from "../../auth";
 import { Subject, Observable } from "rxjs";

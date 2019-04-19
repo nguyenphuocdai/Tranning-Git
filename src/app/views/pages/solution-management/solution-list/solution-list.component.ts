@@ -1,4 +1,3 @@
-import { KtSnackBarService } from "./../../../../core/_base/layout/services/kt-snack-bar.service";
 import { SolutionModel } from "./../../../../core/auth/_models/solution.model";
 import { SolutionModalDialogComponent } from "./../controls/solution-modal-dialog/solution-modal-dialog.component";
 import { Component, OnInit, OnDestroy } from "@angular/core";
