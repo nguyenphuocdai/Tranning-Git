@@ -113,4 +113,4 @@ export { AuthNotice } from "./auth-notice/auth-notice.interface";
 
 export { AuthDataContext } from "./_server/auth.data-context";
 
-export { SolutionModel } from "./_models/solution.model";
+export { SolutionModel } from "../_model-app/solution.model";
