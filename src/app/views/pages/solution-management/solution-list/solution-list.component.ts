@@ -1,4 +1,4 @@
-import { SolutionModel } from "./../../../../core/auth/_models/solution.model";
+import { SolutionModel } from "../../../../core/_model-app/solution.model";
 import { SolutionModalDialogComponent } from "./../controls/solution-modal-dialog/solution-modal-dialog.component";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material";
