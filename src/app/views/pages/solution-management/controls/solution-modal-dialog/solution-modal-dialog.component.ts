@@ -21,12 +21,16 @@ export class SolutionModalDialogComponent implements OnInit {
 	/**
 	 * Public variable
 	 */
-	previewImage = "";
 	rfSolution: FormGroup;
 	stateCtrl: FormControl;
 	loading: boolean = false;
 	listSolution: SolutionModel[] = [];
 	states: SolutionModel[];
+
+	owners = [
+		{ value: "person", viewValue: "Person" },
+		{ value: "pompany", viewValue: "Company" },
+	];
 
 	constructor(
 		public _dialogRef: MatDialogRef<SolutionModalDialogComponent>,
@@ -37,6 +41,7 @@ export class SolutionModalDialogComponent implements OnInit {
 
 	ngOnInit() {
 		this.initialize();
+		this.loading = true;
 	}
 
 	/**
@@ -66,11 +71,12 @@ export class SolutionModalDialogComponent implements OnInit {
 
 	onSubmit(event) {
 		this.loading = true;
+
 		if (this.rfSolution.invalid) {
 			return;
 		}
 
-		let data = { ...this.rfSolution.value, image: this.previewImage };
+		let data = { ...this.rfSolution.value };
 		this.listSolution.push(data);
 		localStorage.setItem("listSolution", JSON.stringify(this.listSolution));
 
@@ -86,29 +92,29 @@ export class SolutionModalDialogComponent implements OnInit {
 	 * choosen image
 	 * @param event
 	 */
-	onSelectFile(event) {
-		/*
-			reset image in form control
-		*/
-		this.previewImage = "";
-		this.rfSolution.patchValue({
-			image: null
-		});
+	// onSelectFile(event) {
+	// 	/*
+	// 		reset image in form control
+	// 	*/
+	// 	this.previewImage = "";
+	// 	this.rfSolution.patchValue({
+	// 		image: null
+	// 	});
 
-		if (event.target.files && event.target.files[0]) {
-			let reader = new FileReader();
+	// 	if (event.target.files && event.target.files[0]) {
+	// 		let reader = new FileReader();
 
-			reader.readAsDataURL(event.target.files[0]); // read file as data url
+	// 		reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-			reader.onload = (_imgsrc: any) => {
-				console.log(event);
-				this.previewImage = _imgsrc.target.result;
-				this.rfSolution.patchValue({
-					image: this.previewImage
-				});
-			};
-		}
-	}
+	// 		reader.onload = (_imgsrc: any) => {
+	// 			console.log(event);
+	// 			this.previewImage = _imgsrc.target.result;
+	// 			this.rfSolution.patchValue({
+	// 				image: this.previewImage
+	// 			});
+	// 		};
+	// 	}
+	// }
 
 	/**
 	 * Create Form rfSolution
@@ -119,11 +125,9 @@ export class SolutionModalDialogComponent implements OnInit {
 				Validators.required,
 				Validators.minLength(3)
 			]),
-			description: new FormControl("", [
-				Validators.required,
-				Validators.minLength(3)
-			]),
-			image: new FormControl(null, [Validators.required])
+			owner: new FormControl("", [Validators.required]),
+			version: new FormControl("", [Validators.required]),
+			databaseName: new FormControl("", [Validators.required])
 		});
 	}
 }

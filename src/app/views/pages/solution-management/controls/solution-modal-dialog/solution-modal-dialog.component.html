@@ -38,47 +38,56 @@
 						</div>
 					</div>
 					<div class="form-group kt-form__group row">
-						<label class="col-lg-3 col-form-label"
-							>Description:</label
-						>
+						<label class="col-lg-3 col-form-label">Owner:</label>
 						<div class="col-lg-6 example-container">
 							<mat-form-field>
-								<textarea
-									rows="5"
-									cols="30"
-									matInput
-									placeholder="Enter description"
-									name="description"
-									formControlName="description"
-								></textarea>
-								<!-- <input
-									matInput
-									type="text"
-									placeholder="Enter description"
-									name="description"
-									formControlName="description"
-								/> -->
+								<mat-label>Owner</mat-label>
+								<mat-select formControlName="owner">
+									<mat-option
+										*ngFor="let owner of owners"
+										[value]="owner.value"
+									>
+										{{ owner.viewValue }}
+									</mat-option>
+								</mat-select>
 								<mat-hint align="start"
-									>Please enter description</mat-hint
+									>Please pick up your owner</mat-hint
 								>
 							</mat-form-field>
 						</div>
 					</div>
 
 					<div class="form-group kt-form__group row">
-						<label class="col-lg-3 col-form-label">Image:</label>
+						<label class="col-lg-3 col-form-label"
+							>Database Name:</label
+						>
 						<div class="col-lg-6 example-container">
-							<div class="kt-form__group" *ngIf="previewImage">
-								<img [src]="previewImage" height="200" />
-							</div>
-							<input
-								type="file"
-								(change)="onSelectFile($event)"
-								accept="image/x-png,image/jpeg"
-							/>
-							<mat-hint align="start"
-								>Please choosen image solution</mat-hint
-							>
+							<mat-form-field class="example-full-width">
+								<input
+									matInput
+									placeholder="Enter database name"
+									formControlName="databaseName"
+								/>
+								<mat-hint align="start"
+									>Please enter your database name</mat-hint
+								>
+							</mat-form-field>
+						</div>
+					</div>
+
+					<div class="form-group kt-form__group row">
+						<label class="col-lg-3 col-form-label">Version:</label>
+						<div class="col-lg-6 example-container">
+							<mat-form-field class="example-full-width">
+								<input
+									matInput
+									placeholder="Enter version solution"
+									formControlName="version"
+								/>
+								<mat-hint align="start"
+									>Please enter your version solution
+								</mat-hint>
+							</mat-form-field>
 						</div>
 					</div>
 				</div>

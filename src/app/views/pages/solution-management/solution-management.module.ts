@@ -15,6 +15,7 @@ import { PortletModule } from "../../partials/content/general/portlet/portlet.mo
 import { PartialsModule } from "../../partials/partials.module";
 import { CardListComponent } from "./controls/card-list/card-list.component";
 import { CardListModuleComponent } from "./controls/card-list-module/card-list-module.component";
+import { ModuleModule } from "../module-management/module.module";
 
 const routes: Routes = [
 	{
@@ -65,6 +66,7 @@ const routes: Routes = [
 		PortletModule,
 		PartialsModule,
 		CoreModule,
+		ModuleModule
 	]
 })
 export class SolutionManagementModule {}
