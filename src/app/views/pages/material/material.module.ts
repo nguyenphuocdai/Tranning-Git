@@ -333,7 +333,8 @@ const routes: Routes = [
 		MatDialogModule,
 		DragDropModule,
 		MatSelectModule,
-		MatSelectTrigger
+		MatSelectTrigger,
+		MatListModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
