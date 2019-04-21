@@ -9,7 +9,10 @@ export class PageConfig {
 		'my-page': { // <= add page URL
 			page: { title: 'My page', desc: 'My page desc' } // <= Page name and description
 		},
-		'builder-field': { // <= add page URL
+		// 'builder-field': { // <= add page URL
+		// 	page: { title: 'Builder', desc: 'Builder for field-form' } // <= Page name and description
+		// },
+		'build-form-field': { // <= add page URL
 			page: { title: 'Builder', desc: 'Builder for field-form' } // <= Page name and description
 		},
 		// ngbootstrap: {

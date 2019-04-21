@@ -360,11 +360,18 @@ export class MenuConfig {
 					page: 'my-page', // <= URL
 					icon: 'flaticon-line-graph' // <= Choose the icon
 				},
+				// {
+				// 	title: 'Field Builder', // <= Title of the page
+				// 	desc: 'Field Builder for Basic', // <= Description of the page
+				// 	root: true,
+				// 	page: 'builder-field', // <= URL
+				// 	icon: 'flaticon-line-graph' // <= Choose the icon
+				// },
 				{
 					title: 'Field Builder', // <= Title of the page
 					desc: 'Field Builder for Basic', // <= Description of the page
 					root: true,
-					page: 'builder-field', // <= URL
+					page: 'build-form-field/form-list', // <= URL
 					icon: 'flaticon-line-graph' // <= Choose the icon
 				},
 				// {
