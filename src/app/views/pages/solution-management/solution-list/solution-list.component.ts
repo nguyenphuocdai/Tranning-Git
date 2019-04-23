@@ -1,22 +1,45 @@
+import { CardListComponent } from "./../controls/card-list/card-list.component";
+import { SolutionService } from "../../../../core/_services/kt-solution-services/solution.service";
 import { SolutionModel } from "../../../../core/_model-app/solution.model";
 import { SolutionModalDialogComponent } from "./../controls/solution-modal-dialog/solution-modal-dialog.component";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MatDialog } from "@angular/material";
+import {
+	Component,
+	OnInit,
+	OnDestroy,
+	SimpleChanges,
+	OnChanges,
+	ViewChild,
+	AfterViewChecked,
+	AfterContentChecked,
+	NgZone,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef
+} from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
 	selector: "kt-solution-list",
 	templateUrl: "./solution-list.component.html",
-	styleUrls: ["./solution-list.component.scss"]
+	styleUrls: ["./solution-list.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SolutionListComponent implements OnInit, OnDestroy {
-	constructor(public dialog: MatDialog) {}
+	_subscription: Subscription;
+	_listSolution$: Observable<SolutionModel[]> = null;
 	data = {
 		a: 2
 	};
-	listSolution: SolutionModel[] = [];
+	constructor(
+		private dialog: MatDialog,
+		private _solutionService: SolutionService,
+		private ref: ChangeDetectorRef
+	) {}
+
 	ngOnInit() {
-		this.listSolution = JSON.parse(localStorage.getItem("listSolution"));
+		this.Initialize();
 	}
+
 	handleOpenModal() {
 		this.dialog.open(SolutionModalDialogComponent, {
 			data: this.data,
@@ -26,6 +49,17 @@ export class SolutionListComponent implements OnInit, OnDestroy {
 	handleCardListClick(event) {
 		this.handleOpenModal();
 	}
+	Initialize() {
+		this._subscription = this._solutionService
+			.getListSolutionObs$()
+			.subscribe(sln => {
+				this._listSolution$ = sln;
+				this.ref.markForCheck();
+				console.log(sln);
+			});
+	}
 
-	ngOnDestroy() {}
+	ngOnDestroy() {
+		this._subscription.unsubscribe();
+	}
 }

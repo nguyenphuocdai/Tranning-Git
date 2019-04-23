@@ -1,3 +1,4 @@
+import { SolutionService } from "./../../../core/_services/kt-solution-services/solution.service";
 import { DialogConfirmComponent } from "./../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { SmStepperComponent } from "./controls/sm-stepper/sm-stepper.component";
 import { CoreModule } from "./../../../core/core.module";
@@ -67,6 +68,7 @@ const routes: Routes = [
 		PartialsModule,
 		CoreModule,
 		ModuleModule
-	]
+	],
+	providers: [SolutionService]
 })
 export class SolutionManagementModule {}

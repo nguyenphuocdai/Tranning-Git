@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { AppSettings } from "../../_constant/app-setting";
 import { Injectable } from "@angular/core";
 import { SolutionModel } from "../../auth";
-import { Subject, Observable } from "rxjs";
+import { Subject, Observable, BehaviorSubject } from "rxjs";
 import { HttpUtilsService } from "../../_base/crud";
 
 @Injectable({
@@ -10,24 +10,53 @@ import { HttpUtilsService } from "../../_base/crud";
 })
 export class SolutionService {
 	// Public properties
-	subjectSolution = new Subject<SolutionModel[]>();
-	listSolution: SolutionModel[] = [];
+	// subjectSolution = new Subject<SolutionModel[]>();
+	listSln: SolutionModel[] = [];
+
+	sourceSolution: BehaviorSubject<SolutionModel[]> = new BehaviorSubject<
+		SolutionModel[]
+	>([]);
 
 	constructor(
 		private http: HttpClient,
 		private httpUtils: HttpUtilsService
 	) {}
 
-	sendListSolution(listSolution: SolutionModel[]) {
-		this.subjectSolution.next(listSolution);
+	/**
+	 * Add new solution observable
+	 * @param listSolution
+	 */
+	sendSolutionObs$(listSolution: SolutionModel) {
+		if (localStorage.getItem(AppSettings.solutionStorage)) {
+			this.listSln = JSON.parse(
+				localStorage.getItem(AppSettings.solutionStorage)
+			);
+		}
+		this.listSln.push(listSolution);
+		localStorage.setItem(
+			AppSettings.solutionStorage,
+			JSON.stringify(this.listSln)
+		);
+		this.sourceSolution.next(this.listSln);
+	}
+	/**
+	 * Clear subject
+	 */
+	getListSolutionObs$(): Observable<any> {
+		if (localStorage.getItem(AppSettings.solutionStorage)) {
+			this.sourceSolution.next(
+				JSON.parse(localStorage.getItem(AppSettings.solutionStorage))
+			);
+		}
+		// todos
+		return this.sourceSolution.asObservable();
 	}
 
+	/**
+	 * Clear subject
+	 */
 	clearSolution() {
-		this.subjectSolution.next();
-	}
-
-	getListSolution(): Observable<SolutionModel[]> {
-		return this.subjectSolution.asObservable();
+		this.sourceSolution.next([]);
 	}
 
 	// CREATE =>  POST: add a new solution to the server

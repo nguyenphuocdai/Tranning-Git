@@ -1,4 +1,6 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { KtSnackBarService } from "./../../../../../core/_base/layout/services/kt-snack-bar.service";
+import { SolutionService } from "./../../../../../core/_services/kt-solution-services/solution.service";
+import { Component, OnInit, Inject, NgZone } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { SolutionModel } from "../../../../../core/auth";
@@ -24,24 +26,27 @@ export class SolutionModalDialogComponent implements OnInit {
 	rfSolution: FormGroup;
 	stateCtrl: FormControl;
 	loading: boolean = false;
-	listSolution: SolutionModel[] = [];
+	listSolution: SolutionModel;
 	states: SolutionModel[];
+
+	items: [];
 
 	owners = [
 		{ value: "person", viewValue: "Person" },
-		{ value: "pompany", viewValue: "Company" },
+		{ value: "pompany", viewValue: "Company" }
 	];
 
 	constructor(
 		public _dialogRef: MatDialogRef<SolutionModalDialogComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any
+		@Inject(MAT_DIALOG_DATA) public data: any,
+		private _solutionService: SolutionService,
+		private _snackBarService: KtSnackBarService
 	) {
-		console.log(data);
+		// console.log(data);
 	}
 
 	ngOnInit() {
 		this.initialize();
-		this.loading = true;
 	}
 
 	/**
@@ -71,21 +76,24 @@ export class SolutionModalDialogComponent implements OnInit {
 
 	onSubmit(event) {
 		this.loading = true;
+		this._dialogRef.disableClose = true;
 
 		if (this.rfSolution.invalid) {
 			return;
 		}
 
-		let data = { ...this.rfSolution.value };
-		this.listSolution.push(data);
-		localStorage.setItem("listSolution", JSON.stringify(this.listSolution));
-
 		setTimeout(() => {
+			this.listSolution = this.rfSolution.value;
+			this._solutionService.sendSolutionObs$(this.listSolution);
+
 			this.loading = false;
+			this._snackBarService.openSnackBar(
+				"Add new solution successfully !",
+				5000
+			);
+
 			this._dialogRef.close();
 		}, 3000);
-
-		console.log(data);
 	}
 
 	/**

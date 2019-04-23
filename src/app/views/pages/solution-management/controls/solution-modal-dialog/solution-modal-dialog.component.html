@@ -30,6 +30,7 @@
 									placeholder="Enter name"
 									name="name"
 									formControlName="name"
+									[attr.disabled]="loading"
 								/>
 								<mat-hint align="start"
 									>Please enter your solution name</mat-hint
@@ -42,7 +43,7 @@
 						<div class="col-lg-6 example-container">
 							<mat-form-field>
 								<mat-label>Owner</mat-label>
-								<mat-select formControlName="owner">
+								<mat-select formControlName="owner" [attr.disabled]="loading">
 									<mat-option
 										*ngFor="let owner of owners"
 										[value]="owner.value"
@@ -67,6 +68,7 @@
 									matInput
 									placeholder="Enter database name"
 									formControlName="databaseName"
+									[attr.disabled]="loading"
 								/>
 								<mat-hint align="start"
 									>Please enter your database name</mat-hint
@@ -83,6 +85,7 @@
 									matInput
 									placeholder="Enter version solution"
 									formControlName="version"
+									[attr.disabled]="loading"
 								/>
 								<mat-hint align="start"
 									>Please enter your version solution
@@ -105,7 +108,7 @@
 								type="submit"
 								mat-raised-button
 								color="accent"
-								[disabled]="!rfSolution.valid"
+								[disabled]="!rfSolution.valid || loading"
 							>
 								Submit</button
 							>&nbsp;
@@ -114,6 +117,7 @@
 								mat-raised-button
 								type="reset"
 								(click)="handleCancel()"
+								[disabled]="loading"
 							>
 								Cancel
 							</button>
