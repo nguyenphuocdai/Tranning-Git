@@ -12,7 +12,7 @@ import { CoreModule } from "../../../core/core.module";
 import { MaterialPreviewModule } from "../../partials/content/general/material-preview/material-preview.module";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatRippleModule } from "@angular/material/core";
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import {
 	MatAutocompleteModule,
@@ -352,7 +352,11 @@ const routes: Routes = [
 		{ provide: MatBottomSheetRef, useValue: {} },
 		{ provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
 		{ provide: MAT_DATE_LOCALE, useValue: "en-GB" },
-		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
+		{
+			provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+			useValue: { useUtc: true }
+		},
+		{ provide: MatDialogRef, useValue: {} }
 	],
 	declarations: [
 		MaterialComponent,

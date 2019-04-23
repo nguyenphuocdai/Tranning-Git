@@ -23,6 +23,7 @@
 			font-size: 2rem;
 			font-weight: 600;
 			opacity: 0.5;
+			margin-bottom: 0
 		}
 	}
 	& .mat-card-actions:last-child {
@@ -30,8 +31,23 @@
 	}
 }
 /* 
-    End modify kt-card
+    Global variable
 */
+
 .kt-padding-b-20 {
 	padding-bottom: 20px;
+}
+
+/*
+	content for router-outlet
+*/
+.kt-content {
+	min-height: 100vh;
+}
+/* 
+    Footer 
+*/
+.kt-footer {
+	position: relative;
+	z-index: 99;
 }

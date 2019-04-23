@@ -28,12 +28,12 @@ export class KtSnackBarService {
 	 * @param panelClass
 	 */
 	openSnackBar(
-		message = "Message Default",
+		message: string = "Message Default",
 		autoHide: number = 3000,
 		verticalPosition: MatSnackBarVerticalPosition = "bottom",
 		horizontalPosition: MatSnackBarHorizontalPosition = "center",
 		setAutoHide: boolean = true,
-		panelClass: Array<string> = [""],
+		panelClass: string = "",
 		action: boolean = true,
 		actionButtonLabel: string = ""
 	) {
@@ -42,12 +42,12 @@ export class KtSnackBarService {
 		config.horizontalPosition = horizontalPosition;
 		config.duration = setAutoHide ? autoHide : 0;
 		config.panelClass = panelClass;
-		this.zone.run(() => {
-			this.snackBar.open(
-				message,
-				action ? actionButtonLabel : undefined,
-				config
-			);
-		});
+		// this.zone.run(() => {
+		this.snackBar.open(
+			message,
+			action ? actionButtonLabel : undefined,
+			config
+		);
+		// });
 	}
 }
