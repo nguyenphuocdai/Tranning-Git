@@ -3,13 +3,95 @@ export class MenuConfig {
 		header: {
 			self: {},
 			items: [
+				{
+					title: "Dashboards",
+					root: true,
+					alignment: "left",
+					page: "dashboard",
+					translate: "MENU.DASHBOARD"
+				},
+				{
+					title: "Applications",
+					root: true,
+					alignment: "left",
+					toggle: "click",
+					submenu: [
+						{
+							title: "Solution Management",
+							bullet: "dot",
+							icon: 'flaticon-interface-7',
+							submenu: [
+								{
+									title: "Solution",
+									page: "solution-management/solution"
+								},
+								{
+									title: "List solution roles",
+									page: "solution-management/list-role"
+								}
+							]
+						},
+						// {
+						// 	title: "User Management",
+						// 	bullet: "dot",
+						// 	icon: "flaticon-user",
+						// 	submenu: [
+						// 		{
+						// 			title: "Users",
+						// 			page: "user-management/users"
+						// 		},
+						// 		{
+						// 			title: "Roles",
+						// 			page: "user-management/roles"
+						// 		}
+						// 	]
+						// }
+					]
+				}
 				// {
-				// 	title: 'Dashboards',
+				// 	title: "My Page", // <= Title of the page
+				// 	desc: "Some my description goes here", // <= Description of the page
 				// 	root: true,
-				// 	alignment: 'left',
-				// 	page: 'dashboard',
-				// 	translate: 'MENU.DASHBOARD',
+				// 	page: "my-page" // <= URL
 				// },
+				// {
+				// 	title: "Field Builder", // <= Title of the page
+				// 	desc: "Field Builder for Basic", // <= Description of the page
+				// 	root: true,
+				// 	page: "build-form-field/form-list" // <= URL
+				// },
+				// { section: "Applications" },
+				// {
+				// 	title: "User Management",
+				// 	root: true,
+				// 	bullet: "dot",
+				// 	submenu: [
+				// 		{
+				// 			title: "Users",
+				// 			page: "user-management/users"
+				// 		},
+				// 		{
+				// 			title: "Roles",
+				// 			page: "user-management/roles"
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	title: "Solution Management",
+				// 	root: true,
+				// 	bullet: "dot",
+				// 	submenu: [
+				// 		{
+				// 			title: "Solution",
+				// 			page: "solution-management/solution"
+				// 		},
+				// 		{
+				// 			title: "List solution roles",
+				// 			page: "solution-management/list-role"
+				// 		}
+				// 	]
+				// },
+
 				// {
 				// 	title: 'Components',
 				// 	root: true,
@@ -358,19 +440,19 @@ export class MenuConfig {
 			self: {},
 			items: [
 				{
-					title: 'Dashboard',
+					title: "Dashboard",
 					root: true,
-					icon: 'flaticon2-architecture-and-city',
-					page: 'dashboard',
-					translate: 'MENU.DASHBOARD',
-					bullet: 'dot',
+					icon: "flaticon2-architecture-and-city",
+					page: "dashboard",
+					translate: "MENU.DASHBOARD",
+					bullet: "dot"
 				},
 				{
-					title: 'My Page', // <= Title of the page
-					desc: 'Some my description goes here', // <= Description of the page
+					title: "My Page", // <= Title of the page
+					desc: "Some my description goes here", // <= Description of the page
 					root: true,
-					page: 'my-page', // <= URL
-					icon: 'flaticon-line-graph' // <= Choose the icon
+					page: "my-page", // <= URL
+					icon: "flaticon-line-graph" // <= Choose the icon
 				},
 				// {
 				// 	title: 'Field Builder', // <= Title of the page
@@ -380,11 +462,11 @@ export class MenuConfig {
 				// 	icon: 'flaticon-line-graph' // <= Choose the icon
 				// },
 				{
-					title: 'Field Builder', // <= Title of the page
-					desc: 'Field Builder for Basic', // <= Description of the page
+					title: "Field Builder", // <= Title of the page
+					desc: "Field Builder for Basic", // <= Description of the page
 					root: true,
-					page: 'build-form-field/form-list', // <= URL
-					icon: 'flaticon-line-graph' // <= Choose the icon
+					page: "build-form-field/form-list", // <= URL
+					icon: "flaticon-line-graph" // <= Choose the icon
 				},
 				// {
 				// 	title: 'Layout Builder',
@@ -650,7 +732,7 @@ export class MenuConfig {
 				// 		}
 				// 	]
 				// },
-				{section: 'Applications'},
+				{ section: "Applications" },
 				// {
 				// 	title: 'eCommerce',
 				// 	bullet: 'dot',
@@ -669,37 +751,37 @@ export class MenuConfig {
 				// 	]
 				// },
 				{
-					title: 'User Management',
+					title: "User Management",
 					root: true,
-					bullet: 'dot',
-					icon: 'flaticon2-user-outline-symbol',
+					bullet: "dot",
+					icon: "flaticon2-user-outline-symbol",
 					submenu: [
 						{
-							title: 'Users',
-							page: 'user-management/users'
+							title: "Users",
+							page: "user-management/users"
 						},
 						{
-							title: 'Roles',
-							page: 'user-management/roles'
+							title: "Roles",
+							page: "user-management/roles"
 						}
 					]
 				},
 				{
-					title: 'Solution Management',
+					title: "Solution Management",
 					root: true,
-					bullet: 'dot',
-					icon: 'flaticon2-delivery-package',
+					bullet: "dot",
+					icon: "flaticon2-delivery-package",
 					submenu: [
 						{
-							title: 'Solution',
-							page: 'solution-management/solution'
+							title: "Solution",
+							page: "solution-management/solution"
 						},
 						{
-							title: 'List solution roles',
-							page: 'solution-management/list-role'
+							title: "List solution roles",
+							page: "solution-management/list-role"
 						}
 					]
-				},
+				}
 				// {section: 'Custom'},
 				// {
 				// 	title: 'Error Pages',
@@ -734,7 +816,7 @@ export class MenuConfig {
 				// 	]
 				// },
 			]
-		},
+		}
 	};
 
 	public get configs(): any {

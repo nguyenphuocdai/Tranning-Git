@@ -125,8 +125,8 @@ export class LayoutConfig {
 		'aside': {
 			'self': {
 				'skin': 'light',
-				'fixed': true,
-				'display': true,
+				'fixed': false,
+				'display': false,
 				'minimize': {
 					'toggle': true,
 					'default': false
