@@ -1,10 +1,12 @@
-import { BaseBuilderModel } from '../_base/crud/models/_base-builder.model';
+import { BaseBuilderModel } from "../_base/crud/models/_base-builder.model";
 
 export class SolutionModel extends BaseBuilderModel {
-    roles: number[];
-    image: string;
+	roles: number[];
+	owner: string;
+	databaseName: string;
+	version: string;
 
-    clear(): void {
-       // clear solution
-    }
+	clear(): void {
+		// clear solution
+	}
 }

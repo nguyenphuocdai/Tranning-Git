@@ -1,3 +1,4 @@
+import { SolutionService } from "./../../../../core/_services/kt-solution-services/solution.service";
 import { filter } from "rxjs/operators";
 import { SolutionModel } from "../../../../core/_model-app/solution.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
@@ -73,7 +74,8 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		private solutionFB: FormBuilder,
 		private layoutUtilsService: LayoutUtilsService,
 		private store: Store<AppState>,
-		private layoutConfigService: LayoutConfigService
+		private layoutConfigService: LayoutConfigService,
+		private _solutionService: SolutionService
 	) {}
 
 	/**
@@ -90,9 +92,15 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 				const id = params["id"];
 
 				if (id && id.length > 0) {
-					this.solution = JSON.parse(
-						localStorage.getItem("listSolution")
-					).find(x => x.name === id);
+					this._solutionService
+						.getListSolutionObs$()
+						.subscribe(listSln => {
+							this.solution = listSln.find(x => x.name === id);
+						});
+
+					// this.solution = JSON.parse(
+					// 	localStorage.getItem("listSolution")
+					// ).find(x => x.name === id);
 
 					/**
 					 * Initialize Solution
@@ -118,10 +126,10 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 	createForm() {
 		this.rfSolution = this.solutionFB.group({
 			name: [this.solution.name, Validators.required],
-			description: [this.solution.description, Validators.required],
-			image: [this.solution.image, Validators.required]
+			owner: [this.solution.owner, Validators.required],
+			databaseName: [this.solution.databaseName, Validators.required],
+			version : [this.solution.version, Validators.required],
 		});
-		this.previewImage = this.solution.image;
 	}
 	onShowFormEdit(isShow: boolean = false) {
 		this.isShowFormEdit = isShow;
@@ -202,8 +210,10 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		const _solution = new SolutionModel();
 		_solution.clear();
 		_solution.name = controls["name"].value;
-		_solution.description = controls["description"].value;
-		_solution.image = controls["image"].value;
+		_solution.owner = controls["owner"].value;
+		_solution.databaseName = controls["databaseName"].value;
+		_solution.version = controls["version"].value;
+		// _solution.image = controls["image"].value;
 		return _solution;
 	}
 
@@ -273,12 +283,12 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 	 * Returns component title
 	 */
 	getComponentTitle() {
-		let result = "Edit solution";
+		let result = "Solution";
 		if (!this.solution || !this.solution.name) {
 			return result;
 		}
 
-		result = `Edit solution - ${this.solution.name}`;
+		result = `Solution - ${this.solution.name}`;
 		return result;
 	}
 

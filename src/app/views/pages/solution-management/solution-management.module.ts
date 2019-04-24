@@ -15,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PortletModule } from "../../partials/content/general/portlet/portlet.module";
 import { PartialsModule } from "../../partials/partials.module";
 import { CardListComponent } from "./controls/card-list/card-list.component";
-import { CardListModuleComponent } from "./controls/card-list-module/card-list-module.component";
 import { ModuleModule } from "../module-management/module.module";
 
 const routes: Routes = [
@@ -54,7 +53,6 @@ const routes: Routes = [
 		SolutionModalDialogComponent,
 		CardListComponent,
 		SmStepperComponent,
-		CardListModuleComponent,
 		DialogConfirmComponent
 	],
 	entryComponents: [SolutionModalDialogComponent, DialogConfirmComponent],
