@@ -7,27 +7,38 @@
 /* 
     Modify kt-card
 */
-.row .kt-card {
-	max-width: 400px;
-	& .kt-icon-center {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		flex-direction: column;
-		& i {
-			font-size: 2.5rem;
-			color: #ddd;
-		}
-		& p {
-			font-size: 2rem;
-			font-weight: 600;
-			opacity: 0.5;
-			margin-bottom: 0
-		}
+.row {
+	.kt-card--border {
+		border: 2px dashed #ddd;
+		box-shadow: unset;
 	}
-	& .mat-card-actions:last-child {
-		margin-bottom: 0;
+	& .kt-cursor-pointer {
+		cursor: pointer;
+	}
+	& .kt-card {
+		max-width: 400px;
+		min-height: 265px;
+		height: 100%;
+		& .kt-icon-center {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			flex-direction: column;
+			& i {
+				font-size: 2.5rem;
+				color: #ddd;
+			}
+			& p {
+				font-size: 2rem;
+				font-weight: 600;
+				opacity: 0.5;
+				margin-bottom: 0;
+			}
+		}
+		& .mat-card-actions:last-child {
+			margin-bottom: 0;
+		}
 	}
 }
 /* 

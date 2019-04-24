@@ -2,7 +2,7 @@ import { LayoutConfigModel } from '../../_base/layout';
 
 export class LayoutConfig {
 	public defaults: LayoutConfigModel = {
-		'demo': 'demo2',
+		'demo': 'AIT',
 		// == Base Layout
 		'self': {
 			'layout': 'fluid', // fluid|boxed
