@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
+import { Location } from "@angular/common";
 @Component({
 	selector: "kt-form-field-list",
 	templateUrl: "./form-field-list.component.html",
@@ -10,7 +10,11 @@ export class FormFieldListComponent implements OnInit {
 	data = {
 		animal: "panda"
 	};
-	constructor() {}
+	constructor(private _location: Location) {}
 
 	ngOnInit() {}
+
+	backClicked() {
+		this._location.back();
+	}
 }

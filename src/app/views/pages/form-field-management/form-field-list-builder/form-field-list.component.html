@@ -3,9 +3,18 @@
 	<div class="alert fade show" role="alert">
 		<div class="alert-text">
 			<div class="kt-form__actions kt-form__actions kt-align-right">
+				<a
+					(click)="backClicked()"
+					class="btn btn-secondary kt-margin-r-10"
+					mat-raised-button
+					matTooltip="Back to the users list"
+				>
+					<i class="la la-arrow-left"></i>
+					<span class="kt-hidden-mobile">Back</span>
+				</a>
 				<button mat-raised-button color="primary">Submit</button>&nbsp;
 				<button mat-raised-button type="reset">
-					Cancel
+					Reset
 				</button>
 			</div>
 		</div>
