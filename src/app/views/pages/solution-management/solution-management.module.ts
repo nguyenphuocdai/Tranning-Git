@@ -24,18 +24,18 @@ const routes: Routes = [
 		children: [
 			{
 				path: "",
-				redirectTo: "solution",
+				redirectTo: "solutions",
 				pathMatch: "full"
 			},
 			{
-				path: "solution",
+				path: "solutions",
 				component: SolutionListComponent
 			},
 			// access by admin
-			{
-				path: "list-role",
-				component: SolutionListRoleComponent
-			},
+			// {
+			// 	path: "list-role",
+			// 	component: SolutionListRoleComponent
+			// },
 			{
 				path: "solution-edit/:id",
 				component: SolutionEditComponent

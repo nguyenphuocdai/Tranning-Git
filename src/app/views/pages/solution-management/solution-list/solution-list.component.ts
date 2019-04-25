@@ -6,12 +6,6 @@ import {
 	Component,
 	OnInit,
 	OnDestroy,
-	SimpleChanges,
-	OnChanges,
-	ViewChild,
-	AfterViewChecked,
-	AfterContentChecked,
-	NgZone,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef
 } from "@angular/core";

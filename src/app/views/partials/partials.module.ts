@@ -1,3 +1,4 @@
+import { LoadingRequestComponent } from './layout/loading-request/loading-request.component';
 // Angular
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -81,6 +82,7 @@ import { CartComponent } from './layout/topbar/cart/cart.component';
 		ScrollTopComponent,
 		SearchResultComponent,
 		SplashScreenComponent,
+		LoadingRequestComponent,
 		StickyToolbarComponent,
 		Subheader1Component,
 		Subheader2Component,
@@ -115,6 +117,7 @@ import { CartComponent } from './layout/topbar/cart/cart.component';
 		ScrollTopComponent,
 		SearchResultComponent,
 		SplashScreenComponent,
+		LoadingRequestComponent,
 		StickyToolbarComponent,
 		Subheader1Component,
 		Subheader2Component,
