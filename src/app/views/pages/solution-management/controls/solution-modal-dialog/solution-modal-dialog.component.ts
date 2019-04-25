@@ -25,7 +25,8 @@ export class SolutionModalDialogComponent implements OnInit {
 	 */
 	rfSolution: FormGroup;
 	stateCtrl: FormControl;
-	loading: boolean = false;
+	isSubmit: boolean = false;
+	loadingSpinner: boolean = false;
 	listSolution: SolutionModel;
 	states: SolutionModel[];
 
@@ -75,7 +76,7 @@ export class SolutionModalDialogComponent implements OnInit {
 	 */
 
 	onSubmit(event) {
-		this.loading = true;
+		this.isSubmit = this.loadingSpinner = true;
 		this._dialogRef.disableClose = true;
 
 		if (this.rfSolution.invalid) {
@@ -86,44 +87,14 @@ export class SolutionModalDialogComponent implements OnInit {
 			this.listSolution = this.rfSolution.value;
 			this._solutionService.sendSolutionObs$(this.listSolution);
 
-			this.loading = false;
 			this._snackBarService.openSnackBar(
 				"Add new solution successfully !",
 				5000
 			);
-
+			this.isSubmit = this.loadingSpinner = false;
 			this._dialogRef.close();
 		}, 3000);
 	}
-
-	/**
-	 * choosen image
-	 * @param event
-	 */
-	// onSelectFile(event) {
-	// 	/*
-	// 		reset image in form control
-	// 	*/
-	// 	this.previewImage = "";
-	// 	this.rfSolution.patchValue({
-	// 		image: null
-	// 	});
-
-	// 	if (event.target.files && event.target.files[0]) {
-	// 		let reader = new FileReader();
-
-	// 		reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-	// 		reader.onload = (_imgsrc: any) => {
-	// 			console.log(event);
-	// 			this.previewImage = _imgsrc.target.result;
-	// 			this.rfSolution.patchValue({
-	// 				image: this.previewImage
-	// 			});
-	// 		};
-	// 	}
-	// }
-
 	/**
 	 * Create Form rfSolution
 	 */

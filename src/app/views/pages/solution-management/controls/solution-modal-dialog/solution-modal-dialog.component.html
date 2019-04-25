@@ -7,7 +7,7 @@
 						<i class="la la-gear"></i>
 					</span>
 					<h3 class="kt-portlet__head-text">
-						New Solution
+						Add new Solution
 					</h3>
 				</div>
 			</div>
@@ -19,6 +19,7 @@
 			(ngSubmit)="onSubmit($event)"
 			[formGroup]="rfSolution"
 		>
+			<kt-loading-request *ngIf="loadingSpinner"></kt-loading-request>
 			<div class="kt-portlet__body">
 				<div class="kt-form__section kt-form__section--first">
 					<div class="form-group kt-form__group row">
@@ -30,7 +31,7 @@
 									placeholder="Enter name"
 									name="name"
 									formControlName="name"
-									[attr.disabled]="loading"
+									[attr.disabled]="isSubmit"
 								/>
 								<mat-hint align="start"
 									>Please enter your solution name</mat-hint
@@ -43,7 +44,10 @@
 						<div class="col-lg-6 example-container">
 							<mat-form-field>
 								<mat-label>Owner</mat-label>
-								<mat-select formControlName="owner" [attr.disabled]="loading">
+								<mat-select
+									formControlName="owner"
+									[attr.disabled]="isSubmit"
+								>
 									<mat-option
 										*ngFor="let owner of owners"
 										[value]="owner.value"
@@ -68,7 +72,7 @@
 									matInput
 									placeholder="Enter database name"
 									formControlName="databaseName"
-									[attr.disabled]="loading"
+									[attr.disabled]="isSubmit"
 								/>
 								<mat-hint align="start"
 									>Please enter your database name</mat-hint
@@ -85,7 +89,7 @@
 									matInput
 									placeholder="Enter version solution"
 									formControlName="version"
-									[attr.disabled]="loading"
+									[attr.disabled]="isSubmit"
 								/>
 								<mat-hint align="start"
 									>Please enter your version solution
@@ -101,14 +105,11 @@
 						<div class="col-lg-3"></div>
 						<div class="col-lg-6">
 							<button
-								[ngClass]="{
-									'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading
-								}"
 								class="kt-button--width-100"
 								type="submit"
 								mat-raised-button
 								color="accent"
-								[disabled]="!rfSolution.valid || loading"
+								[disabled]="!rfSolution.valid || isSubmit"
 							>
 								Submit</button
 							>&nbsp;
@@ -117,7 +118,7 @@
 								mat-raised-button
 								type="reset"
 								(click)="handleCancel()"
-								[disabled]="loading"
+								[disabled]="isSubmit"
 							>
 								Cancel
 							</button>
