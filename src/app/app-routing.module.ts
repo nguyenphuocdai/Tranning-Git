@@ -13,14 +13,14 @@ const routes: Routes = [
 	// {path: '', loadChildren: 'app/views/themes/default/theme.module#ThemeModule'},
 
 	/** START: remove this themes list on production */
-	{ path: "", redirectTo: "AIT", pathMatch: "full" },
-	{
-		path: "AIT",
-		loadChildren: "app/views/themes/demo2/theme.module#ThemeModule"
-	},
+	{ path: "", redirectTo: "default", pathMatch: "full" },
+	// {
+	// 	path: "AIT",
+	// 	loadChildren: "app/views/themes/demo2/theme.module#ThemeModule"
+	// },
 
 	// list of routers specified by demos, for demo purpose only!
-	// {path: 'default', loadChildren: 'app/views/themes/default/theme.module#ThemeModule'},
+	 {path: 'default', loadChildren: 'app/views/themes/default/theme.module#ThemeModule'},
 	/** END: themes list end */
 
 	{ path: "**", redirectTo: "default/error/403", pathMatch: "full" }
