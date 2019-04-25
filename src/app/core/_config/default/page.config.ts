@@ -218,10 +218,10 @@ export class PageConfig {
 			}
 		},
 		'solution-management': {
-			users: {
-				page: {title: 'Solution', desc: ''}
+			solutions: {
+				page: {title: 'Solution list', desc: 'This page show all solution'}
 			},
-			roles: {
+			list: {
 				page: {title: 'List', desc: ''}
 			}
 		},
