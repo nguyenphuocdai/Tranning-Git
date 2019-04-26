@@ -1,7 +1,6 @@
 :host {
 	.kt-splash-screen {
-		background-color: #908c8c;
-		opacity: 0.3;
+		background-color: rgba(161,162,165,0.3);
 		position: absolute;
 		display: flex;
 		flex-direction: column;
@@ -21,7 +20,8 @@
 		}
 
 		::ng-deep {
-			.mat-progress-spinner circle, .mat-spinner circle {
+			.mat-progress-spinner circle,
+			.mat-spinner circle {
 				// brand color
 				stroke: #5d78ff;
 			}
