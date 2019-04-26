@@ -639,23 +639,23 @@ export class MenuConfig {
 				// 	]
 				// },
 				{section: 'Applications'},
-				{
-					title: 'eCommerce',
-					bullet: 'dot',
-					icon: 'flaticon2-list-2',
-					root: true,
-					permission: 'accessToECommerceModule',
-					submenu: [
-						{
-							title: 'Customers',
-							page: 'ecommerce/customers'
-						},
-						{
-							title: 'Products',
-							page: 'ecommerce/products'
-						},
-					]
-				},
+				// {
+				// 	title: 'eCommerce',
+				// 	bullet: 'dot',
+				// 	icon: 'flaticon2-list-2',
+				// 	root: true,
+				// 	permission: 'accessToECommerceModule',
+				// 	submenu: [
+				// 		{
+				// 			title: 'Customers',
+				// 			page: 'ecommerce/customers'
+				// 		},
+				// 		{
+				// 			title: 'Products',
+				// 			page: 'ecommerce/products'
+				// 		},
+				// 	]
+				// },
 				// {
 				// 	title: 'User Management',
 				// 	root: true,

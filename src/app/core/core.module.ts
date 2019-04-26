@@ -27,7 +27,7 @@ import { TruncateStrPipe } from './_base/metronic/pipes/truncate-str.pipe';
 		GetObjectPipe,
 		SafePipe,
 		FirstLetterPipe,
-		TruncateStrPipe
+		TruncateStrPipe,
 	],
 	exports: [
 		// directives

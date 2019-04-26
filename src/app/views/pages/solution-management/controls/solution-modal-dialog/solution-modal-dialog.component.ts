@@ -26,7 +26,7 @@ export class SolutionModalDialogComponent implements OnInit {
 	rfSolution: FormGroup;
 	stateCtrl: FormControl;
 	isSubmit: boolean = false;
-	loadingSpinner: boolean = false;
+	loadingSpinner: boolean = true;
 	listSolution: SolutionModel;
 	states: SolutionModel[];
 
