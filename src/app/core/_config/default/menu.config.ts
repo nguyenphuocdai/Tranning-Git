@@ -673,14 +673,14 @@ export class MenuConfig {
 				// 	]
 				// },
 				{
-					title: 'Solution Management',
+					title: 'Builder Management',
 					root: true,
 					bullet: 'dot',
 					icon: 'flaticon2-delivery-package',
 					submenu: [
 						{
 							title: 'Solution list',
-							page: 'solution-management/solutions'
+							page: 'builder/solutions'
 						},
 						// {
 						// 	title: 'List solution roles',
