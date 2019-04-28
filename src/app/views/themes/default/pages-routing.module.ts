@@ -63,15 +63,15 @@ const routes: Routes = [
 					"app/views/pages/form-field-management/form-field.module#FormFieldModule"
 			},
 			{
-				path: "solution-management",
-				loadChildren:
-					"app/views/pages/solution-management/solution-management.module#SolutionManagementModule"
-			},
-			{
 				path: "builder",
 				loadChildren:
-					"app/views/themes/default/content/builder/builder.module#BuilderModule"
+					"app/views/pages/builder-manage/builder-manage.module#BuilderManageModule"
 			},
+			// {
+			// 	path: "builder",
+			// 	loadChildren:
+			// 		"app/views/themes/default/content/builder/builder.module#BuilderModule"
+			// },
 			{
 				path: "error/403",
 				component: ErrorPageComponent,

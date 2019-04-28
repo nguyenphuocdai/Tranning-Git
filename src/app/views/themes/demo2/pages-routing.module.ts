@@ -63,7 +63,7 @@ const routes: Routes = [
 					"app/views/pages/form-field-management/form-field.module#FormFieldModule"
 			},
 			{
-				path: "solution-management",
+				path: "solution",
 				loadChildren:
 					"app/views/pages/solution-management/solution-management.module#SolutionManagementModule"
 			},

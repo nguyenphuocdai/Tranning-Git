@@ -217,13 +217,13 @@ export class PageConfig {
 				page: {title: 'Roles', desc: ''}
 			}
 		},
-		'solution-management': {
+		'builder': {
 			solutions: {
 				page: {title: 'Solution list', desc: 'This page show all solution'}
 			},
-			list: {
-				page: {title: 'List', desc: ''}
-			}
+			// list: {
+			// 	page: {title: 'List', desc: ''}
+			// }
 		},
 		// builder: {
 		// 	page: {title: 'Layout Builder', desc: ''}
