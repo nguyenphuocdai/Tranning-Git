@@ -1,7 +1,7 @@
 import { CardListComponent } from "../controls/card-list/card-list.component";
 import { SolutionService } from "../../../../../core/_services/kt-solution-services/solution.service";
 import { SolutionModel } from "../../../../../core/_model-app/solution.model";
-import { SolutionModalDialogComponent } from "../controls/solution-modal-dialog/solution-modal-dialog.component";
+import { SolutionAddComponent } from "../solution-add/solution-add.component";
 import {
 	Component,
 	OnInit,
@@ -35,7 +35,7 @@ export class SolutionListComponent implements OnInit, OnDestroy {
 	}
 
 	handleOpenModal() {
-		this.dialog.open(SolutionModalDialogComponent, {
+		this.dialog.open(SolutionAddComponent, {
 			data: this.data,
 			panelClass: ""
 		});
