@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { HighlightModule } from "ngx-highlightjs";
 import { ModalDialogComponent } from "./controls/modal-dialog/modal-dialog.component";
+import { FormFieldEditComponent } from "./form-field-edit/form-field-edit.component";
 
 const routes: Routes = [
 	{
@@ -45,6 +46,7 @@ const routes: Routes = [
 	declarations: [
 		FormFieldComponent,
 		FormFieldListComponent,
+		FormFieldEditComponent,
 		DragDropComponent,
 		ModalDialogComponent
 	],
