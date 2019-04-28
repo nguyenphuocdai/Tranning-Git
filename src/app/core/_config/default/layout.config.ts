@@ -154,7 +154,7 @@ export class LayoutConfig {
 			},
 			'menu': {
 				'dropdown': false,
-				'scroll': false,
+				'scroll': true,
 				'submenu': {
 					'accordion': true,
 					'dropdown': {

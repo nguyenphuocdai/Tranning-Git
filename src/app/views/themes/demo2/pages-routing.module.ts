@@ -52,26 +52,26 @@ const routes: Routes = [
 			// 	path: 'material',
 			// 	loadChildren: 'app/views/pages/material/material.module#MaterialModule'
 			// },
-			{
-				path: "user-management",
-				loadChildren:
-					"app/views/pages/user-management/user-management.module#UserManagementModule"
-			},
-			{
-				path: "build-form-field",
-				loadChildren:
-					"app/views/pages/form-field-management/form-field.module#FormFieldModule"
-			},
-			{
-				path: "solution",
-				loadChildren:
-					"app/views/pages/solution-management/solution-management.module#SolutionManagementModule"
-			},
-			{
-				path: "builder",
-				loadChildren:
-					"app/views/themes/default/content/builder/builder.module#BuilderModule"
-			},
+			// {
+			// 	path: "user-management",
+			// 	loadChildren:
+			// 		"app/views/pages/user-management/user-management.module#UserManagementModule"
+			// },
+			// {
+			// 	path: "build-form-field",
+			// 	loadChildren:
+			// 		"app/views/pages/form-field-management/form-field.module#FormFieldModule"
+			// },
+			// {
+			// 	path: "solution",
+			// 	loadChildren:
+			// 		"app/views/pages/solution-management/solution-management.module#SolutionManagementModule"
+			// },
+			// {
+			// 	path: "builder",
+			// 	loadChildren:
+			// 		"app/views/themes/default/content/builder/builder.module#BuilderModule"
+			// },
 			{
 				path: "error/403",
 				component: ErrorPageComponent,

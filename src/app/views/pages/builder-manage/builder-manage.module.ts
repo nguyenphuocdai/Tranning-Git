@@ -1,20 +1,42 @@
-import { SolutionService } from "../../../core/_services/kt-solution-services/solution.service";
-import { DialogConfirmComponent } from "../../../core/material-services/dialog-confirm/dialog-confirm.component";
-import { SmStepperComponent } from "./solution-manage/controls/sm-stepper/sm-stepper.component";
-import { CoreModule } from "../../../core/core.module";
-import { MaterialModule } from "../material/material.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { SolutionListComponent } from "./solution-manage/solution-list/solution-list.component";
-import { SolutionEditComponent } from "./solution-manage/solution-edit/solution-edit.component";
-import { BuilderManageComponent } from "./builder-manage.component";
 import { Routes, RouterModule } from "@angular/router";
-import { SolutionModalDialogComponent } from "./solution-manage/controls/solution-modal-dialog/solution-modal-dialog.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+// Base
 import { PortletModule } from "../../partials/content/general/portlet/portlet.module";
 import { PartialsModule } from "../../partials/partials.module";
+import { DialogConfirmComponent } from "../../../core/material-services/dialog-confirm/dialog-confirm.component";
+import { CoreModule } from "../../../core/core.module";
+import { MaterialModule } from "../material/material.module";
+
+// Builder
+import { BuilderManageComponent } from "./builder-manage.component";
+
+// Solution
 import { CardListComponent } from "./solution-manage/controls/card-list/card-list.component";
+import { SolutionAddComponent } from "./solution-manage/solution-add/solution-add.component";
+import { SolutionListComponent } from "./solution-manage/solution-list/solution-list.component";
+import { SolutionEditComponent } from "./solution-manage/solution-edit/solution-edit.component";
+import { SmStepperComponent } from "./solution-manage/controls/sm-stepper/sm-stepper.component";
+
+// Solution Service
+import { SolutionService } from "../../../core/_services/kt-solution-services/solution.service";
+
+// Module
 import { ModuleListComponent } from "./module-manage/module-list/module-list.component";
+import { ModuleAddComponent } from "./module-manage/module-add/module-add.component";
+import { ModuleEditComponent } from "./module-manage/module-edit/module-edit.component";
+
+// Field
+import { FormFieldEditComponent } from "./form-field-management/form-field-edit/form-field-edit.component";
+
+// Pipe, Directives
+import {
+	ReplaceSpacePipe,
+	NumericDirective
+} from "../../../core/_base/metronic/index";
+import { FormFieldModule } from "./form-field-management/form-field.module";
 
 const routes: Routes = [
 	{
@@ -46,17 +68,26 @@ const routes: Routes = [
 @NgModule({
 	declarations: [
 		BuilderManageComponent,
-		// solution
+		// Solution
 		SolutionListComponent,
 		SolutionEditComponent,
-		SolutionModalDialogComponent,
+		SolutionAddComponent,
 		CardListComponent,
 		SmStepperComponent,
 		DialogConfirmComponent,
-		// module
-		ModuleListComponent
+		// Module
+		ModuleListComponent,
+		ModuleAddComponent,
+		ModuleEditComponent,
+		// Pipe
+		ReplaceSpacePipe,
+		NumericDirective
 	],
-	entryComponents: [SolutionModalDialogComponent, DialogConfirmComponent],
+	entryComponents: [
+		SolutionAddComponent,
+		DialogConfirmComponent,
+		ModuleAddComponent
+	],
 	imports: [
 		CommonModule,
 		FormsModule,
@@ -65,7 +96,8 @@ const routes: Routes = [
 		MaterialModule,
 		PortletModule,
 		PartialsModule,
-		CoreModule
+		CoreModule,
+		FormFieldModule
 	],
 	providers: [SolutionService]
 })

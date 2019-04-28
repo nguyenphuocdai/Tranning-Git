@@ -60,7 +60,7 @@ const routes: Routes = [
 			{
 				path: "build-form-field",
 				loadChildren:
-					"app/views/pages/form-field-management/form-field.module#FormFieldModule"
+					"app/views/pages/builder-manage/form-field-management/form-field.module#FormFieldModule"
 			},
 			{
 				path: "builder",
