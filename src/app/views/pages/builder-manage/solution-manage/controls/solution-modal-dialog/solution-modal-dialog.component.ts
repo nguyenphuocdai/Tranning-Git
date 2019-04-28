@@ -1,9 +1,9 @@
-import { KtSnackBarService } from "./../../../../../core/_base/layout/services/kt-snack-bar.service";
-import { SolutionService } from "./../../../../../core/_services/kt-solution-services/solution.service";
+import { KtSnackBarService } from "../../../../../../core/_base/layout/services/kt-snack-bar.service";
+import { SolutionService } from "../../../../../../core/_services/kt-solution-services/solution.service";
 import { Component, OnInit, Inject, NgZone } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { SolutionModel } from "../../../../../core/auth";
+import { SolutionModel } from "../../../../../../core/auth";
 
 // fix after
 export class State {
@@ -26,7 +26,6 @@ export class SolutionModalDialogComponent implements OnInit {
 	rfSolution: FormGroup;
 	stateCtrl: FormControl;
 	isSubmit: boolean = false;
-	loadingSpinner: boolean = true;
 	listSolution: SolutionModel;
 	states: SolutionModel[];
 
@@ -76,7 +75,7 @@ export class SolutionModalDialogComponent implements OnInit {
 	 */
 
 	onSubmit(event) {
-		this.isSubmit = this.loadingSpinner = true;
+		this.isSubmit = true;
 		this._dialogRef.disableClose = true;
 
 		if (this.rfSolution.invalid) {
@@ -91,7 +90,7 @@ export class SolutionModalDialogComponent implements OnInit {
 				"Add new solution successfully !",
 				5000
 			);
-			this.isSubmit = this.loadingSpinner = false;
+			this.isSubmit = false;
 			this._dialogRef.close();
 		}, 3000);
 	}

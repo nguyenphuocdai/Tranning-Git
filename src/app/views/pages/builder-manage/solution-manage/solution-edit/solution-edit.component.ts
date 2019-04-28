@@ -1,6 +1,6 @@
-import { SolutionService } from "./../../../../core/_services/kt-solution-services/solution.service";
+import { SolutionService } from "../../../../../core/_services/kt-solution-services/solution.service";
 import { filter } from "rxjs/operators";
-import { SolutionModel } from "../../../../core/_model-app/solution.model";
+import { SolutionModel } from "../../../../../core/_model-app/solution.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -9,16 +9,16 @@ import { BehaviorSubject, Observable, of, Subscription } from "rxjs";
 // NGRX
 import { Store, select } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { AppState } from "../../../../../app/core/reducers";
+import { AppState } from "../../../../../core/reducers";
 // Layout
 import {
 	SubheaderService,
 	LayoutConfigService
-} from "../../../../../app/core/_base/layout";
+} from "../../../../../core/_base/layout";
 import {
 	LayoutUtilsService,
 	MessageType
-} from "../../../../../app/core/_base/crud";
+} from "../../../../../core/_base/crud";
 // Services and Models
 import {
 	User,
@@ -30,7 +30,7 @@ import {
 	UserOnServerCreated,
 	selectLastCreatedUserId,
 	selectUsersActionLoading
-} from "../../../../app/../core/auth";
+} from "../../../../../core/auth";
 
 @Component({
 	selector: "kt-solution-edit",

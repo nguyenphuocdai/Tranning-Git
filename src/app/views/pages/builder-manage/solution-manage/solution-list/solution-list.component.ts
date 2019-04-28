@@ -1,7 +1,7 @@
-import { CardListComponent } from "./../controls/card-list/card-list.component";
-import { SolutionService } from "../../../../core/_services/kt-solution-services/solution.service";
-import { SolutionModel } from "../../../../core/_model-app/solution.model";
-import { SolutionModalDialogComponent } from "./../controls/solution-modal-dialog/solution-modal-dialog.component";
+import { CardListComponent } from "../controls/card-list/card-list.component";
+import { SolutionService } from "../../../../../core/_services/kt-solution-services/solution.service";
+import { SolutionModel } from "../../../../../core/_model-app/solution.model";
+import { SolutionModalDialogComponent } from "../controls/solution-modal-dialog/solution-modal-dialog.component";
 import {
 	Component,
 	OnInit,

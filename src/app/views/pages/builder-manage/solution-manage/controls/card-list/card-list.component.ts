@@ -1,7 +1,7 @@
-import { DialogConfirmComponent } from "./../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
+import { DialogConfirmComponent } from "../../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { MatDialog } from "@angular/material";
-import { LayoutConfigService } from "../../../../../core/_base/layout/services/layout-config.service";
-import { SolutionModel } from "../../../../../core/auth";
+import { LayoutConfigService } from "../../../../../../core/_base/layout/services/layout-config.service";
+import { SolutionModel } from "../../../../../../core/auth";
 import {
 	Component,
 	OnInit,
@@ -59,7 +59,7 @@ export class CardListComponent implements OnInit, OnChanges {
 	 */
 
 	handleNavigate(item) {
-		const url = `${this.layoutConfigService.getCurrentMainRoute()}/solution-management/solution-edit/${
+		const url = `${this.layoutConfigService.getCurrentMainRoute()}/builder/solutions/edit/${
 			item.name
 		}`;
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
