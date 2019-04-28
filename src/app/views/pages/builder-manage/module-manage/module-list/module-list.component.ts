@@ -1,8 +1,8 @@
-import { LayoutConfigService } from "../../../../core/_base/layout/services/layout-config.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material";
-import { SolutionModalDialogComponent } from "../../solution-management/controls/solution-modal-dialog/solution-modal-dialog.component";
+import { SolutionModalDialogComponent } from "../../solution-manage/controls/solution-modal-dialog/solution-modal-dialog.component";
+import { LayoutConfigService } from "../../../../../core/_base/layout";
 @Component({
 	selector: "kt-module-list",
 	templateUrl: "./module-list.component.html",
@@ -18,8 +18,8 @@ export class ModuleListComponent implements OnInit {
 
 	ngOnInit() {}
 
-	handleCardListclick() {
-		const url = `${this.layoutConfigService.getCurrentMainRoute()}/build-form-field/form-list`;
+	handleCardListclick(item) {
+		const url = `${this.layoutConfigService.getCurrentMainRoute()}/builder/${item.name}`;
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
 	}
 
