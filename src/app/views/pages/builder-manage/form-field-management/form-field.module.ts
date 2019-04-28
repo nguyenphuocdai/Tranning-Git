@@ -1,12 +1,12 @@
 import { DragDropComponent } from "./controls/drag-drop/drag-drop.component";
-import { CoreModule } from "../../../core/core.module";
+import { CoreModule } from "../../../../core/core.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormFieldComponent } from "./form-field.component";
 import { FormFieldListComponent } from "./form-field-list-builder/form-field-list.component";
-import { MaterialModule } from "../material/material.module";
-import { PartialsModule } from "../../partials/partials.module";
+import { MaterialModule } from "../../material/material.module";
+import { PartialsModule } from "../../../partials/partials.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { HighlightModule } from "ngx-highlightjs";
@@ -17,13 +17,13 @@ const routes: Routes = [
 		path: "",
 		component: FormFieldComponent,
 		children: [
+			// {
+			// 	path: "",
+			// 	redirectTo: "form-list",
+			// 	pathMatch: "full"
+			// },
 			{
-				path: "",
-				redirectTo: "form-list",
-				pathMatch: "full"
-			},
-			{
-				path: "form-list",
+				path: "builder:id",
 				component: FormFieldListComponent
 			}
 		]
