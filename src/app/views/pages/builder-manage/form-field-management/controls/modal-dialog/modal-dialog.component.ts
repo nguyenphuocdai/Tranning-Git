@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { FormControl, Validators } from "@angular/forms";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { FormControl } from "@angular/forms";
 
 @Component({
 	selector: "kt-modal-dialog",
@@ -23,7 +23,6 @@ export class ModalDialogComponent implements OnInit {
 	];
 
 	openLink(event: MouseEvent): void {
-		// this.bottomSheetRef.dismiss();
 		event.preventDefault();
 	}
 
@@ -31,7 +30,6 @@ export class ModalDialogComponent implements OnInit {
 	// default value multiple select
 	bindData() {
 		const anotherList: any[] = [this.toppingList[0], this.toppingList[1]];
-
 		this.toppings.setValue(anotherList);
 	}
 }
