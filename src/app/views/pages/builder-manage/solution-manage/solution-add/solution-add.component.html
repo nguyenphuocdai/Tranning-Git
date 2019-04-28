@@ -73,9 +73,10 @@
 									placeholder="Enter database name"
 									formControlName="databaseName"
 									[attr.disabled]="isSubmit"
+									#database
 								/>
 								<mat-hint align="start"
-									>Please enter your database name</mat-hint
+									>Your database name {{database.value | ktReplaceSpace}}</mat-hint
 								>
 							</mat-form-field>
 						</div>

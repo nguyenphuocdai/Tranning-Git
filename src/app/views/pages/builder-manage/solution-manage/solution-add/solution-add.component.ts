@@ -1,9 +1,9 @@
-import { KtSnackBarService } from "../../../../../../core/_base/layout/services/kt-snack-bar.service";
-import { SolutionService } from "../../../../../../core/_services/kt-solution-services/solution.service";
+import { KtSnackBarService } from "../../../../../core/_base/layout/services/kt-snack-bar.service";
+import { SolutionService } from "../../../../../core/_services/kt-solution-services/solution.service";
 import { Component, OnInit, Inject, NgZone } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { SolutionModel } from "../../../../../../core/auth";
+import { SolutionModel } from "../../../../../core/auth";
 
 // fix after
 export class State {
@@ -15,11 +15,11 @@ export class State {
 }
 
 @Component({
-	selector: "kt-solution-modal-dialog",
-	templateUrl: "./solution-modal-dialog.component.html",
-	styleUrls: ["./solution-modal-dialog.component.scss"]
+	selector: "kt-solution-add",
+	templateUrl: "./solution-add.component.html",
+	styleUrls: ["./solution-add.component.scss"]
 })
-export class SolutionModalDialogComponent implements OnInit {
+export class SolutionAddComponent implements OnInit {
 	/**
 	 * Public variable
 	 */
@@ -37,7 +37,7 @@ export class SolutionModalDialogComponent implements OnInit {
 	];
 
 	constructor(
-		public _dialogRef: MatDialogRef<SolutionModalDialogComponent>,
+		public _dialogRef: MatDialogRef<SolutionAddComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		private _solutionService: SolutionService,
 		private _snackBarService: KtSnackBarService
@@ -48,7 +48,6 @@ export class SolutionModalDialogComponent implements OnInit {
 	ngOnInit() {
 		this.initialize();
 	}
-
 	/**
 	 * Init component
 	 */
