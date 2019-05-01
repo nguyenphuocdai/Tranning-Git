@@ -28,7 +28,8 @@ export class ModuleListComponent implements OnInit {
 	handleOpenModal() {
 		this.dialog.open(ModuleAddComponent, {
 			data: { data: "ModuleListComponent" },
-			panelClass: ""
+			panelClass: "",
+			maxHeight: '90vh'
 		});
 	}
 	onRemove(item) {

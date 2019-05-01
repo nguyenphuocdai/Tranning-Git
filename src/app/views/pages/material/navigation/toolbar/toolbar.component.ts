@@ -1,13 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 
 const singleRow = {
-		beforeCodeTitle: 'Single row',
-		htmlCode: `
+	beforeCodeTitle: "Single row",
+	htmlCode: `
 <mat-toolbar>
   <span>My Application</span>
 </mat-toolbar>
 `,
-		tsCode: `
+	tsCode: `
 import {Component} from '@angular/core';\n
 /**
 * @title Basic toolbar : single row
@@ -19,16 +19,15 @@ import {Component} from '@angular/core';\n
 })
 export class ToolbarOverviewExample {}
 `,
-		cssCode: ``,
-		viewCode: ``,
-		isCodeVisible: false,
-		isExampleExpanded: true
-	};
-
+	cssCode: ``,
+	viewCode: ``,
+	isCodeVisible: false,
+	isExampleExpanded: true
+};
 
 const multipleRows = {
-	beforeCodeTitle: 'Multiple rows',
-		htmlCode: `
+	beforeCodeTitle: "Multiple rows",
+	htmlCode: `
 <mat-toolbar>
   <mat-toolbar-row>
     <span>First Row</span>
@@ -54,12 +53,11 @@ export class ToolbarMultiExample {}
 	viewCode: ``,
 	isCodeVisible: false,
 	isExampleExpanded: true
-	};
+};
 
-
-	const multipleRows2 = {
-	beforeCodeTitle: 'Multi-row toolbar',
-		htmlCode: `
+const multipleRows2 = {
+	beforeCodeTitle: "Multi-row toolbar",
+	htmlCode: `
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>Custom Toolbar</span>
@@ -89,7 +87,7 @@ styleUrls: ['toolbar-multi-example.css'],
 })
 export class ToolbarMultiExample {}
 `,
-			cssCode: `
+	cssCode: `
 .example-icon {
   padding: 0 14px;
 }
@@ -101,20 +99,21 @@ export class ToolbarMultiExample {}
 	isExampleExpanded: true
 };
 @Component({
-	selector: 'kt-toolbar',
-	templateUrl: './toolbar.component.html',
+	selector: "kt-toolbar",
+	templateUrl: "./toolbar.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	styles: [`
-	.example-icon {
-		padding: 0 14px;
-	}
-	.example-spacer {
-		flex: 1 1 auto;
-	}
-	`]
+	styles: [
+		`
+			.example-icon {
+				padding: 0 14px;
+			}
+			.example-spacer {
+				flex: 1 1 auto;
+			}
+		`
+	]
 })
 export class ToolbarComponent implements OnInit {
-
 	exampleSingleRow;
 	examplMultipleRows;
 	examplMultipleRows2;

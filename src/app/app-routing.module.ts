@@ -20,7 +20,10 @@ const routes: Routes = [
 	// },
 
 	// list of routers specified by demos, for demo purpose only!
-	 {path: 'default', loadChildren: 'app/views/themes/default/theme.module#ThemeModule'},
+	{
+		path: "default",
+		loadChildren: "app/views/themes/default/theme.module#ThemeModule"
+	},
 	/** END: themes list end */
 
 	{ path: "**", redirectTo: "default/error/403", pathMatch: "full" }
