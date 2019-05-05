@@ -12,7 +12,6 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { HighlightModule } from "ngx-highlightjs";
 import { ModalDialogComponent } from "./controls/modal-dialog/modal-dialog.component";
 import { FormFieldEditComponent } from "./form-field-edit/form-field-edit.component";
-import { MultiDragDropComponent } from './controls/multi-drag-drop/multi-drag-drop.component';
 
 const routes: Routes = [
 	{
@@ -50,7 +49,6 @@ const routes: Routes = [
 		FormFieldEditComponent,
 		DragDropComponent,
 		ModalDialogComponent,
-		MultiDragDropComponent
 	],
 	entryComponents: [ModalDialogComponent]
 })

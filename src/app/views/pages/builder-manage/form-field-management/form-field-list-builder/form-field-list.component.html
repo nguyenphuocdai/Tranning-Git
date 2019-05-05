@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" cdkDropListGroup>
 	<!-- I can use kt-notice selector -->
 	<div class="alert fade show" role="alert">
 		<div class="alert-text">
@@ -23,7 +23,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			<mat-accordion>
-				<mat-expansion-panel>
+				<mat-expansion-panel [expanded]="true">
 					<mat-expansion-panel-header>
 						<mat-panel-title>
 							Basic
@@ -32,8 +32,25 @@
 							Choosen component
 						</mat-panel-description> -->
 					</mat-expansion-panel-header>
-					<kt-drag-drop></kt-drag-drop>
-
+					<div
+						cdkDropList
+						[cdkDropListData]="todo"
+						class="left-list"
+						(cdkDropListDropped)="drop($event)"
+						[cdkDropListEnterPredicate]="noReturnPredicate"
+					>
+						<div
+							class="example-box"
+							*ngFor="let item of todo"
+							cdkDrag
+						>
+							<div
+								class="example-custom-placeholder"
+								*cdkDragPlaceholder
+							></div>
+							{{ item }}
+						</div>
+					</div>
 					<!-- tree data in panel -->
 					<!-- <kt-tree></kt-tree> -->
 					<!-- tree data in panel -->
@@ -79,6 +96,22 @@
 								<mat-form-field class="example-full-width">
 									<input matInput placeholder="Enter Label" />
 								</mat-form-field>
+								<div
+									cdkDropList
+									[cdkDropListData]="done"
+									class="example-list"
+									(cdkDropListDropped)="
+										dropFromPreview($event)
+									"
+								>
+									<div
+										class="example-box"
+										*ngFor="let item of done"
+										cdkDrag
+									>
+										{{ item }}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
