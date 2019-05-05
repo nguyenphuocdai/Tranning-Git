@@ -78,3 +78,27 @@
 		}
 	}
 }
+
+
+/*
+	modify toolbar
+*/
+.kt-absolute-toolbar{
+	width: 100% !important;
+    position: absolute !important;
+	bottom: 0 !important;
+	top: unset !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    flex-direction: row !important;
+}
+.row .kt-demo-icon{
+	padding: 0;
+	margin-bottom: 10px;
+}
+.row .kt-demo-icon .kt-demo-icon__preview i {
+	font-size: 1rem !important;
+}
+.kt-demo-icon__class--color{
+	color: #000;
+}
