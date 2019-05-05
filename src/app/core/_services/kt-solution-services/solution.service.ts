@@ -40,7 +40,7 @@ export class SolutionService {
 		this.sourceSolution.next(this.listSln);
 	}
 	/**
-	 * Clear subject
+	 * get list solution
 	 */
 	getListSolutionObs$(): Observable<any> {
 		if (localStorage.getItem(AppSettings.solutionStorage)) {
