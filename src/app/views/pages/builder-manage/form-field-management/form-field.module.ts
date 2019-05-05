@@ -25,7 +25,7 @@ const routes: Routes = [
 			// 	pathMatch: "full"
 			// },
 			{
-				path: "builder:id",
+				path: "builder/:id",
 				component: FormFieldListComponent
 			}
 		]

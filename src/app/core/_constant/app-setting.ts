@@ -6,4 +6,5 @@ export class AppSettings {
 	public static API_FORM_FIELD_URL = "http://127.0.0.1:9999/api/";
 
 	public static solutionStorage = "ListSolution";
+	public static moduleStorage = "ListModule";
 }
