@@ -18,7 +18,34 @@
 			/> -->
 			<mat-card-content>
 				<!-- <p class="text-justify">Database : {{ item.databaseName }}</p> -->
-				<mat-list role="list">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="kt-demo-icon">
+							<div class="kt-demo-icon__preview">
+								<i class="flaticon2-next"></i>
+							</div>
+							<div class="kt-demo-icon__class">
+								<span class="kt-demo-icon__class--color"
+									>Database: &nbsp;</span
+								>{{ item.databaseName }}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="kt-demo-icon">
+							<div class="kt-demo-icon__preview">
+								<i class="flaticon2-next"></i>
+							</div>
+							<div class="kt-demo-icon__class">
+								<span class="kt-demo-icon__class--color"
+									>Owner: &nbsp;</span
+								>
+								{{ item.owner }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <mat-list role="list">
 					<mat-list-item role="listitem">
 						<span class="font-weight-bold">Owner </span>:
 						{{ item.owner }}</mat-list-item
@@ -27,10 +54,33 @@
 						><span class="font-weight-bold">Database </span>:
 						{{ item.databaseName }}</mat-list-item
 					>
-				</mat-list>
+				</mat-list> -->
 			</mat-card-content>
 			<mat-card-actions align="end">
-				<button
+				<ul class="kt-sticky-toolbar kt-absolute-toolbar">
+					<li
+						class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
+						id="kt_demo_panel_toggle"
+						data-placement="left"
+						ngbTooltip="Check out more demos"
+						(click)="handleNavigate(item)"
+					>
+						<a href="javascript:;" class=""
+							><i class="flaticon2-edit"></i
+						></a>
+					</li>
+					<li
+						class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
+						data-placement="left"
+						ngbTooltip="Layout Builder"
+						(click)="onRemove(item)"
+					>
+						<a href="javascript:;"
+							><i class="flaticon2-trash"></i
+						></a>
+					</li>
+				</ul>
+				<!-- <button
 					mat-button
 					class="mat-raised-button mat-accent"
 					(click)="handleNavigate(item)"
@@ -43,11 +93,14 @@
 					(click)="onRemove(item)"
 				>
 					REMOVE
-				</button>
+				</button> -->
 			</mat-card-actions>
 		</mat-card>
 	</div>
-	<div class="col-md-3 col-sm-6 col-xs-12 kt-padding-b-20" (click)="handleCardListclick()">
+	<div
+		class="col-md-3 col-sm-6 col-xs-12 kt-padding-b-20"
+		(click)="handleCardListclick()"
+	>
 		<mat-card
 			class="kt-card kt-card--height-100 kt-card--border kt-cursor-pointer"
 		>
