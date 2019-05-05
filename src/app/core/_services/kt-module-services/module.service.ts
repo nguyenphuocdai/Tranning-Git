@@ -1,8 +1,8 @@
-import { ModuleModel } from './../../_model-app/module.model';
+import { ModuleModel } from "./../../_model-app/module.model";
 import { Injectable } from "@angular/core";
 import { HttpUtilsService } from "../../_base/crud";
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, BehaviorSubject } from "rxjs";
 import { AppSettings } from "../../_constant/app-setting";
 
 @Injectable({
@@ -11,34 +11,66 @@ import { AppSettings } from "../../_constant/app-setting";
 export class ModuleService {
 	// Public properties
 	subjectModule = new Subject<ModuleModel[]>();
-	listModule: ModuleModel[] = [];
 
+	sourceModules: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+	// listModule: ModuleModel[] = [];
+	listModule = [];
 	constructor(
 		private http: HttpClient,
 		private httpUtils: HttpUtilsService
 	) {}
 
-	sendListModule(listModule: ModuleModel[]) {
-		this.subjectModule.next(listModule);
+	/**
+	 * Add new solution observable
+	 * @param listSolution
+	 */
+	sendListModuleObs$(listModule: any) {
+		if (localStorage.getItem(AppSettings.moduleStorage)) {
+			this.listModule =
+				JSON.parse(localStorage.getItem(AppSettings.moduleStorage)) ==
+				null
+					? []
+					: JSON.parse(
+							localStorage.getItem(AppSettings.moduleStorage)
+					  );
+		}
+		this.listModule.push(listModule);
+		localStorage.setItem(
+			AppSettings.moduleStorage,
+			JSON.stringify(this.listModule)
+		);
+		this.sourceModules.next(this.listModule);
 	}
+
+	/**
+	 * get list modules
+	 */
+	getListModuleObs$(): Observable<any> {
+		if (localStorage.getItem(AppSettings.moduleStorage)) {
+			this.sourceModules.next(
+				JSON.parse(localStorage.getItem(AppSettings.moduleStorage))
+			);
+		}
+		// todos
+		return this.sourceModules.asObservable();
+	}
+
 
 	clearModule() {
 		this.subjectModule.next();
 	}
 
-	getListModule(): Observable<ModuleModel[]> {
-		return this.subjectModule.asObservable();
-	}
+	// getListModule(): Observable<ModuleModel[]> {
+	// 	return this.subjectModule.asObservable();
+	// }
 
 	// CREATE =>  POST: add a new Module to the server
 	createModule(Module: ModuleModel): Observable<ModuleModel> {
 		// Note: Add headers if needed (tokens/bearer)
 		const httpHeaders = this.httpUtils.getHTTPHeaders();
-		return this.http.post<ModuleModel>(
-			AppSettings.API_MODULE_URL,
-			Module,
-			{ headers: httpHeaders }
-		);
+		return this.http.post<ModuleModel>(AppSettings.API_MODULE_URL, Module, {
+			headers: httpHeaders
+		});
 	}
 
 	// READ

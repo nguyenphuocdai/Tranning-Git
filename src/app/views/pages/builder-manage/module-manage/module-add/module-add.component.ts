@@ -1,9 +1,8 @@
+import { KtSnackBarService } from "./../../../../../core/_base/layout/services/kt-snack-bar.service";
+import { ModuleService } from "./../../../../../core/_services/kt-module-services/module.service";
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { RouterAction } from "@ngrx/router-store";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 
 @Component({
 	selector: "kt-module-add",
@@ -12,17 +11,27 @@ import { Subscription } from "rxjs";
 })
 export class ModuleAddComponent implements OnInit {
 	constructor(
-		private activatedRoute: ActivatedRoute,
-		private router: Router,
 		public _dialogRef: MatDialogRef<ModuleAddComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any
+		@Inject(MAT_DIALOG_DATA) public data: any,
+		private fbModule: FormBuilder,
+		private _moduleService: ModuleService,
+		private _snackBarService: KtSnackBarService
 	) {
-		// console.log(data);
+		console.log(data);
+		this.solutionData = data;
 	}
-
+	solutionData: any;
 	rfModule: FormGroup;
+	listModule = [];
+	// lsitModule: Array<{
+	// 	id: number,
+	// 	name: string,
+	// 	pluralName: string,
+	// 	accessType: string,
+	// 	database: string,
+	// 	solution:string
+	// }>;
 	isSubmit: boolean = false;
-	private subscriptions: Subscription[] = [];
 
 	accessTypes = [
 		{ value: "master", viewValue: "Master Data" },
@@ -31,43 +40,51 @@ export class ModuleAddComponent implements OnInit {
 	];
 	ngOnInit() {
 		this.initialize();
-		const routeSubscription = this.activatedRoute.params.subscribe(
-			params => {
-				const id = params["id"];
-
-				if (id && id.length > 0) {
-					// this.solution = JSON.parse(
-					// 	localStorage.getItem("listSolution")
-					// ).find(x => x.name === id);
-					/**
-					 * Initialize Solution
-					 */
-				}
-			}
-		);
-		this.subscriptions.push(routeSubscription);
 	}
 
 	initialize() {
 		this.createForm();
 	}
 	createForm() {
-		this.rfModule = new FormGroup({
-			name: new FormControl("", [
-				Validators.required,
-				Validators.minLength(3)
-			]),
-			pluralName: new FormControl("", [Validators.minLength(3)]),
-			accessType: new FormControl("", [Validators.required]),
-			solution: new FormControl("", [Validators.required]),
-			database: new FormControl("", [Validators.required])
+		//after check solutionId && databaseId has change, if change so return function;
+		this.rfModule = this.fbModule.group({
+			name: ["", Validators.required],
+			pluralName: ["", Validators.minLength(3)],
+			accessType: ["", Validators.required],
+			solutionId: [
+				{ value: this.solutionData.data.name, disabled: true },
+				Validators.required
+			],
+			databaseId: [
+				{ value: this.solutionData.data.databaseName, disabled: true },
+				Validators.required
+			]
 		});
 	}
 
 	onSubmit(event) {
+		console.log(this.rfModule);
+		this.isSubmit = true;
+		this._dialogRef.disableClose = true;
+
+		if (this.rfModule.invalid) {
+			return;
+		}
+
+		setTimeout(() => {
+			this.listModule = this.rfModule.value;
+			this._moduleService.sendListModuleObs$(this.listModule);
+			this._snackBarService.openSnackBar(
+				"Add new solution successfully !",
+				5000
+			);
+			this.isSubmit = false;
+			this._dialogRef.close();
+		}, 3000);
+
 		return event;
 	}
-	handleCancel(){
-		return 1;
+	handleCancel() {
+		this._dialogRef.close();
 	}
 }
