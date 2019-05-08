@@ -12,6 +12,7 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { HighlightModule } from "ngx-highlightjs";
 import { ModalDialogComponent } from "./controls/modal-dialog/modal-dialog.component";
 import { FormFieldEditComponent } from "./form-field-edit/form-field-edit.component";
+import { BrowserModule } from "@angular/platform-browser";
 
 const routes: Routes = [
 	{
@@ -35,7 +36,7 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
 		FormsModule,
-		ReactiveFormsModule,
+		ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
 		PartialsModule,
 		CoreModule,
 		PerfectScrollbarModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import {
@@ -7,7 +7,7 @@ import {
 	transferArrayItem
 } from "@angular/cdk/drag-drop";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatDialogRef } from "@angular/material";
 @Component({
 	selector: "kt-form-field-list",
 	templateUrl: "./form-field-list.component.html",
@@ -17,8 +17,13 @@ export class FormFieldListComponent implements OnInit {
 	constructor(
 		private _location: Location,
 		private activatedRoute: ActivatedRoute,
-		public dialog: MatDialog
-	) {}
+		private dialog: MatDialog,
+		private ref: ChangeDetectorRef
+	) {
+		// this.dialogRef.afterClosed().subscribe(x =>{
+		// 	console.log(x);
+		// });
+	}
 	panelOpenState: boolean = false;
 	data = {
 		animal: "panda"
@@ -26,14 +31,14 @@ export class FormFieldListComponent implements OnInit {
 	poster: "https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg";
 	todo = [];
 	stableData = [
-		"Text Field",
-		"Auto Complete",
-		"Check box",
-		"Date Picker",
-		"Slider",
-		"Slide Toggle",
-		"Radio Button",
-		"Select Option"
+		{type: "Input",valueView: "Text Field"},
+		{type: "AutoComplete",valueView: "Auto Complete"},
+		{type: "Checkbox",valueView: "Check box"},
+		{type: "DatePicker",valueView: "Date Picker"},
+		{type: "Slider",valueView: "Slider"},
+		{type: "SlideToggle",valueView: "Slide Toggle"},
+		{type: "RadioButton",valueView: "Radio Button"},
+		{type: "SelectOption",valueView: "Select Option"},
 	];
 	done = [];
 
@@ -88,25 +93,28 @@ export class FormFieldListComponent implements OnInit {
 	 */
 	dropFromPreview(event: CdkDragDrop<string[]>) {
 		if (event.previousContainer === event.container) {
-			// moveItemInArray(
-			// 	event.container.data,
-			// 	event.previousIndex,
-			// 	event.currentIndex
-			// );
+			return false;
 		} else {
-			this.dialog.open(ModalDialogComponent, {
-				data: this.data,
-				width: "70%",
-				panelClass: ""
-			});
-			transferArrayItem(
-				event.previousContainer.data,
-				event.container.data,
-				event.previousIndex,
-				event.currentIndex
-			);
+			this.dialog
+				.open(ModalDialogComponent, {
+					data: this.stableData[event.previousIndex],
+					width: "70%",
+					panelClass: ""
+				})
+				.afterClosed()
+				.subscribe(response => {
+					if (response) {
+						transferArrayItem(
+							event.previousContainer.data,
+							event.container.data,
+							event.previousIndex,
+							event.currentIndex
+						);
+						this.ref.markForCheck();
+						this.resetList();
+					}
+				});
 		}
-		this.resetList();
 	}
 	/** Predicate function that doesn't allow items to be dropped into a list. */
 	noReturnPredicate() {
