@@ -1,76 +1,186 @@
 <div class="container-fluid ">
-	<div class="row">
-		<div class="col-md-6">
-			<div class="kt-portlet">
-				<div class="kt-portlet__head">
-					<div class="kt-portlet__head-caption">
-						<div class="kt-portlet__head-title">
-							<span class="kt-portlet__head-icon kt-hide">
-								<i class="la la-gear"></i>
-							</span>
-							<h3 class="kt-portlet__head-text">
-								Default Form Layout
-							</h3>
+	<form
+		class="kt-form"
+		novalidate
+		(ngSubmit)="onSubmit($event)"
+		[formGroup]="rfField"
+	>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="kt-portlet">
+					<div class="kt-portlet__head">
+						<div class="kt-portlet__head-caption">
+							<div class="kt-portlet__head-title">
+								<span class="kt-portlet__head-icon kt-hide">
+									<i class="la la-gear"></i>
+								</span>
+								<h3 class="kt-portlet__head-text">
+									Default Form Layout
+								</h3>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!--Begin::Form-->
-				<form class="kt-form">
-					<div class="kt-portlet__body">
-						<div class="kt-form__section kt-form__section--first">
-							<!--Begin::Label-->
-							<div class="form-group kt-form__group">
-								<mat-form-field class="example-full-width">
-									<input matInput placeholder="Enter Label" />
-									<mat-hint align="start"
-										>Please enter Label</mat-hint
-									>
-								</mat-form-field>
-							</div>
-							<!--End::Label-->
+					<!--Begin::Form-->
+					<div
+						class="kt-form"
+						novalidate
+						(ngSubmit)="onSubmit($event)"
+						[formGroup]="rfField"
+					>
+						<div class="kt-portlet__body">
+							<div
+								class="kt-form__section kt-form__section--first"
+							>
+								<!--Begin::Label-->
+								<div class="form-group kt-form__group">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Enter display name"
+											required
+											name="name"
+											formControlName="name"
+											#nameRef
+										/>
+										<mat-hint align="start"
+											>Please enter display name</mat-hint
+										>
+									</mat-form-field>
+								</div>
+								<!--End::Label-->
 
-							<!--Begin::Place Holder-->
-							<div class="form-group kt-form__group">
-								<mat-form-field class="example-full-width">
-									<input
-										matInput
-										placeholder="Place Holder"
-										type="text"
-									/>
-									<mat-hint align="start"
-										>Please enter Place Holder</mat-hint
+								<!--Begin::Required-->
+								<div
+									class="form-group kt-form__group form-group-flex"
+								>
+									<mat-checkbox
+										#requiredRef
+										class="example-margin"
+										name="required"
+										formControlName="required"
+										>Required</mat-checkbox
 									>
-								</mat-form-field>
-							</div>
-							<!--End::Place Holder-->
-
-							<!--Begin::Description-->
-							<div class="form-group kt-form__group">
-								<mat-form-field class="example-full-width">
-									<input matInput placeholder="Description" />
-									<mat-hint align="start"
-										>Please enter Description</mat-hint
+									<mat-form-field
+										class="example-full-width kt-margin-l-20"
 									>
-								</mat-form-field>
-							</div>
-							<!--End::Description-->
-
-							<!--Begin::Default Value-->
-							<div class="form-group kt-form__group">
-								<mat-form-field class="example-full-width">
-									<input
-										matInput
-										placeholder="Value Default"
-									/>
-									<mat-hint align="start"
-										>Please enter Value Default</mat-hint
+										<input
+											matInput
+											placeholder="Enter error message"
+											#errorMessageRef
+										/>
+										<mat-hint align="start"
+											>If field required, Please enter
+											error message</mat-hint
+										>
+									</mat-form-field>
+								</div>
+								<!--End::Required-->
+								<div class="form-group kt-form__group">
+									<mat-checkbox
+										class="example-margin"
+										name="security"
+										formControlName="security"
+										>Field Security</mat-checkbox
 									>
-								</mat-form-field>
-							</div>
-							<!--End::Default Value-->
+								</div>
+								<div class="form-group kt-form__group">
+									<mat-checkbox
+										class="example-margin"
+										name="tracking"
+										formControlName="tracking"
+										>Change Tracking</mat-checkbox
+									>
+								</div>
+								<!--Begin::Place Holder-->
+								<!-- <div class="form-group kt-form__group">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Place Holder"
+											type="text"
+											name="placeholder"
+											formControlName="placeholder"
+										/>
+										<mat-hint align="start"
+											>Please enter Place Holder</mat-hint
+										>
+									</mat-form-field>
+								</div> -->
+								<!--End::Place Holder-->
 
-							<!--Begin::Select-->
-							<div class="form-group kt-form__group">
+								<!--Begin::Description-->
+								<div class="form-group kt-form__group">
+									<mat-form-field class="example-full-width">
+										<textarea
+											matInput
+											placeholder="Please enter description"
+											formControlName="description"
+											name="description"
+											#descriptionRef
+										></textarea>
+										<mat-hint align="start"
+											>Please enter description</mat-hint
+										>
+									</mat-form-field>
+								</div>
+
+								<!--Begin::Field Type-->
+								<div class="form-group kt-form__group">
+									<mat-form-field>
+										<mat-label>Field Type</mat-label>
+										<mat-select
+											required
+											formControlName="fieldType"
+										>
+											<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+										{{food.viewValue}}
+									  </mat-option> -->
+											<mat-option value="volvo"
+												>Text</mat-option
+											>
+											<mat-option value="saab"
+												>Number</mat-option
+											>
+										</mat-select>
+									</mat-form-field>
+
+									<mat-form-field class="kt-padding-l-5">
+										<mat-label>Display format</mat-label>
+										<mat-select
+											required
+											formControlName="displayFormat"
+										>
+											<mat-option value="01"
+												>Format 01: ###</mat-option
+											>
+											<mat-option value="02"
+												>Format 02: ###</mat-option
+											>
+										</mat-select>
+									</mat-form-field>
+
+									<mat-form-field class="kt-padding-l-5">
+										<mat-label>Validate Parttern</mat-label>
+										<mat-select
+											required
+											formControlName="parttern"
+										>
+											<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+										{{food.viewValue}}
+									  </mat-option> -->
+											<mat-option value="01"
+												>Pattern 01: ###</mat-option
+											>
+											<mat-option value="02"
+												>Pattern 02: ###</mat-option
+											>
+										</mat-select>
+									</mat-form-field>
+								</div>
+
+								<!--End::Description-->
+								<!--Begin::Select-->
+								<!-- <div class="form-group kt-form__group">
 								<mat-form-field>
 									<mat-select
 										placeholder="Toppings"
@@ -106,60 +216,78 @@
 										>
 									</mat-select>
 								</mat-form-field>
+							</div> -->
+								<!--End::Select-->
 							</div>
-							<!--End::Select-->
 						</div>
 					</div>
-				</form>
-				<!--End::Form-->
-				<!-- </div> -->
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="kt-portlet">
-				<div class="kt-portlet__head">
-					<div class="kt-portlet__head-caption">
-						<div class="kt-portlet__head-title">
-							<span class="kt-portlet__head-icon kt-hide">
-								<i class="la la-gear"></i>
-							</span>
-							<h3 class="kt-portlet__head-text">
-								Preview Layout
-							</h3>
-						</div>
-					</div>
+					<!--End::Form-->
+					<!-- </div> -->
 				</div>
-				<!--Begin::Form-->
-				<form class="kt-form">
-					<div class="kt-portlet__body">
-						<div class="kt-form__section kt-form__section--first">
-							<div class="form-group kt-form__group">
-								<mat-form-field class="example-full-width">
-									<input matInput placeholder="Enter Label" />
-								</mat-form-field>
-							</div>
-						</div>
-						<div
-							class="kt-portlet__foot kt-portlet__foot--border-top-0"
-						>
-							<div
-								class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0"
-							>
-								<button
-									mat-raised-button
-									color="primary"
-								>
-									Submit</button
-								>&nbsp;
-								<button mat-raised-button type="reset">
-									Cancel
-								</button>
+			</div>
+			<div class="col-md-6">
+				<div class="kt-portlet">
+					<div class="kt-portlet__head">
+						<div class="kt-portlet__head-caption">
+							<div class="kt-portlet__head-title">
+								<span class="kt-portlet__head-icon kt-hide">
+									<i class="la la-gear"></i>
+								</span>
+								<h3 class="kt-portlet__head-text">
+									Preview Layout
+								</h3>
 							</div>
 						</div>
 					</div>
-				</form>
-				<!--End::Form-->
+					<!--Begin::Form-->
+					<div class="kt-form">
+						<div class="kt-portlet__body">
+							<div
+								class="kt-form__section kt-form__section--first"
+							>
+								<div class="form-group kt-form__group">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="{{ nameRef.value }}"
+											required
+										/>
+										<mat-icon matSuffix matTooltip="{{descriptionRef.value}}">help</mat-icon>
+										<mat-hint
+											align="start"
+											*ngIf="requiredRef.checked"
+											>{{ errorMessageRef?.value }}</mat-hint
+										>
+									</mat-form-field>
+								</div>
+							</div>
+							<div
+								class="kt-portlet__foot kt-portlet__foot--border-top-0"
+							>
+								<div
+									class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0"
+								>
+									<button
+										mat-raised-button
+										color="primary"
+										type="submit"
+									>
+										Submit</button
+									>&nbsp;
+									<button
+										mat-raised-button
+										type="button"
+										(click)="closeModal()"
+									>
+										Cancel
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End::Form-->
+				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </div>
