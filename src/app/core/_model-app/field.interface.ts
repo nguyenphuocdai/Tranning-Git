@@ -4,6 +4,7 @@ export interface Validator {
     message: string;
   }
   export interface FieldConfig {
+	  // regConfig: any;
     label?: string;
     name?: string;
     inputType?: string;
@@ -13,4 +14,3 @@ export interface Validator {
     value?: any;
     validations?: Validator[];
   }
-  
