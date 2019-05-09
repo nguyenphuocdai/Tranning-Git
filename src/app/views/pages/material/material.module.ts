@@ -11,7 +11,7 @@ import { PartialsModule } from "../../partials/partials.module";
 import { CoreModule } from "../../../core/core.module";
 import { MaterialPreviewModule } from "../../partials/content/general/material-preview/material-preview.module";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { MatRippleModule } from "@angular/material/core";
+import { MatRippleModule, MatOptionModule } from "@angular/material/core";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import {
@@ -107,7 +107,7 @@ import { PizzaPartyComponent } from "./popups-and-modals/snackbar/pizza-party.co
 import { PaginatorComponent } from "./data-table/paginator/paginator.component";
 import { SortHeaderComponent } from "./data-table/sort-header/sort-header.component";
 import { MaterialTableComponent } from "./data-table/material-table/material-table.component";
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "@angular/material-moment-adapter";
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from "@angular/material-moment-adapter";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ModalBottomSheetComponent } from "./controls/modal-bottom-sheet/modal-bottom-sheet.component";
 
@@ -309,7 +309,20 @@ const routes: Routes = [
 		FormsModule,
 		ReactiveFormsModule,
 		CodePreviewModule,
-		RouterModule.forChild(routes)
+		RouterModule.forChild(routes),
+		MatButtonModule,
+		MatIconModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatListModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		MatMomentDateModule,
+		MatSelectModule,
+		MatOptionModule,
+		MatCheckboxModule,
+		MatRadioModule
 	],
 	exports: [
 		RouterModule,
@@ -335,7 +348,20 @@ const routes: Routes = [
 		MatSelectModule,
 		MatSelectTrigger,
 		MatListModule,
-		MatTooltipModule
+		MatTooltipModule,
+		MatButtonModule,
+		MatIconModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatListModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		MatMomentDateModule,
+		MatSelectModule,
+		MatOptionModule,
+		MatCheckboxModule,
+		MatRadioModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
