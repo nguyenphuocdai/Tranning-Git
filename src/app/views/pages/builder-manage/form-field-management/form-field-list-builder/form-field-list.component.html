@@ -93,25 +93,26 @@
 					<div class="kt-portlet__body">
 						<div class="kt-form__section kt-form__section--first">
 							<div class="form-group kt-form__group">
-								<mat-form-field class="example-full-width">
-									<input matInput placeholder="Enter Label" />
-								</mat-form-field>
 								<div
 									cdkDropList
-									[cdkDropListData]="done"
+									[cdkDropListData]="regConfig"
 									class="example-list"
 									(cdkDropListDropped)="
 										dropFromPreview($event)
 									"
 								>
-									<div
+									<!-- <div
 										class="example-box"
-										*ngFor="let item of done"
+										*ngFor="let item of regConfig; let first = first; let i = index"
 										cdkDrag
+									> -->
+									<dynamic-form
+										[fields]="items"
+										(submit)="submit($event)"
 									>
-										{{ item }}
-									</div>
+									</dynamic-form>
 								</div>
+								<!-- </div> -->
 							</div>
 						</div>
 					</div>

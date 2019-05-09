@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { DynamicFormComponent } from "./../components/dynamic-form/dynamic-form.component";
+import { FieldConfig } from "../../../../../core/_model-app/field.interface";
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from "@angular/core";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import {
@@ -8,6 +10,7 @@ import {
 } from "@angular/cdk/drag-drop";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
 import { MatDialog, MatDialogRef } from "@angular/material";
+import { Validators } from "@angular/forms";
 @Component({
 	selector: "kt-form-field-list",
 	templateUrl: "./form-field-list.component.html",
@@ -24,21 +27,24 @@ export class FormFieldListComponent implements OnInit {
 		// 	console.log(x);
 		// });
 	}
+	@ViewChild(DynamicFormComponent) form: DynamicFormComponent;
 	panelOpenState: boolean = false;
+	regConfig: FieldConfig[] = [];
+	items: FieldConfig[] = [];
 	data = {
 		animal: "panda"
 	};
 	poster: "https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg";
 	todo = [];
 	stableData = [
-		{type: "Input",valueView: "Text Field"},
-		{type: "AutoComplete",valueView: "Auto Complete"},
-		{type: "Checkbox",valueView: "Check box"},
-		{type: "DatePicker",valueView: "Date Picker"},
-		{type: "Slider",valueView: "Slider"},
-		{type: "SlideToggle",valueView: "Slide Toggle"},
-		{type: "RadioButton",valueView: "Radio Button"},
-		{type: "SelectOption",valueView: "Select Option"},
+		{ type: "input", valueView: "Text Field" },
+		{ type: "autoComplete", valueView: "Auto Complete" },
+		{ type: "checkbox", valueView: "Check box" },
+		{ type: "datePicker", valueView: "Date Picker" },
+		{ type: "slider", valueView: "Slider" },
+		{ type: "slideToggle", valueView: "Slide Toggle" },
+		{ type: "radioButton", valueView: "Radio Button" },
+		{ type: "selectOption", valueView: "Select Option" }
 	];
 	done = [];
 
@@ -103,6 +109,7 @@ export class FormFieldListComponent implements OnInit {
 				})
 				.afterClosed()
 				.subscribe(response => {
+					console.log(response);
 					if (response) {
 						transferArrayItem(
 							event.previousContainer.data,
@@ -110,8 +117,13 @@ export class FormFieldListComponent implements OnInit {
 							event.previousIndex,
 							event.currentIndex
 						);
+						this.regConfig.push(response);
+						let obj = response;
+						this.items.push(obj)
 						this.ref.markForCheck();
 						this.resetList();
+						console.log(this.regConfig);
+
 					}
 				});
 		}
@@ -127,7 +139,11 @@ export class FormFieldListComponent implements OnInit {
 		this.todo = this.stableData.slice();
 	}
 
+	/**
+	 * previous routerlink
+	 */
 	backClicked() {
 		this._location.back();
 	}
+	submit(value: any) {}
 }
