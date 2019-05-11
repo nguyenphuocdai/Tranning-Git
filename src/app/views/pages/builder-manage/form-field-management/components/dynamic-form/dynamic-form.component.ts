@@ -4,7 +4,8 @@ import {
 	Input,
 	OnChanges,
 	OnInit,
-	Output
+	Output,
+	SimpleChanges
 } from "@angular/core";
 import {
 	FormGroup,
@@ -34,7 +35,7 @@ import { FieldConfig } from "./../../../../../../core/auth";
 	`,
 	styles: []
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnChanges {
 	@Input() fields: FieldConfig[] = [];
 
 	@Output() submit: EventEmitter<any> = new EventEmitter<any>();
@@ -55,7 +56,11 @@ export class DynamicFormComponent implements OnInit {
 	ngOnInit() {
 		this.form = this.createControl();
 	}
-
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes.fields.currentValue !== changes.fields.previousValue) {
+			this.form = this.createControl();
+		}
+	}
 	onSubmit(event: Event) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -69,7 +74,9 @@ export class DynamicFormComponent implements OnInit {
 	createControl() {
 		const group = this.fb.group({});
 		this.fields.forEach(field => {
-			if (field.type === "button") return;
+			if (field.type === "button") {
+				return;
+			}
 			const control = this.fb.control(
 				field.value,
 				this.bindValidations(field.validations || [])
