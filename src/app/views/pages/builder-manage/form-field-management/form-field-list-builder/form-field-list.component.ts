@@ -31,9 +31,6 @@ export class FormFieldListComponent implements OnInit {
 	panelOpenState: boolean = false;
 	regConfig: FieldConfig[] = [];
 	items: FieldConfig[] = [];
-	data = {
-		animal: "panda"
-	};
 	poster: "https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg";
 	todo = [];
 	stableData = [
@@ -50,49 +47,17 @@ export class FormFieldListComponent implements OnInit {
 
 	ngOnInit() {
 		this.resetList();
-		const routeSubscription = this.activatedRoute.params.subscribe(
-			params => {
-				const id = params["id"];
-				console.log(id);
 
-				if (id && id.length > 0) {
-					// this._solutionService
-					// 	.getListSolutionObs$()
-					// .subscribe(listSln => {
-					// 	this.solution = listSln.find(x => x.name === id);
-					// });
-					// this.solution = JSON.parse(
-					// 	localStorage.getItem("listSolution")
-					// ).find(x => x.name === id);
-					/**
-					 * Initialize Solution
-					 */
-					// this.initSolution();
-				}
-			}
-		);
+		let localData = JSON.parse(localStorage.getItem("regConfig"));
+		if (localData) {
+			this.items = localData;
+		}
 	}
 	/**
 	 * event drop from source to preview (temp not use)
 	 * @param event CdkDragDrop
 	 */
-	drop(event: CdkDragDrop<string[]>) {
-		// if (event.previousContainer === event.container) {
-		// 	moveItemInArray(
-		// 		event.container.data,
-		// 		event.previousIndex,
-		// 		event.currentIndex
-		// 	);
-		// } else {
-		// transferArrayItem(
-		// 	event.previousContainer.data,
-		// 	event.container.data,
-		// 	event.previousIndex,
-		// 	event.currentIndex
-		// );
-		// // }
-		// this.resetList();
-	}
+	drop(event: CdkDragDrop<string[]>) {}
 	/**
 	 * event drop from preview to source
 	 * @param event CdkDragDrop
@@ -109,7 +74,6 @@ export class FormFieldListComponent implements OnInit {
 				})
 				.afterClosed()
 				.subscribe(response => {
-					console.log(response);
 					if (response) {
 						transferArrayItem(
 							event.previousContainer.data,
@@ -118,12 +82,18 @@ export class FormFieldListComponent implements OnInit {
 							event.currentIndex
 						);
 						this.regConfig.push(response);
-						let obj = response;
-						this.items.push(obj)
+						this.items = this.regConfig.filter(
+							x => !x.hasOwnProperty("valueView")
+						);
+						console.log(this.regConfig);
 						this.ref.markForCheck();
 						this.resetList();
-						console.log(this.regConfig);
 
+						// local strorage
+						localStorage.setItem(
+							"regConfig",
+							JSON.stringify(this.items)
+						);
 					}
 				});
 		}

@@ -68,7 +68,7 @@ const routes: Routes = [
 		DynamicFieldDirective,
 		DynamicFormComponent
 	],
-	exports:[DynamicFieldDirective],
+	exports: [DynamicFieldDirective],
 	entryComponents: [
 		ModalDialogComponent,
 		InputComponent,
