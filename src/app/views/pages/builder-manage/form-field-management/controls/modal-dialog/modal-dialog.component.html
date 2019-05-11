@@ -70,6 +70,7 @@
 											matInput
 											placeholder="Enter error message"
 											#errorMessageRef
+											formControlName="errorMessage"
 										/>
 										<mat-hint align="start"
 											>If field required, Please enter
@@ -127,52 +128,19 @@
 									</mat-form-field>
 								</div>
 
-								<!--Begin::Field Type-->
 								<div class="form-group kt-form__group">
-									<mat-form-field>
-										<mat-label>Field Type</mat-label>
-										<mat-select
-											required
-											formControlName="fieldType"
-										>
-											<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-										{{food.viewValue}}
-									  </mat-option> -->
-											<mat-option value="Text"
-												>Text</mat-option
-											>
-											<mat-option value="Number"
-												>Number</mat-option
-											>
-										</mat-select>
-									</mat-form-field>
-
-									<mat-form-field class="kt-padding-l-5">
-										<mat-label>Display format</mat-label>
-										<mat-select
-											required
-											formControlName="displayFormat"
-										>
-											<mat-option value="Format01"
-												>Format 01: ###</mat-option
-											>
-											<mat-option value="Format02"
-												>Format 02: ###</mat-option
-											>
-										</mat-select>
-									</mat-form-field>
-
-									<mat-form-field class="kt-padding-l-5">
+									<mat-form-field class="demo-full-width">
 										<mat-label>Validate Parttern</mat-label>
 										<mat-select
 											required
 											formControlName="parttern"
 										>
 											<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-										{{food.viewValue}}
-									  </mat-option> -->
-											<mat-option value="Parttern01"
-												>Pattern 01: ###</mat-option
+													{{food.viewValue}}
+												  </mat-option> -->
+											<mat-option value="^[a-zA-Z]+$"
+												># Accept only text
+												"^[a-zA-Z]+$"</mat-option
 											>
 											<mat-option value="Parttern02"
 												>Pattern 02: ###</mat-option
@@ -180,6 +148,57 @@
 										</mat-select>
 									</mat-form-field>
 								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group kt-form__group">
+											<mat-form-field class="demo-full-width">
+												<mat-label
+													>Field Type</mat-label
+												>
+												<mat-select
+													required
+													formControlName="fieldType"
+												>
+													<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+										{{food.viewValue}}
+									  </mat-option> -->
+													<mat-option value="Text"
+														>Text</mat-option
+													>
+													<mat-option value="Number"
+														>Number</mat-option
+													>
+												</mat-select>
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group kt-form__group">
+											<mat-form-field
+												class="kt-padding-l-5 demo-full-width"
+											>
+												<mat-label
+													>Display format</mat-label
+												>
+												<mat-select
+													required
+													formControlName="displayFormat"
+												>
+													<mat-option value="Format01"
+														>Format 01:
+														###</mat-option
+													>
+													<mat-option value="Format02"
+														>Format 02:
+														###</mat-option
+													>
+												</mat-select>
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+								<!--Begin::Field Type-->
 
 								<!--End::Description-->
 								<!--Begin::Select-->
@@ -282,13 +301,11 @@
 										mat-raised-button
 										color="primary"
 										type="submit"
+										[disabled]="!rfField.valid"
 									>
 										Submit</button
 									>&nbsp;
-									<button
-										mat-raised-button
-										type="button"
-									>
+									<button mat-raised-button type="button">
 										Cancel
 									</button>
 									<!-- <button

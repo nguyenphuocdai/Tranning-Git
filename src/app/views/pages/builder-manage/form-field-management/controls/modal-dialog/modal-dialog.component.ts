@@ -1,3 +1,4 @@
+import { Validator } from "./../../../../../../core/_model-app/field.interface";
 import { KtSnackBarService } from "./../../../../../../core/_base/layout/services/kt-snack-bar.service";
 import * as FunctionBase from "../../../../../../core/_function-base/function-base.ultilities";
 import { FieldSetting } from "./../../../../../../core/_constant/field-setting";
@@ -64,7 +65,6 @@ export class ModalDialogComponent implements OnInit {
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
-			// placeholder: [""],
 			description: [""],
 			fieldType: ["", Validators.required],
 			displayFormat: ["", Validators.required],
@@ -82,16 +82,14 @@ export class ModalDialogComponent implements OnInit {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this.dialogRef.disableClose = true;
-
+		console.log(this.rfField.value);
 		if (this.rfField.invalid) {
+			this.isSubmit = false;
 			return;
 		}
-		setTimeout(() => {
-			let obj = this.onPreBuildItems(this.dialogRefData.type);
-			this.dialogRefData = null;
-			let mergedObj = { ...obj, ...this.rfField.value };
-			// this.items.push(mergedObj);
 
+		setTimeout(() => {
+			let mergedObj = this.onBuildData();
 			this._snackBarService.openSnackBar(
 				"Add new field successfully !",
 				5000
@@ -99,7 +97,7 @@ export class ModalDialogComponent implements OnInit {
 			this.isSubmit = false;
 			this.dialogRef.close(mergedObj);
 			console.log(mergedObj);
-		}, 3000);
+		}, 3000 );
 	}
 
 	/**
@@ -130,5 +128,49 @@ export class ModalDialogComponent implements OnInit {
 			}
 		}
 		return item;
+	}
+
+	onBuildData() {
+		let obj = this.onPreBuildItems(this.dialogRefData.type);
+
+		let label = this.rfField.controls["name"].value;
+		let type = obj.type;
+		let inputType = obj.inputType;
+		let isRequired = this.rfField.controls["required"].value;
+		let errorMessage = this.rfField.controls["errorMessage"].value;
+		let isPattern = this.rfField.controls["parttern"].value;
+		let messagePattern = "Accept only text";
+		let isSecurity = this.rfField.controls["security"].value;
+		let isTracking = this.rfField.controls["tracking"].value;
+		let displayFormat = this.rfField.controls["displayFormat"].value;
+
+		let mergedObj = {
+			type: type,
+			label: label,
+			inputType: inputType,
+			name: label,
+			security: isSecurity,
+			tracking: isTracking,
+			displayFormat: displayFormat,
+			validations: []
+		};
+		if (isRequired === true) {
+			let objValidator = {
+				name: "required",
+				validator: Validators.required,
+				message: errorMessage
+			};
+			mergedObj.validations.push(objValidator);
+		}
+		if (isPattern) {
+			let objValidator = {
+				name: "pattern",
+				validator: Validators.pattern(isPattern),
+				message: messagePattern
+			};
+			mergedObj.validations.push(objValidator);
+		}
+		this.dialogRefData = null;
+		return mergedObj;
 	}
 }
