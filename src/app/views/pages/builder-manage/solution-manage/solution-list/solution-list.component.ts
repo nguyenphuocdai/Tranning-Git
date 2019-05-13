@@ -37,7 +37,8 @@ export class SolutionListComponent implements OnInit, OnDestroy {
 	handleOpenModal() {
 		this.dialog.open(SolutionAddComponent, {
 			data: this.data,
-			panelClass: ""
+			panelClass: "",
+			maxHeight: "90vh"
 		});
 	}
 	handleCardListClick(event) {
