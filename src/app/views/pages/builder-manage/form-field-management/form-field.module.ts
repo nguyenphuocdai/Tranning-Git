@@ -1,4 +1,3 @@
-import { DragDropComponent } from "./controls/drag-drop/drag-drop.component";
 import { CoreModule } from "../../../../core/core.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -20,6 +19,7 @@ import { RadiobuttonComponent } from "./components/radiobutton/radiobutton.compo
 import { CheckboxComponent } from "./components/checkbox/checkbox.component";
 import { DynamicFieldDirective } from "./components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.component";
+import { TextFieldComponent } from "./controls/form-control-components/text-field/text-field.component";
 
 const routes: Routes = [
 	{
@@ -57,7 +57,6 @@ const routes: Routes = [
 		FormFieldComponent,
 		FormFieldListComponent,
 		FormFieldEditComponent,
-		DragDropComponent,
 		ModalDialogComponent,
 		InputComponent,
 		ButtonComponent,
@@ -66,7 +65,8 @@ const routes: Routes = [
 		RadiobuttonComponent,
 		CheckboxComponent,
 		DynamicFieldDirective,
-		DynamicFormComponent
+		DynamicFormComponent,
+		TextFieldComponent
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
