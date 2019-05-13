@@ -7,7 +7,7 @@ import {
 	ViewContainerRef
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfig } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "./../../../../../../core/auth";
 import { InputComponent } from "../input/input.component";
 import { ButtonComponent } from "../button/button.component";
 import { SelectComponent } from "../select/select.component";
@@ -27,7 +27,7 @@ const componentMapper = {
 	selector: "[dynamicField]"
 })
 export class DynamicFieldDirective implements OnInit {
-	@Input() field: FieldConfig;
+	@Input() field: FieldConfigInterface;
 	@Input() group: FormGroup;
 	componentRef: any;
 	constructor(

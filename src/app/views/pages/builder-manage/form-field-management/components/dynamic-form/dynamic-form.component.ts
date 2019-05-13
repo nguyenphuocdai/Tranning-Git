@@ -13,7 +13,7 @@ import {
 	Validators,
 	FormControl
 } from "@angular/forms";
-import { FieldConfig } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "./../../../../../../core/auth";
 
 @Component({
 	exportAs: "dynamicForm",
@@ -36,7 +36,7 @@ import { FieldConfig } from "./../../../../../../core/auth";
 	styles: []
 })
 export class DynamicFormComponent implements OnInit, OnChanges {
-	@Input() fields: FieldConfig[] = [];
+	@Input() fields: FieldConfigInterface[] = [];
 
 	@Output() submit: EventEmitter<any> = new EventEmitter<any>();
 

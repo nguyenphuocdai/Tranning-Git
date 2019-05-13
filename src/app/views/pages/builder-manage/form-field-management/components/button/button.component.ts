@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfig } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "./../../../../../../core/auth";
 @Component({
 	selector: "kt-app-button",
 	template: `
@@ -13,7 +13,7 @@ import { FieldConfig } from "./../../../../../../core/auth";
 	styles: []
 })
 export class ButtonComponent implements OnInit {
-	field: FieldConfig;
+	field: FieldConfigInterface;
 	group: FormGroup;
 	constructor() {}
 	ngOnInit() {}
