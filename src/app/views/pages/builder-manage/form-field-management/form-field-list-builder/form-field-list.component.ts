@@ -11,7 +11,12 @@ import {
 } from "@angular/core";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { CdkDragDrop, transferArrayItem } from "@angular/cdk/drag-drop";
+import {
+	CdkDragDrop,
+	transferArrayItem,
+	CdkDragStart,
+	CdkDragEnd
+} from "@angular/cdk/drag-drop";
 import { MatDialog } from "@angular/material";
 @Component({
 	selector: "kt-form-field-list",
@@ -24,6 +29,7 @@ export class FormFieldListComponent implements OnInit {
 	regConfig: FieldConfigInterface[] = [];
 	items: FieldConfigInterface[] = [];
 	todo = [];
+	isDragging: boolean = false;
 	stableData = [
 		{
 			type: "input",
@@ -148,4 +154,12 @@ export class FormFieldListComponent implements OnInit {
 	 * @param value
 	 */
 	submit(value: any) {}
+
+	dragStarted(event: CdkDragStart) {
+		this.isDragging = true;
+	}
+
+	dragEnded(event: CdkDragEnd) {
+		this.isDragging = false;
+	}
 }

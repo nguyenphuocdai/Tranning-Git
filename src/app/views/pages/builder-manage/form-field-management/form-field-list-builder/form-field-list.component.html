@@ -38,6 +38,9 @@
 						class="left-list"
 						(cdkDropListDropped)="drop($event)"
 						[cdkDropListEnterPredicate]="noReturnPredicate"
+						[cdkDropListDisabled]="isDragging"
+						(cdkDragStarted)="dragStarted($event)"
+						(cdkDragEnded)="dragEnded($event)"
 					>
 						<div
 							class="example-box"
