@@ -43,6 +43,26 @@
 										>
 									</mat-form-field>
 								</div>
+
+								<div class="form-group kt-form__group">
+									<mat-form-field class="demo-full-width">
+										<mat-label>Field Type</mat-label>
+										<mat-select
+											required
+											formControlName="fieldType"
+										>
+											<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+								{{food.viewValue}}
+							  </mat-option> -->
+											<mat-option value="Text"
+												>Text</mat-option
+											>
+											<mat-option value="Number"
+												>Number</mat-option
+											>
+										</mat-select>
+									</mat-form-field>
+								</div>
 								<!--End::Label-->
 
 								<!--Begin::Required-->
@@ -121,26 +141,6 @@
 									</mat-form-field>
 								</div>
 
-								<div class="form-group kt-form__group">
-									<mat-form-field class="demo-full-width">
-										<mat-label>Validate Parttern</mat-label>
-										<mat-select
-											required
-											formControlName="parttern"
-										>
-											<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-													{{food.viewValue}}
-												  </mat-option> -->
-											<mat-option value="^[a-zA-Z]+$"
-												># Accept only text
-												"^[a-zA-Z]+$"</mat-option
-											>
-											<mat-option value="Parttern02"
-												>Pattern 02: ###</mat-option
-											>
-										</mat-select>
-									</mat-form-field>
-								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group kt-form__group">
@@ -148,20 +148,25 @@
 												class="demo-full-width"
 											>
 												<mat-label
-													>Field Type</mat-label
+													>Validate
+													Parttern</mat-label
 												>
 												<mat-select
 													required
-													formControlName="fieldType"
+													formControlName="parttern"
 												>
 													<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-										{{food.viewValue}}
-									  </mat-option> -->
-													<mat-option value="Text"
-														>Text</mat-option
+															{{food.viewValue}}
+														  </mat-option> -->
+													<mat-option
+														value="^[a-zA-Z]+$"
+														># Accept only text
+														"^[a-zA-Z]+$"</mat-option
 													>
-													<mat-option value="Number"
-														>Number</mat-option
+													<mat-option
+														value="Parttern02"
+														>Pattern 02:
+														###</mat-option
 													>
 												</mat-select>
 											</mat-form-field>

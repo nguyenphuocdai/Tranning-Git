@@ -9,7 +9,7 @@ import {
 	Output,
 	EventEmitter
 } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MatDialogRef } from "@angular/material";
 import {
 	FormControl,
 	Validators,
@@ -61,6 +61,9 @@ export class TextFieldComponent implements OnInit {
 		this.toppings.setValue(anotherList);
 	}
 
+	/**
+	 * create form builder
+	 */
 	createForm() {
 		this.rfField = this.fbField.group({
 			name: ["", Validators.required],
