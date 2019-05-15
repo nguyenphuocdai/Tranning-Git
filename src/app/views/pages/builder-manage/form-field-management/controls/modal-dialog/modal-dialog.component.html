@@ -5,8 +5,11 @@
 			(textFieldSubmit)="onSubmit($event)"
 		></kt-text-field>
 	</ng-container>
-	<ng-container *ngSwitchCase="2">
-		<ng-container> 2</ng-container>
+	<ng-container *ngSwitchCase="'selectoption'">
+		<kt-select-option
+			[dialogRefData]="dialogRefData"
+			(textFieldSubmit)="onSubmit($event)"
+		></kt-select-option>
 	</ng-container>
 	<ng-container *ngSwitchCase="3">
 		some html
