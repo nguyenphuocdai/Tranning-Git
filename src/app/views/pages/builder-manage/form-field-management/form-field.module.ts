@@ -20,6 +20,7 @@ import { CheckboxComponent } from "./components/checkbox/checkbox.component";
 import { DynamicFieldDirective } from "./components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.component";
 import { TextFieldComponent } from "./controls/form-control-components/text-field/text-field.component";
+import { SelectOptionComponent } from "./controls/form-control-components/select-option/select-option.component";
 
 const routes: Routes = [
 	{
@@ -66,7 +67,8 @@ const routes: Routes = [
 		CheckboxComponent,
 		DynamicFieldDirective,
 		DynamicFormComponent,
-		TextFieldComponent
+		TextFieldComponent,
+		SelectOptionComponent
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
