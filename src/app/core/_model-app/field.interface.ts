@@ -3,6 +3,12 @@ export interface ValidatorInterface {
 	validator: any;
 	message: string;
 }
+
+export interface SelectOption {
+	id: number;
+	label: string;
+	value: string;
+}
 export interface FieldConfigInterface {
 	label?: string;
 	name?: string;
@@ -13,7 +19,7 @@ export interface FieldConfigInterface {
 	errorMessage?: string;
 	fieldType?: string;
 	description?: string;
-	options?: string[];
+	options?: SelectOption[];
 	collections?: any;
 	displayFormat?: string;
 	type: string;
