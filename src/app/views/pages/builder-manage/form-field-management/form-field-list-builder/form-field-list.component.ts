@@ -24,7 +24,7 @@ import { MatDialog } from "@angular/material";
 	styleUrls: ["./form-field-list.component.scss"]
 })
 export class FormFieldListComponent implements OnInit {
-	@ViewChild(DynamicFormComponent) form: DynamicFormComponent;
+	@ViewChild(DynamicFormComponent) dynamicFormControl: DynamicFormComponent;
 	panelOpenState: boolean = false;
 	regConfig: FieldConfigInterface[] = [];
 	items: FieldConfigInterface[] = [];
@@ -36,7 +36,7 @@ export class FormFieldListComponent implements OnInit {
 			valueView: "Text Field"
 		},
 		{
-			type: "selectoption",
+			type: "select",
 			valueView: "Select Option"
 		},
 		{
@@ -56,8 +56,6 @@ export class FormFieldListComponent implements OnInit {
 			valueView: "Radio Button"
 		}
 	];
-	done = [];
-
 	/**
 	 * Constructor DI
 	 * @param _location
@@ -114,19 +112,23 @@ export class FormFieldListComponent implements OnInit {
 							event.previousIndex,
 							event.currentIndex
 						);
-						this.regConfig.push(response);
-						// filder for drag drop always insert item stable
-						this.items = this.regConfig.filter(
-							x => !x.hasOwnProperty("valueView")
-						);
-						this.ref.markForCheck();
-						this.resetList();
+						this.items.push(response);
+						this.regConfig = this.items;
 
 						// local strorage
+						let arrLocal = JSON.parse(
+							localStorage.getItem("regConfig")
+						);
+						if (arrLocal !== null && this.items.length === 0) {
+							this.items = this.items.concat(arrLocal);
+						}
 						localStorage.setItem(
 							"regConfig",
 							JSON.stringify(this.items)
 						);
+						this.ref.markForCheck();
+						this.resetList();
+						this.dynamicFormControl.ngOnInit();
 					}
 				});
 		}
