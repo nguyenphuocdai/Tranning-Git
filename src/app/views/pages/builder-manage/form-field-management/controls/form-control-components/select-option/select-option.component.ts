@@ -16,7 +16,8 @@ import {
 	FormGroup,
 	FormBuilder,
 	FormGroupDirective,
-	NgForm
+	NgForm,
+	FormArray
 } from "@angular/forms";
 import {
 	DialogRefInterface,
@@ -52,7 +53,7 @@ export class SelectOptionComponent implements OnInit {
 	matcher = new MyErrorStateMatcher();
 
 	toppings = new FormControl();
-	rfField: FormGroup;
+	rfSelectOption: FormGroup;
 	toppingList = [
 		{ id: 1, label: "Extra cheese", value: "Extracheese" },
 		{ id: 2, label: "Mushroom", value: "Mushroom" },
@@ -64,7 +65,7 @@ export class SelectOptionComponent implements OnInit {
 	mySelections: any;
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
-		private fbField: FormBuilder,
+		private fbSelectOption: FormBuilder,
 		private _snackBarService: KtSnackBarService
 	) {}
 
@@ -85,16 +86,20 @@ export class SelectOptionComponent implements OnInit {
 	 * create form builder
 	 */
 	createForm() {
-		this.rfField = this.fbField.group({
+		this.rfSelectOption = this.fbSelectOption.group({
 			name: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
+			options: new FormArray([
+				new FormControl(""),
+				new FormControl("")
+			]),
 			description: [""],
-			fieldType: ["", Validators.required],
-			displayFormat: ["", Validators.required],
-			parttern: ["", Validators.required]
+			fieldType: ["", Validators.required]
+			// displayFormat: ["", Validators.required],
+			// parttern: ["", Validators.required]
 		});
 	}
 
@@ -104,8 +109,8 @@ export class SelectOptionComponent implements OnInit {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this.dialogRef.disableClose = true;
-		console.log(this.rfField.value);
-		if (this.rfField.invalid) {
+		console.log(this.rfSelectOption.value);
+		if (this.rfSelectOption.invalid) {
 			this.isSubmit = false;
 			return;
 		}
@@ -124,62 +129,30 @@ export class SelectOptionComponent implements OnInit {
 	}
 
 	/**
-	 * prebuild item when has type input
-	 * @param type
-	 */
-	onPreBuildItems(type: string) {
-		if (FunctionBase.isEmptyOrSpaces(type)) {
-			return;
-		}
-
-		let item: DialogRefInterface = {
-			type: "",
-			inputType: ""
-		};
-
-		switch (type) {
-			case FieldSetting.INPUT: {
-				item.type = "input";
-				item.inputType = "text";
-				break;
-			}
-			case FieldSetting.AUTOCOMPLETE: {
-				break;
-			}
-			default: {
-				break;
-			}
-		}
-		return item;
-	}
-
-	/**
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let obj = this.onPreBuildItems(this.dialogRefData.type);
-
-		let label = this.rfField.controls["name"].value;
-		let type = obj.type;
-		let inputType = obj.inputType;
-		let isRequired = this.rfField.controls["required"].value;
-		let errorMessage = this.rfField.controls["errorMessage"].value;
-		let isPattern = this.rfField.controls["parttern"].value;
-		let messagePattern = "Accept only text";
-		let isSecurity = this.rfField.controls["security"].value;
-		let isTracking = this.rfField.controls["tracking"].value;
-		let displayFormat = this.rfField.controls["displayFormat"].value;
-		let fieldType = this.rfField.controls["fieldType"].value;
+		let label = this.rfSelectOption.controls["name"].value;
+		let type = this.dialogRefData.type;
+		let inputType = this.dialogRefData.valueView;
+		let isRequired = this.rfSelectOption.controls["required"].value;
+		let errorMessage = this.rfSelectOption.controls["errorMessage"].value;
+		let isSecurity = this.rfSelectOption.controls["security"].value;
+		let isTracking = this.rfSelectOption.controls["tracking"].value;
+		let fieldType = this.rfSelectOption.controls["fieldType"].value;
+		let description = this.rfSelectOption.controls["description"].value;
+		let options = this.addListOption;
 
 		let mergedObj: FieldConfigInterface = {
 			type: type,
 			label: label,
 			inputType: inputType,
-			name: label,
+			name: FunctionBase.removeUnicode(label) + FunctionBase.randomGuid(),
 			security: isSecurity,
 			tracking: isTracking,
-			displayFormat: displayFormat,
+			options: options,
 			fieldType: fieldType,
+			description: description,
 			validations: []
 		};
 		if (isRequired === true) {
@@ -187,14 +160,6 @@ export class SelectOptionComponent implements OnInit {
 				name: "required",
 				validator: Validators.required,
 				message: errorMessage
-			};
-			mergedObj.validations.push(objValidator);
-		}
-		if (isPattern) {
-			let objValidator = {
-				name: "pattern",
-				validator: Validators.pattern(isPattern),
-				message: messagePattern
 			};
 			mergedObj.validations.push(objValidator);
 		}
@@ -211,7 +176,7 @@ export class SelectOptionComponent implements OnInit {
 	}
 
 	handleRemoveOption(index, option) {
-		if (typeof index != "number" || index < 0) {
+		if (typeof index !== "number" || index < 0) {
 			return;
 		}
 		this.addListOption.splice(index, 1);
