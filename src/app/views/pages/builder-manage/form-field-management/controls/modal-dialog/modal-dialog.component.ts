@@ -8,11 +8,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 	styleUrls: ["./modal-dialog.component.scss"]
 })
 export class ModalDialogComponent implements OnInit {
+	dialogRefData : DialogRefInterface;
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: DialogRefInterface,
 		private dialogRef: MatDialogRef<ModalDialogComponent>
 	) {
 		console.log(this.data);
+		this.dialogRefData = data;
 	}
 
 	ngOnInit() {}
