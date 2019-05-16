@@ -90,7 +90,15 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 		if (validations.length > 0) {
 			const validList = [];
 			validations.forEach(valid => {
-				validList.push(valid.validator);
+				if (
+					valid.name === "required" &&
+					valid.validator === undefined
+				) {
+					let obj = new FormControl("", [Validators.required]);
+					validList.push(obj.validator);
+				} else {
+					validList.push(valid.validator);
+				}
 			});
 			return Validators.compose(validList);
 		}
