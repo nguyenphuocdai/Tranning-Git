@@ -104,44 +104,12 @@ export class TextFieldComponent implements OnInit {
 	}
 
 	/**
-	 * prebuild item when has type input
-	 * @param type
-	 */
-	onPreBuildItems(type: string) {
-		if (FunctionBase.isEmptyOrSpaces(type)) {
-			return;
-		}
-
-		let item: DialogRefInterface = {
-			type: "",
-			inputType: ""
-		};
-
-		switch (type) {
-			case FieldSetting.INPUT: {
-				item.type = "input";
-				item.inputType = "text";
-				break;
-			}
-			case FieldSetting.AUTOCOMPLETE: {
-				break;
-			}
-			default: {
-				break;
-			}
-		}
-		return item;
-	}
-
-	/**
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let obj = this.onPreBuildItems(this.dialogRefData.type);
-
 		let label = this.rfField.controls["name"].value;
-		let type = obj.type;
-		let inputType = obj.inputType;
+		let type = this.dialogRefData.type;
+		let inputType = this.dialogRefData.valueView;
 		let isRequired = this.rfField.controls["required"].value;
 		let errorMessage = this.rfField.controls["errorMessage"].value;
 		let isPattern = this.rfField.controls["parttern"].value;
