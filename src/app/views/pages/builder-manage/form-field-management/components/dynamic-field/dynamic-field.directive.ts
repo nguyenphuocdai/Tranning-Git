@@ -14,6 +14,7 @@ import { SelectComponent } from "../select/select.component";
 import { DateComponent } from "../date/date.component";
 import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
 import { CheckboxComponent } from "../checkbox/checkbox.component";
+import { NumberComponent } from "../number.component";
 
 const componentMapper = {
 	input: InputComponent,
@@ -21,7 +22,8 @@ const componentMapper = {
 	select: SelectComponent,
 	date: DateComponent,
 	radiobutton: RadiobuttonComponent,
-	checkbox: CheckboxComponent
+	checkbox: CheckboxComponent,
+	number: NumberComponent
 };
 @Directive({
 	selector: "[dynamicField]"
@@ -37,10 +39,10 @@ export class DynamicFieldDirective implements OnInit {
 	ngOnInit() {
 		const factory = this.resolver.resolveComponentFactory(
 			componentMapper[this.field.type]
-		  );
-		  this.componentRef = this.container.createComponent(factory);
-		  this.componentRef.instance.field = this.field;
-		  this.componentRef.instance.group = this.group;
+		);
+		this.componentRef = this.container.createComponent(factory);
+		this.componentRef.instance.field = this.field;
+		this.componentRef.instance.group = this.group;
 	}
 	capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1) + "Component";
