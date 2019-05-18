@@ -22,7 +22,7 @@ export class SolutionListComponent implements OnInit, OnDestroy {
 	_subscription: Subscription;
 	_listSolution$: Observable<SolutionModel[]> = null;
 	data = {
-		a: 2
+		a: "Solution List Component Temporary"
 	};
 	constructor(
 		private dialog: MatDialog,
@@ -50,7 +50,6 @@ export class SolutionListComponent implements OnInit, OnDestroy {
 			.subscribe(sln => {
 				this._listSolution$ = sln;
 				this.ref.markForCheck();
-				console.log(sln);
 			});
 	}
 
