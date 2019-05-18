@@ -1,19 +1,28 @@
 <ng-container [ngSwitch]="data.type">
+	<!-- input component -->
 	<ng-container *ngSwitchCase="'input'">
 		<kt-text-field
 			[dialogRefData]="dialogRefData"
-			(textFieldSubmit)="onSubmit($event)"
+			(textComponentSubmit)="onSubmit($event)"
 		></kt-text-field>
 	</ng-container>
+	<!-- input component -->
+	<!-- select component -->
 	<ng-container *ngSwitchCase="'select'">
 		<kt-select-option
 			[dialogRefData]="dialogRefData"
-			(textFieldSubmit)="onSubmit($event)"
+			(selectComponentSubmit)="onSubmit($event)"
 		></kt-select-option>
 	</ng-container>
-	<ng-container *ngSwitchCase="3">
-		some html
+	<!-- select component -->
+	<!-- number component -->
+	<ng-container *ngSwitchCase="'number'">
+		<kt-number-field
+			[dialogRefData]="dialogRefData"
+			(numberComponentSubmit)="onSubmit($event)"
+		></kt-number-field>
 	</ng-container>
+	<!-- number component -->
 	<ng-container *ngSwitchDefault>
 		Please check agian! dialog ref has not data.
 	</ng-container>

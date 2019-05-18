@@ -41,7 +41,6 @@ export class ModuleListComponent implements OnInit {
 			}
 		});
 		this.Initialize();
-		console.log(this.items);
 	}
 
 	Initialize() {
