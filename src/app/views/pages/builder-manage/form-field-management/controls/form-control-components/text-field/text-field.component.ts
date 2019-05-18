@@ -29,7 +29,7 @@ import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component"
 })
 export class TextFieldComponent implements OnInit {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
-	@Output("textFieldSubmit") submitForm = new EventEmitter<object>();
+	@Output("textComponentSubmit") submitForm = new EventEmitter<object>();
 
 	toppings = new FormControl();
 	rfField: FormGroup;
