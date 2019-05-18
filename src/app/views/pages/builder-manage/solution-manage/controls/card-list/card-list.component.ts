@@ -35,7 +35,6 @@ export class CardListComponent implements OnInit, OnChanges {
 	) {}
 
 	ngOnInit() {
-		console.log(this.listSolution);
 		this.items = this.listSolution;
 	}
 	/**
@@ -43,7 +42,6 @@ export class CardListComponent implements OnInit, OnChanges {
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
 		for (let propName in changes) {
-			console.log(propName);
 			let change = changes["listSolution"].currentValue;
 			this.items = change;
 		}
