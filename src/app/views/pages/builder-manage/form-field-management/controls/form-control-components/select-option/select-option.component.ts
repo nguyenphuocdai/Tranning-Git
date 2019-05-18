@@ -32,7 +32,7 @@ import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component"
 })
 export class SelectOptionComponent implements OnInit {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
-	@Output("textFieldSubmit") submitForm = new EventEmitter<object>();
+	@Output("selectComponentSubmit") submitForm = new EventEmitter<object>();
 
 	// validate if check box required
 	selected = new FormControl("valid", [
@@ -92,12 +92,9 @@ export class SelectOptionComponent implements OnInit {
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
-			options: new FormArray([
-				new FormControl(""),
-				new FormControl("")
-			]),
+			options: new FormArray([new FormControl(""), new FormControl("")]),
 			description: [""],
-			fieldType: ["", Validators.required]
+			fieldType: ["", Validators.required],
 			// displayFormat: ["", Validators.required],
 			// parttern: ["", Validators.required]
 		});
