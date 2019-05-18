@@ -37,6 +37,10 @@ export class NumericDirective {
 	 */
 	@HostListener("keydown", ["$event"])
 	onKeyDown(event: KeyboardEvent) {
+		if (this.numericType === "") {
+			return;
+		}
+
 		if (this.specialKeys[this.numericType].indexOf(event.key) !== -1) {
 			return;
 		}
@@ -48,5 +52,5 @@ export class NumericDirective {
 		}
 	}
 
-	// example <input ktNumberOnlyDerective numericType="decimal" type="text">
+	// example <input ktNumbericDerective numericType="decimal" type="text">
 }
