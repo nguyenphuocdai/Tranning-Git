@@ -34,7 +34,7 @@ import { FormFieldEditComponent } from "./form-field-management/form-field-edit/
 // Pipe, Directives
 import {
 	ReplaceSpacePipe,
-	NumericDirective
+	// NumericDirective
 } from "../../../core/_base/metronic/index";
 import { FormFieldModule } from "./form-field-management/form-field.module";
 
@@ -81,7 +81,7 @@ const routes: Routes = [
 		ModuleEditComponent,
 		// Pipe
 		ReplaceSpacePipe,
-		NumericDirective
+		// NumericDirective
 	],
 	entryComponents: [
 		SolutionAddComponent,
@@ -99,6 +99,7 @@ const routes: Routes = [
 		CoreModule,
 		FormFieldModule
 	],
+	// exports: [NumericDirective],
 	providers: [SolutionService]
 })
 export class BuilderManageModule {}
