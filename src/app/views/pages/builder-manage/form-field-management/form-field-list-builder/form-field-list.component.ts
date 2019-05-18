@@ -1,5 +1,5 @@
-import { ModalDialogComponent } from "./../controls/modal-dialog/modal-dialog.component";
-import { DynamicFormComponent } from "./../components/dynamic-form/dynamic-form.component";
+import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
+import { DynamicFormComponent } from "../components/dynamic-form/dynamic-form.component";
 import { FieldConfigInterface } from "../../../../../core/_model-app/field.interface";
 import {
 	Component,
@@ -40,21 +40,21 @@ export class FormFieldListComponent implements OnInit {
 			valueView: "Select Option"
 		},
 		{
-			type: "autocomplete",
-			valueView: "Auto Complete"
-		},
-		{
-			type: "checkbox",
-			valueView: "Check box"
-		},
-		{
-			type: "datepicker",
-			valueView: "Date Picker"
-		},
-		{
-			type: "radiobutton",
-			valueView: "Radio Button"
+			type: "number",
+			valueView: "Number"
 		}
+		// {
+		// 	type: "checkbox",
+		// 	valueView: "Check box"
+		// },
+		// {
+		// 	type: "datepicker",
+		// 	valueView: "Date Picker"
+		// },
+		// {
+		// 	type: "radiobutton",
+		// 	valueView: "Radio Button"
+		// }
 	];
 	/**
 	 * Constructor DI
@@ -105,7 +105,6 @@ export class FormFieldListComponent implements OnInit {
 				.afterClosed()
 				.subscribe(response => {
 					if (response) {
-						console.log("response " + response.toString());
 						transferArrayItem(
 							event.previousContainer.data,
 							event.container.data,
@@ -122,6 +121,13 @@ export class FormFieldListComponent implements OnInit {
 						if (arrLocal !== null && this.items.length === 0) {
 							this.items = this.items.concat(arrLocal);
 						}
+
+						for (let i = 0; i < this.items.length; i++) {
+							if (this.items[i].hasOwnProperty("valueView")) {
+								this.items.splice(i, 1);
+							}
+						}
+
 						localStorage.setItem(
 							"regConfig",
 							JSON.stringify(this.items)
@@ -129,6 +135,7 @@ export class FormFieldListComponent implements OnInit {
 						this.ref.markForCheck();
 						this.resetList();
 						this.dynamicFormControl.ngOnInit();
+						console.log(this.regConfig);
 					}
 				});
 		}

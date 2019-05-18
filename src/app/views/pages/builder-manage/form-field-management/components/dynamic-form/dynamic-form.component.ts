@@ -48,10 +48,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 		}
 		return this.form.value;
 	}
-	constructor(private fb: FormBuilder) {
-		console.log("fields");
-		console.log(this.fields);
-	}
+	constructor(private fb: FormBuilder) {}
 
 	ngOnInit() {
 		this.form = this.createControl();
