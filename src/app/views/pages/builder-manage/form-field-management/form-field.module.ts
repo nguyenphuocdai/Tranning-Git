@@ -1,5 +1,4 @@
 import { DirectiveModule } from "./../../../../core/_base/metronic/directives/directive.module";
-import { FormatCommaPipe } from "./../../../../core/_base/metronic/pipes/format-digit-comma";
 import { NumericDirective } from "../../../../core/_base/metronic/index";
 import { CoreModule } from "../../../../core/core.module";
 import { RouterModule, Routes } from "@angular/router";
@@ -79,8 +78,7 @@ const routes: Routes = [
 		TextFieldComponent,
 		SelectOptionComponent,
 		NumberFieldComponent,
-		NumericDirective,
-		FormatCommaPipe
+		NumericDirective
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
