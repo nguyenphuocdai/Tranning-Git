@@ -1,3 +1,6 @@
+import { DirectiveModule } from "./../../../../core/_base/metronic/directives/directive.module";
+import { FormatCommaPipe } from "./../../../../core/_base/metronic/pipes/format-digit-comma";
+import { NumericDirective } from "../../../../core/_base/metronic/index";
 import { CoreModule } from "../../../../core/core.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -11,6 +14,7 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { HighlightModule } from "ngx-highlightjs";
 import { ModalDialogComponent } from "./controls/modal-dialog/modal-dialog.component";
 import { FormFieldEditComponent } from "./form-field-edit/form-field-edit.component";
+// controls components dynamic
 import { InputComponent } from "./components/input/input.component";
 import { ButtonComponent } from "./components/button/button.component";
 import { SelectComponent } from "./components/select/select.component";
@@ -19,8 +23,11 @@ import { RadiobuttonComponent } from "./components/radiobutton/radiobutton.compo
 import { CheckboxComponent } from "./components/checkbox/checkbox.component";
 import { DynamicFieldDirective } from "./components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.component";
+// form control components
 import { TextFieldComponent } from "./controls/form-control-components/text-field/text-field.component";
 import { SelectOptionComponent } from "./controls/form-control-components/select-option/select-option.component";
+import { NumberFieldComponent } from "./controls/form-control-components/number-field/number-field.component";
+import { NumberComponent } from "./components/number.component";
 
 const routes: Routes = [
 	{
@@ -52,7 +59,8 @@ const routes: Routes = [
 		PerfectScrollbarModule,
 		HighlightModule,
 		RouterModule.forChild(routes),
-		MaterialModule
+		MaterialModule,
+		DirectiveModule
 	],
 	declarations: [
 		FormFieldComponent,
@@ -60,6 +68,7 @@ const routes: Routes = [
 		FormFieldEditComponent,
 		ModalDialogComponent,
 		InputComponent,
+		NumberComponent,
 		ButtonComponent,
 		SelectComponent,
 		DateComponent,
@@ -68,7 +77,10 @@ const routes: Routes = [
 		DynamicFieldDirective,
 		DynamicFormComponent,
 		TextFieldComponent,
-		SelectOptionComponent
+		SelectOptionComponent,
+		NumberFieldComponent,
+		NumericDirective,
+		FormatCommaPipe
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
@@ -78,7 +90,8 @@ const routes: Routes = [
 		SelectComponent,
 		DateComponent,
 		RadiobuttonComponent,
-		CheckboxComponent
+		CheckboxComponent,
+		NumberComponent
 	]
 })
 export class FormFieldModule {}
