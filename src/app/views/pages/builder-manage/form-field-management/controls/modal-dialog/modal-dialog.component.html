@@ -30,7 +30,20 @@
 			(lookupComponentSubmit)="onSubmit($event)"
 		></kt-look-up>
 	</ng-container>
+	<!-- fupload component -->
+	<ng-container *ngSwitchCase="'fupload'">
+		<kt-fupload-image
+			[dialogRefData]="dialogRefData"
+			(fuploadComponentSubmit)="onSubmit($event)"
+		></kt-fupload-image>
+	</ng-container>
 	<!-- lookup component -->
+	<ng-container *ngSwitchCase="'money'">
+		<kt-money
+			[dialogRefData]="dialogRefData"
+			(moneyComponentSubmit)="onSubmit($event)"
+		></kt-money>
+	</ng-container>
 	<ng-container *ngSwitchDefault>
 		Please check agian! dialog ref has not data.
 	</ng-container>
