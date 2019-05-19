@@ -30,6 +30,10 @@ import { NumberComponent } from "./components/number/number.component";
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from "@angular/material";
 import { LookUpComponent } from "./controls/form-control-components/look-up/look-up.component";
 import { LookupComponent } from "./components/lookup/look-up.component";
+import { FuploadImageComponent } from "./controls/form-control-components/fupload-image/fupload-image.component";
+import { MoneyComponent } from "./controls/form-control-components/money/money.component";
+import { MoneyDynamicComponent } from "./components/money/money.component";
+import { MaterialFileUploadComponent } from "./controls/material-file-upload/material-file-upload.component";
 
 const routes: Routes = [
 	{
@@ -75,6 +79,7 @@ const routes: Routes = [
 		SelectComponent,
 		DateComponent,
 		LookupComponent,
+		MoneyDynamicComponent,
 		RadiobuttonComponent,
 		CheckboxComponent,
 		DynamicFieldDirective,
@@ -83,7 +88,10 @@ const routes: Routes = [
 		SelectOptionComponent,
 		NumberFieldComponent,
 		NumericDirective,
-		LookUpComponent
+		LookUpComponent,
+		FuploadImageComponent,
+		MoneyComponent,
+		MaterialFileUploadComponent
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
@@ -95,7 +103,8 @@ const routes: Routes = [
 		RadiobuttonComponent,
 		CheckboxComponent,
 		NumberComponent,
-		LookupComponent
+		LookupComponent,
+		MoneyDynamicComponent
 	],
 	providers: [
 		{

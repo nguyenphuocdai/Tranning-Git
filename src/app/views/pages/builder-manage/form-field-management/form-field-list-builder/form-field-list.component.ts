@@ -46,14 +46,18 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 			type: "lookup",
 			valueView: "Lookup Field"
 		},
-		// {
-		// 	type: "datepicker",
-		// 	valueView: "Date Picker"
-		// },
-		// {
-		// 	type: "radiobutton",
-		// 	valueView: "Radio Button"
-		// }
+		{
+			type: "fupload",
+			valueView: "File Upload"
+		},
+		{
+			type: "money",
+			valueView: "Money Field"
+		},
+		{
+			type: "datepicker",
+			valueView: "Date Picker"
+		}
 	];
 	/**
 	 * Constructor DI
