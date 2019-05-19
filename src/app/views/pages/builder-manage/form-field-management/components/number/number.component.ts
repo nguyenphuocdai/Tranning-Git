@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfigInterface } from "../../../../../core/auth";
+import { FieldConfigInterface } from "../../../../../../core/auth";
 @Component({
 	selector: "app-number",
 	template: `
