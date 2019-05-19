@@ -1,6 +1,6 @@
+import { MoneyDynamicComponent } from "./../money/money.component";
 import {
 	ComponentFactoryResolver,
-	ComponentRef,
 	Directive,
 	Input,
 	OnInit,
@@ -25,7 +25,8 @@ const componentMapper = {
 	radiobutton: RadiobuttonComponent,
 	checkbox: CheckboxComponent,
 	number: NumberComponent,
-	lookup: LookupComponent
+	lookup: LookupComponent,
+	money: MoneyDynamicComponent
 };
 @Directive({
 	selector: "[dynamicField]"
