@@ -26,7 +26,10 @@ import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.com
 import { TextFieldComponent } from "./controls/form-control-components/text-field/text-field.component";
 import { SelectOptionComponent } from "./controls/form-control-components/select-option/select-option.component";
 import { NumberFieldComponent } from "./controls/form-control-components/number-field/number-field.component";
-import { NumberComponent } from "./components/number.component";
+import { NumberComponent } from "./components/number/number.component";
+import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from "@angular/material";
+import { LookUpComponent } from "./controls/form-control-components/look-up/look-up.component";
+import { LookupComponent } from "./components/lookup/look-up.component";
 
 const routes: Routes = [
 	{
@@ -71,6 +74,7 @@ const routes: Routes = [
 		ButtonComponent,
 		SelectComponent,
 		DateComponent,
+		LookupComponent,
 		RadiobuttonComponent,
 		CheckboxComponent,
 		DynamicFieldDirective,
@@ -78,7 +82,8 @@ const routes: Routes = [
 		TextFieldComponent,
 		SelectOptionComponent,
 		NumberFieldComponent,
-		NumericDirective
+		NumericDirective,
+		LookUpComponent
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
@@ -89,7 +94,18 @@ const routes: Routes = [
 		DateComponent,
 		RadiobuttonComponent,
 		CheckboxComponent,
-		NumberComponent
+		NumberComponent,
+		LookupComponent
+	],
+	providers: [
+		{
+			provide: MatSnackBarRef,
+			useValue: {}
+		},
+		{
+			provide: MAT_SNACK_BAR_DATA,
+			useValue: {} // Add any data you wish to test if it is passed/used correctly
+		}
 	]
 })
 export class FormFieldModule {}
