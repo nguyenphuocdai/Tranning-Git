@@ -6,7 +6,8 @@ import {
 	Input,
 	Output,
 	EventEmitter,
-	ChangeDetectorRef
+	ChangeDetectorRef,
+	AfterViewChecked
 } from "@angular/core";
 import { MatDialogRef } from "@angular/material";
 import {
@@ -26,7 +27,7 @@ import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component"
 	templateUrl: "./look-up.component.html",
 	styleUrls: ["./look-up.component.scss"]
 })
-export class LookUpComponent implements OnInit {
+export class LookUpComponent implements OnInit, AfterViewChecked {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
 	@Output("lookupComponentSubmit") submitForm = new EventEmitter<object>();
 	optionDefault: string = "lookup";
@@ -54,7 +55,7 @@ export class LookUpComponent implements OnInit {
 			tracking: new FormControl(false),
 			description: [""],
 			fieldType: ["", Validators.required],
-			modules: ["", Validators.required],
+			modules: ["", Validators.required]
 		});
 	}
 
