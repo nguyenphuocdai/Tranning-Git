@@ -70,23 +70,27 @@
                                 </div>
 
                                 <!--Begin::Float-->
-                                <div class="form-group kt-form__group form-group-flex">
-                                    <mat-checkbox #requiredRef class="example-margin" name="isFloat" formControlName="isFloat">Float</mat-checkbox>
-                                    <mat-form-field class="example-full-width kt-margin-l-20">
-                                        <input matInput placeholder="Enter number float" #numberFloatRef formControlName="numberFloat" maxlength="2" />
-                                        <mat-hint align="start">eg: 500.00
-                                        </mat-hint>
-                                    </mat-form-field>
+                                <div class="form-group kt-form__group " [ngClass]="{'form-group-flex': rfNumber.get('isFloat').value}">
+                                    <mat-checkbox #isFloatRef class="example-margin" name="isFloat" formControlName="isFloat">Float</mat-checkbox>
+                                    <ng-container *ngIf="rfNumber.get('isFloat').value">
+                                        <mat-form-field class="example-full-width kt-margin-l-20">
+                                            <input matInput placeholder="Enter number float" #numberFloatRef formControlName="numberFloat" maxlength="2" />
+                                            <mat-hint align="start">eg: 500.00
+                                            </mat-hint>
+                                        </mat-form-field>
+                                    </ng-container>
                                 </div>
                                 <!--End::Float-->
 
                                 <!--Begin::Required-->
-                                <div class="form-group kt-form__group form-group-flex">
-                                    <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
-                                    <mat-form-field class="example-full-width kt-margin-l-20">
-                                        <input matInput placeholder="Enter error message" #errorMessageRef formControlName="errorMessage" />
-                                        <mat-hint align="start">If field required, Please enter error message</mat-hint>
-                                    </mat-form-field>
+                                <div class="form-group kt-form__group " [ngClass]="{'form-group-flex': rfNumber.get('required').value}">
+                                    <mat-checkbox class="example-margin" [(ngModel)]="required" name="required" formControlName="required">Required</mat-checkbox>
+                                    <ng-container *ngIf="rfNumber.get('required').value">
+                                        <mat-form-field class="example-full-width kt-margin-l-20" >
+                                            <input matInput placeholder="Enter error message" #errorMessageRef formControlName="errorMessage" />
+                                            <mat-hint align="start">If field required, Please enter error message</mat-hint>
+                                        </mat-form-field>
+                                    </ng-container>
                                 </div>
                                 <!--End::Required-->
                                 <div class="form-group kt-form__group">
