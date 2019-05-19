@@ -59,10 +59,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 
 // Form controls
 import { DatepickerComponent } from "./formcontrols/datepicker/datepicker.component";
-import {
-	MatDatepickerModule,
-	MatDatepickerIntl
-} from "@angular/material/datepicker";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import { FormfieldComponent } from "./formcontrols/formfield/formfield.component";
 import { InputComponent } from "./formcontrols/input/input.component";
 import { RadiobuttonComponent } from "./formcontrols/radiobutton/radiobutton.component";
@@ -107,7 +104,10 @@ import { PizzaPartyComponent } from "./popups-and-modals/snackbar/pizza-party.co
 import { PaginatorComponent } from "./data-table/paginator/paginator.component";
 import { SortHeaderComponent } from "./data-table/sort-header/sort-header.component";
 import { MaterialTableComponent } from "./data-table/material-table/material-table.component";
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from "@angular/material-moment-adapter";
+import {
+	MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+	MatMomentDateModule
+} from "@angular/material-moment-adapter";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ModalBottomSheetComponent } from "./controls/modal-bottom-sheet/modal-bottom-sheet.component";
 
@@ -322,7 +322,9 @@ const routes: Routes = [
 		MatSelectModule,
 		MatOptionModule,
 		MatCheckboxModule,
-		MatRadioModule
+		MatRadioModule,
+		MatIconModule,
+		MatProgressBarModule
 	],
 	exports: [
 		RouterModule,
@@ -349,7 +351,6 @@ const routes: Routes = [
 		MatSelectTrigger,
 		MatListModule,
 		MatTooltipModule,
-		MatButtonModule,
 		MatIconModule,
 		MatCardModule,
 		MatFormFieldModule,
@@ -361,7 +362,8 @@ const routes: Routes = [
 		MatSelectModule,
 		MatOptionModule,
 		MatCheckboxModule,
-		MatRadioModule
+		MatRadioModule,
+		MatProgressBarModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
