@@ -1,6 +1,4 @@
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
-import * as FunctionBase from "../../../../../../../core/_function-base/function-base.ultilities";
-import { FieldSetting } from "../../../../../../../core/_constant/field-setting";
 import {
 	Component,
 	OnInit,
