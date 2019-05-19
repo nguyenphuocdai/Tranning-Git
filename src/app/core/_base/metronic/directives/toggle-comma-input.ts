@@ -10,7 +10,7 @@ export class InputToggleCommaDirective {
 		if (this.el.nativeElement.value.length <= 3) {
 			return;
 		}
-		let valueFocus = this.el.nativeElement.value.replace(",", "");
+		let valueFocus = this.el.nativeElement.value.replace(/,/g, '');
         this.ngModelChange.emit(valueFocus);
 	}
 
