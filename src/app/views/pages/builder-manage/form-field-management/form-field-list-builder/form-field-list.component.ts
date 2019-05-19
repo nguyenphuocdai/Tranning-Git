@@ -1,3 +1,4 @@
+import { LayoutUtilsService } from "./../../../../../core/_base/crud";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
 import { DynamicFormComponent } from "../components/dynamic-form/dynamic-form.component";
 import { FieldConfigInterface } from "../../../../../core/_model-app/field.interface";
@@ -6,11 +7,9 @@ import {
 	OnInit,
 	ChangeDetectorRef,
 	ViewChild,
-	RenderComponentType,
-	TemplateRef
+	AfterViewInit
 } from "@angular/core";
 import { Location } from "@angular/common";
-import { ActivatedRoute } from "@angular/router";
 import {
 	CdkDragDrop,
 	transferArrayItem,
@@ -23,7 +22,7 @@ import { MatDialog } from "@angular/material";
 	templateUrl: "./form-field-list.component.html",
 	styleUrls: ["./form-field-list.component.scss"]
 })
-export class FormFieldListComponent implements OnInit {
+export class FormFieldListComponent implements OnInit, AfterViewInit {
 	@ViewChild(DynamicFormComponent) dynamicFormControl: DynamicFormComponent;
 	panelOpenState: boolean = false;
 	regConfig: FieldConfigInterface[] = [];
@@ -42,11 +41,11 @@ export class FormFieldListComponent implements OnInit {
 		{
 			type: "number",
 			valueView: "Number"
-		}
-		// {
-		// 	type: "checkbox",
-		// 	valueView: "Check box"
-		// },
+		},
+		{
+			type: "lookup",
+			valueView: "Lookup Field"
+		},
 		// {
 		// 	type: "datepicker",
 		// 	valueView: "Date Picker"
@@ -66,7 +65,8 @@ export class FormFieldListComponent implements OnInit {
 	constructor(
 		private _location: Location,
 		private dialog: MatDialog,
-		private ref: ChangeDetectorRef
+		private ref: ChangeDetectorRef,
+		private _layoutUtilsService: LayoutUtilsService
 	) {}
 
 	/**
@@ -80,7 +80,11 @@ export class FormFieldListComponent implements OnInit {
 			this.items = localData;
 		}
 	}
-
+	ngAfterViewInit() {
+		// setTimeout(() =>
+		// 	this._layoutUtilsService.showActionNotification("123123213")
+		// );
+	}
 	/**
 	 * event drop from source to preview (temp not use)
 	 * @param event CdkDragDrop
