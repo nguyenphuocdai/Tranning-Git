@@ -1,5 +1,13 @@
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+	Component,
+	OnInit,
+	Input,
+	Output,
+	EventEmitter,
+	ChangeDetectorRef,
+	AfterViewChecked
+} from "@angular/core";
 import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component";
 import { MatDialogRef } from "@angular/material";
 import {
@@ -18,7 +26,7 @@ import {
 	templateUrl: "./number-field.component.html",
 	styleUrls: ["./number-field.component.scss"]
 })
-export class NumberFieldComponent implements OnInit {
+export class NumberFieldComponent implements OnInit, AfterViewChecked {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
 	@Output("numberComponentSubmit") submitForm = new EventEmitter<object>();
 	previewInput: any;
@@ -39,7 +47,8 @@ export class NumberFieldComponent implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbNumber: FormBuilder,
-		private _snackBarService: KtSnackBarService
+		private _snackBarService: KtSnackBarService,
+		private _changeDetectionRef: ChangeDetectorRef
 	) {}
 
 	ngOnInit() {
@@ -76,6 +85,10 @@ export class NumberFieldComponent implements OnInit {
 		});
 	}
 
+	ngAfterViewChecked(): void {
+		// your code
+		this._changeDetectionRef.detectChanges();
+	}
 	/**
 	 * Submit @Output
 	 */
