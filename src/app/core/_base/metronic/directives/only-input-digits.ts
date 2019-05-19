@@ -53,4 +53,13 @@ export class NumericDirective {
 	}
 
 	// example <input ktNumbericDerective numericType="decimal" type="text">
+	// 0,00  => true
+	// 0.00  => true
+	// 01,00 => true
+	// 01.00 => true
+	// 0.000 => false
+	// 0-01  => false
+	// then use this:
+
+	// ^\d+(\.|\,)\d{2}$
 }
