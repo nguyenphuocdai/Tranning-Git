@@ -27,5 +27,6 @@ export interface FieldConfigInterface {
 	modules?: string;
 	minValue?: string;
 	maxValue?: string;
+	unitMoney?: string;
 	validations?: ValidatorInterface[];
 }
