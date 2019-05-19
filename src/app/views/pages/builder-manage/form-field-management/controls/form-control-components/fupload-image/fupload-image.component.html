@@ -1,0 +1,142 @@
+<div class="container-fluid ">
+    <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfField">
+        <kt-loading-request *ngIf="isSubmit"></kt-loading-request>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-caption">
+                            <div class="kt-portlet__head-title">
+                                <span class="kt-portlet__head-icon kt-hide">
+                <i class="la la-gear"></i>
+              </span>
+                                <h3 class="kt-portlet__head-text">
+                Default Form Layout
+              </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Begin::Form-->
+                    <div class="kt-form">
+                        <div class="kt-portlet__body">
+                            <div class="kt-form__section kt-form__section--first">
+                                <!--Begin::Label-->
+                                <div class="form-group kt-form__group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Enter display name" required name="name" formControlName="name" #nameRef />
+                                        <mat-hint align="start">Please enter display name</mat-hint>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group kt-form__group">
+                                    <mat-form-field class="demo-full-width">
+                                        <mat-label>Field Type</mat-label>
+                                        <mat-select required formControlName="fieldType">
+                                            <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+              </mat-option> -->
+                                            <mat-option value="Text">Text</mat-option>
+                                            <mat-option value="Number">Number</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <!--End::Label-->
+
+                                <!--Begin::Required-->
+                                <div class="form-group kt-form__group " [ngClass]="{'form-group-flex': rfField.get('required').value}">
+                                    <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
+                                    <ng-container *ngIf="rfField.get('required').value">
+                                        <mat-form-field class="example-full-width kt-margin-l-20">
+                                            <input matInput placeholder="Enter error message" #errorMessageRef formControlName="errorMessage" />
+                                            <mat-hint align="start">If field required, Please enter error message</mat-hint>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
+
+                                <!--End::Required-->
+                                <div class="form-group kt-form__group">
+                                    <mat-checkbox class="example-margin" name="security" formControlName="security">Field Security</mat-checkbox>
+                                </div>
+                                <div class="form-group kt-form__group">
+                                    <mat-checkbox class="example-margin" name="tracking" formControlName="tracking">Change Tracking</mat-checkbox>
+                                </div>
+                                <!--Begin::Place Holder-->
+                                <!-- <div class="form-group kt-form__group">
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    placeholder="Place Holder"
+                    type="text"
+                    name="placeholder"
+                    formControlName="placeholder"
+                  />
+                  <mat-hint align="start"
+                    >Please enter Place Holder</mat-hint
+                  >
+                </mat-form-field>
+              </div> -->
+                                <!--End::Place Holder-->
+
+                                <!--Begin::Description-->
+                                <div class="form-group kt-form__group">
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput placeholder="Please enter description" formControlName="description" name="description" #descriptionRef></textarea>
+                                        <mat-hint align="start">Please enter description</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <!--Begin::Field Type-->
+                                <!--End::Select-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--End::Form-->
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-caption">
+                            <div class="kt-portlet__head-title">
+                                <span class="kt-portlet__head-icon kt-hide">
+                <i class="la la-gear"></i>
+              </span>
+                                <h3 class="kt-portlet__head-text">
+                Preview Layout
+              </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Begin::Form-->
+                    <div class="kt-form">
+                        <div class="kt-portlet__body">
+                            <div class="kt-form__section kt-form__section--first">
+                                <div class="form-group kt-form__group">
+                                    <!-- <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="{{ nameRef.value }}" required />
+                                      <mat-icon *ngIf="descriptionRef.value" color="primary" matSuffix matTooltip="{{
+                      descriptionRef.value
+                    }}">help</mat-icon>
+                                      <mat-hint align="start" *ngIf="requiredRef.checked">{{ errorMessageRef?.value }}
+                                      </mat-hint>
+                                  </mat-form-field> -->
+                                    <app-material-file-upload (complete)="onFileComplete($event)"></app-material-file-upload>
+                                </div>
+                            </div>
+                            <div class="kt-portlet__foot kt-portlet__foot--border-top-0">
+                                <div class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0">
+                                    <button mat-raised-button color="primary" type="submit" [disabled]="!rfField.valid">
+                                        Submit</button>&nbsp;
+                                    <button mat-raised-button type="button">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End::Form-->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
