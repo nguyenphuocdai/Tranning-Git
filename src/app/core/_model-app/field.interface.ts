@@ -24,6 +24,7 @@ export interface FieldConfigInterface {
 	displayFormat?: string;
 	type: string;
 	value?: any;
+	modules?: string;
 	minValue?: string;
 	maxValue?: string;
 	validations?: ValidatorInterface[];
