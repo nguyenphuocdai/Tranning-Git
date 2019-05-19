@@ -1,6 +1,5 @@
+import { TypesUtilsService } from "./../../../../../../../core/_base/crud";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
-import * as FunctionBase from "../../../../../../../core/_function-base/function-base.ultilities";
-import { FieldSetting } from "../../../../../../../core/_constant/field-setting";
 import {
 	Component,
 	OnInit,
@@ -66,7 +65,8 @@ export class SelectOptionComponent implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbSelectOption: FormBuilder,
-		private _snackBarService: KtSnackBarService
+		private _snackBarService: KtSnackBarService,
+		private _typesUtilsService: TypesUtilsService
 	) {}
 
 	ngOnInit() {
@@ -94,7 +94,7 @@ export class SelectOptionComponent implements OnInit {
 			tracking: new FormControl(false),
 			options: new FormArray([new FormControl(""), new FormControl("")]),
 			description: [""],
-			fieldType: ["", Validators.required],
+			fieldType: ["", Validators.required]
 			// displayFormat: ["", Validators.required],
 			// parttern: ["", Validators.required]
 		});
@@ -144,7 +144,7 @@ export class SelectOptionComponent implements OnInit {
 			type: type,
 			label: label,
 			inputType: inputType,
-			name: FunctionBase.removeUnicode(label) + FunctionBase.randomGuid(),
+			name: this._typesUtilsService.removeUnicode(label) + this._typesUtilsService.randomGuid(),
 			security: isSecurity,
 			tracking: isTracking,
 			options: options,
