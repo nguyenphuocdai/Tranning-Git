@@ -23,6 +23,14 @@
 		></kt-number-field>
 	</ng-container>
 	<!-- number component -->
+	<!-- lookup component -->
+	<ng-container *ngSwitchCase="'lookup'">
+		<kt-look-up
+			[dialogRefData]="dialogRefData"
+			(lookupComponentSubmit)="onSubmit($event)"
+		></kt-look-up>
+	</ng-container>
+	<!-- lookup component -->
 	<ng-container *ngSwitchDefault>
 		Please check agian! dialog ref has not data.
 	</ng-container>
