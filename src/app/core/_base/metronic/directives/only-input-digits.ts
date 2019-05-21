@@ -25,8 +25,8 @@ export class NumericDirective {
 	 * Not allow specialKeys input
 	 */
 	private specialKeys = {
-		number: ["Backspace", "Tab", "End", "Home", "ArrowLeft", "ArrowRight"],
-		decimal: ["Backspace", "Tab", "End", "Home", "ArrowLeft", "ArrowRight"]
+		number: ["Backspace", "Tab", "End", "Home", "ArrowLeft", "ArrowRight",","],
+		decimal: ["Backspace", "Tab", "End", "Home", "ArrowLeft", "ArrowRight", ","]
 	};
 
 	constructor(private el: ElementRef) {}
