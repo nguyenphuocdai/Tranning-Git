@@ -1,7 +1,16 @@
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { MatDialogRef } from "@angular/material";
 import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component";
+import { MatDialogRef } from "@angular/material";
+
+import {
+	Component,
+	OnInit,
+	Input,
+	Output,
+	EventEmitter,
+	AfterViewChecked,
+	ChangeDetectorRef
+} from "@angular/core";
 import {
 	FormControl,
 	Validators,
@@ -13,26 +22,28 @@ import {
 	FieldConfigInterface
 } from "../../../../../../../core/auth";
 
-const URL = "https://evening-anchorage-3159.herokuapp.com/api/";
-
 @Component({
 	selector: "kt-fupload-image",
 	templateUrl: "./fupload-image.component.html",
 	styleUrls: ["./fupload-image.component.scss"]
 })
-export class FuploadImageComponent implements OnInit {
+export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
 	@Output("fuploadComponentSubmit") submitForm = new EventEmitter<object>();
 
 	rfField: FormGroup;
-
+	fuploadText: string;
 	isSubmit: boolean = false;
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbField: FormBuilder,
-		private _snackBarService: KtSnackBarService
+		private _snackBarService: KtSnackBarService,
+		private cdr: ChangeDetectorRef
 	) {}
-
+	ngAfterViewChecked(): void {
+		this.fuploadText = "Upload Image";
+		this.cdr.detectChanges();
+	}
 	ngOnInit() {
 		this.createForm();
 	}
@@ -47,7 +58,7 @@ export class FuploadImageComponent implements OnInit {
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
-			description: [""],
+			// description: [""],
 			fieldType: ["", Validators.required]
 		});
 	}
@@ -88,7 +99,6 @@ export class FuploadImageComponent implements OnInit {
 		let errorMessage = this.rfField.controls["errorMessage"].value;
 		let isSecurity = this.rfField.controls["security"].value;
 		let isTracking = this.rfField.controls["tracking"].value;
-		let displayFormat = this.rfField.controls["displayFormat"].value;
 		let fieldType = this.rfField.controls["fieldType"].value;
 
 		let mergedObj: FieldConfigInterface = {
@@ -98,8 +108,8 @@ export class FuploadImageComponent implements OnInit {
 			name: label,
 			security: isSecurity,
 			tracking: isTracking,
-			displayFormat: displayFormat,
 			fieldType: fieldType,
+			textFupload: this.fuploadText,
 			validations: []
 		};
 		if (isRequired === true) {
