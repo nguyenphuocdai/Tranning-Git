@@ -195,7 +195,7 @@
 												}}"
 												>help</mat-icon
 											>
-                                                <mat-hint>{{errorMessageRef.value}}
+                                                <mat-hint>{{rfSelectOption.get('errorMessage').value}}
                                                 </mat-hint>
                                                 <!-- <mat-error *ngIf="
 															selected.hasError(
@@ -244,7 +244,7 @@
 															" [value]="topping.value">{{ topping.label }}
                                                     </mat-option>
                                                 </mat-select>
-                                                <mat-hint>{{errorMessageRef.value}}
+                                                <mat-hint>{{rfSelectOption.get('errorMessage').value}}
                                                 </mat-hint>
                                             </mat-form-field>
                                         </ng-container>
@@ -259,7 +259,7 @@
 															" [value]="topping.value">{{ topping.label }}
                                                     </mat-option>
                                                 </mat-select>
-                                                <mat-hint>{{errorMessageRef.value}}
+                                                <mat-hint>{{rfSelectOption.get('errorMessage').value}}
                                                 </mat-hint>
                                             </mat-form-field>
                                         </ng-container>
