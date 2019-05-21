@@ -95,26 +95,21 @@
 				<form class="kt-form">
 					<div class="kt-portlet__body">
 						<div class="kt-form__section kt-form__section--first">
-							<div class="form-group kt-form__group">
-								<div class="alert alert-info" *ngIf="!items">
-									<strong>Please </strong>&nbsp; Drag & Drop a
-									form component
-								</div>
-								<div
-									cdkDropList
-									[cdkDropListData]="regConfig"
-									class="example-list kt-min-height-400"
-									(cdkDropListDropped)="
-										dropFromPreview($event)
-									"
+							<div class="alert alert-info" *ngIf="!items">
+								<strong>Please </strong>&nbsp; Drag & Drop a
+								form component
+							</div>
+							<div
+								cdkDropList
+								[cdkDropListData]="regConfig"
+								class="example-list kt-min-height-400"
+								(cdkDropListDropped)="dropFromPreview($event)"
+							>
+								<dynamic-form
+									[fields]="items"
+									(submit)="submit($event)"
 								>
-									<dynamic-form
-										[fields]="items"
-										(submit)="submit($event)"
-									>
-									</dynamic-form>
-								</div>
-								<!-- </div> -->
+								</dynamic-form>
 							</div>
 						</div>
 					</div>

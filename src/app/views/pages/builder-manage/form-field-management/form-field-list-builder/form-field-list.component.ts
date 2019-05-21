@@ -58,6 +58,11 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 			type: "datepicker",
 			valueView: "Date Picker"
 		}
+		,
+		{
+			type: "button",
+			valueView: "Button"
+		}
 	];
 	/**
 	 * Constructor DI
