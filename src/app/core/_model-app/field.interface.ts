@@ -28,5 +28,6 @@ export interface FieldConfigInterface {
 	minValue?: string;
 	maxValue?: string;
 	unitMoney?: string;
+	textFupload?: string;
 	validations?: ValidatorInterface[];
 }

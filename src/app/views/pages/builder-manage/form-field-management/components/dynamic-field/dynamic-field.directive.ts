@@ -16,6 +16,7 @@ import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
 import { CheckboxComponent } from "../checkbox/checkbox.component";
 import { NumberComponent } from "../number/number.component";
 import { LookupComponent } from "../lookup/look-up.component";
+import { FuploadDynamicComponent } from "../fupload-dynamic/fupload-dynamic.component";
 
 const componentMapper = {
 	input: InputComponent,
@@ -26,7 +27,8 @@ const componentMapper = {
 	checkbox: CheckboxComponent,
 	number: NumberComponent,
 	lookup: LookupComponent,
-	money: MoneyDynamicComponent
+	money: MoneyDynamicComponent,
+	fupload: FuploadDynamicComponent
 };
 @Directive({
 	selector: "[dynamicField]"
