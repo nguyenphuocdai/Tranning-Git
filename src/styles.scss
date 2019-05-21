@@ -153,6 +153,6 @@
 .cursor-pointer {
 	cursor: pointer;
 }
-.kt-portlet__body {
-	min-height: 400px;
+.kt-portlet__body, .kt-min-height-400 {
+	min-height: 400px !important;
 }
