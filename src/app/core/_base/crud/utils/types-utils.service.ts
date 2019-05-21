@@ -163,4 +163,22 @@ export class TypesUtilsService {
 	isEmptyOrSpaces(str: string) {
 		return str === null || str.match(/^ *$/) !== null;
 	}
+	digitAddComma(str: any) {
+		if (typeof str !== "string") {
+			str = str.toString();
+		}
+		if (!str || str.length <= 3) {
+			return;
+		}
+		return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	digitRemoveComma(str: any) {
+		if (typeof str !== "string") {
+			str = str.toString();
+		}
+		if (!str || str.length <= 3) {
+			return;
+		}
+		return str.replace(",", "");
+	}
 }
