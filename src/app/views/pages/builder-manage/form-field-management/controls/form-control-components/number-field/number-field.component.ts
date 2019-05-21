@@ -130,6 +130,7 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		let fieldType = this.rfNumber.controls["fieldType"].value;
 		let minValue = this.rfNumber.controls["minValue"].value;
 		let maxValue = this.rfNumber.controls["maxValue"].value;
+		let description = this.rfNumber.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
 			type: type,
@@ -139,6 +140,7 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			security: isSecurity,
 			tracking: isTracking,
 			displayFormat: displayFormat,
+			description: description,
 			fieldType: fieldType,
 			validations: [],
 			minValue: minValue,
