@@ -1,4 +1,11 @@
 import {
+	CdkDragDrop,
+	transferArrayItem,
+	CdkDragStart,
+	CdkDragEnd,
+	moveItemInArray
+} from "@angular/cdk/drag-drop";
+import {
 	Component,
 	EventEmitter,
 	Input,
@@ -24,21 +31,74 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 			[formGroup]="form"
 			(submit)="onSubmit($event)"
 		>
-			<ng-container
-				*ngFor="let field of fields"
-				dynamicField
-				[field]="field"
-				[group]="form"
-			>
-			</ng-container>
+			<ng-container *ngTemplateOutlet="content"></ng-container>
+			<ng-template #content>
+				<div
+					cdkDropList
+					(cdkDropListDropped)="drop($event)"
+					class="example-list"
+				>
+					<div
+						*ngFor="let field of fields"
+						class="form-group"
+						cdkDrag
+					>
+						<div
+							class="example-custom-placeholder"
+							*cdkDragPlaceholder
+						></div>
+						<div dynamicField [field]="field" [group]="form"></div>
+					</div>
+				</div>
+			</ng-template>
 		</form>
 	`,
-	styles: []
+	styles: [
+		`
+			.example-custom-placeholder {
+				background: #ccc;
+				border: dotted 2px #999;
+				min-height: 41px;
+				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+			}
+			.cdk-drag-preview {
+				box-sizing: border-box;
+				background: #eee;
+				border-radius: 4px;
+				box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+					0 8px 10px 1px rgba(0, 0, 0, 0.14),
+					0 3px 14px 2px rgba(0, 0, 0, 0.12);
+			}
+			.cdk-drag-animating {
+				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+			}
+
+			.example-box:last-child {
+				border: none;
+			}
+
+			.example-list.cdk-drop-list-dragging
+				.example-box:not(.cdk-drag-placeholder) {
+				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+			}
+		`
+	]
 })
 export class DynamicFormComponent implements OnInit, OnChanges {
 	@Input() fields: FieldConfigInterface[] = [];
 
 	@Output() submit: EventEmitter<any> = new EventEmitter<any>();
+
+	movies = [
+		"Episode I - The Phantom Menace",
+		"Episode II - Attack of the Clones",
+		"Episode III - Revenge of the Sith",
+		"Episode IV - A New Hope",
+		"Episode V - The Empire Strikes Back",
+		"Episode VI - Return of the Jedi",
+		"Episode VII - The Force Awakens",
+		"Episode VIII - The Last Jedi"
+	];
 
 	form: FormGroup;
 
@@ -108,4 +168,17 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 			control.markAsTouched({ onlySelf: true });
 		});
 	}
+	drop(event: CdkDragDrop<string[]>) {
+		console.log("drop");
+		moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
+	}
 }
+
+// <ng-container
+// *ngFor="let field of fields"
+// dynamicField
+// [field]="field"
+// [group]="form"
+// [cdkDragging]="cdkDrag"
+// >
+// </ng-container>
