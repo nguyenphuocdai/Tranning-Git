@@ -1,3 +1,4 @@
+import { FormControl, FormGroup } from "@angular/forms";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {
 	trigger,
@@ -29,21 +30,31 @@ import { catchError, last, map, tap } from "rxjs/operators";
 })
 export class MaterialFileUploadComponent implements OnInit {
 	/** Link text */
-	@Input() text = "Upload";
+	@Input("Text") text: string = "Upload";
+	// single or multiple file upload
+	@Input() multiple: string = "single";
 	/** Name used in form which will be sent in HTTP request. */
 	@Input() param = "file";
 	/** Target URL for file uploading. */
 	@Input() target = "https://file.io";
 	/** File extension that accepted, same as 'accept' of <input type="file" />. By the default, it's set to 'image/*'. */
 	@Input() accept = "image/*";
+
+	@Input("RequireMessage") requireMessage: string =
+		"Please choosen file image";
 	/** Allow you to add handler after its completion. Bubble up response text from remote. */
+	@Input("controlName") controlName: FormControl;
+	@Input("controlGroup") formControlGroup: FormGroup;
+
 	@Output() complete = new EventEmitter<string>();
 
 	files: Array<FileUploadModel> = [];
 
 	constructor(private _http: HttpClient) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		console.log(this.controlName);
+	}
 
 	onClick() {
 		const fileUpload = document.getElementById(
@@ -67,6 +78,7 @@ export class MaterialFileUploadComponent implements OnInit {
 				reader.onloadend = e => {
 					// this.image = reader.result;
 					console.log(reader.result);
+					console.log(this.files);
 				};
 				reader.readAsDataURL(file);
 			}

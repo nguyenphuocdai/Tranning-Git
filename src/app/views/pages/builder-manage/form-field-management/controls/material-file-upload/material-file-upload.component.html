@@ -1,8 +1,9 @@
-<div class="container-upload">
+<div class="container-upload" [attr.formGroup]="formControlGroup ? 'formControlGroup' : null">
   <button mat-raised-button color="primary" (click)="onClick()" type="button">
       <mat-icon class="customize-w-h-icon">file_upload</mat-icon>
       {{ text }}
   </button>
+  <span class="mat-hint mat-hint--f-size" *ngIf="files.length <= 0">{{requireMessage}}</span>
   <br />
   <br />
   <ul>
@@ -29,5 +30,5 @@
     </span>
       </li>
   </ul>
-  <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{ accept }}" style="display:none;" />
+  <input type="file" id="fileUpload" [attr.formControlName]="controlName ? 'controlName' : null" name="fileUpload" [attr.multiple]="multiple === 'multiple' ? 'multiple' : null" accept="{{ accept }}" style="display:none;" />
 </div>
