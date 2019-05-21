@@ -34,6 +34,8 @@ import { FuploadImageComponent } from "./controls/form-control-components/fuploa
 import { MoneyComponent } from "./controls/form-control-components/money/money.component";
 import { MoneyDynamicComponent } from "./components/money/money.component";
 import { MaterialFileUploadComponent } from "./controls/material-file-upload/material-file-upload.component";
+import { FuploadDynamicComponent } from "./components/fupload-dynamic/fupload-dynamic.component";
+import { CButtonComponent } from "./controls/form-control-components/c-button/c-button.component";
 
 const routes: Routes = [
 	{
@@ -80,6 +82,7 @@ const routes: Routes = [
 		DateComponent,
 		LookupComponent,
 		MoneyDynamicComponent,
+		FuploadDynamicComponent,
 		RadiobuttonComponent,
 		CheckboxComponent,
 		DynamicFieldDirective,
@@ -91,7 +94,8 @@ const routes: Routes = [
 		LookUpComponent,
 		FuploadImageComponent,
 		MoneyComponent,
-		MaterialFileUploadComponent
+		MaterialFileUploadComponent,
+		CButtonComponent
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
@@ -104,7 +108,8 @@ const routes: Routes = [
 		CheckboxComponent,
 		NumberComponent,
 		LookupComponent,
-		MoneyDynamicComponent
+		MoneyDynamicComponent,
+		FuploadDynamicComponent
 	],
 	providers: [
 		{
