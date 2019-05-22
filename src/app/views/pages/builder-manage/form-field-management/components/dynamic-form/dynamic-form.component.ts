@@ -12,7 +12,9 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges
+	SimpleChanges,
+	ViewChild,
+	QueryList
 } from "@angular/core";
 import {
 	FormGroup,
@@ -21,6 +23,7 @@ import {
 	FormControl
 } from "@angular/forms";
 import { FieldConfigInterface } from "./../../../../../../core/auth";
+import { StickyControlComponent } from "../sticky-control/sticky-control.component";
 
 @Component({
 	exportAs: "dynamicForm",
@@ -39,15 +42,17 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 					class="example-list"
 				>
 					<div
-						*ngFor="let field of fields"
-						class="form-group"
+						*ngFor="let field of fields; trackBy: trackByFn"
+						class="form-group kt-relative"
 						cdkDrag
 					>
 						<div
 							class="example-custom-placeholder"
 							*cdkDragPlaceholder
 						></div>
+
 						<div dynamicField [field]="field" [group]="form"></div>
+						<kt-sticky-control [field]="field"></kt-sticky-control>
 					</div>
 				</div>
 			</ng-template>
@@ -55,6 +60,9 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 	`,
 	styles: [
 		`
+			.dynamic-form {
+				padding-right: 50px;
+			}
 			.example-custom-placeholder {
 				background: #ccc;
 				border: dotted 2px #999;
@@ -64,10 +72,6 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 			.cdk-drag-preview {
 				box-sizing: border-box;
 				background: #eee;
-				border-radius: 4px;
-				box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-					0 8px 10px 1px rgba(0, 0, 0, 0.14),
-					0 3px 14px 2px rgba(0, 0, 0, 0.12);
 			}
 			.cdk-drag-animating {
 				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
@@ -86,20 +90,8 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 })
 export class DynamicFormComponent implements OnInit, OnChanges {
 	@Input() fields: FieldConfigInterface[] = [];
-
 	@Output() submit: EventEmitter<any> = new EventEmitter<any>();
-
-	movies = [
-		"Episode I - The Phantom Menace",
-		"Episode II - Attack of the Clones",
-		"Episode III - Revenge of the Sith",
-		"Episode IV - A New Hope",
-		"Episode V - The Empire Strikes Back",
-		"Episode VI - Return of the Jedi",
-		"Episode VII - The Force Awakens",
-		"Episode VIII - The Last Jedi"
-	];
-
+	hoveredIndex: number;
 	form: FormGroup;
 
 	get value() {
@@ -109,7 +101,6 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 		return this.form.value;
 	}
 	constructor(private fb: FormBuilder) {}
-
 	ngOnInit() {
 		this.form = this.createControl();
 	}
@@ -171,6 +162,9 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 	drop(event: CdkDragDrop<string[]>) {
 		console.log("drop");
 		moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
+	}
+	trackByFn(index, item) {
+		return index; // or item.id
 	}
 }
 

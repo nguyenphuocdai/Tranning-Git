@@ -153,6 +153,9 @@
 .cursor-pointer {
 	cursor: pointer;
 }
-.kt-portlet__body, .kt-min-height-400 {
+.kt-min-height-400 {
 	min-height: 400px !important;
+}
+.kt-relative{
+	position: relative;
 }
