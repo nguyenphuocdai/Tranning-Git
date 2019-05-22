@@ -1,0 +1,222 @@
+.kt-sticky-control {
+	width: auto;
+	right: -50px;
+	list-style: none;
+	padding: 0;
+	position: absolute;
+	background: transparent;
+	bottom: 0;
+	top: unset;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row;
+	z-index: 99;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row;
+}
+
+// .kt-sticky-control .kt-sticky-control__item {
+// 	margin: 0;
+// 	padding: 5px;
+// 	text-align: center;
+// }
+
+.kt-sticky-control .kt-sticky-control__item > a {
+	background: #f4f4f8;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 25px;
+	height: 25px;
+	-webkit-transition: background 0.3s ease;
+	transition: background 0.3s ease;
+}
+
+.kt-sticky-control .kt-sticky-control__item > a > i {
+	-webkit-transition: color 0.3s ease;
+	transition: color 0.3s ease;
+	font-size: 1.3rem;
+}
+
+.kt-sticky-control .kt-sticky-control__item > a:hover {
+	-webkit-transition: background 0.3s ease;
+	transition: background 0.3s ease;
+}
+
+.kt-sticky-control .kt-sticky-control__item > a:hover > i {
+	-webkit-transition: color 0.3s ease;
+	transition: color 0.3s ease;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--brand
+	> a
+	> i {
+	color: #5d78ff;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--brand:hover
+	> a {
+	background: #5d78ff;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--brand:hover
+	> a
+	> i {
+	color: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--light
+	> a
+	> i {
+	color: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--light:hover
+	> a {
+	background: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--light:hover
+	> a
+	> i {
+	color: #282a3c;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--dark
+	> a
+	> i {
+	color: #282a3c;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--dark:hover
+	> a {
+	background: #282a3c;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--dark:hover
+	> a
+	> i {
+	color: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--primary
+	> a
+	> i {
+	color: #5867dd;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--primary:hover
+	> a {
+	background: #5867dd;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--primary:hover
+	> a
+	> i {
+	color: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--success
+	> a
+	> i {
+	color: #0abb87;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--success:hover
+	> a {
+	background: #0abb87;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--success:hover
+	> a
+	> i {
+	color: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--info
+	> a
+	> i {
+	color: #5578eb;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--info:hover
+	> a {
+	background: #5578eb;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--info:hover
+	> a
+	> i {
+	color: #f4f4f8;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--warning
+	> a
+	> i {
+	color: #ffb822;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--warning:hover
+	> a {
+	background: #ffb822;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--warning:hover
+	> a
+	> i {
+	color: #111;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--danger
+	> a
+	> i {
+	color: #fd397a;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--danger:hover
+	> a {
+	background: #fd397a;
+}
+
+.kt-sticky-control
+	.kt-sticky-control__item.kt-sticky-control__item--danger:hover
+	> a
+	> i {
+	color: #f4f4f8;
+}

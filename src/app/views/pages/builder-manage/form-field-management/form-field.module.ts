@@ -36,6 +36,7 @@ import { MoneyDynamicComponent } from "./components/money/money.component";
 import { MaterialFileUploadComponent } from "./controls/material-file-upload/material-file-upload.component";
 import { FuploadDynamicComponent } from "./components/fupload-dynamic/fupload-dynamic.component";
 import { CButtonComponent } from "./controls/form-control-components/c-button/c-button.component";
+import { StickyControlComponent } from "./components/sticky-control/sticky-control.component";
 
 const routes: Routes = [
 	{
@@ -95,7 +96,8 @@ const routes: Routes = [
 		FuploadImageComponent,
 		MoneyComponent,
 		MaterialFileUploadComponent,
-		CButtonComponent
+		CButtonComponent,
+		StickyControlComponent
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
