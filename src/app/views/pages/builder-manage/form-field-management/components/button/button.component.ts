@@ -4,11 +4,11 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 @Component({
 	selector: "kt-app-button",
 	template: `
-			<div class="" [formGroup]="group">
-				<button type="submit" mat-raised-button color="primary">
-					{{ field.label }}
-				</button>
-			</div>
+		<div [formGroup]="group" class="cursor-pointer">
+			<button type="submit" mat-raised-button color="primary">
+				{{ field.label }}
+			</button>
+		</div>
 	`,
 	styles: []
 })
