@@ -198,7 +198,6 @@ const routes: Routes = [
 		ProductSpecificationsService,
 		ProductsService,
 		TypesUtilsService,
-		LayoutUtilsService
 	],
 	entryComponents: [
 		ActionNotificationComponent,
