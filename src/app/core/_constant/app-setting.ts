@@ -7,4 +7,5 @@ export class AppSettings {
 
 	public static solutionStorage = "ListSolution";
 	public static moduleStorage = "ListModule";
+	public static FIELDSTORAGE = "regConfig";
 }

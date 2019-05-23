@@ -91,7 +91,8 @@
             "karmaConfig": "./karma.conf.js",
             "scripts": [
               "src/assets/vendors/base/vendors.bundle.js",
-              "src/assets/demo/default/base/scripts.bundle.js"
+              "src/assets/demo/default/base/scripts.bundle.js",
+              "src/assets/app/custom/event/default-passive-events.js"
             ],
             "styles": [
               "src/styles.scss",
