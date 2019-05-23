@@ -1,9 +1,9 @@
+import { AppSettings } from "./../../../core/_constant/app-setting";
+import { SolutionModel } from "./../../../core/_model-app/solution.model";
+import { HttpUtilsService } from "./../../../core/_base/crud/utils/http-utils.service";
 import { HttpClient } from "@angular/common/http";
-import { AppSettings } from "../../_constant/app-setting";
 import { Injectable } from "@angular/core";
-import { SolutionModel } from "../../auth";
 import { Subject, Observable, BehaviorSubject } from "rxjs";
-import { HttpUtilsService } from "../../_base/crud";
 
 @Injectable({
 	providedIn: "root"

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { HttpUtilsService } from "../../_base/crud";
-import { AppSettings } from "../../_constant/app-setting";
+import { HttpUtilsService } from './../../../core/_base/crud/utils/http-utils.service';
+import { AppSettings } from './../../../core/_constant/app-setting';
 
 @Injectable({
 	providedIn: "root"
@@ -10,12 +10,21 @@ import { AppSettings } from "../../_constant/app-setting";
 export class FormFieldService {
 	// Public properties
 	subjectFormField = new Subject<FormFieldService[]>();
+	private isCloseModal$ = new Subject<boolean>();
 	listFormField: FormFieldService[] = [];
 
 	constructor(
 		private http: HttpClient,
 		private httpUtils: HttpUtilsService
 	) {}
+
+	nextIsDelete(isValue: boolean) {
+		this.isCloseModal$.next(isValue);
+	}
+
+	getIsDelete(): Observable<boolean> {
+		return this.isCloseModal$.asObservable();
+	}
 
 	sendListFormField(listFormField: FormFieldService[]) {
 		this.subjectFormField.next(listFormField);
@@ -33,21 +42,27 @@ export class FormFieldService {
 	createFormField(FormField: FormFieldService): Observable<FormFieldService> {
 		// Note: Add headers if needed (tokens/bearer)
 		const httpHeaders = this.httpUtils.getHTTPHeaders();
-		return this.http.post<FormFieldService>(AppSettings.API_FORM_FIELD_URL, FormField, {
-			headers: httpHeaders
-		});
+		return this.http.post<FormFieldService>(
+			AppSettings.API_FORM_FIELD_URL,
+			FormField,
+			{
+				headers: httpHeaders
+			}
+		);
 	}
 
 	// READ
 	getAllFormFields(): Observable<FormFieldService[]> {
-		return this.http.get<FormFieldService[]>(AppSettings.API_FORM_FIELD_URL);
+		return this.http.get<FormFieldService[]>(
+			AppSettings.API_FORM_FIELD_URL
+		);
 	}
 
 	getFormFieldById(FormFieldId: number): Observable<FormFieldService> {
 		return this.http.get<FormFieldService>(
 			AppSettings.API_FORM_FIELD_URL + `/${FormFieldId}`
 		);
-  }
+	}
 
 	// UPDATE => PUT: update the FormField on the server
 	updateFormField(FormField: FormFieldService): Observable<any> {
