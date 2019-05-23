@@ -1,3 +1,4 @@
+import { SharedModule } from "./../../../shared/shared.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
@@ -21,7 +22,6 @@ import { SolutionEditComponent } from "./solution-manage/solution-edit/solution-
 import { SmStepperComponent } from "./solution-manage/controls/sm-stepper/sm-stepper.component";
 
 // Solution Service
-import { SolutionService } from "../../../core/_services/kt-solution-services/solution.service";
 
 // Module
 import { ModuleListComponent } from "./module-manage/module-list/module-list.component";
@@ -33,7 +33,7 @@ import { FormFieldEditComponent } from "./form-field-management/form-field-edit/
 
 // Pipe, Directives
 import {
-	ReplaceSpacePipe,
+	ReplaceSpacePipe
 	// NumericDirective
 } from "../../../core/_base/metronic/index";
 import { FormFieldModule } from "./form-field-management/form-field.module";
@@ -80,7 +80,7 @@ const routes: Routes = [
 		ModuleAddComponent,
 		ModuleEditComponent,
 		// Pipe
-		ReplaceSpacePipe,
+		ReplaceSpacePipe
 		// NumericDirective
 	],
 	entryComponents: [
@@ -97,9 +97,10 @@ const routes: Routes = [
 		PortletModule,
 		PartialsModule,
 		CoreModule,
-		FormFieldModule
+		FormFieldModule,
+		SharedModule
 	],
 	// exports: [NumericDirective],
-	providers: [SolutionService]
+	providers: []
 })
 export class BuilderManageModule {}
