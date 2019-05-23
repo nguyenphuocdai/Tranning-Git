@@ -1,3 +1,4 @@
+import { AppSettings } from "./../../../../../../core/_constant/app-setting";
 import {
 	CdkDragDrop,
 	transferArrayItem,
@@ -23,8 +24,6 @@ import {
 	FormControl
 } from "@angular/forms";
 import { FieldConfigInterface } from "./../../../../../../core/auth";
-import { StickyControlComponent } from "../sticky-control/sticky-control.component";
-
 @Component({
 	exportAs: "dynamicForm",
 	selector: "dynamic-form",
@@ -52,7 +51,10 @@ import { StickyControlComponent } from "../sticky-control/sticky-control.compone
 						></div>
 
 						<div dynamicField [field]="field" [group]="form"></div>
-						<kt-sticky-control [field]="field"></kt-sticky-control>
+						<kt-sticky-control
+							[field]="field"
+							(ondelete)="onDelete($event)"
+						></kt-sticky-control>
 					</div>
 				</div>
 			</ng-template>
@@ -166,13 +168,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 	trackByFn(index, item) {
 		return index; // or item.id
 	}
+	onDelete(event) {
+		if (event) {
+			this.fields = event;
+			this.ngOnInit();
+		}
+	}
 }
-
-// <ng-container
-// *ngFor="let field of fields"
-// dynamicField
-// [field]="field"
-// [group]="form"
-// [cdkDragging]="cdkDrag"
-// >
-// </ng-container>
