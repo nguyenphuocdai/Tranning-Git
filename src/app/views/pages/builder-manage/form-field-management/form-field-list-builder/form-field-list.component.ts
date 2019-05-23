@@ -17,6 +17,7 @@ import {
 	CdkDragEnd
 } from "@angular/cdk/drag-drop";
 import { MatDialog } from "@angular/material";
+import { AppSettings } from "../../../../../core/_constant/app-setting";
 @Component({
 	selector: "kt-form-field-list",
 	templateUrl: "./form-field-list.component.html",
@@ -84,7 +85,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		this.resetList();
 
-		let localData = JSON.parse(localStorage.getItem("regConfig"));
+		let localData = JSON.parse(localStorage.getItem(AppSettings.FIELDSTORAGE));
 		if (localData) {
 			this.items = localData;
 		}
@@ -115,7 +116,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 					panelClass: "",
 					maxHeight: "90vh"
 				})
-				.afterClosed()
+				.beforeClosed()
 				.subscribe(response => {
 					if (response) {
 						transferArrayItem(
@@ -129,7 +130,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 
 						// local strorage
 						let arrLocal = JSON.parse(
-							localStorage.getItem("regConfig")
+							localStorage.getItem(AppSettings.FIELDSTORAGE)
 						);
 						if (arrLocal !== null && this.items.length === 0) {
 							this.items = this.items.concat(arrLocal);
@@ -142,7 +143,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 						}
 
 						localStorage.setItem(
-							"regConfig",
+							AppSettings.FIELDSTORAGE,
 							JSON.stringify(this.items)
 						);
 						this.ref.markForCheck();
