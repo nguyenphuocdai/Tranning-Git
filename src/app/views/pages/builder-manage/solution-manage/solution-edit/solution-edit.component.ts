@@ -1,4 +1,4 @@
-import { SolutionService } from "../../../../../core/_services/kt-solution-services/solution.service";
+import { SolutionService } from "../../../../../shared/_services/kt-solution-services/solution.service";
 import { filter } from "rxjs/operators";
 import { SolutionModel } from "../../../../../core/_model-app/solution.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";

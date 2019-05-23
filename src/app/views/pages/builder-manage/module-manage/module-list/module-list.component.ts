@@ -1,4 +1,4 @@
-import { ModuleService } from "./../../../../../core/_services/kt-module-services/module.service";
+import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material";

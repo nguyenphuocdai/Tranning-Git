@@ -1,5 +1,5 @@
 import { KtSnackBarService } from "./../../../../../core/_base/layout/services/kt-snack-bar.service";
-import { ModuleService } from "./../../../../../core/_services/kt-module-services/module.service";
+import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
