@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Subject, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { HttpUtilsService } from './../../../core/_base/crud/utils/http-utils.service';
-import { AppSettings } from './../../../core/_constant/app-setting';
+import { AppSettings } from '../../_constant/app-setting';
 
 @Injectable({
 	providedIn: "root"

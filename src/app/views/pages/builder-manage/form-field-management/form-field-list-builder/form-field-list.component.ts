@@ -1,7 +1,7 @@
 import { LayoutUtilsService } from "./../../../../../core/_base/crud";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
 import { DynamicFormComponent } from "../components/dynamic-form/dynamic-form.component";
-import { FieldConfigInterface } from "../../../../../core/_model-app/field.interface";
+import { FieldConfigInterface } from "../../../../../shared/_model-app/field.interface";
 import {
 	Component,
 	OnInit,
@@ -17,7 +17,7 @@ import {
 	CdkDragEnd
 } from "@angular/cdk/drag-drop";
 import { MatDialog } from "@angular/material";
-import { AppSettings } from "../../../../../core/_constant/app-setting";
+import { AppSettings } from "../../../../../shared/_constant/app-setting";
 @Component({
 	selector: "kt-form-field-list",
 	templateUrl: "./form-field-list.component.html",

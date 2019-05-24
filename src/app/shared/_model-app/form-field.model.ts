@@ -1,4 +1,4 @@
-import { BaseBuilderModel } from "./../_base/crud/models/_base-builder.model";
+import { BaseBuilderModel } from "../../core/_base/crud/models/_base-builder.model";
 
 export class ModuleModel extends BaseBuilderModel {
 	roles: number[];
