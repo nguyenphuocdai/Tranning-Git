@@ -1,0 +1,12 @@
+<p>
+    <button type="button" class="btn" (click)="file.click()">
+      {{ btnText }}
+    </button>
+    <input
+      type="file"
+      name="file"
+      #file
+      [hidden]="true"
+      (change)="getFiles($event)"
+    />
+  </p>
