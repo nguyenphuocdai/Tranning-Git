@@ -1,6 +1,6 @@
 import { HttpUtilsService } from './../../../core/_base/crud/utils/http-utils.service';
-import { ModuleModel } from './../../../core/_model-app/form-field.model';
-import { AppSettings } from './../../../core/_constant/app-setting';
+import { ModuleModel } from '../../_model-app/form-field.model';
+import { AppSettings } from '../../_constant/app-setting';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject, BehaviorSubject } from "rxjs";

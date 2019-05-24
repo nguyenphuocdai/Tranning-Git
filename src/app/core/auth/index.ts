@@ -113,6 +113,6 @@ export { AuthNotice } from "./auth-notice/auth-notice.interface";
 
 export { AuthDataContext } from "./_server/auth.data-context";
 
-export { SolutionModel } from "../_model-app/solution.model";
-export { FieldConfigInterface } from "../_model-app/field.interface";
-export { DialogRefInterface } from "../_model-app/dialog-ref.interface";
+export { SolutionModel } from "../../shared/_model-app/solution.model";
+export { FieldConfigInterface } from "../../shared/_model-app/field.interface";
+export { DialogRefInterface } from "../../shared/_model-app/dialog-ref.interface";

@@ -1,4 +1,4 @@
-import { AppSettings } from "./../../../../../../core/_constant/app-setting";
+import { AppSettings } from "../../../../../../shared/_constant/app-setting";
 import {
 	CdkDragDrop,
 	transferArrayItem,

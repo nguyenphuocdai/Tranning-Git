@@ -1,5 +1,5 @@
-import { FieldConfigInterface } from "./../../../../../../core/_model-app/field.interface";
-import { AppSettings } from "./../../../../../../core/_constant/app-setting";
+import { FieldConfigInterface } from "../../../../../../shared/_model-app/field.interface";
+import { AppSettings } from "../../../../../../shared/_constant/app-setting";
 import { LayoutUtilsService } from "./../../../../../../core/_base/crud";
 import { Component, OnInit, Input, Output } from "@angular/core";
 import { EventEmitter } from "@angular/core";

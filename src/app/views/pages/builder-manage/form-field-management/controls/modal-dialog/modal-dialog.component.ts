@@ -1,4 +1,4 @@
-import { DialogRefInterface } from "./../../../../../../core/_model-app/dialog-ref.interface";
+import { DialogRefInterface } from "../../../../../../shared/_model-app/dialog-ref.interface";
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 

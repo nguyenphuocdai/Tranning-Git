@@ -1,6 +1,6 @@
 import { CardListComponent } from "../controls/card-list/card-list.component";
 import { SolutionService } from "../../../../../shared/_services/kt-solution-services/solution.service";
-import { SolutionModel } from "../../../../../core/_model-app/solution.model";
+import { SolutionModel } from "../../../../../shared/_model-app/solution.model";
 import { SolutionAddComponent } from "../solution-add/solution-add.component";
 import {
 	Component,

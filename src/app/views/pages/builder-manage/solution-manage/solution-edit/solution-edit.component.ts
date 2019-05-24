@@ -1,6 +1,6 @@
 import { SolutionService } from "../../../../../shared/_services/kt-solution-services/solution.service";
 import { filter } from "rxjs/operators";
-import { SolutionModel } from "../../../../../core/_model-app/solution.model";
+import { SolutionModel } from "../../../../../shared/_model-app/solution.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
