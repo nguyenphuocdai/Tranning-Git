@@ -1,4 +1,4 @@
-import { TreeSettings } from '../../../../../core/_constant/tree-setting';
+import { TreeSettings } from '../../../../../shared/_constant/tree-setting';
 import { Component, OnInit } from '@angular/core';
 import { TreeService,LoadmoreFlatNode,LoadmoreNode } from '../../../../../core/material-services/tree/tree.service';
 import { FlatTreeControl } from '@angular/cdk/tree';
