@@ -1,3 +1,4 @@
+import { TypesUtilsService } from "./../../../../../../../core/_base/crud/utils/types-utils.service";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
 import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component";
 import { MatDialogRef } from "@angular/material";
@@ -35,14 +36,15 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	fuploadText: string;
 	isSubmit: boolean = false;
 	constructor(
-		private dialogRef: MatDialogRef<ModalDialogComponent>,
-		private fbField: FormBuilder,
+		private _dialogRef: MatDialogRef<ModalDialogComponent>,
+		private _fbField: FormBuilder,
 		private _snackBarService: KtSnackBarService,
-		private cdr: ChangeDetectorRef
+		private _cdr: ChangeDetectorRef,
+		private _typesUtilsService: TypesUtilsService
 	) {}
 	ngAfterViewChecked(): void {
 		this.fuploadText = "Upload Image";
-		this.cdr.detectChanges();
+		this._cdr.detectChanges();
 	}
 	ngOnInit() {
 		this.createForm();
@@ -52,7 +54,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	 * create form builder
 	 */
 	createForm() {
-		this.rfField = this.fbField.group({
+		this.rfField = this._fbField.group({
 			name: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
@@ -68,7 +70,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	 */
 	onSubmit(event) {
 		this.isSubmit = true;
-		this.dialogRef.disableClose = true;
+		this._dialogRef.disableClose = true;
 		console.log(this.rfField.value);
 		if (this.rfField.invalid) {
 			this.isSubmit = false;
@@ -102,6 +104,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 		let fieldType = this.rfField.controls["fieldType"].value;
 
 		let mergedObj: FieldConfigInterface = {
+			id: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,

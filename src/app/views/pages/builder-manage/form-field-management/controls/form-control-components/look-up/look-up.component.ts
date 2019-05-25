@@ -1,3 +1,4 @@
+import { TypesUtilsService } from "./../../../../../../../core/_base/crud/utils/types-utils.service";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
 import {
 	Component,
@@ -37,7 +38,8 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbField: FormBuilder,
 		private _snackBarService: KtSnackBarService,
-		private _changeDetectionRef: ChangeDetectorRef
+		private _changeDetectionRef: ChangeDetectorRef,
+		private _typesUtilsService: TypesUtilsService
 	) {}
 
 	ngOnInit() {
@@ -106,6 +108,7 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 		let modules = this.rfField.controls["modules"].value;
 
 		let mergedObj: FieldConfigInterface = {
+			id: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,

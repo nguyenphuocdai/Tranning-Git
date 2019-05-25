@@ -1,3 +1,4 @@
+import { TypesUtilsService } from "./../../../../../../../core/_base/crud/utils/types-utils.service";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
 import {
 	Component,
@@ -48,7 +49,8 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbNumber: FormBuilder,
 		private _snackBarService: KtSnackBarService,
-		private _changeDetectionRef: ChangeDetectorRef
+		private _changeDetectionRef: ChangeDetectorRef,
+		private _typesUtilsService: TypesUtilsService
 	) {}
 
 	ngOnInit() {
@@ -133,6 +135,7 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		let description = this.rfNumber.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
+			id: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,

@@ -141,10 +141,13 @@ export class SelectOptionComponent implements OnInit {
 		let options = this.addListOption;
 
 		let mergedObj: FieldConfigInterface = {
+			id: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
-			name: this._typesUtilsService.removeUnicode(label) + this._typesUtilsService.randomGuid(),
+			name:
+				this._typesUtilsService.removeUnicode(label) +
+				this._typesUtilsService.randomGuid(),
 			security: isSecurity,
 			tracking: isTracking,
 			options: options,

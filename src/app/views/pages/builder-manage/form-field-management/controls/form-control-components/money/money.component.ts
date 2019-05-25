@@ -1,3 +1,4 @@
+import { TypesUtilsService } from "./../../../../../../../core/_base/crud/utils/types-utils.service";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MatDialogRef } from "@angular/material";
@@ -34,7 +35,8 @@ export class MoneyComponent implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbField: FormBuilder,
-		private _snackBarService: KtSnackBarService
+		private _snackBarService: KtSnackBarService,
+		private _typesUtilsService: TypesUtilsService
 	) {}
 
 	ngOnInit() {
@@ -98,6 +100,7 @@ export class MoneyComponent implements OnInit {
 		let description = this.rfField.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
+			id: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
@@ -108,7 +111,7 @@ export class MoneyComponent implements OnInit {
 			fieldType: fieldType,
 			description: description,
 			required: isRequired,
-			validations: [],
+			validations: []
 		};
 		if (isRequired === true) {
 			let objValidator = {
