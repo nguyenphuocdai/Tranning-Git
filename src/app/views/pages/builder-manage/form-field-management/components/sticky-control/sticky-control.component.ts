@@ -12,13 +12,25 @@ import { EventEmitter } from "@angular/core";
 export class StickyControlComponent implements OnInit {
 	@Input() field;
 	@Output("ondelete") ondelete = new EventEmitter();
+
+	/**
+	 * Constructor
+	 * @param _layoutUtilsService
+	 */
 	constructor(private _layoutUtilsService: LayoutUtilsService) {}
+
 	ngOnInit() {}
 
+	/**
+	 * trigger event click icon setting
+	 */
 	handleSetting() {
 		console.log(this.field);
 	}
 
+	/**
+	 * trigger event delete
+	 */
 	handleDelete() {
 		this._layoutUtilsService
 			.deleteElement(
@@ -30,17 +42,19 @@ export class StickyControlComponent implements OnInit {
 			.subscribe(bool => {
 				if (bool) {
 					let arr = this.getAllItems();
-					let indexField = arr.findIndex(
-						x => x.label === this.field.label
-					);
-					arr.splice(indexField, 1);
-					
+					arr.forEach((element, index) => {
+						if (
+							JSON.stringify(element) ===
+							JSON.stringify(this.field)
+						) {
+							arr.splice(index, 1);
+						}
+					});
+
 					localStorage.setItem(
 						AppSettings.FIELDSTORAGE,
 						JSON.stringify(arr)
 					);
-					console.log(arr);
-
 					setTimeout(() => {
 						this.ondelete.emit(arr);
 						this._layoutUtilsService.showActionNotification(
@@ -52,6 +66,9 @@ export class StickyControlComponent implements OnInit {
 			});
 	}
 
+	/**
+	 * Get all items from local storage
+	 */
 	getAllItems(): FieldConfigInterface[] {
 		let localData: FieldConfigInterface[] = JSON.parse(
 			localStorage.getItem(AppSettings.FIELDSTORAGE)
