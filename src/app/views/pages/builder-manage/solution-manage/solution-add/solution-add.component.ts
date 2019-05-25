@@ -103,8 +103,8 @@ export class SolutionAddComponent implements OnInit {
 				Validators.minLength(3)
 			]),
 			owner: new FormControl("", [Validators.required]),
-			version: new FormControl("", [Validators.required]),
-			databaseName: new FormControl("", [Validators.required])
+			version: new FormControl("", [Validators.required])
+			// databaseName: new FormControl("", [Validators.required])
 		});
 	}
 }
