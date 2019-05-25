@@ -26,74 +26,13 @@ import {
 import { FieldConfigInterface } from "./../../../../../../core/auth";
 @Component({
 	exportAs: "dynamicForm",
-	selector: "dynamic-form",
-	template: `
-		<form
-			class="dynamic-form"
-			[formGroup]="form"
-			(submit)="onSubmit($event)"
-		>
-			<ng-container *ngTemplateOutlet="content"></ng-container>
-			<ng-template #content>
-				<div
-					cdkDropList
-					(cdkDropListDropped)="drop($event)"
-					class="example-list"
-				>
-					<div
-						*ngFor="let field of fields; trackBy: trackByFn"
-						class="form-group kt-relative"
-						cdkDrag
-					>
-						<div
-							class="example-custom-placeholder"
-							*cdkDragPlaceholder
-						></div>
-
-						<div dynamicField [field]="field" [group]="form"></div>
-						<kt-sticky-control
-							[field]="field"
-							(ondelete)="onDelete($event)"
-						></kt-sticky-control>
-					</div>
-				</div>
-			</ng-template>
-		</form>
-	`,
-	styles: [
-		`
-			.dynamic-form {
-				padding-right: 50px;
-			}
-			.example-custom-placeholder {
-				background: #ccc;
-				border: dotted 2px #999;
-				min-height: 41px;
-				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-			}
-			.cdk-drag-preview {
-				box-sizing: border-box;
-				background: #eee;
-			}
-			.cdk-drag-animating {
-				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-			}
-
-			.example-box:last-child {
-				border: none;
-			}
-
-			.example-list.cdk-drop-list-dragging
-				.example-box:not(.cdk-drag-placeholder) {
-				transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-			}
-		`
-	]
+	selector: "kt-dynamic-form",
+	templateUrl: "dynamic-form.component.html",
+	styleUrls: ["dynamic-form.component.scss"]
 })
 export class DynamicFormComponent implements OnInit, OnChanges {
 	@Input() fields: FieldConfigInterface[] = [];
 	@Output() submit: EventEmitter<any> = new EventEmitter<any>();
-	hoveredIndex: number;
 	form: FormGroup;
 
 	get value() {
@@ -164,9 +103,6 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 	drop(event: CdkDragDrop<string[]>) {
 		console.log("drop");
 		moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
-	}
-	trackByFn(index, item) {
-		return index; // or item.id
 	}
 	onDelete(event) {
 		if (event) {
