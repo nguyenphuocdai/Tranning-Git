@@ -186,7 +186,7 @@ export class TypesUtilsService {
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
-	makeid(length: number = 10) {
+	makeid(length: number = 16) {
 		let result = "";
 		let characters =
 			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
