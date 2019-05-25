@@ -13,7 +13,7 @@
 					<span class="kt-hidden-mobile">Back</span>
 				</a>
 				<button mat-raised-button color="primary">Submit</button>&nbsp;
-				<button mat-raised-button type="reset">
+				<button mat-raised-button type="button" (click)="onReset()">
 					Reset
 				</button>
 			</div>
@@ -28,9 +28,6 @@
 						<mat-panel-title>
 							Basic
 						</mat-panel-title>
-						<!-- <mat-panel-description>
-							Choosen component
-						</mat-panel-description> -->
 					</mat-expansion-panel-header>
 					<div
 						cdkDropList
@@ -105,11 +102,11 @@
 								class="example-list kt-min-height-400"
 								(cdkDropListDropped)="dropFromPreview($event)"
 							>
-								<dynamic-form
+								<kt-dynamic-form
 									[fields]="items"
 									(submit)="submit($event)"
 								>
-								</dynamic-form>
+								</kt-dynamic-form>
 							</div>
 						</div>
 					</div>

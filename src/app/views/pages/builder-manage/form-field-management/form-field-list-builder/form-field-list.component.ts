@@ -1,3 +1,4 @@
+import { data } from "./../../../../../shared/_mock-updata/mk-drag-data";
 import { LayoutUtilsService } from "./../../../../../core/_base/crud";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
 import { DynamicFormComponent } from "../components/dynamic-form/dynamic-form.component";
@@ -30,41 +31,9 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	items: FieldConfigInterface[] = [];
 	todo = [];
 	isDragging: boolean = false;
-	stableData = [
-		{
-			type: "input",
-			valueView: "Text Field"
-		},
-		{
-			type: "select",
-			valueView: "Select Option"
-		},
-		{
-			type: "number",
-			valueView: "Number"
-		},
-		{
-			type: "lookup",
-			valueView: "Lookup Field"
-		},
-		{
-			type: "fupload",
-			valueView: "File Upload"
-		},
-		{
-			type: "money",
-			valueView: "Money Field"
-		},
-		{
-			type: "datepicker",
-			valueView: "Date Picker"
-		}
-		,
-		{
-			type: "button",
-			valueView: "Button"
-		}
-	];
+
+	// mockup-data
+	stableData = data;
 	/**
 	 * Constructor DI
 	 * @param _location
@@ -84,12 +53,20 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	 */
 	ngOnInit() {
 		this.resetList();
-
-		let localData = JSON.parse(localStorage.getItem(AppSettings.FIELDSTORAGE));
-		if (localData) {
-			this.items = localData;
-		}
+		this.items = this.getDataLocalStorage();
 	}
+
+	getDataLocalStorage() {
+		let items = [];
+		let localData = JSON.parse(
+			localStorage.getItem(AppSettings.FIELDSTORAGE)
+		);
+		if (localData) {
+			items = localData;
+		}
+		return items;
+	}
+
 	ngAfterViewInit() {
 		// setTimeout(() =>
 		// 	this._layoutUtilsService.showActionNotification("123123213")
@@ -125,6 +102,9 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 							event.previousIndex,
 							event.currentIndex
 						);
+
+						this.items = this.getDataLocalStorage();
+
 						this.items.push(response);
 						this.regConfig = this.items;
 
@@ -184,5 +164,23 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 
 	dragEnded(event: CdkDragEnd) {
 		this.isDragging = false;
+	}
+
+	onReset() {
+		this._layoutUtilsService
+			.deleteElement(
+				"Alert Reset Form",
+				"Are you want to reset this form?",
+				"Processing reset ..."
+			)
+			.afterClosed()
+			.subscribe(bool => {
+				if (bool) {
+					this.items = [];
+					localStorage.removeItem(AppSettings.FIELDSTORAGE);
+					this.ref.markForCheck();
+					this.dynamicFormControl.ngOnInit();
+				}
+			});
 	}
 }
