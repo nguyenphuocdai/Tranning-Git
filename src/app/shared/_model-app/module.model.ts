@@ -1,4 +1,5 @@
 import { BaseBuilderModel } from "../../core/_base/crud/models/_base-builder.model";
+import { FieldConfigInterface } from "./field.interface";
 
 export class ModuleModel extends BaseBuilderModel {
 	name: string;
@@ -6,6 +7,7 @@ export class ModuleModel extends BaseBuilderModel {
 	accessType: string;
 	databaseId: string;
 	solutionId: string;
+	optionsField?: FieldConfigInterface[];
 	clear(): void {
 		// clear solution
 	}
