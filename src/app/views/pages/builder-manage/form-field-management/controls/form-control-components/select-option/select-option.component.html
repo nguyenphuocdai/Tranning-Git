@@ -49,7 +49,7 @@
 										">
                                     <div class="col-md-5">
                                         <mat-form-field class="demo-full-width">
-                                            <input matInput placeholder="Enter label option" required name="label" [(ngModel)]="
+                                            <input matInput placeholder="Enter label option" #labelRef name="label" [(ngModel)]="
 														addListOption[i].label
 													" [ngModelOptions]="{
 														standalone: true
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <mat-form-field class="demo-full-width">
-                                            <input matInput placeholder="Enter value option" required name="value" [(ngModel)]="
+                                            <input matInput placeholder="Enter value option" [value]="labelRef.value" name="value" [(ngModel)]="
 														addListOption[i].value
 													" [ngModelOptions]="{
 														standalone: true
@@ -110,43 +110,6 @@
                                         <mat-hint align="start">Please enter description</mat-hint>
                                     </mat-form-field>
                                 </div>
-
-                                <!-- <div class="row">
-										<div class="col-md-6">
-											<div class="form-group kt-form__group">
-												<mat-form-field class="demo-full-width">
-													<mat-label>Validate Parttern
-													</mat-label>
-													<mat-select required formControlName="parttern">
-														<mat-option value="^[a-zA-Z]+$"># Accept only text "^[a-zA-Z]+$"
-														</mat-option>
-														<mat-option value="Parttern02">Pattern 02: ###
-														</mat-option>
-													</mat-select>
-												</mat-form-field>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group kt-form__group">
-												<mat-form-field class="kt-padding-l-5 demo-full-width">
-													<mat-label>Display format</mat-label>
-													<mat-select required formControlName="displayFormat">
-														<mat-option value="Format01">Format 01: ###
-														</mat-option>
-														<mat-option value="Format02">Format 02: ###
-														</mat-option>
-													</mat-select>
-												</mat-form-field>
-											</div>
-										</div>
-									</div> -->
-                                <!--Begin::Field Type-->
-
-                                <!--End::Description-->
-                                <!--Begin::Select-->
-
-                                <!--End::Select-->
                             </div>
                         </div>
                     </div>
@@ -173,7 +136,7 @@
                         <div class="kt-portlet__body">
                             <div class="kt-form__section kt-form__section--first">
                                 <div class="form-group kt-form__group">
-                                    <ng-container [ngSwitch]="fieldTypeRef.value">
+                                    <ng-container [ngSwitch]="rfSelectOption.get('fieldType').value">
                                         <ng-container *ngSwitchCase="'Option Set'">
                                             <mat-form-field>
                                                 <mat-label>{{nameRef.value}}</mat-label>
@@ -273,7 +236,7 @@
                                 <div class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0">
                                     <button mat-raised-button color="primary" type="submit" [disabled]="!rfSelectOption.valid">
                                         Submit</button>&nbsp;
-                                    <button mat-raised-button type="button">
+                                    <button mat-raised-button type="button" [mat-dialog-close]>
                                         Cancel
                                     </button>
                                 </div>

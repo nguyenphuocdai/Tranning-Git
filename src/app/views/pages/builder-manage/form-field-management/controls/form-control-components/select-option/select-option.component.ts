@@ -31,6 +31,7 @@ import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component"
 })
 export class SelectOptionComponent implements OnInit {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
+	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("selectComponentSubmit") submitForm = new EventEmitter<object>();
 
 	// validate if check box required
@@ -72,6 +73,38 @@ export class SelectOptionComponent implements OnInit {
 	ngOnInit() {
 		this.createForm();
 		this.bindData();
+
+		if (this.valueEdit) {
+			this.rfSelectOption.controls["name"].setValue(this.valueEdit.label);
+			this.rfSelectOption.controls["required"].setValue(
+				this.valueEdit.required
+			);
+			this.rfSelectOption.controls["security"].setValue(
+				this.valueEdit.security
+			);
+			this.rfSelectOption.controls["tracking"].setValue(
+				this.valueEdit.tracking
+			);
+			this.rfSelectOption.controls["fieldType"].setValue(
+				this.valueEdit.fieldType
+			);
+			this.rfSelectOption.controls["description"].setValue(
+				this.valueEdit.description
+			);
+			this.dialogRefData.type = this.valueEdit.type;
+			this.dialogRefData.valueView = this.valueEdit.inputType;
+			this.addListOption = this.valueEdit.options;
+
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfSelectOption.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
+		}
 	}
 
 	/**
@@ -95,18 +128,33 @@ export class SelectOptionComponent implements OnInit {
 			options: new FormArray([new FormControl(""), new FormControl("")]),
 			description: [""],
 			fieldType: ["", Validators.required]
-			// displayFormat: ["", Validators.required],
-			// parttern: ["", Validators.required]
 		});
 	}
 
 	/**
 	 * Submit @Output
 	 */
-	onSubmit(event) {
+	onSubmit() {
 		this.isSubmit = true;
 		this.dialogRef.disableClose = true;
-		console.log(this.rfSelectOption.value);
+
+		for (let option of this.addListOption) {
+			if (option.value === "") {
+				option.value = option.label;
+			}
+			if (option.label === "") {
+				this.isSubmit = false;
+				this.dialogRef.disableClose = false;
+
+				this._snackBarService.openSnackBar(
+					"Please check again! Data in form invalid",
+					5000
+				);
+
+				return false;
+			}
+		}
+
 		if (this.rfSelectOption.invalid) {
 			this.isSubmit = false;
 			return;
@@ -145,9 +193,8 @@ export class SelectOptionComponent implements OnInit {
 			type: type,
 			label: label,
 			inputType: inputType,
-			name:
-				this._typesUtilsService.removeUnicode(label) +
-				this._typesUtilsService.randomGuid(),
+			name: this._typesUtilsService.removeUnicode(label),
+			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			options: options,
