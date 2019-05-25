@@ -1,8 +1,14 @@
+import { LocalstorageService } from "./../../../../../../shared/_services/local-storage-service/localstorage.service";
+import { ModuleModel } from "./../../../../../../shared/_model-app/module.model";
 import { FieldConfigInterface } from "../../../../../../shared/_model-app/field.interface";
 import { AppSettings } from "../../../../../../shared/_constant/app-setting";
 import { LayoutUtilsService } from "./../../../../../../core/_base/crud";
-import { Component, OnInit, Input, Output } from "@angular/core";
+import { Component, OnInit, Input, Output, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
+import { MatDialog } from "@angular/material";
+import { ModalDialogComponent } from "../../controls/modal-dialog/modal-dialog.component";
+import { ActivatedRoute } from "@angular/router";
+// import { DynamicFormComponent } from "../dynamic-form/dynamic-form.component";
 
 @Component({
 	selector: "kt-sticky-control",
@@ -12,20 +18,47 @@ import { EventEmitter } from "@angular/core";
 export class StickyControlComponent implements OnInit {
 	@Input() field;
 	@Output("ondelete") ondelete = new EventEmitter();
-
+	// @ViewChild(DynamicFormComponent) dynamicFormControl: DynamicFormComponent;
+	moduleOpenning: string = "";
 	/**
 	 * Constructor
 	 * @param _layoutUtilsService
+	 * @param _dialog
 	 */
-	constructor(private _layoutUtilsService: LayoutUtilsService) {}
+	constructor(
+		private _activatedRoute: ActivatedRoute,
+		private _layoutUtilsService: LayoutUtilsService,
+		private _dialog: MatDialog,
+		private _localstorageService: LocalstorageService
+	) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this._activatedRoute.params.subscribe(params => {
+			const id = params["id"];
+			if (id && id.length > 0) {
+				this.moduleOpenning = id;
+			}
+		});
+	}
 
 	/**
 	 * trigger event click icon setting
 	 */
 	handleSetting() {
-		console.log(this.field);
+		this._dialog
+			.open(ModalDialogComponent, {
+				data: { type: this.field.type, valueEdit: this.field },
+				width: "70%",
+				panelClass: "",
+				maxHeight: "90vh"
+			})
+			.beforeClosed()
+			.subscribe(response => {
+				if (response) {
+					console.log(response);
+					this.afterSetting(response);
+				}
+			});
 	}
 
 	/**
@@ -51,10 +84,7 @@ export class StickyControlComponent implements OnInit {
 						}
 					});
 
-					localStorage.setItem(
-						AppSettings.FIELDSTORAGE,
-						JSON.stringify(arr)
-					);
+					this.afterDelete(arr);
 					setTimeout(() => {
 						this.ondelete.emit(arr);
 						this._layoutUtilsService.showActionNotification(
@@ -70,12 +100,61 @@ export class StickyControlComponent implements OnInit {
 	 * Get all items from local storage
 	 */
 	getAllItems(): FieldConfigInterface[] {
-		let localData: FieldConfigInterface[] = JSON.parse(
-			localStorage.getItem(AppSettings.FIELDSTORAGE)
+		let listModule: ModuleModel[] = this._localstorageService.get(
+			AppSettings.moduleStorage
 		);
-		if (localData === null) {
-			return;
-		}
+		let localData: FieldConfigInterface[] = [];
+
+		listModule.forEach((element, index) => {
+			if (element.name === this.moduleOpenning) {
+				if (
+					element.optionsField === undefined ||
+					element.optionsField.length === 0
+				) {
+					localData = [];
+					return false;
+				}
+				localData = listModule[index].optionsField;
+			}
+		});
 		return localData;
+	}
+
+	afterDelete(arr: FieldConfigInterface[]) {
+		let listModule: ModuleModel[] = this._localstorageService.get(
+			AppSettings.moduleStorage
+		);
+		listModule.forEach((element, index) => {
+			if (element.name === this.moduleOpenning) {
+				listModule[index].optionsField = arr;
+
+				this._localstorageService.set(
+					AppSettings.moduleStorage,
+					listModule
+				);
+			}
+		});
+	}
+
+	afterSetting(response: FieldConfigInterface) {
+		let listModule: ModuleModel[] = this._localstorageService.get(
+			AppSettings.moduleStorage
+		);
+		listModule.forEach((element, index) => {
+			if (element.name === this.moduleOpenning) {
+				let arrFields = listModule[index].optionsField;
+				arrFields.forEach((item, i) => {
+					if (item.id === response.id) {
+						listModule[index].optionsField[i] = response;
+						console.log(listModule[index].optionsField[i]);
+					}
+				});
+				this._localstorageService.set(
+					AppSettings.moduleStorage,
+					listModule
+				);
+				this.ondelete.emit(listModule[index].optionsField);
+			}
+		});
 	}
 }
