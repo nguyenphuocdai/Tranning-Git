@@ -27,7 +27,12 @@ import { TextFieldComponent } from "./controls/form-control-components/text-fiel
 import { SelectOptionComponent } from "./controls/form-control-components/select-option/select-option.component";
 import { NumberFieldComponent } from "./controls/form-control-components/number-field/number-field.component";
 import { NumberComponent } from "./components/number/number.component";
-import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from "@angular/material";
+import {
+	MatSnackBarRef,
+	MAT_SNACK_BAR_DATA,
+	MatDialogRef,
+	MAT_DIALOG_DATA
+} from "@angular/material";
 import { LookUpComponent } from "./controls/form-control-components/look-up/look-up.component";
 import { LookupComponent } from "./components/lookup/look-up.component";
 import { FuploadImageComponent } from "./controls/form-control-components/fupload-image/fupload-image.component";
@@ -121,7 +126,9 @@ const routes: Routes = [
 		{
 			provide: MAT_SNACK_BAR_DATA,
 			useValue: {} // Add any data you wish to test if it is passed/used correctly
-		}
+		},
+		{ provide: MatDialogRef, useValue: {} },
+		{ provide: MAT_DIALOG_DATA, useValue: [] }
 	]
 })
 export class FormFieldModule {}
