@@ -1,5 +1,5 @@
 <div class="container-fluid ">
-    <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfField">
+    <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfMoney">
         <kt-loading-request *ngIf="isSubmit"></kt-loading-request>
         <div class="row">
             <div class="col-md-6">
@@ -23,7 +23,7 @@
                                 <!--Begin::Label-->
                                 <div class="form-group kt-form__group">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Enter display name" required name="name" formControlName="name" #nameRef maxlength="32"/>
+                                        <input matInput placeholder="Enter display name" required name="name" formControlName="name" #nameRef maxlength="32" />
                                         <mat-hint align="start">Please enter display name</mat-hint>
                                         <mat-hint align="end">{{nameRef.value.length}} / 32</mat-hint>
                                     </mat-form-field>
@@ -42,24 +42,23 @@
                                 <div class="form-group kt-form__group">
                                     <mat-form-field>
                                         <mat-label>Tiền Tệ</mat-label>
-                                        <mat-select formControlName="unitMoney" required #unitMoneyRef>
-                                            <mat-option>--</mat-option>
-                                            <mat-option *ngFor="let unit of listUnit" [value]="unit">
-                                                {{unit.name}}
+                                        <mat-select formControlName="unitMoney" [(ngModel)]="unitDefault" required #unitMoneyRef>
+                                            <mat-option *ngFor="let item of listUnit" [value]="item.unit">
+                                                {{item.name}}
                                             </mat-option>
                                         </mat-select>
-                                        <mat-error *ngIf="rfField.controls['unitMoney'].errors?.required">Please choose an unit of money</mat-error>
-                                        <mat-hint>{{rfField.get('unitMoney').value?.unit}}</mat-hint>
+                                        <mat-error *ngIf="rfMoney.controls['unitMoney'].errors?.required">Please choose an unit of money</mat-error>
+                                        <mat-hint>{{rfMoney.get('unitMoney').value?.unit}}</mat-hint>
                                     </mat-form-field>
                                 </div>
                                 <!--Begin::Required-->
                                 <div class="form-group kt-form__group " [ngClass]="{
-                                    'form-group-flex': rfField.get(
+                                    'form-group-flex': rfMoney.get(
                                       'required'
                                     ).value
                                   }">
                                     <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
-                                    <ng-container *ngIf="rfField.get('required').value">
+                                    <ng-container *ngIf="rfMoney.get('required').value">
                                         <mat-form-field class="example-full-width kt-margin-l-20">
                                             <input matInput placeholder="Enter error message" #errorMessageRef formControlName="errorMessage" />
                                             <mat-hint align="start">If field required, Please enter error message</mat-hint>
@@ -110,21 +109,21 @@
                             <div class="kt-form__section kt-form__section--first">
                                 <div class="form-group kt-form__group">
                                     <mat-form-field>
-                                        <span matPrefix>{{rfField.get('unitMoney').value?.unit}} &nbsp;</span>
+                                        <span matPrefix>{{rfMoney.get('unitMoney').value}} &nbsp;</span>
                                         <input type="text" [(ngModel)]="previewInput" [ngModelOptions]="{
                                         standalone: true
-                                        }" ktNumbericDerective numericType="number" ktInputToggleComma matInput placeholder="{{nameRef.value}}" maxlength="32"/>
-                                        <mat-icon matSuffix *ngIf="descriptionRef.value" matTooltip="{{
-                                        descriptionRef.value
+                                        }" ktNumbericDerective numericType="number" ktInputToggleComma matInput placeholder="{{rfMoney.get('name').value}}" maxlength="32" />
+                                        <mat-icon matSuffix *ngIf="rfMoney.get('description').value" matTooltip="{{
+                                            rfMoney.get('description').value
                                         }}">local_atm</mat-icon>
-                                        <mat-hint align="start" *ngIf="requiredRef.checked">{{ errorMessageRef?.value }}
+                                        <mat-hint align="start" *ngIf="rfMoney.get('required').value">{{rfMoney.get('errorMessage').value}}
                                         </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="kt-portlet__foot kt-portlet__foot--border-top-0">
                                 <div class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0">
-                                    <button mat-raised-button color="primary" type="submit" [disabled]="!rfField.valid">
+                                    <button mat-raised-button color="primary" type="submit" [disabled]="!rfMoney.valid">
                                         Submit</button>&nbsp;
                                     <button mat-raised-button type="button">
                                         Cancel
