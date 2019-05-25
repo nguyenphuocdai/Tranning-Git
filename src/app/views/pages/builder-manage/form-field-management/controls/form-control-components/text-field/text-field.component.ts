@@ -1,3 +1,4 @@
+import { TypesUtilsService } from "./../../../../../../../core/_base/crud/utils/types-utils.service";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
 import {
 	Component,
@@ -27,6 +28,7 @@ import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component"
 })
 export class TextFieldComponent implements OnInit {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
+	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("textComponentSubmit") submitForm = new EventEmitter<object>();
 
 	toppings = new FormControl();
@@ -44,11 +46,39 @@ export class TextFieldComponent implements OnInit {
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
 		private fbField: FormBuilder,
-		private _snackBarService: KtSnackBarService
+		private _snackBarService: KtSnackBarService,
+		private _typesUtilsService: TypesUtilsService
 	) {}
 
 	ngOnInit() {
 		this.createForm();
+
+		if (this.valueEdit) {
+			console.log(this.valueEdit);
+			this.rfField.controls["name"].setValue(this.valueEdit.name);
+			this.rfField.controls["required"].setValue(this.valueEdit.required);
+			this.rfField.controls["security"].setValue(this.valueEdit.security);
+			this.rfField.controls["tracking"].setValue(this.valueEdit.tracking);
+			this.rfField.controls["displayFormat"].setValue(
+				this.valueEdit.displayFormat
+			);
+			this.rfField.controls["fieldType"].setValue(
+				this.valueEdit.fieldType
+			);
+			this.rfField.controls["description"].setValue(
+				this.valueEdit.description
+			);
+			this.rfField.controls["pattern"].setValue(this.valueEdit.pattern);
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfField.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
+		}
 	}
 
 	/**
@@ -72,7 +102,7 @@ export class TextFieldComponent implements OnInit {
 			description: [""],
 			fieldType: ["", Validators.required],
 			displayFormat: ["", Validators.required],
-			parttern: ["", Validators.required]
+			pattern: ["", Validators.required]
 		});
 	}
 
@@ -82,7 +112,6 @@ export class TextFieldComponent implements OnInit {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this.dialogRef.disableClose = true;
-		console.log(this.rfField.value);
 		if (this.rfField.invalid) {
 			this.isSubmit = false;
 			return;
@@ -96,8 +125,6 @@ export class TextFieldComponent implements OnInit {
 			);
 			this.isSubmit = false;
 			this.submitForm.emit(mergedObj);
-			// this.dialogRef.close(mergedObj);
-			console.log(mergedObj);
 		}, 3000);
 	}
 
@@ -110,7 +137,7 @@ export class TextFieldComponent implements OnInit {
 		let inputType = this.dialogRefData.valueView;
 		let isRequired = this.rfField.controls["required"].value;
 		let errorMessage = this.rfField.controls["errorMessage"].value;
-		let isPattern = this.rfField.controls["parttern"].value;
+		let pattern = this.rfField.controls["pattern"].value;
 		let messagePattern = "Accept only text";
 		let isSecurity = this.rfField.controls["security"].value;
 		let isTracking = this.rfField.controls["tracking"].value;
@@ -119,15 +146,18 @@ export class TextFieldComponent implements OnInit {
 		let description = this.rfField.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
+			id:  this.valueEdit.id || this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
 			name: label,
+			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			description: description,
 			displayFormat: displayFormat,
 			fieldType: fieldType,
+			pattern: pattern,
 			validations: []
 		};
 		if (isRequired === true) {
@@ -138,10 +168,10 @@ export class TextFieldComponent implements OnInit {
 			};
 			mergedObj.validations.push(objValidator);
 		}
-		if (isPattern) {
+		if (pattern) {
 			let objValidator = {
 				name: "pattern",
-				validator: Validators.pattern(isPattern),
+				validator: Validators.pattern(pattern),
 				message: messagePattern
 			};
 			mergedObj.validations.push(objValidator);
