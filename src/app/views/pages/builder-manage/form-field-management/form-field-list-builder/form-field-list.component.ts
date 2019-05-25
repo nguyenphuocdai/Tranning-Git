@@ -1,3 +1,6 @@
+import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
+import { ActivatedRoute } from "@angular/router";
+import { LocalstorageService } from "./../../../../../shared/_services/local-storage-service/localstorage.service";
 import { data } from "./../../../../../shared/_mock-updata/mk-drag-data";
 import { LayoutUtilsService } from "./../../../../../core/_base/crud";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
@@ -31,21 +34,26 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	items: FieldConfigInterface[] = [];
 	todo = [];
 	isDragging: boolean = false;
-
+	moduleOpenning: string = "";
 	// mockup-data
 	stableData = data;
+
 	/**
 	 * Constructor DI
+	 * @param _activatedRoute
 	 * @param _location
-	 * @param activatedRoute
-	 * @param dialog
-	 * @param ref
+	 * @param _dialog
+	 * @param _ref
+	 * @param _layoutUtilsService
+	 * @param _localstorageService
 	 */
 	constructor(
+		private _activatedRoute: ActivatedRoute,
 		private _location: Location,
-		private dialog: MatDialog,
-		private ref: ChangeDetectorRef,
-		private _layoutUtilsService: LayoutUtilsService
+		private _dialog: MatDialog,
+		private _ref: ChangeDetectorRef,
+		private _layoutUtilsService: LayoutUtilsService,
+		private _localstorageService: LocalstorageService
 	) {}
 
 	/**
@@ -53,18 +61,30 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	 */
 	ngOnInit() {
 		this.resetList();
-		this.items = this.getDataLocalStorage();
-	}
+		// this.items = this._localstorageService.get(AppSettings.FIELDSTORAGE);
 
-	getDataLocalStorage() {
-		let items = [];
-		let localData = JSON.parse(
-			localStorage.getItem(AppSettings.FIELDSTORAGE)
-		);
-		if (localData) {
-			items = localData;
-		}
-		return items;
+		this._activatedRoute.params.subscribe(params => {
+			const id = params["id"];
+			if (id && id.length > 0) {
+				this.moduleOpenning = id;
+
+				let listModule: ModuleModel[] = this._localstorageService.get(
+					AppSettings.moduleStorage
+				);
+				listModule.forEach((element, index) => {
+					if (element.name === id) {
+						if (
+							element.optionsField === undefined ||
+							element.optionsField.length === 0
+						) {
+							this.items = [];
+							return false;
+						}
+						this.items = listModule[index].optionsField;
+					}
+				});
+			}
+		});
 	}
 
 	ngAfterViewInit() {
@@ -86,7 +106,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 		if (event.previousContainer === event.container) {
 			return false;
 		} else {
-			this.dialog
+			this._dialog
 				.open(ModalDialogComponent, {
 					data: this.stableData[event.previousIndex],
 					width: "70%",
@@ -103,7 +123,9 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 							event.currentIndex
 						);
 
-						this.items = this.getDataLocalStorage();
+						this.items = this._localstorageService.get(
+							AppSettings.FIELDSTORAGE
+						);
 
 						this.items.push(response);
 						this.regConfig = this.items;
@@ -126,7 +148,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 							AppSettings.FIELDSTORAGE,
 							JSON.stringify(this.items)
 						);
-						this.ref.markForCheck();
+						this._ref.markForCheck();
 						this.resetList();
 						this.dynamicFormControl.ngOnInit();
 						console.log(this.regConfig);
@@ -156,7 +178,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	 * submit form
 	 * @param value
 	 */
-	submit(value: any) {}
+	dynamicFormSubmit(value: any) {}
 
 	dragStarted(event: CdkDragStart) {
 		this.isDragging = true;
@@ -171,15 +193,45 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 			.deleteElement(
 				"Alert Reset Form",
 				"Are you want to reset this form?",
-				"Processing reset ..."
+				"Processing reset ...",
+				"Reset All"
 			)
 			.afterClosed()
 			.subscribe(bool => {
 				if (bool) {
 					this.items = [];
 					localStorage.removeItem(AppSettings.FIELDSTORAGE);
-					this.ref.markForCheck();
+					this._ref.markForCheck();
 					this.dynamicFormControl.ngOnInit();
+				}
+			});
+	}
+
+	onSubmit() {
+		let listModule: ModuleModel[] = this._localstorageService.get(
+			AppSettings.moduleStorage
+		);
+
+		this._layoutUtilsService
+			.deleteElement(
+				"Alert Submit Form",
+				"Are you want to submit this form?",
+				"Processing submit ...",
+				"Yes"
+			)
+			.afterClosed()
+			.subscribe(bool => {
+				if (bool) {
+					listModule.forEach((element, index) => {
+						if (element.name === this.moduleOpenning) {
+							listModule[index].optionsField = this.items;
+							console.log(listModule[index].optionsField);
+							this._localstorageService.set(
+								AppSettings.moduleStorage,
+								listModule
+							);
+						}
+					});
 				}
 			});
 	}

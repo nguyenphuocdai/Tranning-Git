@@ -12,8 +12,8 @@
 					<i class="la la-arrow-left"></i>
 					<span class="kt-hidden-mobile">Back</span>
 				</a>
-				<button mat-raised-button color="primary">Submit</button>&nbsp;
-				<button mat-raised-button type="button" (click)="onReset()">
+				<button mat-raised-button color="primary" [disabled]="items.length === 0" (click)="onSubmit()">Save</button>&nbsp;
+				<button mat-raised-button type="button" [disabled]="items.length === 0" (click)="onReset()">
 					Reset
 				</button>
 			</div>
@@ -104,7 +104,7 @@
 							>
 								<kt-dynamic-form
 									[fields]="items"
-									(submit)="submit($event)"
+									(submit)="dynamicFormSubmit($event)"
 								>
 								</kt-dynamic-form>
 							</div>
