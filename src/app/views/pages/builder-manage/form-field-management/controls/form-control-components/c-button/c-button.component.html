@@ -49,8 +49,8 @@
 										<mat-label>Field Type</mat-label>
 										<mat-select
 											required
-                                            formControlName="fieldType"
-                                            [(ngModel)]="optionDefault"
+											formControlName="fieldType"
+											[(ngModel)]="optionDefault"
 										>
 											<mat-option value="button"
 												>Button Submit</mat-option
@@ -141,20 +141,12 @@
 								class="kt-form__section kt-form__section--first"
 							>
 								<div class="form-group kt-form__group">
-									<!-- <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="{{ nameRef.value }}" required />
-                                      <mat-icon *ngIf="descriptionRef.value" color="primary" matSuffix matTooltip="{{
-                      descriptionRef.value
-                    }}">help</mat-icon>
-                                      <mat-hint align="start" *ngIf="requiredRef.checked">{{ errorMessageRef?.value }}
-                                      </mat-hint>
-                                  </mat-form-field> -->
 									<button
 										mat-raised-button
 										color="primary"
 										type="button"
 									>
-										Submit
+										{{ nameRef.value }}
 									</button>
 								</div>
 							</div>
