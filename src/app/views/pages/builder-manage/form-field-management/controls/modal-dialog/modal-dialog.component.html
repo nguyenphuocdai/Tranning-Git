@@ -3,6 +3,7 @@
 	<ng-container *ngSwitchCase="'input'">
 		<kt-text-field
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(textComponentSubmit)="onSubmit($event)"
 		></kt-text-field>
 	</ng-container>
@@ -50,6 +51,7 @@
 	<ng-container *ngSwitchCase="'button'">
 		<kt-c-button
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(cButtonComponentSubmit)="onSubmit($event)"
 		></kt-c-button>
 	</ng-container>
