@@ -165,7 +165,7 @@ export class SelectOptionComponent implements OnInit {
 
 	handleAddOption() {
 		let option = {
-			id: this.addListOption.length + 1,
+			id: this.addListOption.length,
 			label: "",
 			value: ""
 		};
