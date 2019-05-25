@@ -13,7 +13,6 @@ export class ModalDialogComponent implements OnInit {
 		@Inject(MAT_DIALOG_DATA) public data: DialogRefInterface,
 		private dialogRef: MatDialogRef<ModalDialogComponent>
 	) {
-		console.log(this.data);
 		this.dialogRefData = data;
 	}
 
@@ -23,7 +22,6 @@ export class ModalDialogComponent implements OnInit {
 	 * @param event
 	 */
 	onSubmit(event) {
-		console.log(event);
 		this.dialogRef.close(event);
 	}
 }

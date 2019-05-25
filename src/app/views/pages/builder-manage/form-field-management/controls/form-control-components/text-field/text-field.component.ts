@@ -116,6 +116,7 @@ export class TextFieldComponent implements OnInit {
 		let isTracking = this.rfField.controls["tracking"].value;
 		let displayFormat = this.rfField.controls["displayFormat"].value;
 		let fieldType = this.rfField.controls["fieldType"].value;
+		let description = this.rfField.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
 			type: type,
@@ -124,6 +125,7 @@ export class TextFieldComponent implements OnInit {
 			name: label,
 			security: isSecurity,
 			tracking: isTracking,
+			description: description,
 			displayFormat: displayFormat,
 			fieldType: fieldType,
 			validations: []
