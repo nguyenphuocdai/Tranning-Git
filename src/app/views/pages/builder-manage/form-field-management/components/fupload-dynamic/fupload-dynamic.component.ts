@@ -7,7 +7,7 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 		<div class="form-group kt-form__group" [formGroup]="group">
 			<app-material-file-upload
 				(complete)="onFileComplete($event)"
-				[RequireMessage]="require.message"
+				[RequireMessage]="require?.message"
 				[multiple]="field.fieldType"
 				[Text]="field.textFupload"
 				[controlName]="formControl"
@@ -28,7 +28,7 @@ export class FuploadDynamicComponent implements OnInit {
 		this.require = this.field.validations[0];
 		this.formControl = new FormControl(this.field.name);
 	}
-	onFileComplete(data){
+	onFileComplete(data) {
 		console.log(data);
 		this.group.controls[this.field.name].setValue(data);
 	}
