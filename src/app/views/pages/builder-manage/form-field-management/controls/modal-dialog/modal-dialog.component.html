@@ -12,6 +12,7 @@
 	<ng-container *ngSwitchCase="'select'">
 		<kt-select-option
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(selectComponentSubmit)="onSubmit($event)"
 		></kt-select-option>
 	</ng-container>
@@ -20,6 +21,7 @@
 	<ng-container *ngSwitchCase="'number'">
 		<kt-number-field
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(numberComponentSubmit)="onSubmit($event)"
 		></kt-number-field>
 	</ng-container>
@@ -28,6 +30,7 @@
 	<ng-container *ngSwitchCase="'lookup'">
 		<kt-look-up
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(lookupComponentSubmit)="onSubmit($event)"
 		></kt-look-up>
 	</ng-container>
@@ -35,6 +38,7 @@
 	<ng-container *ngSwitchCase="'fupload'">
 		<kt-fupload-image
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(fuploadComponentSubmit)="onSubmit($event)"
 		></kt-fupload-image>
 	</ng-container>
@@ -43,6 +47,7 @@
 	<ng-container *ngSwitchCase="'money'">
 		<kt-money
 			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
 			(moneyComponentSubmit)="onSubmit($event)"
 		></kt-money>
 	</ng-container>
