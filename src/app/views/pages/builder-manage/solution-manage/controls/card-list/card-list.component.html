@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-xl-3" *ngFor="let item of items">
 		<kt-portlet [class]="'kt-portlet--height-fluid'">
-			<kt-portlet-header [title]="'Download Files'">
-				<ng-container ktPortletTools>
+			<kt-portlet-header [title]="item.name">
+				<!-- <ng-container ktPortletTools>
 					<kt-context-menu2></kt-context-menu2>
-				</ng-container>
+				</ng-container> -->
 			</kt-portlet-header>
 			<kt-portlet-body>
 
@@ -17,7 +17,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div class="row">
-							<div class="col-md-12">
+							<!-- <div class="col-md-12">
 								<div class="kt-demo-icon">
 									<div class="kt-demo-icon__preview">
 										<i class="flaticon2-next"></i>
@@ -28,7 +28,7 @@
 										>{{ item.databaseName }}
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="col-md-12">
 								<div class="kt-demo-icon">
 									<div class="kt-demo-icon__preview">
