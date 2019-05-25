@@ -1,101 +1,116 @@
 <div class="row">
-	<div class="col-md-3 col-sm-6 col-xs-12 kt-padding-b-20" *ngFor="let item of items">
-		<mat-card class="kt-card">
-			<mat-card-header>
-				<!-- <div mat-card-avatar class="example-header-image"></div> -->
-				<mat-card-title>{{ item.name }}</mat-card-title>
-				<mat-card-subtitle>{{ item.pluralName }}</mat-card-subtitle>
-			</mat-card-header>
-			<mat-card-content>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="kt-demo-icon">
-							<div class="kt-demo-icon__preview">
-								<i class="flaticon2-next"></i>
+	<div class="col-xl-3 kt-padding-b-20" *ngFor="let item of items">
+		<kt-portlet class="kt-portlet--height-fluid">
+			<kt-portlet-header [title]="item.name">
+				<ng-container ktPortletTools>
+					<kt-context-menu2></kt-context-menu2>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<mat-card class="kt-card">
+					<mat-card-header>
+						<!-- <div mat-card-avatar class="example-header-image"></div> -->
+						<!-- <mat-card-title>{{ item.name }}</mat-card-title> -->
+						<mat-card-subtitle>
+							{{ item.pluralName }}
+						</mat-card-subtitle>
+					</mat-card-header>
+					<mat-card-content>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Plural name: &nbsp;</span
+										>
+										{{ item.pluralName }}
+									</div>
+								</div>
 							</div>
-							<div class="kt-demo-icon__class">
-								<span class="kt-demo-icon__class--color"
-									>Plural name: &nbsp;</span
-								>
-								{{ item.pluralName }}
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Access type: &nbsp;</span
+										>
+										{{ item.accessType }}
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Solution: &nbsp;</span
+										>{{ solution.name }}
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Database: &nbsp;</span
+										>{{ solution.databaseName }}
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="kt-demo-icon">
-							<div class="kt-demo-icon__preview">
-								<i class="flaticon2-next"></i>
-							</div>
-							<div class="kt-demo-icon__class">
-								<span class="kt-demo-icon__class--color"
-									>Access type: &nbsp;</span
-								>
-								{{ item.accessType }}
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="kt-demo-icon">
-							<div class="kt-demo-icon__preview">
-								<i class="flaticon2-next"></i>
-							</div>
-							<div class="kt-demo-icon__class">
-								<span class="kt-demo-icon__class--color"
-									>Solution: &nbsp;</span
-								>{{ solution.name }}
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="kt-demo-icon">
-							<div class="kt-demo-icon__preview">
-								<i class="flaticon2-next"></i>
-							</div>
-							<div class="kt-demo-icon__class">
-								<span class="kt-demo-icon__class--color"
-									>Database: &nbsp;</span
-								>{{ solution.databaseName }}
-							</div>
-						</div>
-					</div>
-				</div>
-			</mat-card-content>
-			<mat-card-actions>
-				<ul class="kt-sticky-toolbar kt-absolute-toolbar">
-					<li
-						class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
-						id="kt_demo_panel_toggle"
-						data-placement="left"
-						ngbTooltip="Check out more demos"
-						(click)="handleNavigate(item)"
-					>
-						<a href="javascript:;" class=""
-							><i class="flaticon2-edit"></i
-						></a>
-					</li>
-					<li
-						class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
-						data-placement="left"
-						ngbTooltip="Layout Builder"
-						(click)="onRemove(item)"
-					>
-						<a href="javascript:;"
-							><i class="flaticon2-trash"></i
-						></a>
-					</li>
-				</ul>
-			</mat-card-actions>
-		</mat-card>
+					</mat-card-content>
+					<mat-card-actions>
+						<ul class="kt-sticky-toolbar kt-absolute-toolbar">
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
+								id="kt_demo_panel_toggle"
+								data-placement="left"
+								ngbTooltip="Check out more demos"
+								(click)="handleNavigate(item)"
+							>
+								<a href="javascript:;" class=""
+									><i class="flaticon2-edit"></i
+								></a>
+							</li>
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
+								data-placement="left"
+								ngbTooltip="Layout Builder"
+								(click)="onRemove(item)"
+							>
+								<a href="javascript:;"
+									><i class="flaticon2-trash"></i
+								></a>
+							</li>
+						</ul>
+					</mat-card-actions>
+				</mat-card>
+			</kt-portlet-body>
+		</kt-portlet>
 	</div>
 	<div class="col-md-3 col-sm-6 col-xs-12 kt-padding-b-20">
-		<mat-card
-			(click)="handleOpenModal()"
-			class="kt-card kt-card--height-100 kt-card--border kt-cursor-pointer"
-		>
-			<div class="kt-icon-center">
-				<p>New Module</p>
-				<i class="flaticon2-plus"></i>
-			</div>
-		</mat-card>
+		<kt-portlet class="kt-portlet--height-fluid">
+			<kt-portlet-body>
+				<mat-card
+					(click)="handleOpenModal()"
+					class="kt-card kt-card--height-100 kt-card--border kt-cursor-pointer"
+				>
+					<div class="kt-icon-center">
+						<p>New Module</p>
+						<i class="flaticon2-plus"></i>
+					</div>
+				</mat-card>
+			</kt-portlet-body>
+		</kt-portlet>
 	</div>
 </div>

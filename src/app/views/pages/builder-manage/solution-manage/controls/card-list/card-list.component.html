@@ -1,101 +1,77 @@
 <div class="row">
-	<div
-		class="col-md-3 col-sm-6 col-xs-12 kt-padding-b-20"
-		*ngFor="let item of items"
-	>
-		<mat-card class="kt-card">
-			<mat-card-header>
-				<!-- <div mat-card-avatar class="kt-header-image"></div> -->
-				<mat-card-title>{{ item.name }}</mat-card-title>
-				<mat-card-subtitle
-					>Version: {{ item.version }}</mat-card-subtitle
-				>
-			</mat-card-header>
-			<!-- <img
-				mat-card-image
-				src="{{ item.image }}"
-				alt="Photo of a Shiba Inu"
-			/> -->
-			<mat-card-content>
-				<!-- <p class="text-justify">Database : {{ item.databaseName }}</p> -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="kt-demo-icon">
-							<div class="kt-demo-icon__preview">
-								<i class="flaticon2-next"></i>
+	<div class="col-xl-3" *ngFor="let item of items">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Download Files'">
+				<ng-container ktPortletTools>
+					<kt-context-menu2></kt-context-menu2>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+
+				<mat-card class="kt-card">
+					<mat-card-header>
+						<mat-card-title>{{ item.name }}</mat-card-title>
+						<mat-card-subtitle
+							>Version: {{ item.version }}</mat-card-subtitle
+						>
+					</mat-card-header>
+					<mat-card-content>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Database: &nbsp;</span
+										>{{ item.databaseName }}
+									</div>
+								</div>
 							</div>
-							<div class="kt-demo-icon__class">
-								<span class="kt-demo-icon__class--color"
-									>Database: &nbsp;</span
-								>{{ item.databaseName }}
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Owner: &nbsp;</span
+										>
+										{{ item.owner }}
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="kt-demo-icon">
-							<div class="kt-demo-icon__preview">
-								<i class="flaticon2-next"></i>
-							</div>
-							<div class="kt-demo-icon__class">
-								<span class="kt-demo-icon__class--color"
-									>Owner: &nbsp;</span
-								>
-								{{ item.owner }}
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- <mat-list role="list">
-					<mat-list-item role="listitem">
-						<span class="font-weight-bold">Owner </span>:
-						{{ item.owner }}</mat-list-item
-					>
-					<mat-list-item role="listitem"
-						><span class="font-weight-bold">Database </span>:
-						{{ item.databaseName }}</mat-list-item
-					>
-				</mat-list> -->
-			</mat-card-content>
-			<mat-card-actions align="end">
-				<ul class="kt-sticky-toolbar kt-absolute-toolbar">
-					<li
-						class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
-						id="kt_demo_panel_toggle"
-						data-placement="left"
-						ngbTooltip="Check out more demos"
-						(click)="handleNavigate(item)"
-					>
-						<a href="javascript:;" class=""
-							><i class="flaticon2-edit"></i
-						></a>
-					</li>
-					<li
-						class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
-						data-placement="left"
-						ngbTooltip="Layout Builder"
-						(click)="onRemove(item)"
-					>
-						<a href="javascript:;"
-							><i class="flaticon2-trash"></i
-						></a>
-					</li>
-				</ul>
-				<!-- <button
-					mat-button
-					class="mat-raised-button mat-accent"
-					(click)="handleNavigate(item)"
-				>
-					DETAIL
-				</button>
-				<button
-					mat-button
-					class="mat-button mat-warn"
-					(click)="onRemove(item)"
-				>
-					REMOVE
-				</button> -->
-			</mat-card-actions>
-		</mat-card>
+					</mat-card-content>
+					<mat-card-actions align="end">
+						<ul class="kt-sticky-toolbar kt-absolute-toolbar">
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
+								id="kt_demo_panel_toggle"
+								data-placement="left"
+								ngbTooltip="Check out more demos"
+								(click)="handleNavigate(item)"
+							>
+								<a href="javascript:;" class=""
+									><i class="flaticon2-edit"></i
+								></a>
+							</li>
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
+								data-placement="left"
+								ngbTooltip="Layout Builder"
+								(click)="onRemove(item)"
+							>
+								<a href="javascript:;"
+									><i class="flaticon2-trash"></i
+								></a>
+							</li>
+						</ul>
+					</mat-card-actions>
+				</mat-card>
+			</kt-portlet-body>
+		</kt-portlet>
 	</div>
 	<div
 		class="col-md-3 col-sm-6 col-xs-12 kt-padding-b-20"
