@@ -11,6 +11,13 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 				[placeholder]="field.name"
 				[type]="field.inputType"
 			/>
+			<mat-icon
+					*ngIf="field.description"
+					color="primary"
+					matSuffix
+					matTooltip="{{ field.description }}"
+					>help</mat-icon
+				>
 			<ng-container
 				*ngFor="let validation of field.validations"
 				ngProjectAs="mat-error"
