@@ -30,9 +30,10 @@ import { ModalDialogComponent } from "../../modal-dialog/modal-dialog.component"
 })
 export class LookUpComponent implements OnInit, AfterViewChecked {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
+	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("lookupComponentSubmit") submitForm = new EventEmitter<object>();
 	optionDefault: string = "lookup";
-	rfField: FormGroup;
+	rfLookup: FormGroup;
 	isSubmit: boolean = false;
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
@@ -44,12 +45,41 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 
 	ngOnInit() {
 		this.createForm();
+
+		if (this.valueEdit) {
+			this.rfLookup.controls["name"].setValue(this.valueEdit.name);
+			this.rfLookup.controls["required"].setValue(
+				this.valueEdit.required
+			);
+			this.rfLookup.controls["security"].setValue(
+				this.valueEdit.security
+			);
+			this.rfLookup.controls["tracking"].setValue(
+				this.valueEdit.tracking
+			);
+			this.rfLookup.controls["fieldType"].setValue(
+				this.valueEdit.fieldType
+			);
+			this.rfLookup.controls["modules"].setValue(this.valueEdit.modules);
+			this.dialogRefData.type = this.valueEdit.type;
+			this.dialogRefData.valueView = this.valueEdit.inputType;
+
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfLookup.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
+		}
 	}
 	/**
 	 * create form builder
 	 */
 	createForm() {
-		this.rfField = this.fbField.group({
+		this.rfLookup = this.fbField.group({
 			name: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
@@ -74,8 +104,8 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this.dialogRef.disableClose = true;
-		console.log(this.rfField.value);
-		if (this.rfField.invalid) {
+		console.log(this.rfLookup.value);
+		if (this.rfLookup.invalid) {
 			this.isSubmit = false;
 			return;
 		}
@@ -97,22 +127,26 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let label = this.rfField.controls["name"].value;
+		let label = this.rfLookup.controls["name"].value;
 		let type = this.dialogRefData.type;
 		let inputType = this.dialogRefData.valueView;
-		let isRequired = this.rfField.controls["required"].value;
-		let errorMessage = this.rfField.controls["errorMessage"].value;
-		let isSecurity = this.rfField.controls["security"].value;
-		let isTracking = this.rfField.controls["tracking"].value;
-		let fieldType = this.rfField.controls["fieldType"].value;
-		let modules = this.rfField.controls["modules"].value;
+		let isRequired = this.rfLookup.controls["required"].value;
+		let errorMessage = this.rfLookup.controls["errorMessage"].value;
+		let isSecurity = this.rfLookup.controls["security"].value;
+		let isTracking = this.rfLookup.controls["tracking"].value;
+		let fieldType = this.rfLookup.controls["fieldType"].value;
+		let modules = this.rfLookup.controls["modules"].value;
 
 		let mergedObj: FieldConfigInterface = {
-			id: this._typesUtilsService.makeid(),
+			id:
+				this.valueEdit !== undefined
+					? this.valueEdit.id
+					: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
 			name: label,
+			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			fieldType: fieldType,

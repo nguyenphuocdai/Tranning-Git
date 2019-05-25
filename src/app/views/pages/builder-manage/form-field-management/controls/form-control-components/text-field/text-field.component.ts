@@ -129,7 +129,7 @@ export class TextFieldComponent implements OnInit {
 	}
 
 	/**
-	 * build data fro @Output
+	 * build data from @Output
 	 */
 	onBuildData() {
 		let label = this.rfField.controls["name"].value;
@@ -146,7 +146,10 @@ export class TextFieldComponent implements OnInit {
 		let description = this.rfField.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
-			id:  this.valueEdit.id || this._typesUtilsService.makeid(),
+			id:
+				this.valueEdit !== undefined
+					? this.valueEdit.id
+					: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,

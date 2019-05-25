@@ -30,14 +30,15 @@ import {
 })
 export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
+	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("fuploadComponentSubmit") submitForm = new EventEmitter<object>();
 
-	rfField: FormGroup;
+	rfFupload: FormGroup;
 	fuploadText: string;
 	isSubmit: boolean = false;
 	constructor(
 		private _dialogRef: MatDialogRef<ModalDialogComponent>,
-		private _fbField: FormBuilder,
+		private _fbFupload: FormBuilder,
 		private _snackBarService: KtSnackBarService,
 		private _cdr: ChangeDetectorRef,
 		private _typesUtilsService: TypesUtilsService
@@ -48,13 +49,42 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	}
 	ngOnInit() {
 		this.createForm();
+
+		if (this.valueEdit) {
+			this.rfFupload.controls["name"].setValue(this.valueEdit.name);
+			this.rfFupload.controls["required"].setValue(
+				this.valueEdit.required
+			);
+			this.rfFupload.controls["security"].setValue(
+				this.valueEdit.security
+			);
+			this.rfFupload.controls["tracking"].setValue(
+				this.valueEdit.tracking
+			);
+			this.rfFupload.controls["fieldType"].setValue(
+				this.valueEdit.fieldType
+			);
+
+			this.dialogRefData.type = this.valueEdit.type;
+			this.dialogRefData.valueView = this.valueEdit.inputType;
+
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfFupload.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
+		}
 	}
 
 	/**
 	 * create form builder
 	 */
 	createForm() {
-		this.rfField = this._fbField.group({
+		this.rfFupload = this._fbFupload.group({
 			name: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
@@ -71,8 +101,8 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this._dialogRef.disableClose = true;
-		console.log(this.rfField.value);
-		if (this.rfField.invalid) {
+		console.log(this.rfFupload.value);
+		if (this.rfFupload.invalid) {
 			this.isSubmit = false;
 			return;
 		}
@@ -94,21 +124,25 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let label = this.rfField.controls["name"].value;
+		let label = this.rfFupload.controls["name"].value;
 		let type = this.dialogRefData.type;
 		let inputType = this.dialogRefData.valueView;
-		let isRequired = this.rfField.controls["required"].value;
-		let errorMessage = this.rfField.controls["errorMessage"].value;
-		let isSecurity = this.rfField.controls["security"].value;
-		let isTracking = this.rfField.controls["tracking"].value;
-		let fieldType = this.rfField.controls["fieldType"].value;
+		let isRequired = this.rfFupload.controls["required"].value;
+		let errorMessage = this.rfFupload.controls["errorMessage"].value;
+		let isSecurity = this.rfFupload.controls["security"].value;
+		let isTracking = this.rfFupload.controls["tracking"].value;
+		let fieldType = this.rfFupload.controls["fieldType"].value;
 
 		let mergedObj: FieldConfigInterface = {
-			id: this._typesUtilsService.makeid(),
+			id:
+				this.valueEdit !== undefined
+					? this.valueEdit.id
+					: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
 			name: label,
+			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			fieldType: fieldType,

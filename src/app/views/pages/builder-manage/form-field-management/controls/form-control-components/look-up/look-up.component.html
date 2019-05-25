@@ -1,5 +1,5 @@
 <div class="container-fluid ">
-    <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfField">
+    <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfLookup">
         <kt-loading-request *ngIf="isSubmit"></kt-loading-request>
         <div class="row">
             <div class="col-md-6">
@@ -44,17 +44,17 @@
 								<div class="form-group kt-form__group">
                                     <mat-form-field>
                                         <mat-label>Modules/Model</mat-label>
-                                        <mat-select required formControlName="modules" #fieldTypeRef>
+                                        <mat-select required formControlName="modules" #modulesRef>
                                             <mat-option value="Another model 01">Another model 01</mat-option>
                                             <mat-option value="Another model 02">Another model 02</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <!--Begin::Required-->
-                                <div class="form-group kt-form__group"  [ngClass]="{'form-group-flex': rfField.get('required').value}">
+                                <div class="form-group kt-form__group"  [ngClass]="{'form-group-flex': rfLookup.get('required').value}">
                                     <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
                                    
-									<ng-container *ngIf="rfField.get('required').value">
+									<ng-container *ngIf="rfLookup.get('required').value">
                                         <mat-form-field class="example-full-width kt-margin-l-20">
 											<input matInput placeholder="Enter error message" #errorMessageRef formControlName="errorMessage" />
 											<mat-hint align="start">If field required, Please enter error message</mat-hint>
@@ -112,11 +112,11 @@
 										</mat-form-field>
                                     <!-- modules/model lookup -->
 										<mat-form-field class="kt-padding-l-20">
-											<mat-label>{{fieldTypeRef.value}}</mat-label>
-											<mat-select [(ngModel)]="fieldTypeRef.value" [ngModelOptions]="{standalone: true}">
-												<mat-option value="{{fieldTypeRef.value}}">{{fieldTypeRef.value}}</mat-option>
+											<mat-label>{{rfLookup.get('modules').value}}</mat-label>
+											<mat-select [(ngModel)]="rfLookup.get('modules').value" [ngModelOptions]="{standalone: true}">
+												<mat-option value="{{rfLookup.get('modules').value}}">{{rfLookup.get('modules').value}}</mat-option>
 											</mat-select>
-											<mat-hint *ngIf="rfField.get('required').value">{{ rfField.get('errorMessage').value }}</mat-hint>
+											<mat-hint *ngIf="rfLookup.get('required').value">{{ rfLookup.get('errorMessage').value }}</mat-hint>
 										</mat-form-field>
 										<mat-icon *ngIf="descriptionRef.value" color="primary" matSuffix matTooltip="{{
 											descriptionRef.value
@@ -126,7 +126,7 @@
 							
                             <div class="kt-portlet__foot kt-portlet__foot--border-top-0">
                                 <div class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0">
-                                    <button mat-raised-button color="primary" type="submit" [disabled]="!rfField.valid">
+                                    <button mat-raised-button color="primary" type="submit" [disabled]="!rfLookup.valid">
                                         Submit</button>&nbsp;
                                     <button mat-raised-button type="button">
                                         Cancel

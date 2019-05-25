@@ -3,7 +3,7 @@
 		class="kt-form"
 		novalidate
 		(ngSubmit)="onSubmit($event)"
-		[formGroup]="rfField"
+		[formGroup]="rfFupload"
 	>
 		<kt-loading-request *ngIf="isSubmit"></kt-loading-request>
 		<div class="row">
@@ -67,7 +67,7 @@
 								<div
 									class="form-group kt-form__group "
 									[ngClass]="{
-										'form-group-flex': rfField.get(
+										'form-group-flex': rfFupload.get(
 											'required'
 										).value
 									}"
@@ -80,7 +80,7 @@
 										>Required</mat-checkbox
 									>
 									<ng-container
-										*ngIf="rfField.get('required').value"
+										*ngIf="rfFupload.get('required').value"
 									>
 										<mat-form-field
 											class="example-full-width kt-margin-l-20"
@@ -178,12 +178,12 @@
 								class="kt-form__section kt-form__section--first"
 							>
 								<div class="form-group kt-form__group">
-									<app-material-file-upload *ngIf="fieldTypeRef.value"
+									<app-material-file-upload *ngIf="rfFupload.get('fieldType').value"
 										(complete)="onFileComplete($event)"
 										[Text]="fuploadText"
-										[multiple]="fieldTypeRef.value"
+										[multiple]="rfFupload.get('fieldType').value"
 										[RequireMessage]="
-											rfField.get('errorMessage').value
+											rfFupload.get('errorMessage').value
 										"
 									></app-material-file-upload>
 								</div>
@@ -198,7 +198,7 @@
 										mat-raised-button
 										color="primary"
 										type="submit"
-										[disabled]="!rfField.valid"
+										[disabled]="!rfFupload.valid"
 									>
 										Submit</button
 									>&nbsp;
