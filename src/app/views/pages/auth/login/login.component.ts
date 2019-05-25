@@ -1,29 +1,35 @@
 // Angular
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	ChangeDetectorRef,
+	Component,
+	OnDestroy,
+	OnInit,
+	ViewEncapsulation
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 // RxJS
-import { Observable, Subject } from 'rxjs';
-import { finalize, takeUntil, tap } from 'rxjs/operators';
+import { Observable, Subject } from "rxjs";
+import { finalize, takeUntil, tap } from "rxjs/operators";
 // Translate
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from "@ngx-translate/core";
 // Store
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../../core/reducers';
+import { Store } from "@ngrx/store";
+import { AppState } from "../../../../core/reducers";
 // Auth
-import { AuthNoticeService, AuthService, Login } from '../../../../core/auth';
+import { AuthNoticeService, AuthService, Login } from "../../../../core/auth";
 
 /**
  * ! Just example => Should be removed in development
  */
 const DEMO_PARAMS = {
-	EMAIL: 'admin@demo.com',
-	PASSWORD: 'demo'
+	EMAIL: "projectxadmin",
+	PASSWORD: "theAteamVD"
 };
 
 @Component({
-	selector: 'kt-login',
-	templateUrl: './login.component.html',
+	selector: "kt-login",
+	templateUrl: "./login.component.html",
 	encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -85,26 +91,46 @@ export class LoginComponent implements OnInit, OnDestroy {
 	 */
 	initLoginForm() {
 		// demo message to show
-		if (!this.authNoticeService.onNoticeChanged$.getValue()) {
-			const initialNotice = `Use account
-			<strong>${DEMO_PARAMS.EMAIL}</strong> and password
-			<strong>${DEMO_PARAMS.PASSWORD}</strong> to continue.`;
-			this.authNoticeService.setNotice(initialNotice, 'info');
-		}
+		// if (!this.authNoticeService.onNoticeChanged$.getValue()) {
+		// 	const initialNotice = `Use account
+		// 	<strong>${DEMO_PARAMS.EMAIL}</strong> and password
+		// 	<strong>${DEMO_PARAMS.PASSWORD}</strong> to continue.`;
+		// 	this.authNoticeService.setNotice(initialNotice, 'info');
+		// }
+
+		// this.loginForm = this.fb.group({
+		// 	email: [DEMO_PARAMS.EMAIL, Validators.compose([
+		// 		Validators.required,
+		// 		Validators.email,
+		// 		Validators.minLength(3),
+		// 		Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+		// 	])
+		// 	],
+		// 	password: [DEMO_PARAMS.PASSWORD, Validators.compose([
+		// 		Validators.required,
+		// 		Validators.minLength(3),
+		// 		Validators.maxLength(100)
+		// 	])
+		// 	]
+		// });
 
 		this.loginForm = this.fb.group({
-			email: [DEMO_PARAMS.EMAIL, Validators.compose([
-				Validators.required,
-				Validators.email,
-				Validators.minLength(3),
-				Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
-			])
+			email: [
+				"",
+				Validators.compose([
+					Validators.required,
+					Validators.email,
+					Validators.minLength(3),
+					Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+				])
 			],
-			password: [DEMO_PARAMS.PASSWORD, Validators.compose([
-				Validators.required,
-				Validators.minLength(3),
-				Validators.maxLength(100)
-			])
+			password: [
+				"",
+				Validators.compose([
+					Validators.required,
+					Validators.minLength(3),
+					Validators.maxLength(100)
+				])
 			]
 		});
 	}
@@ -125,18 +151,25 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.loading = true;
 
 		const authData = {
-			email: controls['email'].value,
-			password: controls['password'].value
+			email: controls["email"].value,
+			password: controls["password"].value
 		};
 		this.auth
 			.login(authData.email, authData.password)
 			.pipe(
 				tap(user => {
 					if (user) {
-						this.store.dispatch(new Login({authToken: user.accessToken}));
-						this.router.navigateByUrl('/'); // Main page
+						this.store.dispatch(
+							new Login({ authToken: user.accessToken })
+						);
+						this.router.navigateByUrl("/"); // Main page
 					} else {
-						this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+						this.authNoticeService.setNotice(
+							this.translate.instant(
+								"AUTH.VALIDATION.INVALID_LOGIN"
+							),
+							"danger"
+						);
 					}
 				}),
 				takeUntil(this.unsubscribe),
@@ -160,7 +193,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 			return false;
 		}
 
-		const result = control.hasError(validationType) && (control.dirty || control.touched);
+		const result =
+			control.hasError(validationType) &&
+			(control.dirty || control.touched);
 		return result;
 	}
 }
