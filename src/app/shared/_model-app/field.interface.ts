@@ -10,6 +10,7 @@ export interface SelectOption {
 	value: string;
 }
 export interface FieldConfigInterface {
+	id: string;
 	label?: string;
 	name?: string;
 	inputType?: string;
@@ -29,5 +30,6 @@ export interface FieldConfigInterface {
 	maxValue?: string;
 	unitMoney?: string;
 	textFupload?: string;
+	pattern?: string;
 	validations?: ValidatorInterface[];
 }
