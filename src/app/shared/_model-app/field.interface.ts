@@ -14,6 +14,8 @@ export interface FieldConfigInterface {
 	label?: string;
 	name?: string;
 	inputType?: string;
+	isFloat?: string;
+	numberFloat?: string;
 	required?: boolean;
 	tracking?: boolean;
 	security?: boolean;

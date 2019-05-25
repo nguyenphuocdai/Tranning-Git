@@ -29,11 +29,12 @@ import {
 })
 export class NumberFieldComponent implements OnInit, AfterViewChecked {
 	@Input("dialogRefData") dialogRefData: DialogRefInterface;
+	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("numberComponentSubmit") submitForm = new EventEmitter<object>();
 	previewInput: any;
 	toppings = new FormControl();
 	rfNumber: FormGroup;
-	isShowMinMax: boolean;
+	// isShowMinMax: boolean;
 	isShowMinMaxValue: boolean;
 	toppingList = [
 		"Extra cheese",
@@ -55,6 +56,49 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 
 	ngOnInit() {
 		this.createForm();
+		if (this.valueEdit) {
+			this.rfNumber.controls["name"].setValue(this.valueEdit.name);
+			this.rfNumber.controls["required"].setValue(
+				this.valueEdit.required
+			);
+			this.rfNumber.controls["security"].setValue(
+				this.valueEdit.security
+			);
+			this.rfNumber.controls["tracking"].setValue(
+				this.valueEdit.tracking
+			);
+			this.rfNumber.controls["displayFormat"].setValue(
+				this.valueEdit.displayFormat
+			);
+			this.rfNumber.controls["fieldType"].setValue(
+				this.valueEdit.fieldType
+			);
+			this.rfNumber.controls["minValue"].setValue(
+				this.valueEdit.minValue
+			);
+			this.rfNumber.controls["isFloat"].setValue(this.valueEdit.isFloat);
+			this.rfNumber.controls["numberFloat"].setValue(
+				this.valueEdit.numberFloat
+			);
+			this.rfNumber.controls["maxValue"].setValue(
+				this.valueEdit.maxValue
+			);
+			this.rfNumber.controls["description"].setValue(
+				this.valueEdit.description
+			);
+			this.dialogRefData.type = this.valueEdit.type;
+			this.dialogRefData.valueView = this.valueEdit.inputType;
+
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfNumber.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
+		}
 	}
 
 	/**
@@ -78,7 +122,7 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			description: [""],
 			fieldType: ["", Validators.required],
 			displayFormat: ["", Validators.required],
-			parttern: ["", Validators.required],
+			// parttern: ["", Validators.required],
 			minValue: ["", Validators.required],
 			maxValue: ["", Validators.required],
 			isFloat: new FormControl(false),
@@ -124,8 +168,8 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		let inputType = this.dialogRefData.valueView;
 		let isRequired = this.rfNumber.controls["required"].value;
 		let errorMessage = this.rfNumber.controls["errorMessage"].value;
-		let isPattern = this.rfNumber.controls["parttern"].value;
-		let messagePattern = "Accept only text";
+		let isFloat = this.rfNumber.controls["isFloat"].value;
+		let numberFloat = this.rfNumber.controls["numberFloat"].value;
 		let isSecurity = this.rfNumber.controls["security"].value;
 		let isTracking = this.rfNumber.controls["tracking"].value;
 		let displayFormat = this.rfNumber.controls["displayFormat"].value;
@@ -135,11 +179,17 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		let description = this.rfNumber.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
-			id: this._typesUtilsService.makeid(),
+			id:
+				this.valueEdit !== undefined
+					? this.valueEdit.id
+					: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
 			name: label,
+			isFloat: isFloat,
+			numberFloat: numberFloat,
+			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			displayFormat: displayFormat,
@@ -157,14 +207,14 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			};
 			mergedObj.validations.push(objValidator);
 		}
-		if (isPattern) {
-			let objValidator = {
-				name: "pattern",
-				validator: Validators.pattern(isPattern),
-				message: messagePattern
-			};
-			mergedObj.validations.push(objValidator);
-		}
+		// if (isPattern) {
+		// 	let objValidator = {
+		// 		name: "pattern",
+		// 		validator: Validators.pattern(isPattern),
+		// 		message: messagePattern
+		// 	};
+		// 	mergedObj.validations.push(objValidator);
+		// }
 		return mergedObj;
 	}
 	changeMinValue(newValue) {
@@ -201,7 +251,6 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 
 	onCheckMinMax() {
 		this.isShowMinMaxValue = false;
-		let isRequired = this.rfNumber.controls["required"].value;
 		let minValue = this.rfNumber.controls["minValue"].value;
 		let maxValue = this.rfNumber.controls["maxValue"].value;
 		let previewInput = this.previewInput;
@@ -217,13 +266,8 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		maxValue = parseFloat(maxValue.replace(",", ""));
 		previewInput = parseFloat(previewInput.replace(",", ""));
 
-		if (isRequired === false) {
-			this.isShowMinMax = true;
-		}
-
-		if (previewInput < minValue && previewInput < maxValue) {
+		if (previewInput < minValue || previewInput > maxValue) {
 			this.isShowMinMaxValue = true;
-			this.isShowMinMax = false;
 		}
 	}
 }

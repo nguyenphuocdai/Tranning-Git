@@ -69,7 +69,7 @@ export class NumberComponent implements OnInit {
 		let fMinValue = parseFloat(min.replace(",", ""));
 		let fMaxValue = parseFloat(max.replace(",", ""));
 		let floatInput = parseFloat(previewInput.replace(",", ""));
-		if (floatInput > fMinValue && floatInput < fMaxValue) {
+		if (floatInput >= fMinValue && floatInput <= fMaxValue) {
 			this.isShowMinMaxError = false;
 		}
 	}
