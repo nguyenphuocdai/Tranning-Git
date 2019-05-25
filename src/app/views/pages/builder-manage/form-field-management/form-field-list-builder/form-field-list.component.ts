@@ -123,17 +123,14 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 							event.currentIndex
 						);
 
-						this.items = this._localstorageService.get(
-							AppSettings.FIELDSTORAGE
-						);
+						this.items = this.getAllItems();
 
 						this.items.push(response);
 						this.regConfig = this.items;
 
 						// local strorage
-						let arrLocal = JSON.parse(
-							localStorage.getItem(AppSettings.FIELDSTORAGE)
-						);
+						let arrLocal = this.getAllItems();
+
 						if (arrLocal !== null && this.items.length === 0) {
 							this.items = this.items.concat(arrLocal);
 						}
@@ -144,14 +141,11 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 							}
 						}
 
-						localStorage.setItem(
-							AppSettings.FIELDSTORAGE,
-							JSON.stringify(this.items)
-						);
+						this.afterSubmit(this.items);
+
 						this._ref.markForCheck();
 						this.resetList();
 						this.dynamicFormControl.ngOnInit();
-						console.log(this.regConfig);
 					}
 				});
 		}
@@ -200,7 +194,21 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 			.subscribe(bool => {
 				if (bool) {
 					this.items = [];
-					localStorage.removeItem(AppSettings.FIELDSTORAGE);
+
+					let listModule: ModuleModel[] = this._localstorageService.get(
+						AppSettings.moduleStorage
+					);
+
+					listModule.forEach((element, index) => {
+						if (element.name === this.moduleOpenning) {
+							element.optionsField = this.items;
+							this._localstorageService.set(
+								AppSettings.moduleStorage,
+								listModule
+							);
+						}
+					});
+					// localStorage.removeItem(AppSettings.FIELDSTORAGE);
 					this._ref.markForCheck();
 					this.dynamicFormControl.ngOnInit();
 				}
@@ -225,7 +233,6 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 					listModule.forEach((element, index) => {
 						if (element.name === this.moduleOpenning) {
 							listModule[index].optionsField = this.items;
-							console.log(listModule[index].optionsField);
 							this._localstorageService.set(
 								AppSettings.moduleStorage,
 								listModule
@@ -234,5 +241,44 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 					});
 				}
 			});
+	}
+
+	/**
+	 * Get all items from local storage
+	 */
+	getAllItems(): FieldConfigInterface[] {
+		let listModule: ModuleModel[] = this._localstorageService.get(
+			AppSettings.moduleStorage
+		);
+		let localData: FieldConfigInterface[] = [];
+
+		listModule.forEach((element, index) => {
+			if (element.name === this.moduleOpenning) {
+				if (
+					element.optionsField === undefined ||
+					element.optionsField.length === 0
+				) {
+					localData = [];
+					return false;
+				}
+				localData = listModule[index].optionsField;
+			}
+		});
+		return localData;
+	}
+
+	afterSubmit(arr: FieldConfigInterface[]) {
+		let listModule: ModuleModel[] = this._localstorageService.get(
+			AppSettings.moduleStorage
+		);
+		listModule.forEach((element, index) => {
+			if (element.name === this.moduleOpenning) {
+				listModule[index].optionsField = arr;
+				this._localstorageService.set(
+					AppSettings.moduleStorage,
+					listModule
+				);
+			}
+		});
 	}
 }

@@ -23,14 +23,6 @@ export class ModuleAddComponent implements OnInit {
 	solutionData: any;
 	rfModule: FormGroup;
 	listModule = [];
-	// lsitModule: Array<{
-	// 	id: number,
-	// 	name: string,
-	// 	pluralName: string,
-	// 	accessType: string,
-	// 	database: string,
-	// 	solution:string
-	// }>;
 	isSubmit: boolean = false;
 
 	accessTypes = [
@@ -46,7 +38,7 @@ export class ModuleAddComponent implements OnInit {
 		this.createForm();
 	}
 	createForm() {
-		//after check solutionId && databaseId has change, if change so return function;
+		// after check solutionId && databaseId has change, if change so return function;
 		this.rfModule = this.fbModule.group({
 			name: ["", Validators.required],
 			pluralName: ["", Validators.minLength(3)],
@@ -63,7 +55,6 @@ export class ModuleAddComponent implements OnInit {
 	}
 
 	onSubmit(event) {
-		console.log(this.rfModule);
 		this.isSubmit = true;
 		this._dialogRef.disableClose = true;
 
