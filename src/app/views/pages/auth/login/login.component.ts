@@ -23,7 +23,7 @@ import { AuthNoticeService, AuthService, Login } from "../../../../core/auth";
  * ! Just example => Should be removed in development
  */
 const DEMO_PARAMS = {
-	EMAIL: "projectxadmin",
+	EMAIL: "projectxadmin@risotech.vn",
 	PASSWORD: "theAteamVD"
 };
 
