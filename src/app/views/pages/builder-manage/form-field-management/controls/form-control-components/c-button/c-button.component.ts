@@ -107,7 +107,10 @@ export class CButtonComponent implements OnInit {
 		let fieldType = this.rfField.controls["fieldType"].value;
 
 		let mergedObj: FieldConfigInterface = {
-			id: this._typesUtilsService.makeid(),
+			id:
+				this.valueEdit !== undefined
+					? this.valueEdit.id
+					: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
