@@ -1,3 +1,77 @@
-<p>
-  my-page works!
-</p>
+<!-- <table id="mytable">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Population</th>
+      <th>Date</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chinna</td>
+      <td>1363480000</td>
+      <td>March 24 2014</td>
+      <td>19.1</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>1241900000</td>
+      <td>March 24 2014</td>
+      <td>17.4</td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td>317746000</td>
+      <td>March 24 2014</td>
+      <td>4.44</td>
+    </tr>
+    <tr>
+      <td>Indonesia</td>
+      <td>249866000</td>
+      <td>July 1 2013</td>
+      <td>3.49</td>
+    </tr>
+    <tr>
+      <td>Brazil</td>
+      <td>201032714</td>
+      <td>July 1 2013</td>
+      <td>2.81</td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="exportAs('pdf')">export as pdf</button>
+<button (click)="exportAs('png')">export as png</button>
+<button (click)="exportAs('csv')">export as csv</button>
+<button (click)="exportAs('txt')">export as txt</button>
+<button (click)="exportAs('xlsx')">export as Ms-Excel</button>
+<button (click)="exportAs('docx')">export as MS-Word</button>
+<button (click)="exportAs('json')">export as json</button>
+<button (click)="exportAs('xml')">export as xml</button> -->
+
+
+<div class="container" style="margin-top: 20px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">All persons data</div>
+    <table class="table" *ngIf="persons">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons">
+          <td>{{person.id}}</td>
+          <td>{{person.name}}</td>
+          <td>{{person.surname}}</td>
+          <td>{{person.age}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="exportToExcel()" class="btn btn-primary">Export to excel</button>
+</div>
