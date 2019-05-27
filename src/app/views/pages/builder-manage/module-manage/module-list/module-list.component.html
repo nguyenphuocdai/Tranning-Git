@@ -3,7 +3,9 @@
 		<kt-portlet class="kt-portlet--height-fluid">
 			<kt-portlet-header [title]="item.name">
 				<ng-container ktPortletTools>
-					<kt-context-menu-module [module]="item"></kt-context-menu-module>
+					<kt-context-menu-module
+						[module]="item"
+					></kt-context-menu-module>
 				</ng-container>
 			</kt-portlet-header>
 			<kt-portlet-body>
@@ -17,6 +19,19 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div class="row">
+							<div class="col-md-12">
+								<div class="kt-demo-icon">
+									<div class="kt-demo-icon__preview">
+										<i class="flaticon2-next"></i>
+									</div>
+									<div class="kt-demo-icon__class">
+										<span class="kt-demo-icon__class--color"
+											>Identity: &nbsp;</span
+										>
+										{{ item.id }}
+									</div>
+								</div>
+							</div>
 							<div class="col-md-12">
 								<div class="kt-demo-icon">
 									<div class="kt-demo-icon__preview">
@@ -63,7 +78,7 @@
 									<div class="kt-demo-icon__class">
 										<span class="kt-demo-icon__class--color"
 											>Database: &nbsp;</span
-										>{{ solution.databaseName }}
+										>{{ item.database }}
 									</div>
 								</div>
 							</div>
@@ -75,17 +90,30 @@
 								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
 								id="kt_demo_panel_toggle"
 								data-placement="left"
-								ngbTooltip="Check out more demos"
-								(click)="handleNavigate(item)"
+								matTooltip="Edit"
+								(click)="onEdit(item)"
 							>
 								<a href="javascript:;" class=""
 									><i class="flaticon2-edit"></i
 								></a>
 							</li>
+
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
+								id="kt_demo_panel_toggle"
+								data-placement="left"
+								(click)="handleNavigate(item)"
+								matTooltip="Detail"
+							>
+								<a href="javascript:;" class=""
+									><i class="flaticon-list-2"></i
+								></a>
+							</li>
+
 							<li
 								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
 								data-placement="left"
-								ngbTooltip="Layout Builder"
+								matTooltip="Delete"
 								(click)="onRemove(item)"
 							>
 								<a href="javascript:;"

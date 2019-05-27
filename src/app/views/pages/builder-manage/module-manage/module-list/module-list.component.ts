@@ -1,16 +1,20 @@
-import { AppSettings } from "./../../../../../shared/_constant/app-setting";
-import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material";
+import { LocalstorageService } from "./../../../../../shared/_services/local-storage-service/localstorage.service";
+import { AppSettings } from "./../../../../../shared/_constant/app-setting";
+import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
 import { LayoutConfigService } from "../../../../../core/_base/layout";
 import { ModuleAddComponent } from "../module-add/module-add.component";
 import { Observable, Subscription } from "rxjs";
+import { ModuleEditDialogComponent } from "../module-edit/module-edit-dialog.component";
+
 @Component({
 	selector: "kt-module-list",
 	templateUrl: "./module-list.component.html",
 	styleUrls: ["./module-list.component.scss"]
 })
+
 export class ModuleListComponent implements OnInit {
 	constructor(
 		private layoutConfigService: LayoutConfigService,
@@ -18,7 +22,8 @@ export class ModuleListComponent implements OnInit {
 		private router: Router,
 		private dialog: MatDialog,
 		private ref: ChangeDetectorRef,
-		private _moduleService: ModuleService
+		private _moduleService: ModuleService,
+		private localstorageService: LocalstorageService
 	) {}
 	items = [
 		// {
@@ -69,5 +74,21 @@ export class ModuleListComponent implements OnInit {
 	}
 	onRemove(item) {
 		return item;
+	}
+
+	onEdit(item) {
+		const dialogRef = this.dialog.open(ModuleEditDialogComponent, {
+			data: { item }
+		});
+		dialogRef.afterClosed().subscribe(res => {
+			if (!res) {
+				return;
+			}
+			// binding again when submit data edit
+			this.items = this.localstorageService.get(
+				AppSettings.MODULESTORAGE
+			);
+			this.ref.detectChanges();
+		});
 	}
 }

@@ -1,3 +1,5 @@
+import { AppSettings } from "./../../../../../../shared/_constant/app-setting";
+import { LocalstorageService } from "./../../../../../../shared/_services/local-storage-service/localstorage.service";
 import { DialogConfirmComponent } from "../../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { MatDialog } from "@angular/material";
 import { LayoutConfigService } from "../../../../../../core/_base/layout/services/layout-config.service";
@@ -10,11 +12,11 @@ import {
 	Input,
 	SimpleChanges,
 	OnChanges,
-	NgZone,
-	ChangeDetectionStrategy
+	ChangeDetectionStrategy,
+	ChangeDetectorRef
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
+import { SolutionEditDialogComponent } from "../solution-edit-dialog/solution-edit-dialog.component";
 
 @Component({
 	selector: "kt-card-list",
@@ -31,7 +33,9 @@ export class CardListComponent implements OnInit, OnChanges {
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private layoutConfigService: LayoutConfigService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private _ref: ChangeDetectorRef,
+		private localstorageService: LocalstorageService
 	) {}
 
 	ngOnInit() {
@@ -83,5 +87,21 @@ export class CardListComponent implements OnInit, OnChanges {
 	}
 	onUpdateData(item) {
 		this.items = item;
+	}
+
+	onEdit(item) {
+		const dialogRef = this.dialog.open(SolutionEditDialogComponent, {
+			data: { item }
+		});
+		dialogRef.afterClosed().subscribe(res => {
+			if (!res) {
+				return;
+			}
+			// binding again when submit data edit
+			this.items = this.localstorageService.get(
+				AppSettings.SOLUTIONSTORAGE
+			);
+			this._ref.detectChanges();
+		});
 	}
 }
