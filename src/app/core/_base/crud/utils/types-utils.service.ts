@@ -163,6 +163,11 @@ export class TypesUtilsService {
 	isEmptyOrSpaces(str: string) {
 		return str === null || str.match(/^ *$/) !== null;
 	}
+
+	isEmptyString(str) {
+		return !str || 0 === str.length;
+	}
+
 	digitAddComma(str: any) {
 		if (typeof str !== "string") {
 			str = str.toString();
@@ -197,5 +202,30 @@ export class TypesUtilsService {
 			);
 		}
 		return result;
+	}
+
+	isEquivalent(a, b) {
+		// Create arrays of property names
+		let aProps = Object.getOwnPropertyNames(a);
+		let bProps = Object.getOwnPropertyNames(b);
+
+		// If number of properties is different,
+		// objects are not equivalent
+		if (aProps.length !== bProps.length) {
+			return false;
+		}
+
+		for (let i = 0; i < aProps.length; i++) {
+			let propName = aProps[i];
+
+			// If values of same property are not equal,
+			// objects are not equivalent
+			if (a[propName] !== b[propName]) {
+				return false;
+			}
+		}
+
+		return true;
+		// console.log(isEquivalent(bobaFett, jangoFett));
 	}
 }
