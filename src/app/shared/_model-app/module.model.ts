@@ -5,10 +5,10 @@ export class ModuleModel extends BaseBuilderModel {
 	name: string;
 	pluralName: string;
 	accessType: string;
-	databaseId: string;
+	database: string;
 	solutionId: string;
 	optionsField?: FieldConfigInterface[];
-	clear(): void {
+	clear?(): void {
 		// clear solution
 	}
 }

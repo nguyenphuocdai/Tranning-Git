@@ -120,145 +120,145 @@ const routes: Routes = [
 				path: "form-controls/autocomplete",
 				component: AutocompleteComponent
 			},
-			{
-				path: "form-controls/checkbox",
-				component: CheckboxComponent
-			},
-			{
-				path: "form-controls/datepicker",
-				component: DatepickerComponent
-			},
-			{
-				path: "form-controls/formfield",
-				component: FormfieldComponent
-			},
-			{
-				path: "form-controls/input",
-				component: InputComponent
-			},
-			{
-				path: "form-controls/radiobutton",
-				component: RadiobuttonComponent
-			},
-			{
-				path: "form-controls/select",
-				component: SelectComponent
-			},
-			{
-				path: "form-controls/slider",
-				component: SliderComponent
-			},
-			{
-				path: "form-controls/slidertoggle",
-				component: SlidertoggleComponent
-			},
-			{
-				path: "navigation/menu",
-				component: MenuComponent
-			},
-			{
-				path: "navigation/sidenav",
-				component: SidenavComponent
-			},
-			{
-				path: "navigation/toolbar",
-				component: ToolbarComponent
-			},
-			{
-				path: "layout/card",
-				component: CardComponent
-			},
-			{
-				path: "layout/divider",
-				component: DividerComponent
-			},
-			{
-				path: "layout/expansion-panel",
-				component: ExpansionPanelComponent
-			},
-			{
-				path: "layout/grid-list",
-				component: GridListComponent
-			},
-			{
-				path: "layout/list",
-				component: ListComponent
-			},
-			{
-				path: "layout/tabs",
-				component: MaterialTabsComponent
-			},
-			{
-				path: "layout/stepper",
-				component: StepperComponent
-			},
-			{
-				path: "layout/default-forms",
-				component: DefaultFormsComponent
-			},
-			{
-				path: "layout/tree",
-				component: TreeComponent
-			},
-			{
-				path: "buttons-and-indicators/button",
-				component: ButtonComponent
-			},
-			{
-				path: "buttons-and-indicators/button-toggle",
-				component: ButtonToggleComponent
-			},
-			{
-				path: "buttons-and-indicators/chips",
-				component: ChipsComponent
-			},
-			{
-				path: "buttons-and-indicators/icon",
-				component: IconComponent
-			},
-			{
-				path: "buttons-and-indicators/progress-bar",
-				component: ProgressBarComponent
-			},
-			{
-				path: "buttons-and-indicators/progress-spinner",
-				component: ProgressSpinnerComponent
-			},
-			{
-				path: "buttons-and-indicators/ripples",
-				component: RipplesComponent
-			},
-			{
-				path: "popups-and-modals/bottom-sheet",
-				component: BottomSheetComponent
-			},
-			{
-				path: "popups-and-modals/dialog",
-				component: DialogComponent
-			},
-			{
-				path: "popups-and-modals/snackbar",
-				component: SnackbarComponent
-			},
-			{
-				path: "popups-and-modals/tooltip",
-				component: MaterialTooltipComponent
-			},
-			{
-				path: "data"
-			},
-			{
-				path: "data-table/paginator",
-				component: PaginatorComponent
-			},
-			{
-				path: "data-table/sort-header",
-				component: SortHeaderComponent
-			},
-			{
-				path: "data-table/table",
-				component: MaterialTableComponent
-			}
+			// {
+			// 	path: "form-controls/checkbox",
+			// 	component: CheckboxComponent
+			// },
+			// {
+			// 	path: "form-controls/datepicker",
+			// 	component: DatepickerComponent
+			// },
+			// {
+			// 	path: "form-controls/formfield",
+			// 	component: FormfieldComponent
+			// },
+			// {
+			// 	path: "form-controls/input",
+			// 	component: InputComponent
+			// },
+			// {
+			// 	path: "form-controls/radiobutton",
+			// 	component: RadiobuttonComponent
+			// },
+			// {
+			// 	path: "form-controls/select",
+			// 	component: SelectComponent
+			// },
+			// {
+			// 	path: "form-controls/slider",
+			// 	component: SliderComponent
+			// },
+			// {
+			// 	path: "form-controls/slidertoggle",
+			// 	component: SlidertoggleComponent
+			// },
+			// {
+			// 	path: "navigation/menu",
+			// 	component: MenuComponent
+			// },
+			// {
+			// 	path: "navigation/sidenav",
+			// 	component: SidenavComponent
+			// },
+			// {
+			// 	path: "navigation/toolbar",
+			// 	component: ToolbarComponent
+			// },
+			// {
+			// 	path: "layout/card",
+			// 	component: CardComponent
+			// },
+			// {
+			// 	path: "layout/divider",
+			// 	component: DividerComponent
+			// },
+			// {
+			// 	path: "layout/expansion-panel",
+			// 	component: ExpansionPanelComponent
+			// },
+			// {
+			// 	path: "layout/grid-list",
+			// 	component: GridListComponent
+			// },
+			// {
+			// 	path: "layout/list",
+			// 	component: ListComponent
+			// },
+			// {
+			// 	path: "layout/tabs",
+			// 	component: MaterialTabsComponent
+			// },
+			// {
+			// 	path: "layout/stepper",
+			// 	component: StepperComponent
+			// },
+			// {
+			// 	path: "layout/default-forms",
+			// 	component: DefaultFormsComponent
+			// },
+			// {
+			// 	path: "layout/tree",
+			// 	component: TreeComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/button",
+			// 	component: ButtonComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/button-toggle",
+			// 	component: ButtonToggleComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/chips",
+			// 	component: ChipsComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/icon",
+			// 	component: IconComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/progress-bar",
+			// 	component: ProgressBarComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/progress-spinner",
+			// 	component: ProgressSpinnerComponent
+			// },
+			// {
+			// 	path: "buttons-and-indicators/ripples",
+			// 	component: RipplesComponent
+			// },
+			// {
+			// 	path: "popups-and-modals/bottom-sheet",
+			// 	component: BottomSheetComponent
+			// },
+			// {
+			// 	path: "popups-and-modals/dialog",
+			// 	component: DialogComponent
+			// },
+			// {
+			// 	path: "popups-and-modals/snackbar",
+			// 	component: SnackbarComponent
+			// },
+			// {
+			// 	path: "popups-and-modals/tooltip",
+			// 	component: MaterialTooltipComponent
+			// },
+			// {
+			// 	path: "data"
+			// },
+			// {
+			// 	path: "data-table/paginator",
+			// 	component: PaginatorComponent
+			// },
+			// {
+			// 	path: "data-table/sort-header",
+			// 	component: SortHeaderComponent
+			// },
+			// {
+			// 	path: "data-table/table",
+			// 	component: MaterialTableComponent
+			// }
 		]
 	}
 ];
@@ -324,7 +324,8 @@ const routes: Routes = [
 		MatCheckboxModule,
 		MatRadioModule,
 		MatIconModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		MatProgressSpinnerModule
 	],
 	exports: [
 		RouterModule,
@@ -363,7 +364,8 @@ const routes: Routes = [
 		MatOptionModule,
 		MatCheckboxModule,
 		MatRadioModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		MatProgressSpinnerModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,

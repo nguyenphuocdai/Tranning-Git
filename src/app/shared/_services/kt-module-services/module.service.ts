@@ -24,7 +24,7 @@ export class ModuleService {
 	 * Add new solution observable
 	 * @param listSolution
 	 */
-	sendListModuleObs$(listModule: any) {
+	sendListModuleObs$(moduleData: any) {
 		if (localStorage.getItem(AppSettings.MODULESTORAGE)) {
 			this.listModule =
 				JSON.parse(localStorage.getItem(AppSettings.MODULESTORAGE)) ==
@@ -34,7 +34,7 @@ export class ModuleService {
 							localStorage.getItem(AppSettings.MODULESTORAGE)
 					  );
 		}
-		this.listModule.push(listModule);
+		this.listModule.push(moduleData);
 		localStorage.setItem(
 			AppSettings.MODULESTORAGE,
 			JSON.stringify(this.listModule)
