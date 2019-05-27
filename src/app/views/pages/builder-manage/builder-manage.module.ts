@@ -26,7 +26,7 @@ import { SmStepperComponent } from "./solution-manage/controls/sm-stepper/sm-ste
 // Module
 import { ModuleListComponent } from "./module-manage/module-list/module-list.component";
 import { ModuleAddComponent } from "./module-manage/module-add/module-add.component";
-import { ModuleEditComponent } from "./module-manage/module-edit/module-edit.component";
+import { ModuleEditDialogComponent } from "./module-manage/module-edit/module-edit-dialog.component";
 
 // Field
 import { FormFieldEditComponent } from "./form-field-management/form-field-edit/form-field-edit.component";
@@ -37,6 +37,7 @@ import {
 	// NumericDirective
 } from "../../../core/_base/metronic/index";
 import { FormFieldModule } from "./form-field-management/form-field.module";
+import { SolutionEditDialogComponent } from "./solution-manage/controls/solution-edit-dialog/solution-edit-dialog.component";
 
 const routes: Routes = [
 	{
@@ -52,11 +53,6 @@ const routes: Routes = [
 				path: "solutions",
 				component: SolutionListComponent
 			},
-			// access by admin
-			// {
-			// 	path: "list-role",
-			// 	component: SolutionListRoleComponent
-			// },
 			{
 				path: "solutions/edit/:id",
 				component: SolutionEditComponent
@@ -75,10 +71,11 @@ const routes: Routes = [
 		CardListComponent,
 		SmStepperComponent,
 		DialogConfirmComponent,
+		SolutionEditDialogComponent,
 		// Module
 		ModuleListComponent,
 		ModuleAddComponent,
-		ModuleEditComponent,
+		ModuleEditDialogComponent,
 		// Pipe
 		ReplaceSpacePipe
 		// NumericDirective
@@ -86,7 +83,9 @@ const routes: Routes = [
 	entryComponents: [
 		SolutionAddComponent,
 		DialogConfirmComponent,
-		ModuleAddComponent
+		ModuleAddComponent,
+		SolutionEditDialogComponent,
+		ModuleEditDialogComponent
 	],
 	imports: [
 		CommonModule,
