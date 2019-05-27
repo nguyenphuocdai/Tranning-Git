@@ -1,36 +1,15 @@
+import { AppSettings } from "./../../../../../shared/_constant/app-setting";
+import { LocalstorageService } from "./../../../../../shared/_services/local-storage-service/localstorage.service";
 import { SolutionService } from "../../../../../shared/_services/kt-solution-services/solution.service";
-import { filter } from "rxjs/operators";
 import { SolutionModel } from "../../../../../shared/_model-app/solution.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-// RxJS
 import { BehaviorSubject, Observable, of, Subscription } from "rxjs";
-// NGRX
-import { Store, select } from "@ngrx/store";
-import { Update } from "@ngrx/entity";
-import { AppState } from "../../../../../core/reducers";
-// Layout
-import {
-	SubheaderService,
-	LayoutConfigService
-} from "../../../../../core/_base/layout";
-import {
-	LayoutUtilsService,
-	MessageType
-} from "../../../../../core/_base/crud";
-// Services and Models
-import {
-	User,
-	UserUpdated,
-	Address,
-	SocialNetworks,
-	selectHasUsersInStore,
-	selectUserById,
-	UserOnServerCreated,
-	selectLastCreatedUserId,
-	selectUsersActionLoading
-} from "../../../../../core/auth";
+import { LayoutConfigService } from "../../../../../core/_base/layout";
+import { User, Address, SocialNetworks } from "../../../../../core/auth";
+import { MatDialog } from "@angular/material";
+import { SolutionEditDialogComponent } from "../controls/solution-edit-dialog/solution-edit-dialog.component";
 
 @Component({
 	selector: "kt-solution-edit",
@@ -72,21 +51,16 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
 		private solutionFB: FormBuilder,
-		private layoutUtilsService: LayoutUtilsService,
-		private store: Store<AppState>,
 		private layoutConfigService: LayoutConfigService,
-		private _solutionService: SolutionService
+		private _solutionService: SolutionService,
+		private dialog: MatDialog,
+		private localstorageService: LocalstorageService
 	) {}
-
-	/**
-	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
-	 */
 
 	/**
 	 * On init
 	 */
 	ngOnInit() {
-		// this.loading$ = this.store.pipe(select(selectUsersActionLoading));
 		const routeSubscription = this.activatedRoute.params.subscribe(
 			params => {
 				const id = params["id"];
@@ -97,15 +71,6 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 						.subscribe(listSln => {
 							this.solution = listSln.find(x => x.name === id);
 						});
-
-					// this.solution = JSON.parse(
-					// 	localStorage.getItem("listSolution")
-					// ).find(x => x.name === id);
-
-					/**
-					 * Initialize Solution
-					 */
-
 					this.initSolution();
 				}
 			}
@@ -114,7 +79,7 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * Init user
+	 * Init solution
 	 */
 	initSolution() {
 		this.createForm();
@@ -127,12 +92,26 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		this.rfSolution = this.solutionFB.group({
 			name: [this.solution.name, Validators.required],
 			owner: [this.solution.owner, Validators.required],
-			databaseName: [this.solution.databaseName, Validators.required],
-			version : [this.solution.version, Validators.required],
+			version: [this.solution.version, Validators.required]
 		});
 	}
-	onShowFormEdit(isShow: boolean = false) {
-		this.isShowFormEdit = isShow;
+	onShowFormEdit() {
+		// this.isShowFormEdit = isShow;
+		console.log(this.solution);
+
+		const dialogRef = this.dialog.open(SolutionEditDialogComponent, {
+			data: { item: this.solution }
+		});
+		dialogRef.afterClosed().subscribe(res => {
+			if (!res) {
+				return;
+			}
+			// binding again when submit data edit
+			// this.items = this.localstorageService.get(
+			// 	AppSettings.SOLUTIONSTORAGE
+			// );
+			// this._ref.detectChanges();
+		});
 	}
 	/**
 	 * Redirect to list
@@ -143,34 +122,17 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
 	}
 
-	// /**
-	//  * Refresh user
-	//  *
-	//  * @param isNew: boolean
-	//  * @param id: number
-	//  */
-	// refreshUser(isNew: boolean = false, id = 0) {
-	// 	let url = this.router.url;
-	// 	if (!isNew) {
-	// 		this.router.navigate([url], { relativeTo: this.activatedRoute });
-	// 		return;
-	// 	}
-
-	// 	url = `${this.layoutConfigService.getCurrentMainRoute()}/user-management/users/edit/${id}`;
-	// 	this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
-	// }
-
 	/**
 	 * Reset
 	 */
-	reset() {
-		this.user = Object.assign({}, this.oldUser);
-		this.createForm();
-		this.hasFormErrors = false;
-		this.rfSolution.markAsPristine();
-		this.rfSolution.markAsUntouched();
-		this.rfSolution.updateValueAndValidity();
-	}
+	// reset() {
+	// 	this.user = Object.assign({}, this.oldUser);
+	// 	this.createForm();
+	// 	this.hasFormErrors = false;
+	// 	this.rfSolution.markAsPristine();
+	// 	this.rfSolution.markAsUntouched();
+	// 	this.rfSolution.updateValueAndValidity();
+	// }
 
 	/**
 	 * Save data
@@ -211,74 +173,11 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		_solution.clear();
 		_solution.name = controls["name"].value;
 		_solution.owner = controls["owner"].value;
-		_solution.databaseName = controls["databaseName"].value;
+		// _solution.databaseName = controls["databaseName"].value;
 		_solution.version = controls["version"].value;
 		// _solution.image = controls["image"].value;
 		return _solution;
 	}
-
-	// /**
-	//  * Add User
-	//  *
-	//  * @param _user: User
-	//  * @param withBack: boolean
-	//  */
-	// addUser(_user: User, withBack: boolean = false) {
-	// 	this.store.dispatch(new UserOnServerCreated({ user: _user }));
-	// 	const addSubscription = this.store
-	// 		.pipe(select(selectLastCreatedUserId))
-	// 		.subscribe(newId => {
-	// 			const message = `New user successfully has been added.`;
-	// 			this.layoutUtilsService.showActionNotification(
-	// 				message,
-	// 				MessageType.Create,
-	// 				5000,
-	// 				true,
-	// 				true
-	// 			);
-	// 			if (newId) {
-	// 				if (withBack) {
-	// 					this.goBackWithId();
-	// 				} else {
-	// 					this.refreshUser(true, newId);
-	// 				}
-	// 			}
-	// 		});
-	// 	this.subscriptions.push(addSubscription);
-	// }
-
-	// /**
-	//  * Update user
-	//  *
-	//  * @param _user: User
-	//  * @param withBack: boolean
-	//  */
-	// updateUser(_user: User, withBack: boolean = false) {
-	// 	// Update User
-	// 	// tslint:disable-next-line:prefer-const
-
-	// 	const updatedUser: Update<User> = {
-	// 		id: _user.id,
-	// 		changes: _user
-	// 	};
-	// 	this.store.dispatch(
-	// 		new UserUpdated({ partialUser: updatedUser, user: _user })
-	// 	);
-	// 	const message = `User successfully has been saved.`;
-	// 	this.layoutUtilsService.showActionNotification(
-	// 		message,
-	// 		MessageType.Update,
-	// 		5000,
-	// 		true,
-	// 		true
-	// 	);
-	// 	if (withBack) {
-	// 		this.goBackWithId();
-	// 	} else {
-	// 		this.refreshUser(false);
-	// 	}
-	// }
-
 	/**
 	 * Returns component title
 	 */
@@ -292,14 +191,14 @@ export class SolutionEditComponent implements OnInit, OnDestroy {
 		return result;
 	}
 
-	// /**
-	//  * Close Alert
-	//  *
-	//  * @param $event: Event
-	//  */
-	// onAlertClose($event) {
-	// 	this.hasFormErrors = false;
-	// }
+	/**
+	 * Close Alert
+	 *
+	 * @param $event: Event
+	 */
+	onAlertClose($event) {
+		this.hasFormErrors = false;
+	}
 
 	/**
 	 * Destroy subscriptions

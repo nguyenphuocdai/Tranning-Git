@@ -14,7 +14,7 @@
 				<i class="la la-arrow-left"></i>
 				<span class="kt-hidden-mobile">Back</span>
 			</a>
-			<a
+			<!-- <a
 				href="javascript:;"
 				class="btn btn-secondary kt-margin-r-10"
 				(click)="reset()"
@@ -24,41 +24,17 @@
 			>
 				<i class="la la-cog"></i>
 				<span class="kt-hidden-mobile">Reset</span>
-			</a>
+			</a> -->
 			<a
-				*ngIf="!isShowFormEdit"
 				href="javascript:;"
 				class="btn btn-secondary kt-margin-r-10"
-				(click)="onShowFormEdit(true)"
+				(click)="onShowFormEdit()"
 				mat-raised-button
 				matTooltip="Edit solution"
 			>
 				<i class="la la-edit"></i>
 				<span class="kt-hidden-mobile">Edit</span>
 			</a>
-			<!-- <a
-				*ngIf="isShowFormEdit"
-				href="javascript:;"
-				class="btn btn-secondary kt-margin-r-10"
-				(click)="onShowFormEdit(false)"
-				mat-raised-button
-				matTooltip="Cancel edit solution"
-			>
-				<i class="la la-remove"></i>
-				<span class="kt-hidden-mobile">Cancel</span>
-			</a>
-			<button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
-				<mat-icon>more_vert</mat-icon>
-			</button>
-			<mat-menu #menu="matMenu">
-				<button mat-menu-item color="primary" (click)="onSumbit(true)">
-					Save & Exit
-				</button>
-				<button mat-menu-item color="primary">Save & Duplicate</button>
-				<button mat-menu-item color="primary" (click)="onSumbit(false)">
-					Save & Continue
-				</button>
-			</mat-menu> -->
 		</ng-container>
 	</kt-portlet-header>
 
@@ -66,186 +42,11 @@
 		<mat-tab-group [(selectedIndex)]="selectedTab">
 			<mat-tab>
 				<ng-template mat-tab-label>
-					<i class="mat-tab-label-icon la la-cube"></i>
-					Basic info
+					<i class="mat-tab-label-icon la la-cube"></i> Basic
+					information Solution
 				</ng-template>
 				<ng-template matTabContent>
-					<!--Begin::FormEdit-->
-					<ng-container *ngIf="solution && isShowFormEdit">
-						<div class="col-md-6 mx-auto">
-							<form
-								class="kt-form"
-								novalidate
-								(ngSubmit)="onSubmit($event)"
-								[formGroup]="rfSolution"
-							>
-								<div class="kt-portlet__body">
-									<div
-										class="kt-form__section kt-form__section--first"
-									>
-										<div
-											class="form-group kt-form__group row"
-										>
-											<label
-												class="col-lg-3 col-form-label"
-												>Name:</label
-											>
-											<div
-												class="col-lg-6 example-container"
-											>
-												<mat-form-field>
-													<input
-														matInput
-														placeholder="Enter name"
-														name="name"
-														formControlName="name"
-													/>
-													<mat-hint align="start"
-														>Please enter your
-														solution name</mat-hint
-													>
-												</mat-form-field>
-											</div>
-										</div>
-										<div
-											class="form-group kt-form__group row"
-										>
-											<label
-												class="col-lg-3 col-form-label"
-												>owner:</label
-											>
-											<div
-												class="col-lg-6 example-container"
-											>
-												<mat-form-field>
-													<input
-														matInput
-														placeholder="Enter owner"
-														name="owner"
-														formControlName="owner"
-													/>
-													<mat-hint align="start"
-														>Please enter
-														owner</mat-hint
-													>
-												</mat-form-field>
-											</div>
-										</div>
-
-										<div
-											class="form-group kt-form__group row"
-										>
-											<label
-												class="col-lg-3 col-form-label"
-												>DatabaseName:</label
-											>
-											<div
-												class="col-lg-6 example-container"
-											>
-												<mat-form-field>
-													<input
-														matInput
-														placeholder="Enter database name"
-														name="databaseName"
-														formControlName="databaseName"
-													/>
-													<mat-hint align="start"
-														>Please enter database
-														name</mat-hint
-													>
-												</mat-form-field>
-											</div>
-										</div>
-
-										<div
-											class="form-group kt-form__group row"
-										>
-											<label
-												class="col-lg-3 col-form-label"
-												>Version:</label
-											>
-											<div
-												class="col-lg-6 example-container"
-											>
-												<mat-form-field>
-													<input
-														matInput
-														placeholder="Enter version"
-														name="version"
-														formControlName="version"
-													/>
-													<mat-hint align="start"
-														>Please enter
-														version</mat-hint
-													>
-												</mat-form-field>
-											</div>
-										</div>
-										<!-- <div
-											class="form-group kt-form__group row"
-										>
-											<label
-												class="col-lg-3 col-form-label"
-												>Image:</label
-											>
-											<div
-												class="col-lg-6 example-container"
-											>
-												<div
-													class="kt-form__group"
-													*ngIf="previewImage"
-												>
-													<img
-														[src]="previewImage"
-														height="200"
-													/>
-												</div>
-												<input
-													type="file"
-													(change)="
-														onSelectFile($event)
-													"
-													accept="image/x-png,image/jpeg"
-												/>
-												<mat-hint align="start"
-													>Please choosen image
-													solution</mat-hint
-												>
-											</div>
-										</div> -->
-									</div>
-								</div>
-								<div class="kt-portlet__foot">
-									<div
-										class="kt-form__actions kt-form__actions"
-									>
-										<div class="row">
-											<div class="col-lg-3"></div>
-											<div class="col-lg-6">
-												<button
-													[ngClass]="{
-														'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading
-													}"
-													class="kt-button--width-100"
-													type="submit"
-													mat-raised-button
-													color="accent"
-													[disabled]="
-														!rfSolution.valid
-													"
-												>
-													Save
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</ng-container>
-					<!--End::FormEdit-->
-
-					<ng-container *ngIf="solution && !isShowFormEdit">
+					<ng-container *ngIf="solution">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-12 kt-padding-b-20">
