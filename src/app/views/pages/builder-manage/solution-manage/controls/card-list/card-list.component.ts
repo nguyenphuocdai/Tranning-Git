@@ -1,3 +1,5 @@
+import { LayoutUtilsService } from "./../../../../../../core/_base/crud/utils/layout-utils.service";
+import { ModuleModel } from "./../../../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../../../shared/_constant/app-setting";
 import { LocalstorageService } from "./../../../../../../shared/_services/local-storage-service/localstorage.service";
 import { DialogConfirmComponent } from "../../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
@@ -35,7 +37,8 @@ export class CardListComponent implements OnInit, OnChanges {
 		private layoutConfigService: LayoutConfigService,
 		private dialog: MatDialog,
 		private _ref: ChangeDetectorRef,
-		private localstorageService: LocalstorageService
+		private localstorageService: LocalstorageService,
+		private layoutUtilsService: LayoutUtilsService
 	) {}
 
 	ngOnInit() {
@@ -74,15 +77,60 @@ export class CardListComponent implements OnInit, OnChanges {
 	onRemove(item): void {
 		let title = "Alert Confirm";
 		let message = "Are you sure delete item this?";
+		let messageNotDelete =
+			"Delete is failed, Please delete all module in solution. ";
 
 		let dialogRef = this.dialog.open(DialogConfirmComponent, {
 			width: "400px",
 			data: { title: title, message: message, itemDelete: item }
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
-			console.log("The dialog was closed");
-			console.log(result);
+		dialogRef.afterClosed().subscribe((itemDelete: SolutionModel) => {
+			if (itemDelete) {
+				let arrSolution: SolutionModel[] = this.localstorageService.get(
+					AppSettings.SOLUTIONSTORAGE
+				);
+				let arrModule: ModuleModel[] = this.localstorageService.get(
+					AppSettings.MODULESTORAGE
+				);
+
+				let isDelete: boolean = false;
+				// check if solution contains module -> not delete
+
+				for (let i = 0; i < arrModule.length; i++) {
+					const moduleData = arrModule[i];
+					if (moduleData.solutionId === itemDelete.name) {
+						isDelete = true;
+						break;
+					}
+				}
+				if (isDelete) {
+					this.layoutUtilsService.showActionNotification(
+						messageNotDelete,
+						1
+					);
+					return;
+				}
+				if (!isDelete) {
+					// delete solution and binding data items
+					arrSolution.forEach(
+						(solutionData: SolutionModel, index: number) => {
+							if (itemDelete.id === solutionData.id) {
+								arrSolution.splice(index, 1);
+								this.localstorageService.set(
+									AppSettings.SOLUTIONSTORAGE,
+									arrSolution
+								);
+
+								this.items = arrSolution;
+								this._ref.detectChanges();
+
+								return;
+							}
+						}
+					);
+				}
+			}
 		});
 	}
 	onUpdateData(item) {

@@ -1,3 +1,7 @@
+import { LayoutUtilsService } from "./../../../../../core/_base/crud/utils/layout-utils.service";
+import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
+import { SolutionModel } from "./../../../../../shared/_model-app/solution.model";
+import { DialogConfirmComponent } from "./../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material";
@@ -14,7 +18,6 @@ import { ModuleEditDialogComponent } from "../module-edit/module-edit-dialog.com
 	templateUrl: "./module-list.component.html",
 	styleUrls: ["./module-list.component.scss"]
 })
-
 export class ModuleListComponent implements OnInit {
 	constructor(
 		private layoutConfigService: LayoutConfigService,
@@ -23,17 +26,10 @@ export class ModuleListComponent implements OnInit {
 		private dialog: MatDialog,
 		private ref: ChangeDetectorRef,
 		private _moduleService: ModuleService,
-		private localstorageService: LocalstorageService
+		private localstorageService: LocalstorageService,
+		private layoutUtilsService: LayoutUtilsService
 	) {}
-	items = [
-		// {
-		// 	name: "Leona Module",
-		// 	pluraName: "Leonas",
-		// 	accessType: "master",
-		// 	solution: "Leona The Vanxi",
-		// 	database: "Core"
-		// }
-	];
+	items = [];
 	_listModule$: Observable<[]> = null;
 	_subscription: Subscription;
 	solution: any;
@@ -53,8 +49,11 @@ export class ModuleListComponent implements OnInit {
 		this._subscription = this._moduleService
 			.getListModuleObs$()
 			.subscribe(modules => {
-				this.items = modules;
-				this.ref.markForCheck();
+				window["modules"] = modules;
+				this.items = modules.filter(
+					x => x.solutionId === this.solution.name
+				);
+				// this.ref.markForCheck();
 			});
 	}
 
@@ -73,7 +72,40 @@ export class ModuleListComponent implements OnInit {
 		});
 	}
 	onRemove(item) {
-		return item;
+		let title = "Alert Confirm";
+		let message = "Are you sure delete item this?";
+		let messageNotDelete = "Delete module successfully !";
+
+		console.log(item);
+		let dialogRef = this.dialog.open(DialogConfirmComponent, {
+			width: "400px",
+			data: { title: title, message: message, itemDelete: item }
+		});
+
+		dialogRef.afterClosed().subscribe((itemDelete: SolutionModel) => {
+			if (itemDelete) {
+				let arrModule: ModuleModel[] = this.localstorageService.get(
+					AppSettings.MODULESTORAGE
+				);
+
+				arrModule.forEach((moduleData: ModuleModel, index) => {
+					if (moduleData.id === itemDelete.id) {
+						arrModule.splice(index, 1);
+						this.localstorageService.set(
+							AppSettings.MODULESTORAGE,
+							arrModule
+						);
+						this.items = arrModule;
+						this.ref.detectChanges();
+						this.layoutUtilsService.showActionNotification(
+							messageNotDelete,
+							3
+						);
+						return;
+					}
+				});
+			}
+		});
 	}
 
 	onEdit(item) {

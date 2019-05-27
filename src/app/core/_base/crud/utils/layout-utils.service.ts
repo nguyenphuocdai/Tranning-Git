@@ -43,8 +43,9 @@ export class LayoutUtilsService {
 		_duration: number = 10000,
 		_showCloseButton: boolean = true,
 		_showUndoButton: boolean = true,
-		_undoButtonDuration: number = 3000,
-		_verticalPosition: "top" | "bottom" = "bottom"
+		_undoButtonDuration: number = 0,
+		_verticalPosition: "top" | "bottom" = "bottom",
+		_action: string = "Undo"
 	) {
 		const _data = {
 			message: _message,
@@ -54,7 +55,7 @@ export class LayoutUtilsService {
 			undoButtonDuration: _undoButtonDuration,
 			verticalPosition: _verticalPosition,
 			type: _type,
-			action: "Undo"
+			action: _action
 		};
 		return this.snackBar.openFromComponent(ActionNotificationComponent, {
 			duration: _duration,
