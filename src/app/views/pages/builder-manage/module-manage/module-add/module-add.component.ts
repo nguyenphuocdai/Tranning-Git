@@ -1,3 +1,5 @@
+import { TypesUtilsService } from "./../../../../../core/_base/crud/utils/types-utils.service";
+import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
 import { KtSnackBarService } from "./../../../../../core/_base/layout/services/kt-snack-bar.service";
 import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
 import { Component, OnInit, Inject } from "@angular/core";
@@ -14,15 +16,14 @@ export class ModuleAddComponent implements OnInit {
 		public _dialogRef: MatDialogRef<ModuleAddComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		private fbModule: FormBuilder,
-		private _moduleService: ModuleService,
-		private _snackBarService: KtSnackBarService
+		private moduleService: ModuleService,
+		private snackBarService: KtSnackBarService,
+		private typesUtilsService: TypesUtilsService
 	) {
-		console.log(data);
 		this.solutionData = data;
 	}
 	solutionData: any;
 	rfModule: FormGroup;
-	listModule = [];
 	isSubmit: boolean = false;
 
 	accessTypes = [
@@ -47,10 +48,7 @@ export class ModuleAddComponent implements OnInit {
 				{ value: this.solutionData.data.name, disabled: true },
 				Validators.required
 			],
-			databaseId: [
-				{ value: this.solutionData.data.databaseName, disabled: true },
-				Validators.required
-			]
+			database: ["", Validators.required]
 		});
 	}
 
@@ -63,9 +61,24 @@ export class ModuleAddComponent implements OnInit {
 		}
 
 		setTimeout(() => {
-			this.listModule = this.rfModule.value;
-			this._moduleService.sendListModuleObs$(this.listModule);
-			this._snackBarService.openSnackBar(
+			const name = this.rfModule.controls["name"].value.trim();
+			const pluralName = this.rfModule.controls["pluralName"].value.trim();
+			const accessType = this.rfModule.controls["accessType"].value.trim();
+			const database = this.rfModule.controls["database"].value.trim();
+			const solutionId = this.solutionData.data.name;
+
+			let obj: ModuleModel = {
+				id: this.typesUtilsService.makeid(),
+				name: name,
+				pluralName: pluralName,
+				accessType: accessType,
+				database: database,
+				solutionId: solutionId,
+				optionsField: []
+			};
+
+			this.moduleService.sendListModuleObs$(obj);
+			this.snackBarService.openSnackBar(
 				"Add new solution successfully !",
 				5000
 			);
@@ -77,5 +90,16 @@ export class ModuleAddComponent implements OnInit {
 	}
 	handleCancel() {
 		this._dialogRef.close();
+	}
+	onPluralNameChange(data) {
+		if (this.typesUtilsService.isEmptyString(data)) {
+			return;
+		}
+		let database = data.replace(/ /g, "_").trim();
+		this.rfModule.controls["database"].setValue(database);
+	}
+
+	onDatabaseChange(data) {
+		console.log(data);
 	}
 }
