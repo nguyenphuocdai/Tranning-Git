@@ -15,6 +15,7 @@ import { UserManagementModule } from "./user-management/user-management.module";
 import { CoreModule } from "../../core/core.module";
 import { MyPageComponent } from "./my-page/my-page.component";
 import { ECommerceModule } from "./apps/e-commerce/e-commerce.module";
+import { ExportAsModule } from "../../shared/lib/ngx-export-as/export-as.module";
 
 @NgModule({
 	declarations: [MyPageComponent],
@@ -29,7 +30,8 @@ import { ECommerceModule } from "./apps/e-commerce/e-commerce.module";
 		MaterialModule,
 		// MailModule,
 		ECommerceModule,
-		UserManagementModule
+		UserManagementModule,
+		ExportAsModule
 	],
 	providers: []
 })

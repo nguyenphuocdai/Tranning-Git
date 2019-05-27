@@ -64,6 +64,7 @@ import { WidgetModule } from './content/widgets/widget.module';
 // SVG inline
 import { InlineSVGModule } from 'ng-inline-svg';
 import { CartComponent } from './layout/topbar/cart/cart.component';
+import { ContextMenuModuleComponent } from './layout/context-menu3/context-menu-module.component';
 
 @NgModule({
 	declarations: [
@@ -97,6 +98,7 @@ import { CartComponent } from './layout/topbar/cart/cart.component';
 		CartComponent,
 
 		ErrorComponent,
+		ContextMenuModuleComponent
 	],
 	exports: [
 		WidgetModule,
@@ -132,6 +134,7 @@ import { CartComponent } from './layout/topbar/cart/cart.component';
 		CartComponent,
 
 		ErrorComponent,
+		ContextMenuModuleComponent
 	],
 	imports: [
 		CommonModule,
