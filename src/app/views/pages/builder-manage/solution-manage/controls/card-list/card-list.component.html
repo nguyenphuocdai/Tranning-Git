@@ -3,11 +3,10 @@
 		<kt-portlet [class]="'kt-portlet--height-fluid'">
 			<kt-portlet-header [title]="item.name">
 				<!-- <ng-container ktPortletTools>
-					<kt-context-menu2></kt-context-menu2>
+					<kt-context-menu02></kt-context-menu02>
 				</ng-container> -->
 			</kt-portlet-header>
 			<kt-portlet-body>
-
 				<mat-card class="kt-card">
 					<mat-card-header>
 						<mat-card-title>{{ item.name }}</mat-card-title>
@@ -51,12 +50,25 @@
 								id="kt_demo_panel_toggle"
 								data-placement="left"
 								ngbTooltip="Check out more demos"
-								(click)="handleNavigate(item)"
+								[routerLink]="['edit/',item.name]"
 							>
 								<a href="javascript:;" class=""
 									><i class="flaticon2-edit"></i
 								></a>
 							</li>
+
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
+								id="kt_demo_panel_toggle"
+								data-placement="left"
+								ngbTooltip="Check out more demos"
+								(click)="handleNavigate(item)"
+							>
+								<a href="javascript:;" class=""
+									><i class="flaticon-list-2"></i
+								></a>
+							</li>
+
 							<li
 								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand"
 								data-placement="left"
