@@ -6,11 +6,9 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 	template: `
 		<div class="form-group kt-form__group">
 			<mat-form-field [formGroup]="group">
-				<span matPrefix>{{ field.unitMoney.unit }} &nbsp;</span>
+				<span matPrefix>{{ unit }} &nbsp;</span>
 				<input
 					type="text"
-					[(ngModel)]="previewInput"
-					#previewInputRef
 					ktNumbericDerective
 					numericType="number"
 					ktInputToggleComma
@@ -44,8 +42,9 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 export class MoneyDynamicComponent implements OnInit {
 	field: FieldConfigInterface;
 	group: FormGroup;
+	unit: string = "";
 	constructor() {}
 	ngOnInit() {
-		// console.log(this.field.unitMoney);
+		this.unit = this.field.unitMoney["unit"];
 	}
 }

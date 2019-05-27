@@ -51,7 +51,6 @@
 									matInput
 									placeholder="Enter plural name"
 									formControlName="pluralName"
-									[ngModel]="pluralName"
 									(ngModelChange)="onPluralNameChange($event)"
 									[attr.disabled]="isSubmit"
 								/>
@@ -70,7 +69,6 @@
 									matInput
 									formControlName="database"
 									placeholder="Enter database name"
-									[ngModel]="database"
 									(ngModelChange)="onDatabaseChange($event)"
 								/>
 								<mat-hint align="start"

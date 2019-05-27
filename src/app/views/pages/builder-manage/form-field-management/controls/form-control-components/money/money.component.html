@@ -110,9 +110,7 @@
                                 <div class="form-group kt-form__group">
                                     <mat-form-field>
                                         <span matPrefix>{{rfMoney.get('unitMoney').value}} &nbsp;</span>
-                                        <input type="text" [(ngModel)]="previewInput" [ngModelOptions]="{
-                                        standalone: true
-                                        }" ktNumbericDerective numericType="number" ktInputToggleComma matInput placeholder="{{rfMoney.get('name').value}}" maxlength="32" />
+                                        <input type="text" ktNumbericDerective numericType="number" ktInputToggleComma matInput placeholder="{{rfMoney.get('name').value}}" maxlength="32" />
                                         <mat-icon matSuffix *ngIf="rfMoney.get('description').value" matTooltip="{{
                                             rfMoney.get('description').value
                                         }}">local_atm</mat-icon>

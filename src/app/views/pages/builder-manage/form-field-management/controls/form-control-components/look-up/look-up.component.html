@@ -113,7 +113,7 @@
                                     <!-- modules/model lookup -->
 										<mat-form-field class="kt-padding-l-20">
 											<mat-label>{{rfLookup.get('modules').value}}</mat-label>
-											<mat-select [(ngModel)]="rfLookup.get('modules').value" [ngModelOptions]="{standalone: true}">
+											<mat-select [ngModel]="rfLookup.get('modules').value" [ngModelOptions]="{standalone: true}">
 												<mat-option value="{{rfLookup.get('modules').value}}">{{rfLookup.get('modules').value}}</mat-option>
 											</mat-select>
 											<mat-hint *ngIf="rfLookup.get('required').value">{{ rfLookup.get('errorMessage').value }}</mat-hint>
