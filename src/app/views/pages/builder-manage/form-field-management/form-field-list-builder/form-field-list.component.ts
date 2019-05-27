@@ -69,7 +69,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 				this.moduleOpenning = id;
 
 				let listModule: ModuleModel[] = this._localstorageService.get(
-					AppSettings.moduleStorage
+					AppSettings.MODULESTORAGE
 				);
 				listModule.forEach((element, index) => {
 					if (element.name === id) {
@@ -196,14 +196,14 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 					this.items = [];
 
 					let listModule: ModuleModel[] = this._localstorageService.get(
-						AppSettings.moduleStorage
+						AppSettings.MODULESTORAGE
 					);
 
 					listModule.forEach((element, index) => {
 						if (element.name === this.moduleOpenning) {
 							element.optionsField = this.items;
 							this._localstorageService.set(
-								AppSettings.moduleStorage,
+								AppSettings.MODULESTORAGE,
 								listModule
 							);
 						}
@@ -217,7 +217,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 
 	onSubmit() {
 		let listModule: ModuleModel[] = this._localstorageService.get(
-			AppSettings.moduleStorage
+			AppSettings.MODULESTORAGE
 		);
 
 		this._layoutUtilsService
@@ -234,7 +234,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 						if (element.name === this.moduleOpenning) {
 							listModule[index].optionsField = this.items;
 							this._localstorageService.set(
-								AppSettings.moduleStorage,
+								AppSettings.MODULESTORAGE,
 								listModule
 							);
 						}
@@ -248,7 +248,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	 */
 	getAllItems(): FieldConfigInterface[] {
 		let listModule: ModuleModel[] = this._localstorageService.get(
-			AppSettings.moduleStorage
+			AppSettings.MODULESTORAGE
 		);
 		let localData: FieldConfigInterface[] = [];
 
@@ -269,13 +269,13 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 
 	afterSubmit(arr: FieldConfigInterface[]) {
 		let listModule: ModuleModel[] = this._localstorageService.get(
-			AppSettings.moduleStorage
+			AppSettings.MODULESTORAGE
 		);
 		listModule.forEach((element, index) => {
 			if (element.name === this.moduleOpenning) {
 				listModule[index].optionsField = arr;
 				this._localstorageService.set(
-					AppSettings.moduleStorage,
+					AppSettings.MODULESTORAGE,
 					listModule
 				);
 			}

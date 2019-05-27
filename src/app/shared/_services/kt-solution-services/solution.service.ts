@@ -27,14 +27,14 @@ export class SolutionService {
 	 * @param listSolution
 	 */
 	sendSolutionObs$(listSolution: SolutionModel) {
-		if (localStorage.getItem(AppSettings.solutionStorage)) {
+		if (localStorage.getItem(AppSettings.SOLUTIONSTORAGE)) {
 			this.listSln = JSON.parse(
-				localStorage.getItem(AppSettings.solutionStorage)
+				localStorage.getItem(AppSettings.SOLUTIONSTORAGE)
 			);
 		}
 		this.listSln.push(listSolution);
 		localStorage.setItem(
-			AppSettings.solutionStorage,
+			AppSettings.SOLUTIONSTORAGE,
 			JSON.stringify(this.listSln)
 		);
 		this.sourceSolution.next(this.listSln);
@@ -43,9 +43,9 @@ export class SolutionService {
 	 * get list solution
 	 */
 	getListSolutionObs$(): Observable<any> {
-		if (localStorage.getItem(AppSettings.solutionStorage)) {
+		if (localStorage.getItem(AppSettings.SOLUTIONSTORAGE)) {
 			this.sourceSolution.next(
-				JSON.parse(localStorage.getItem(AppSettings.solutionStorage))
+				JSON.parse(localStorage.getItem(AppSettings.SOLUTIONSTORAGE))
 			);
 		}
 		// todos

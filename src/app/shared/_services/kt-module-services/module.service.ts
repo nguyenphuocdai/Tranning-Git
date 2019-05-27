@@ -25,18 +25,18 @@ export class ModuleService {
 	 * @param listSolution
 	 */
 	sendListModuleObs$(listModule: any) {
-		if (localStorage.getItem(AppSettings.moduleStorage)) {
+		if (localStorage.getItem(AppSettings.MODULESTORAGE)) {
 			this.listModule =
-				JSON.parse(localStorage.getItem(AppSettings.moduleStorage)) ==
+				JSON.parse(localStorage.getItem(AppSettings.MODULESTORAGE)) ==
 				null
 					? []
 					: JSON.parse(
-							localStorage.getItem(AppSettings.moduleStorage)
+							localStorage.getItem(AppSettings.MODULESTORAGE)
 					  );
 		}
 		this.listModule.push(listModule);
 		localStorage.setItem(
-			AppSettings.moduleStorage,
+			AppSettings.MODULESTORAGE,
 			JSON.stringify(this.listModule)
 		);
 		this.sourceModules.next(this.listModule);
@@ -46,9 +46,9 @@ export class ModuleService {
 	 * get list modules
 	 */
 	getListModuleObs$(): Observable<any> {
-		if (localStorage.getItem(AppSettings.moduleStorage)) {
+		if (localStorage.getItem(AppSettings.MODULESTORAGE)) {
 			this.sourceModules.next(
-				JSON.parse(localStorage.getItem(AppSettings.moduleStorage))
+				JSON.parse(localStorage.getItem(AppSettings.MODULESTORAGE))
 			);
 		}
 		// todos

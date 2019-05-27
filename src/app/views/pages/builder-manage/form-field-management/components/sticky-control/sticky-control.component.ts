@@ -101,7 +101,7 @@ export class StickyControlComponent implements OnInit {
 	 */
 	getAllItems(): FieldConfigInterface[] {
 		let listModule: ModuleModel[] = this._localstorageService.get(
-			AppSettings.moduleStorage
+			AppSettings.MODULESTORAGE
 		);
 		let localData: FieldConfigInterface[] = [];
 
@@ -122,14 +122,14 @@ export class StickyControlComponent implements OnInit {
 
 	afterDelete(arr: FieldConfigInterface[]) {
 		let listModule: ModuleModel[] = this._localstorageService.get(
-			AppSettings.moduleStorage
+			AppSettings.MODULESTORAGE
 		);
 		listModule.forEach((element, index) => {
 			if (element.name === this.moduleOpenning) {
 				listModule[index].optionsField = arr;
 
 				this._localstorageService.set(
-					AppSettings.moduleStorage,
+					AppSettings.MODULESTORAGE,
 					listModule
 				);
 			}
@@ -138,7 +138,7 @@ export class StickyControlComponent implements OnInit {
 
 	afterSetting(response: FieldConfigInterface) {
 		let listModule: ModuleModel[] = this._localstorageService.get(
-			AppSettings.moduleStorage
+			AppSettings.MODULESTORAGE
 		);
 		listModule.forEach((element, index) => {
 			if (element.name === this.moduleOpenning) {
@@ -150,7 +150,7 @@ export class StickyControlComponent implements OnInit {
 					}
 				});
 				this._localstorageService.set(
-					AppSettings.moduleStorage,
+					AppSettings.MODULESTORAGE,
 					listModule
 				);
 				this.ondelete.emit(listModule[index].optionsField);
