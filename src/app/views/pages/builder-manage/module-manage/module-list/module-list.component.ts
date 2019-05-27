@@ -1,3 +1,4 @@
+import { AppSettings } from "./../../../../../shared/_constant/app-setting";
 import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -36,7 +37,7 @@ export class ModuleListComponent implements OnInit {
 			const id = params["id"];
 			if (id && id.length > 0) {
 				this.solution = JSON.parse(
-					localStorage.getItem("ListSolution")
+					localStorage.getItem(AppSettings.SOLUTIONSTORAGE)
 				).find(x => x.name === id);
 			}
 		});
