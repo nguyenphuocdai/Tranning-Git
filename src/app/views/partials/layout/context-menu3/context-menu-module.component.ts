@@ -17,21 +17,10 @@ export class ContextMenuModuleComponent implements OnInit {
 
 	constructor(private exportJsonToExcelService: ExportJsonToExcelService) {}
 
-	ngOnInit(): void {
-		console.log(this.module);
-		window["module"] = this.module;
-	}
+	ngOnInit(): void {}
 
 	exportToExcel(event) {
 		let arrModule: any[] = [];
-
-		let dataModule = [
-			{
-				"Access Type": this.module["accessType"],
-				Name: this.module["name"],
-				"Plural Name": this.module["pluralName"]
-			}
-		];
 
 		this.module.optionsField.forEach(element => {
 			let obj: FieldConfigInterface = {
@@ -71,24 +60,3 @@ export class ContextMenuModuleComponent implements OnInit {
 		);
 	}
 }
-
-export const PERSONS = [
-	{
-		id: 1,
-		name: "Very long name which needs to be wrapped",
-		surname: "Novicky",
-		age: 21
-	},
-	{
-		id: 2,
-		name: "Another long name that won't be wrapped",
-		surname: "Tracz",
-		age: 12
-	},
-	{
-		id: 3,
-		name: "Steve",
-		surname: "Laski",
-		age: 38
-	}
-];
