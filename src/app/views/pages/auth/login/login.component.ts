@@ -179,6 +179,33 @@ export class LoginComponent implements OnInit, OnDestroy {
 				})
 			)
 			.subscribe();
+
+		// this.auth
+		// 	.login(authData.email, authData.password)
+		// 	.pipe(
+		// 		tap(data => {
+		// 			if (data) {
+		// 				alert(data);
+		// 				// this.store.dispatch(
+		// 				// 	new Login({ authToken: user.accessToken })
+		// 				// );
+		// 				// this.router.navigateByUrl("/"); // Main page
+		// 			} else {
+		// 				this.authNoticeService.setNotice(
+		// 					this.translate.instant(
+		// 						"AUTH.VALIDATION.INVALID_LOGIN"
+		// 					),
+		// 					"danger"
+		// 				);
+		// 			}
+		// 		}),
+		// 		takeUntil(this.unsubscribe),
+		// 		finalize(() => {
+		// 			this.loading = false;
+		// 			this.cdr.detectChanges();
+		// 		})
+		// 	)
+		// 	.subscribe();
 	}
 
 	/**
