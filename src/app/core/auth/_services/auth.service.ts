@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../shared/_constant/app-setting';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -9,6 +10,7 @@ import { QueryParamsModel, QueryResultsModel } from '../../_base/crud';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 
+// const API_USERS_URL = 'api/users';
 const API_USERS_URL = 'api/users';
 const API_PERMISSION_URL = 'api/permissions';
 const API_ROLES_URL = 'api/roles';
@@ -18,7 +20,7 @@ export class AuthService {
     constructor(private http: HttpClient) {}
     // Authentication/Authorization
     login(email: string, password: string): Observable<User> {
-        return this.http.post<User>(API_USERS_URL, { email, password });
+        return this.http.post<User>(AppSettings.API_USER_LOGIN, { email, password });
     }
 
     getUserByToken(): Observable<User> {
