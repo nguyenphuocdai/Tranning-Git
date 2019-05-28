@@ -5,12 +5,13 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 	selector: "app-radiobutton",
 	template: `
 		<div class="demo-full-width margin-top" [formGroup]="group">
-			<label class="radio-label-padding">{{ field.label }}:</label>
+			<label class="radio-label-padding pr-3">{{ field.label }}:</label>
 			<mat-radio-group [formControlName]="field.name">
 				<mat-radio-button
-					*ngFor="let item of field.options"
-					[value]="item"
-					>{{ item }}</mat-radio-button
+					*ngFor="let item of field.options; let i = index"
+					[value]="item.value"
+					[checked]="item.value === field.options[0].value"
+					>{{ item.label }}</mat-radio-button
 				>
 			</mat-radio-group>
 		</div>

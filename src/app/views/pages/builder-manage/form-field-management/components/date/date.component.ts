@@ -5,7 +5,7 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 @Component({
 	selector: "kt-app-date",
 	template: `
-		<mat-form-field class="demo-full-width margin-top" [formGroup]="group">
+		<mat-form-field class="margin-top" [formGroup]="group">
 			<input
 				matInput
 				[matDatepicker]="picker"
