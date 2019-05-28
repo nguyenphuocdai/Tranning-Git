@@ -61,7 +61,28 @@
 		></kt-c-button>
 	</ng-container>
 	<!-- button component -->
+
+	<!-- date picker component -->
+	<ng-container *ngSwitchCase="'datepicker'">
+		<kt-date-picker
+			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
+			(datePickerComponentSubmit)="onSubmit($event)"
+		></kt-date-picker>
+	</ng-container>
+	<!-- date picker component -->
+
+	<!-- radio component -->
+	<ng-container *ngSwitchCase="'radiobutton'">
+		<kt-c-radio
+			[dialogRefData]="dialogRefData"
+			[valueEdit]="valueEdit"
+			(cRadioComponentSubmit)="onSubmit($event)"
+		></kt-c-radio>
+	</ng-container>
+	<!-- radio component -->
+
 	<ng-container *ngSwitchDefault>
-		Please check agian! dialog ref has not data.
+		Please check modal-dialog.component.html agian! dialog ref has not data.
 	</ng-container>
 </ng-container>

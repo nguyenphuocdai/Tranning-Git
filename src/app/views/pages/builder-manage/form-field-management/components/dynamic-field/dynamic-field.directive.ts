@@ -22,7 +22,7 @@ const componentMapper = {
 	input: InputComponent,
 	button: ButtonComponent,
 	select: SelectComponent,
-	date: DateComponent,
+	datepicker: DateComponent,
 	radiobutton: RadiobuttonComponent,
 	checkbox: CheckboxComponent,
 	number: NumberComponent,
