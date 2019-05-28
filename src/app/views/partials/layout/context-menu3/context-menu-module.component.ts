@@ -1,3 +1,4 @@
+import { LayoutUtilsService } from "./../../../../core/_base/crud/utils/layout-utils.service";
 import { FieldConfigInterface } from "./../../../../shared/_model-app/field.interface";
 import { ModuleModel } from "./../../../../shared/_model-app/module.model";
 import { ExportJsonToExcelService } from "./../../../../shared/lib/export-json-to-excel/export-json-to-excel.service";
@@ -15,12 +16,22 @@ import { Component, Input, OnInit } from "@angular/core";
 export class ContextMenuModuleComponent implements OnInit {
 	@Input("module") module: ModuleModel;
 
-	constructor(private exportJsonToExcelService: ExportJsonToExcelService) {}
+	constructor(
+		private exportJsonToExcelService: ExportJsonToExcelService,
+		private layoutUtilsService: LayoutUtilsService
+	) {}
 
 	ngOnInit(): void {}
 
 	exportToExcel(event) {
 		let arrModule: any[] = [];
+		let message =
+			"Can't export module. Please create one or more field and export again !";
+
+		if (this.module.optionsField.length === 0) {
+			this.layoutUtilsService.showActionNotification(message);
+			return;
+		}
 
 		this.module.optionsField.forEach(element => {
 			let obj: FieldConfigInterface = {
@@ -40,17 +51,17 @@ export class ContextMenuModuleComponent implements OnInit {
 				});
 			}
 			arrModule.push({
+				ModuleName: this.module["name"],
+				PluralName: this.module["pluralName"],
+				AccessType: this.module["accessType"],
 				ID: obj.id,
 				Name: obj.name,
-				"Field Type": obj.fieldType,
-				"Input Type": obj.inputType,
+				FieldType: obj.fieldType,
+				InputType: obj.inputType,
 				Label: obj.label,
 				Security: obj.security,
 				Tracking: obj.tracking,
-				Type: obj.type,
-				"Module Name": this.module["name"],
-				"Plural Name": this.module["pluralName"],
-				"Access Type": this.module["accessType"]
+				Type: obj.type
 			});
 		});
 
