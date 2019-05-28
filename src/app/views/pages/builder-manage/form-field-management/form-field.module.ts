@@ -42,6 +42,8 @@ import { MaterialFileUploadComponent } from "./controls/material-file-upload/mat
 import { FuploadDynamicComponent } from "./components/fupload-dynamic/fupload-dynamic.component";
 import { CButtonComponent } from "./controls/form-control-components/c-button/c-button.component";
 import { StickyControlComponent } from "./components/sticky-control/sticky-control.component";
+import { DatePickerComponent } from "./controls/form-control-components/date-picker/date-picker.component";
+import { CRadioComponent } from "./controls/form-control-components/c-radio/c-radio.component";
 
 const routes: Routes = [
 	{
@@ -89,6 +91,8 @@ const routes: Routes = [
 		LookupComponent,
 		MoneyDynamicComponent,
 		FuploadDynamicComponent,
+		DatePickerComponent,
+		CRadioComponent,
 		RadiobuttonComponent,
 		CheckboxComponent,
 		DynamicFieldDirective,

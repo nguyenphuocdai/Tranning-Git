@@ -32,5 +32,9 @@ export const data: DialogRefInterface[] = [
 	{
 		type: "button",
 		valueView: "Button"
+	},
+	{
+		type: "radiobutton",
+		valueView: "Radio"
 	}
 ];
