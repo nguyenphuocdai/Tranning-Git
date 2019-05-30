@@ -8,26 +8,12 @@ const routes: Routes = [
 		loadChildren: "app/views/pages/auth/auth.module#AuthModule"
 	},
 
-	// enable this router to set which default theme to load,
-	// leave the path value empty to enter into nested router in ThemeModule
-	// {path: '', loadChildren: 'app/views/themes/default/theme.module#ThemeModule'},
-
-	/** START: remove this themes list on production */
-	{ path: "", redirectTo: "default", pathMatch: "full" },
-	// {
-	// 	path: "AIT",
-	// 	loadChildren: "app/views/themes/demo2/theme.module#ThemeModule"
-	// },
-
-	// list of routers specified by demos, for demo purpose only!
+	{ path: "", redirectTo: "", pathMatch: "full" },
 	{
-		path: "default",
+		path: "",
 		loadChildren: "app/views/themes/default/theme.module#ThemeModule"
 	},
-	/** END: themes list end */
-
 	{ path: "**", redirectTo: "default/error/403", pathMatch: "full" }
-	// {path: '**', redirectTo: 'error/403', pathMatch: 'full'},
 ];
 
 @NgModule({

@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 // Base
 import { PortletModule } from "../../partials/content/general/portlet/portlet.module";
 import { PartialsModule } from "../../partials/partials.module";
-import { DialogConfirmComponent } from "../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { CoreModule } from "../../../core/core.module";
 import { MaterialModule } from "../material/material.module";
 
@@ -70,7 +69,6 @@ const routes: Routes = [
 		SolutionAddComponent,
 		CardListComponent,
 		SmStepperComponent,
-		DialogConfirmComponent,
 		SolutionEditDialogComponent,
 		// Module
 		ModuleListComponent,
@@ -82,7 +80,6 @@ const routes: Routes = [
 	],
 	entryComponents: [
 		SolutionAddComponent,
-		DialogConfirmComponent,
 		ModuleAddComponent,
 		SolutionEditDialogComponent,
 		ModuleEditDialogComponent
