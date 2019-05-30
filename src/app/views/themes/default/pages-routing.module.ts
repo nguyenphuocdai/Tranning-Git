@@ -20,18 +20,6 @@ const routes: Routes = [
 				loadChildren:
 					"app/views/pages/dashboard/dashboard.module#DashboardModule"
 			},
-			// {
-			// 	path: "my-page", // <= Page URL
-			// 	component: MyPageComponent // <= Page component registration
-			// },
-			//    {
-			// 	path: 'builder-field', // <= Page URL
-			// 	component: BuilderComponent // <= Page component registration
-			// },
-			// {
-			// 	path: 'mail',
-			// 	loadChildren: 'app/views/pages/apps/mail/mail.module#MailModule'
-			// },
 			{
 				path: "ecommerce",
 				loadChildren:
@@ -44,14 +32,6 @@ const routes: Routes = [
 				// 	}
 				// }
 			},
-			// {
-			// 	path: 'ngbootstrap',
-			// 	loadChildren: 'app/views/pages/ngbootstrap/ngbootstrap.module#NgbootstrapModule'
-			// },
-			// {
-			// 	path: 'material',
-			// 	loadChildren: 'app/views/pages/material/material.module#MaterialModule'
-			// },
 			{
 				path: "user-management",
 				loadChildren:
@@ -70,7 +50,7 @@ const routes: Routes = [
 			{
 				path: "management",
 				loadChildren:
-				"app/views/pages/apps-management/apps-management.module#AppsManagementModule"
+					"app/views/pages/apps-management/apps-management.module#AppsManagementModule"
 			},
 			{
 				path: "error/403",

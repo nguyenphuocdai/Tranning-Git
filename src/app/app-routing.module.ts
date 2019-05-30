@@ -8,9 +8,9 @@ const routes: Routes = [
 		loadChildren: "app/views/pages/auth/auth.module#AuthModule"
 	},
 
-	{ path: "", redirectTo: "", pathMatch: "full" },
+	{ path: "", redirectTo: "default", pathMatch: "full" },
 	{
-		path: "",
+		path: "default",
 		loadChildren: "app/views/themes/default/theme.module#ThemeModule"
 	},
 	{ path: "**", redirectTo: "default/error/403", pathMatch: "full" }

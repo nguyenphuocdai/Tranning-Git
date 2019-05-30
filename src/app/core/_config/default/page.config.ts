@@ -195,7 +195,7 @@ export class PageConfig {
 		// },
 		'management': {
 			solution: {
-				page: {title: 'Customers', desc: ''}
+				page: {title: 'Solutions', desc: ''}
 			},
 			// products: {
 			// 	edit: {
