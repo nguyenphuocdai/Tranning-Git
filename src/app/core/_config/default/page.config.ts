@@ -6,9 +6,9 @@ export class PageConfig {
 				'desc': 'Latest updates and statistic charts'
 			}
 		},
-		'my-page': { // <= add page URL
-			page: { title: 'My page', desc: 'My page desc' } // <= Page name and description
-		},
+		// 'my-page': { // <= add page URL
+		// 	page: { title: 'My page', desc: 'My page desc' } // <= Page name and description
+		// },
 		// 'builder-field': { // <= add page URL
 		// 	page: { title: 'Builder', desc: 'Builder for field-form' } // <= Page name and description
 		// },
@@ -193,22 +193,22 @@ export class PageConfig {
 		// mail: {
 		// 	page: {title: 'Mail', desc: 'Mail'}
 		// },
-		// ecommerce: {
-		// 	customers: {
-		// 		page: {title: 'Customers', desc: ''}
-		// 	},
-		// 	products: {
-		// 		edit: {
-		// 			page: {title: 'Edit product', desc: ''}
-		// 		},
-		// 		add: {
-		// 			page: {title: 'Create product', desc: ''}
-		// 		}
-		// 	},
-		// 	orders: {
-		// 		page: {title: 'Orders', desc: ''}
-		// 	}
-		// },
+		'management': {
+			solution: {
+				page: {title: 'Customers', desc: ''}
+			},
+			// products: {
+			// 	edit: {
+			// 		page: {title: 'Edit product', desc: ''}
+			// 	},
+			// 	add: {
+			// 		page: {title: 'Create product', desc: ''}
+			// 	}
+			// },
+			// orders: {
+			// 	page: {title: 'Orders', desc: ''}
+			// }
+		},
 		'user-management': {
 			users: {
 				page: {title: 'Users', desc: ''}
@@ -219,15 +219,10 @@ export class PageConfig {
 		},
 		'builder': {
 			solutions: {
-				page: {title: 'Solution list', desc: 'This page show all solution'}
+				page: {title: 'Solution', desc: 'This page show all solution'}
 			},
-			// list: {
-			// 	page: {title: 'List', desc: ''}
-			// }
 		},
-		// builder: {
-		// 	page: {title: 'Layout Builder', desc: ''}
-		// },
+
 		header: {
 			actions: {
 				page: {title: 'Actions', desc: 'Actions example page'}

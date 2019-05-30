@@ -20,10 +20,10 @@ const routes: Routes = [
 				loadChildren:
 					"app/views/pages/dashboard/dashboard.module#DashboardModule"
 			},
-			{
-				path: "my-page", // <= Page URL
-				component: MyPageComponent // <= Page component registration
-			},
+			// {
+			// 	path: "my-page", // <= Page URL
+			// 	component: MyPageComponent // <= Page component registration
+			// },
 			//    {
 			// 	path: 'builder-field', // <= Page URL
 			// 	component: BuilderComponent // <= Page component registration
@@ -67,11 +67,11 @@ const routes: Routes = [
 				loadChildren:
 					"app/views/pages/builder-manage/builder-manage.module#BuilderManageModule"
 			},
-			// {
-			// 	path: "builder",
-			// 	loadChildren:
-			// 		"app/views/themes/default/content/builder/builder.module#BuilderModule"
-			// },
+			{
+				path: "management",
+				loadChildren:
+				"app/views/pages/apps-management/apps-management.module#AppsManagementModule"
+			},
 			{
 				path: "error/403",
 				component: ErrorPageComponent,
