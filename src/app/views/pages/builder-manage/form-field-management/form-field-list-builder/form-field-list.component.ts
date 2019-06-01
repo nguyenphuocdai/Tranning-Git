@@ -172,7 +172,9 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 	 * submit form
 	 * @param value
 	 */
-	dynamicFormSubmit(value: any) {}
+	dynamicFormSubmit(value: any) {
+		console.log(value);
+	}
 
 	dragStarted(event: CdkDragStart) {
 		this.isDragging = true;

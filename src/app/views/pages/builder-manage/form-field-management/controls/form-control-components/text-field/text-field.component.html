@@ -46,7 +46,13 @@
                                     </div>
     
                                     <!--End::Label-->
-    
+                                    <!--Begin::Description-->
+                                    <div class="form-group kt-form__group">
+                                        <mat-form-field class="example-full-width">
+                                            <textarea matInput placeholder="Please enter description" formControlName="description" name="description" #descriptionRef></textarea>
+                                            <mat-hint align="start">Please enter description</mat-hint>
+                                        </mat-form-field>
+                                    </div>
                                     <!--Begin::Required-->
                                     <div class="form-group kt-form__group " [ngClass]="{'form-group-flex': rfField.get('required').value}">
                                         <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
@@ -65,13 +71,7 @@
                                     <div class="form-group kt-form__group">
                                         <mat-checkbox class="example-margin" name="tracking" formControlName="tracking">Change Tracking</mat-checkbox>
                                     </div>
-                                    <!--Begin::Description-->
-                                    <div class="form-group kt-form__group">
-                                        <mat-form-field class="example-full-width">
-                                            <textarea matInput placeholder="Please enter description" formControlName="description" name="description" #descriptionRef></textarea>
-                                            <mat-hint align="start">Please enter description</mat-hint>
-                                        </mat-form-field>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

@@ -146,7 +146,6 @@ export class StickyControlComponent implements OnInit {
 				arrFields.forEach((item, i) => {
 					if (item.id === response.id) {
 						listModule[index].optionsField[i] = response;
-						console.log(listModule[index].optionsField[i]);
 					}
 				});
 				this._localstorageService.set(
