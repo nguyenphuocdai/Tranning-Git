@@ -94,81 +94,83 @@ import { AppsManagementRoutingModule } from "./apps-management-routing.module";
 import { AppsManagementComponent } from "./apps-management.component";
 import { ManagementComponent } from "./management/management.component";
 import { ManagementEditComponent } from "./management-edit/management-edit.component";
+import { MaterialModule } from "../material/material.module";
 
 @NgModule({
 	imports: [
 		AppsManagementRoutingModule,
-		MatDialogModule,
+		// MatDialogModule,
 		CommonModule,
 		HttpClientModule,
 		PartialsModule,
-		NgxPermissionsModule.forChild(),
+		// NgxPermissionsModule.forChild(),
 		FormsModule,
-		ReactiveFormsModule,
-		TranslateModule.forChild(),
-		MatButtonModule,
-		MatMenuModule,
-		MatSelectModule,
-		MatInputModule,
-		MatTableModule,
-		MatAutocompleteModule,
-		MatRadioModule,
-		MatIconModule,
-		MatNativeDateModule,
-		MatProgressBarModule,
-		MatDatepickerModule,
-		MatCardModule,
-		MatPaginatorModule,
-		MatSortModule,
-		MatCheckboxModule,
-		MatProgressSpinnerModule,
-		MatSnackBarModule,
-		MatTabsModule,
-		MatTooltipModule,
-		NgbProgressbarModule,
-		environment.isMockEnabled
-			? HttpClientInMemoryWebApiModule.forFeature(FakeApiService, {
-					passThruUnknownUrl: true,
-					dataEncapsulation: false
-			  })
-			: [],
-		StoreModule.forFeature("products", productsReducer),
-		EffectsModule.forFeature([ProductEffects]),
-		StoreModule.forFeature("customers", customersReducer),
-		EffectsModule.forFeature([CustomerEffects]),
-		StoreModule.forFeature("productRemarks", productRemarksReducer),
-		EffectsModule.forFeature([ProductRemarkEffects]),
-		StoreModule.forFeature(
-			"productSpecifications",
-			productSpecificationsReducer
-		),
-		EffectsModule.forFeature([ProductSpecificationEffects])
+		MaterialModule
+		// ReactiveFormsModule,
+		// TranslateModule.forChild(),
+		// MatButtonModule,
+		// MatMenuModule,
+		// MatSelectModule,
+		// MatInputModule,
+		// MatTableModule,
+		// MatAutocompleteModule,
+		// MatRadioModule,
+		// MatIconModule,
+		// MatNativeDateModule,
+		// MatProgressBarModule,
+		// MatDatepickerModule,
+		// MatCardModule,
+		// MatPaginatorModule,
+		// MatSortModule,
+		// MatCheckboxModule,
+		// MatProgressSpinnerModule,
+		// MatSnackBarModule,
+		// MatTabsModule,
+		// MatTooltipModule,
+		// NgbProgressbarModule,
+		// environment.isMockEnabled
+		// 	? HttpClientInMemoryWebApiModule.forFeature(FakeApiService, {
+		// 			passThruUnknownUrl: true,
+		// 			dataEncapsulation: false
+		// 	  })
+		// 	: [],
+		// StoreModule.forFeature("products", productsReducer),
+		// EffectsModule.forFeature([ProductEffects]),
+		// StoreModule.forFeature("customers", customersReducer),
+		// EffectsModule.forFeature([CustomerEffects]),
+		// StoreModule.forFeature("productRemarks", productRemarksReducer),
+		// EffectsModule.forFeature([ProductRemarkEffects]),
+		// StoreModule.forFeature(
+		// 	"productSpecifications",
+		// 	productSpecificationsReducer
+		// ),
+		// EffectsModule.forFeature([ProductSpecificationEffects])
 	],
 	providers: [
-		ModuleGuard,
-		InterceptService,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: InterceptService,
-			multi: true
-		},
-		{
-			provide: MAT_DIALOG_DEFAULT_OPTIONS,
-			useValue: {
-				hasBackdrop: true,
-				panelClass: "kt-mat-dialog-container__wrapper",
-				height: "auto",
-				width: "900px"
-			}
-		},
-		TypesUtilsService,
-		LayoutUtilsService,
-		HttpUtilsService,
-		CustomersService,
-		ProductRemarksService,
-		ProductSpecificationsService,
-		ProductsService,
-		TypesUtilsService
+		// ModuleGuard,
+		// InterceptService,
+		// {
+		// 	provide: HTTP_INTERCEPTORS,
+		// 	useClass: InterceptService,
+		// 	multi: true
+		// },
+		// {
+		// 	provide: MAT_DIALOG_DEFAULT_OPTIONS,
+		// 	useValue: {
+		// 		hasBackdrop: true,
+		// 		panelClass: "kt-mat-dialog-container__wrapper",
+		// 		height: "auto",
+		// 		width: "900px"
+		// 	}
+		// },
+		// TypesUtilsService,
+		// LayoutUtilsService,
+		// HttpUtilsService,
+		// CustomersService,
+		// ProductRemarksService,
+		// ProductSpecificationsService,
+		// ProductsService,
+		// TypesUtilsService
 	],
 	entryComponents: [
 		ActionNotificationComponent,

@@ -9,13 +9,13 @@ const routes: Routes = [
 		path: "",
 		component: AppsManagementComponent,
 		children: [
+			// {
+			// 	path: "",
+			// 	redirectTo: "sln/:id",
+			// 	pathMatch: "full"
+			// },
 			{
-				path: "",
-				redirectTo: "management",
-				pathMatch: "full"
-			},
-			{
-				path: "management",
+				path: "sln/:id",
 				component: ManagementComponent
 			}
 		]
