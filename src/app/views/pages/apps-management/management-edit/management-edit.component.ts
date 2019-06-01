@@ -16,7 +16,7 @@ import { TypesUtilsService } from '../../../../core/_base/crud';
 import { CustomerModel, CustomerUpdated, CustomerOnServerCreated, selectLastCreatedCustomerId, selectCustomersPageLoading, selectCustomersActionLoading } from '../../../../core/e-commerce';
 
 @Component({
-  selector: 'kt-solution-edit',
+  selector: 'kt-management-edit',
   templateUrl: './management-edit.component.html',
   styleUrls: ['./management-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
