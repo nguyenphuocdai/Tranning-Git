@@ -14,8 +14,9 @@ export interface FieldConfigInterface {
 	label?: string;
 	name?: string;
 	inputType?: string;
-	isFloat?: string;
-	numberFloat?: string;
+	textType?: string;
+	isDecimal?: string;
+	numberDecimal?: string;
 	required?: boolean;
 	tracking?: boolean;
 	security?: boolean;
@@ -25,6 +26,7 @@ export interface FieldConfigInterface {
 	options?: SelectOption[];
 	collections?: any;
 	displayFormat?: string;
+	database?: string;
 	type: string;
 	value?: any;
 	modules?: string;
