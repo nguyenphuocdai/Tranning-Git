@@ -6,12 +6,16 @@ export const data: DialogRefInterface[] = [
 		valueView: "Text"
 	},
 	{
-		type: "select",
-		valueView: "Select"
-	},
-	{
 		type: "number",
 		valueView: "Number"
+	},
+	{
+		type: "money",
+		valueView: "Money"
+	},
+	{
+		type: "select",
+		valueView: "Select Options"
 	},
 	{
 		type: "lookup",
@@ -21,10 +25,7 @@ export const data: DialogRefInterface[] = [
 		type: "fupload",
 		valueView: "File Upload"
 	},
-	{
-		type: "money",
-		valueView: "Money"
-	},
+	
 	{
 		type: "datepicker",
 		valueView: "Date"
