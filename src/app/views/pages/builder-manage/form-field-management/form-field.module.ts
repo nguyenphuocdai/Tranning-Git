@@ -1,5 +1,8 @@
 import { DirectiveModule } from "./../../../../core/_base/metronic/directives/directive.module";
-import { NumericDirective } from "../../../../core/_base/metronic/index";
+import {
+	NumericDirective,
+	InputDirective
+} from "../../../../core/_base/metronic/index";
 import { CoreModule } from "../../../../core/core.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -18,7 +21,7 @@ import { InputComponent } from "./components/input/input.component";
 import { ButtonComponent } from "./components/button/button.component";
 import { SelectComponent } from "./components/select/select.component";
 import { DateComponent } from "./components/date/date.component";
-import { RadiobuttonComponent } from "./components/radiobutton/radiobutton.component";
+// import { RadiobuttonComponent } from "./components/radiobutton/radiobutton.component";
 import { CheckboxComponent } from "./components/checkbox/checkbox.component";
 import { DynamicFieldDirective } from "./components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.component";
@@ -93,7 +96,7 @@ const routes: Routes = [
 		FuploadDynamicComponent,
 		DatePickerComponent,
 		CRadioComponent,
-		RadiobuttonComponent,
+		// RadiobuttonComponent,
 		CheckboxComponent,
 		DynamicFieldDirective,
 		DynamicFormComponent,
@@ -106,7 +109,8 @@ const routes: Routes = [
 		MoneyComponent,
 		MaterialFileUploadComponent,
 		CButtonComponent,
-		StickyControlComponent
+		StickyControlComponent,
+		InputDirective
 	],
 	exports: [DynamicFieldDirective],
 	entryComponents: [
@@ -115,7 +119,7 @@ const routes: Routes = [
 		ButtonComponent,
 		SelectComponent,
 		DateComponent,
-		RadiobuttonComponent,
+		// RadiobuttonComponent,
 		CheckboxComponent,
 		NumberComponent,
 		LookupComponent,

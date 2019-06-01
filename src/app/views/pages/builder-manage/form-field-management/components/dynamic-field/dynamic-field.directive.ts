@@ -12,7 +12,7 @@ import { InputComponent } from "../input/input.component";
 import { ButtonComponent } from "../button/button.component";
 import { SelectComponent } from "../select/select.component";
 import { DateComponent } from "../date/date.component";
-import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
+// import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
 import { CheckboxComponent } from "../checkbox/checkbox.component";
 import { NumberComponent } from "../number/number.component";
 import { LookupComponent } from "../lookup/look-up.component";
@@ -23,7 +23,7 @@ const componentMapper = {
 	button: ButtonComponent,
 	select: SelectComponent,
 	datepicker: DateComponent,
-	radiobutton: RadiobuttonComponent,
+	// radiobutton: RadiobuttonComponent,
 	checkbox: CheckboxComponent,
 	number: NumberComponent,
 	lookup: LookupComponent,
