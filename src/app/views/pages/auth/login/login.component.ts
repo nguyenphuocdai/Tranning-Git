@@ -22,6 +22,8 @@ import { AuthNoticeService, AuthService, Login } from "../../../../core/auth";
 /**
  * ! Just example => Should be removed in development
  */
+//root
+//123456789hhccC
 const DEMO_PARAMS = {
 	EMAIL: "projectxadmin@risotech.vn",
 	PASSWORD: "theAteamVD"
@@ -119,7 +121,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				"",
 				Validators.compose([
 					Validators.required,
-					Validators.email,
+					// Validators.email,
 					Validators.minLength(3),
 					Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
 				])
