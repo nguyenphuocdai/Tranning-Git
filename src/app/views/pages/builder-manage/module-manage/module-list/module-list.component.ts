@@ -69,6 +69,10 @@ export class ModuleListComponent implements OnInit {
 			data: { data: this.solution },
 			panelClass: "",
 			maxHeight: "90vh"
+		}).afterClosed().subscribe(response => {
+			if(response){
+				this.ref.detectChanges();
+			}
 		});
 	}
 	onRemove(item) {
@@ -76,7 +80,6 @@ export class ModuleListComponent implements OnInit {
 		let message = "Are you sure delete item this?";
 		let messageNotDelete = "Delete module successfully !";
 
-		console.log(item);
 		let dialogRef = this.dialog.open(DialogConfirmComponent, {
 			width: "400px",
 			data: { title: title, message: message, itemDelete: item }
@@ -114,6 +117,7 @@ export class ModuleListComponent implements OnInit {
 		});
 		dialogRef.afterClosed().subscribe(res => {
 			if (!res) {
+				this.ref.detectChanges();
 				return;
 			}
 			// binding again when submit data edit
