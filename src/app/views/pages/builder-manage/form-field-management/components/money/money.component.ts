@@ -4,7 +4,7 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 @Component({
 	selector: "app-money",
 	template: `
-		<div class="form-group kt-form__group">
+		<div class="">
 			<mat-form-field [formGroup]="group">
 				<span matPrefix>{{ unit }} &nbsp;</span>
 				<input
@@ -14,10 +14,9 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 					ktInputToggleComma
 					matInput
 					placeholder="{{ field.name }}"
-					maxlength="24"
 					[formControlName]="field.name"
 					[placeholder]="field.name"
-					[type]="field.inputType"
+					(blur)="onBlur()"
 				/>
 				<mat-icon
 					matSuffix
@@ -46,5 +45,16 @@ export class MoneyDynamicComponent implements OnInit {
 	constructor() {}
 	ngOnInit() {
 		this.unit = this.field.unitMoney["unit"];
+	}
+	onBlur() {
+		let controlValue = this.group.controls[this.field.name].value;
+		if (!controlValue) {
+			return;
+		}
+		let valueAddcomma = controlValue.replace(
+			/\B(?=(\d{3})+(?!\d))/g,
+			","
+		);
+		this.group.controls[this.field.name].setValue(valueAddcomma);
 	}
 }

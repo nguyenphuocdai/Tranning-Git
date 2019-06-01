@@ -50,16 +50,14 @@ export class MoneyComponent implements OnInit {
 
 	ngOnInit() {
 		this.createForm();
-		
+
 		if (this.valueEdit) {
 			let obj: any = this.valueEdit.unitMoney;
 			this.rfMoney.controls["name"].setValue(this.valueEdit.name);
 			this.rfMoney.controls["required"].setValue(this.valueEdit.required);
 			this.rfMoney.controls["security"].setValue(this.valueEdit.security);
 			this.rfMoney.controls["tracking"].setValue(this.valueEdit.tracking);
-			this.rfMoney.controls["fieldType"].setValue(
-				this.valueEdit.fieldType
-			);
+			this.rfMoney.controls["database"].setValue(this.valueEdit.database);
 			this.rfMoney.controls["unitMoney"].setValue(
 				this.valueEdit.unitMoney
 			);
@@ -67,7 +65,6 @@ export class MoneyComponent implements OnInit {
 			this.rfMoney.controls["description"].setValue(
 				this.valueEdit.description
 			);
-
 			this.dialogRefData.type = this.valueEdit.type;
 			this.dialogRefData.valueView = this.valueEdit.inputType;
 
@@ -91,7 +88,7 @@ export class MoneyComponent implements OnInit {
 			name: ["", Validators.required],
 			required: new FormControl(false),
 			unitMoney: ["", Validators.required],
-			fieldType: ["", Validators.required],
+			database: ["", Validators.required],
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
@@ -135,9 +132,8 @@ export class MoneyComponent implements OnInit {
 		let errorMessage = this.rfMoney.controls["errorMessage"].value;
 		let isSecurity = this.rfMoney.controls["security"].value;
 		let isTracking = this.rfMoney.controls["tracking"].value;
-		let fieldType = this.rfMoney.controls["fieldType"].value;
 		let description = this.rfMoney.controls["description"].value;
-
+		let database = this.rfMoney.controls["database"].value;
 		let unitMoney = this.rfMoney.controls["unitMoney"].value;
 
 		for (let item of this.listUnit) {
@@ -158,8 +154,8 @@ export class MoneyComponent implements OnInit {
 			security: isSecurity,
 			tracking: isTracking,
 			unitMoney: unitMoney,
-			fieldType: fieldType,
 			description: description,
+			database: database,
 			required: isRequired,
 			validations: []
 		};
