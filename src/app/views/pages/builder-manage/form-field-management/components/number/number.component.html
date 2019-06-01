@@ -1,0 +1,30 @@
+<div class="">
+        <mat-form-field [formGroup]="group">
+            <input
+                matInput
+                [formControlName]="field.name"
+                [placeholder]="field.name"
+                (keydown)="onNumberChange($event)"
+            />
+            <!-- <mat-hint *ngIf="isShowMinMaxError" class="mat-error"
+                >Vui lòng nhập trong khoảng {{ field.minValue }} -
+                {{ field.maxValue }}
+            </mat-hint> -->
+            <mat-icon
+                *ngIf="field.description"
+                color="primary"
+                matSuffix
+                matTooltip="{{ field.description }}"
+                >help</mat-icon
+            >
+            <ng-container
+                *ngFor="let validation of field.validations"
+                ngProjectAs="mat-error"
+            >
+                <mat-error
+                    *ngIf="group.get(field.name).hasError(validation.name)"
+                    >{{ validation.message }}</mat-error
+                >
+            </ng-container>
+        </mat-form-field>
+    </div>

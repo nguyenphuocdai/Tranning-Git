@@ -32,10 +32,11 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("numberComponentSubmit") submitForm = new EventEmitter<object>();
 	previewInput: any;
+	previewDecimal: string = "";
 	toppings = new FormControl();
 	rfNumber: FormGroup;
 	// isShowMinMax: boolean;
-	isShowMinMaxValue: boolean;
+	// isShowMinMaxValue: boolean;
 	toppingList = [
 		"Extra cheese",
 		"Mushroom",
@@ -61,24 +62,26 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			this.rfNumber.controls["required"].setValue(
 				this.valueEdit.required
 			);
+			this.rfNumber.controls["database"].setValue(
+				this.valueEdit.database
+			);
 			this.rfNumber.controls["security"].setValue(
 				this.valueEdit.security
 			);
 			this.rfNumber.controls["tracking"].setValue(
 				this.valueEdit.tracking
 			);
-			this.rfNumber.controls["displayFormat"].setValue(
-				this.valueEdit.displayFormat
-			);
-			this.rfNumber.controls["fieldType"].setValue(
-				this.valueEdit.fieldType
-			);
+			// this.rfNumber.controls["fieldType"].setValue(
+			// 	this.valueEdit.fieldType
+			// );
 			this.rfNumber.controls["minValue"].setValue(
 				this.valueEdit.minValue
 			);
-			this.rfNumber.controls["isFloat"].setValue(this.valueEdit.isFloat);
-			this.rfNumber.controls["numberFloat"].setValue(
-				this.valueEdit.numberFloat
+			this.rfNumber.controls["isDecimal"].setValue(
+				this.valueEdit.isDecimal
+			);
+			this.rfNumber.controls["numberDecimal"].setValue(
+				this.valueEdit.numberDecimal
 			);
 			this.rfNumber.controls["maxValue"].setValue(
 				this.valueEdit.maxValue
@@ -120,14 +123,9 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			security: new FormControl(false),
 			tracking: new FormControl(false),
 			description: [""],
-			fieldType: ["", Validators.required],
-			displayFormat: ["", Validators.required],
-			// parttern: ["", Validators.required],
-			minValue: ["", Validators.required],
-			maxValue: ["", Validators.required],
-			isFloat: new FormControl(false),
-			numberFloat: ["", Validators.required]
-			// previewInput: ["", Validators.nullValidator]
+			isDecimal: new FormControl(false),
+			numberDecimal: ["", Validators.required],
+			database: ["", Validators.required]
 		});
 	}
 
@@ -168,14 +166,11 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 		let inputType = this.dialogRefData.valueView;
 		let isRequired = this.rfNumber.controls["required"].value;
 		let errorMessage = this.rfNumber.controls["errorMessage"].value;
-		let isFloat = this.rfNumber.controls["isFloat"].value;
-		let numberFloat = this.rfNumber.controls["numberFloat"].value;
+		let isDecimal = this.rfNumber.controls["isDecimal"].value;
+		let numberDecimal = this.rfNumber.controls["numberDecimal"].value;
 		let isSecurity = this.rfNumber.controls["security"].value;
 		let isTracking = this.rfNumber.controls["tracking"].value;
-		let displayFormat = this.rfNumber.controls["displayFormat"].value;
-		let fieldType = this.rfNumber.controls["fieldType"].value;
-		let minValue = this.rfNumber.controls["minValue"].value;
-		let maxValue = this.rfNumber.controls["maxValue"].value;
+		let database = this.rfNumber.controls["database"].value;
 		let description = this.rfNumber.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
@@ -187,17 +182,14 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			label: label,
 			inputType: inputType,
 			name: label,
-			isFloat: isFloat,
-			numberFloat: numberFloat,
+			isDecimal: isDecimal,
+			numberDecimal: numberDecimal,
 			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
-			displayFormat: displayFormat,
 			description: description,
-			fieldType: fieldType,
-			validations: [],
-			minValue: minValue,
-			maxValue: maxValue
+			database: database,
+			validations: []
 		};
 		if (isRequired === true) {
 			let objValidator = {
@@ -207,67 +199,75 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			};
 			mergedObj.validations.push(objValidator);
 		}
-		// if (isPattern) {
-		// 	let objValidator = {
-		// 		name: "pattern",
-		// 		validator: Validators.pattern(isPattern),
-		// 		message: messagePattern
-		// 	};
-		// 	mergedObj.validations.push(objValidator);
-		// }
+
 		return mergedObj;
 	}
-	changeMinValue(newValue) {
-		console.log(newValue);
-		if (this.rfNumber.controls["minValue"].value.length === 0) {
-			return;
-		}
-		return newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-	removeCommas(controlName: string) {
-		if (
-			this.rfNumber.controls[controlName].value === undefined ||
-			this.rfNumber.controls[controlName].value.length <= 3
-		) {
-			return;
-		}
-		let value = this.rfNumber.controls[controlName].value.replace(",", "");
-		this.rfNumber.controls[controlName].setValue(value);
-	}
+	// changeMinValue(newValue) {
+	// 	console.log(newValue);
+	// 	if (this.rfNumber.controls["minValue"].value.length === 0) {
+	// 		return;
+	// 	}
+	// 	return newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	// }
+	// removeCommas(controlName: string) {
+	// 	if (
+	// 		this.rfNumber.controls[controlName].value === undefined ||
+	// 		this.rfNumber.controls[controlName].value.length <= 3
+	// 	) {
+	// 		return;
+	// 	}
+	// 	let value = this.rfNumber.controls[controlName].value.replace(",", "");
+	// 	this.rfNumber.controls[controlName].setValue(value);
+	// }
 
-	addCommas(controlName: string) {
-		if (
-			this.rfNumber.controls[controlName].value === undefined ||
-			this.rfNumber.controls[controlName].value.length <= 3
-		) {
-			return;
+	// addCommas(controlName: string) {
+	// 	if (
+	// 		this.rfNumber.controls[controlName].value === undefined ||
+	// 		this.rfNumber.controls[controlName].value.length <= 3
+	// 	) {
+	// 		return;
+	// 	}
+	// 	let value = this.rfNumber.controls[controlName].value.replace(
+	// 		/\B(?=(\d{3})+(?!\d))/g,
+	// 		","
+	// 	);
+	// 	this.rfNumber.controls[controlName].setValue(value);
+	// }
+
+	// onCheckMinMax() {
+	// 	this.isShowMinMaxValue = false;
+	// 	let minValue = this.rfNumber.controls["minValue"].value;
+	// 	let maxValue = this.rfNumber.controls["maxValue"].value;
+	// 	let previewInput = this.previewInput;
+
+	// 	if (
+	// 		minValue === undefined ||
+	// 		maxValue === undefined ||
+	// 		previewInput === undefined
+	// 	) {
+	// 		return;
+	// 	}
+	// 	minValue = parseFloat(minValue.replace(",", ""));
+	// 	maxValue = parseFloat(maxValue.replace(",", ""));
+	// 	previewInput = parseFloat(previewInput.replace(",", ""));
+
+	// 	if (previewInput < minValue || previewInput > maxValue) {
+	// 		this.isShowMinMaxValue = true;
+	// 	}
+	// }
+
+	onNumberDecimalChange(data) {
+		let valueDecimalNumber = this.rfNumber.controls["numberDecimal"].value;
+		let padEndNumber = parseInt(valueDecimalNumber, 10);
+		if (data) {
+			let eg = "500.";
+			this.previewDecimal = eg.padEnd(eg.length + padEndNumber, "0");
 		}
-		let value = this.rfNumber.controls[controlName].value.replace(
-			/\B(?=(\d{3})+(?!\d))/g,
-			","
-		);
-		this.rfNumber.controls[controlName].setValue(value);
-	}
 
-	onCheckMinMax() {
-		this.isShowMinMaxValue = false;
-		let minValue = this.rfNumber.controls["minValue"].value;
-		let maxValue = this.rfNumber.controls["maxValue"].value;
-		let previewInput = this.previewInput;
-
-		if (
-			minValue === undefined ||
-			maxValue === undefined ||
-			previewInput === undefined
-		) {
-			return;
-		}
-		minValue = parseFloat(minValue.replace(",", ""));
-		maxValue = parseFloat(maxValue.replace(",", ""));
-		previewInput = parseFloat(previewInput.replace(",", ""));
-
-		if (previewInput < minValue || previewInput > maxValue) {
-			this.isShowMinMaxValue = true;
+		if (this.previewInput) {
+			let arrSplitpreviewInput = this.previewInput.split(".");
+			this.previewInput = arrSplitpreviewInput[0];
+			this.previewInput = this.previewInput.concat(".").padEnd(this.previewInput.length + 1 + padEndNumber, "0");
 		}
 	}
 }
