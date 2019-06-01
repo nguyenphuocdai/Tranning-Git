@@ -1,21 +1,12 @@
 import { TypesUtilsService } from "./../../../../../../../core/_base/crud";
 import { KtSnackBarService } from "../../../../../../../core/_base/layout/services/kt-snack-bar.service";
-import {
-	Component,
-	OnInit,
-	Inject,
-	Input,
-	Output,
-	EventEmitter
-} from "@angular/core";
-import { MatDialogRef, ErrorStateMatcher } from "@angular/material";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { MatDialogRef } from "@angular/material";
 import {
 	FormControl,
 	Validators,
 	FormGroup,
 	FormBuilder,
-	FormGroupDirective,
-	NgForm,
 	FormArray
 } from "@angular/forms";
 import {
@@ -34,32 +25,9 @@ export class SelectOptionComponent implements OnInit {
 	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("selectComponentSubmit") submitForm = new EventEmitter<object>();
 
-	// validate if check box required
-	selected = new FormControl("valid", [
-		Validators.required,
-		Validators.pattern("valid")
-	]);
-
-	selectFormControl = new FormControl("valid", [
-		Validators.required,
-		Validators.pattern("valid")
-	]);
-
-	nativeSelectFormControl = new FormControl("valid", [
-		Validators.required,
-		Validators.pattern("valid")
-	]);
-
-	matcher = new MyErrorStateMatcher();
-
 	toppings = new FormControl();
 	rfSelectOption: FormGroup;
-	toppingList = [
-		{ id: 1, label: "Extra cheese", value: "Extracheese" },
-		{ id: 2, label: "Mushroom", value: "Mushroom" },
-		{ id: 3, label: "Onion", value: "Onion" },
-		{ id: 4, label: "Pepperoni", value: "Pepperoni" }
-	];
+
 	isSubmit: boolean = false;
 	addListOption = [{ id: 0, label: "", value: "" }];
 	mySelections: any;
@@ -72,7 +40,7 @@ export class SelectOptionComponent implements OnInit {
 
 	ngOnInit() {
 		this.createForm();
-		this.bindData();
+		// this.bindData();
 
 		if (this.valueEdit) {
 			this.rfSelectOption.controls["name"].setValue(this.valueEdit.label);
@@ -91,6 +59,9 @@ export class SelectOptionComponent implements OnInit {
 			this.rfSelectOption.controls["description"].setValue(
 				this.valueEdit.description
 			);
+			this.rfSelectOption.controls["database"].setValue(
+				this.valueEdit.database
+			);
 			this.dialogRefData.type = this.valueEdit.type;
 			this.dialogRefData.valueView = this.valueEdit.inputType;
 			this.addListOption = this.valueEdit.options;
@@ -108,14 +79,6 @@ export class SelectOptionComponent implements OnInit {
 	}
 
 	/**
-	 * bind data multi checkbox
-	 */
-	bindData() {
-		const anotherList: any[] = [this.toppingList[0], this.toppingList[1]];
-		this.toppings.setValue(anotherList);
-	}
-
-	/**
 	 * create form builder
 	 */
 	createForm() {
@@ -127,7 +90,8 @@ export class SelectOptionComponent implements OnInit {
 			tracking: new FormControl(false),
 			options: new FormArray([new FormControl(""), new FormControl("")]),
 			description: [""],
-			fieldType: ["", Validators.required]
+			fieldType: ["", Validators.required],
+			database: ["", Validators.required]
 		});
 	}
 
@@ -168,8 +132,6 @@ export class SelectOptionComponent implements OnInit {
 			);
 			this.isSubmit = false;
 			this.submitForm.emit(mergedObj);
-			// this.dialogRef.close(mergedObj);
-			console.log(mergedObj);
 		}, 3000);
 	}
 
@@ -183,18 +145,23 @@ export class SelectOptionComponent implements OnInit {
 		let isRequired = this.rfSelectOption.controls["required"].value;
 		let errorMessage = this.rfSelectOption.controls["errorMessage"].value;
 		let isSecurity = this.rfSelectOption.controls["security"].value;
+		let database = this.rfSelectOption.controls["database"].value;
 		let isTracking = this.rfSelectOption.controls["tracking"].value;
 		let fieldType = this.rfSelectOption.controls["fieldType"].value;
 		let description = this.rfSelectOption.controls["description"].value;
 		let options = this.addListOption;
 
 		let mergedObj: FieldConfigInterface = {
-			id: this._typesUtilsService.makeid(),
+			id:
+				this.valueEdit !== undefined
+					? this.valueEdit.id
+					: this._typesUtilsService.makeid(),
 			type: type,
 			label: label,
 			inputType: inputType,
 			name: this._typesUtilsService.removeUnicode(label),
 			required: isRequired,
+			database: database,
 			security: isSecurity,
 			tracking: isTracking,
 			options: options,
@@ -234,19 +201,5 @@ export class SelectOptionComponent implements OnInit {
 		} else {
 			this.toppings.setValue(this.mySelections);
 		}
-	}
-}
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-	isErrorState(
-		control: FormControl | null,
-		form: FormGroupDirective | NgForm | null
-	): boolean {
-		const isSubmitted = form && form.submitted;
-		return !!(
-			control &&
-			control.invalid &&
-			(control.dirty || control.touched || isSubmitted)
-		);
 	}
 }

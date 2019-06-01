@@ -28,15 +28,22 @@
                                     </mat-form-field>
                                 </div>
 
+                                <div class="form-group kt-form__group">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Enter database name" required [type]="'database'" [input]="rfSelectOption.get('database').value"  name="database" formControlName="database" />
+                                            <mat-hint align="start">Please enter database name</mat-hint>
+                                        </mat-form-field>
+                                    </div>
+                            
                                 <!-- Field Type -->
                                 <div class="form-group kt-form__group">
                                     <mat-form-field class="demo-full-width">
-                                        <mat-label>Field Type</mat-label>
+                                        <mat-label>Choice Type</mat-label>
                                         <mat-select required formControlName="fieldType" #fieldTypeRef>
-                                            <mat-option value="Option Set">Option Set</mat-option>
-                                            <mat-option value="MultiSelect Option Set">MultiSelect Option Set
+                                            <mat-option value="single">Single choice - dropdown</mat-option>
+                                            <mat-option value="multiple">Multiple choice - dropdown
                                             </mat-option>
-                                            <mat-option value="Two Option">Two Option</mat-option>
+                                            <mat-option value="radio">Radio</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -137,12 +144,9 @@
                             <div class="kt-form__section kt-form__section--first">
                                 <div class="form-group kt-form__group">
                                     <ng-container [ngSwitch]="rfSelectOption.get('fieldType').value">
-                                        <ng-container *ngSwitchCase="'Option Set'">
+                                        <ng-container *ngSwitchCase="'single'">
                                             <mat-form-field>
                                                 <mat-label>{{nameRef.value}}</mat-label>
-                                                <!-- <mat-select [formControl]="selected" [errorStateMatcher]="
-															matcher
-														"> -->
                                                 <mat-select [formControl]="toppings">
                                                     <mat-option *ngFor="
 																let topping of addListOption
@@ -160,26 +164,10 @@
 											>
                                                 <mat-hint>{{rfSelectOption.get('errorMessage').value}}
                                                 </mat-hint>
-                                                <!-- <mat-error *ngIf="
-															selected.hasError(
-																'required'
-															)
-														">You must make a selection
-													</mat-error>
-													<mat-error *ngIf="
-															selected.hasError(
-																'pattern'
-															) &&
-															!selected.hasError(
-																'required'
-															)
-														">
-														Your selection is invalid
-													</mat-error> -->
                                             </mat-form-field>
                                         </ng-container>
                                         <ng-container *ngSwitchCase="
-													'MultiSelect Option Set'
+													'multiple'
 												">
                                             <mat-form-field>
                                                 <mat-select placeholder="{{nameRef.value}}" [formControl]="toppings" multiple>
@@ -211,23 +199,21 @@
                                                 </mat-hint>
                                             </mat-form-field>
                                         </ng-container>
-                                        <ng-container *ngSwitchCase="'Two Option'">
-                                            <mat-form-field>
-                                                <mat-label>{{nameRef.value}}</mat-label>
-                                                <mat-select [formControl]="toppings" multiple (selectionChange)="
-															handleChangeTwoOptions()
-														">
-                                                    <mat-option *ngFor="
-																let topping of addListOption
-															" [value]="topping.value">{{ topping.label }}
-                                                    </mat-option>
-                                                </mat-select>
-                                                <mat-hint>{{rfSelectOption.get('errorMessage').value}}
-                                                </mat-hint>
-                                            </mat-form-field>
+                                        <ng-container *ngSwitchCase="'radio'">
+                                                <div class="form-group kt-form__group">
+                                                        <mat-radio-group>
+                                                            <mat-radio-button
+                                                                *ngFor="let item of addListOption"
+                                                                [value]="item.value"
+                                                                >{{ item.label }}</mat-radio-button
+                                                            >
+                                                        </mat-radio-group>
+                                                </div>
                                         </ng-container>
+
+
                                         <ng-container *ngSwitchDefault>
-                                            Please choosen field type !
+                                            Please choosen type !
                                         </ng-container>
                                     </ng-container>
                                 </div>

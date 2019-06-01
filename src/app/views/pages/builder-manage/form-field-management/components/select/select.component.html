@@ -1,6 +1,6 @@
-<div class="form-group kt-form__group">
+<div class="">
 	<ng-container [ngSwitch]="field.fieldType">
-		<ng-container *ngSwitchCase="'Option Set'">
+		<ng-container *ngSwitchCase="'single'">
 			<mat-form-field [formGroup]="group" class="kt-margin-r-20">
 				<mat-label>{{ field.label }}</mat-label>
 				<mat-select
@@ -32,7 +32,7 @@
 			</mat-form-field>
 		</ng-container>
 
-		<ng-container *ngSwitchCase="'MultiSelect Option Set'">
+		<ng-container *ngSwitchCase="'multiple'">
 			<mat-form-field [formGroup]="group" class="kt-margin-r-20">
 				<mat-select
 					[placeholder]="field.label"
@@ -64,8 +64,8 @@
 			</mat-form-field>
 		</ng-container>
 
-		<ng-container *ngSwitchCase="'Two Option'">
-			<mat-form-field [formGroup]="group" class="kt-margin-r-20">
+		<ng-container *ngSwitchCase="'radio'">
+			<!-- <mat-form-field [formGroup]="group" class="kt-margin-r-20">
 				<mat-label>{{ field.label }}</mat-label>
 				<mat-select
 					[placeholder]="field.label"
@@ -95,7 +95,18 @@
 						>{{ validation.message }}</mat-error
 					>
 				</ng-container>
-			</mat-form-field>
+			</mat-form-field> -->
+			<div class="demo-full-width margin-top" [formGroup]="group">
+					<label class="radio-label-padding pr-3">{{ field.label }}:</label>
+					<mat-radio-group [formControlName]="field.name">
+						<mat-radio-button
+							*ngFor="let item of field.options; let i = index"
+							[value]="item.value"
+							[checked]="item.value === field.options[0].value"
+							>{{ item.label }}</mat-radio-button
+						>
+					</mat-radio-group>
+				</div>
 		</ng-container>
 	</ng-container>
 </div>
