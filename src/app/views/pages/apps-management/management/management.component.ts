@@ -20,7 +20,7 @@ import { MatTableDataSource } from "@angular/material/table";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ManagementComponent implements OnInit {
-	displayedColumns: string[] = ["id", "name", "owner", "version"];
+	displayedColumns: string[] = ["id", "name", "owner", "version","actions"];
 	dataSource: MatTableDataSource<SolutionModel>;
 	listSolution: SolutionModel[] = [];
 	constructor(private localstorageService: LocalstorageService) {}
