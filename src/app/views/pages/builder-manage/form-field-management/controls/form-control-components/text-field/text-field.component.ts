@@ -31,17 +31,8 @@ export class TextFieldComponent implements OnInit {
 	@Input("valueEdit") valueEdit: FieldConfigInterface;
 	@Output("textComponentSubmit") submitForm = new EventEmitter<object>();
 
-	toppings = new FormControl();
 	rfField: FormGroup;
-	toppingList = [
-		"Extra cheese",
-		"Mushroom",
-		"Onion",
-		"Pepperoni",
-		"Sausage",
-		"Tomato"
-	];
-	emailFormControl = new FormControl("", [Validators.required]);
+
 	isSubmit: boolean = false;
 	constructor(
 		private dialogRef: MatDialogRef<ModalDialogComponent>,
@@ -59,16 +50,13 @@ export class TextFieldComponent implements OnInit {
 			this.rfField.controls["required"].setValue(this.valueEdit.required);
 			this.rfField.controls["security"].setValue(this.valueEdit.security);
 			this.rfField.controls["tracking"].setValue(this.valueEdit.tracking);
-			this.rfField.controls["displayFormat"].setValue(
-				this.valueEdit.displayFormat
-			);
-			this.rfField.controls["fieldType"].setValue(
-				this.valueEdit.fieldType
+			this.rfField.controls["database"].setValue(this.valueEdit.database);
+			this.rfField.controls["textType"].setValue(
+				this.valueEdit.textType
 			);
 			this.rfField.controls["description"].setValue(
 				this.valueEdit.description
 			);
-			this.rfField.controls["pattern"].setValue(this.valueEdit.pattern);
 			if (this.valueEdit.validations.length !== 0) {
 				this.valueEdit.validations.forEach((element, index) => {
 					if (element.name === "required") {
@@ -80,29 +68,19 @@ export class TextFieldComponent implements OnInit {
 			}
 		}
 	}
-
-	/**
-	 * bind data multi checkbox
-	 */
-	bindData() {
-		const anotherList: any[] = [this.toppingList[0], this.toppingList[1]];
-		this.toppings.setValue(anotherList);
-	}
-
 	/**
 	 * create form builder
 	 */
 	createForm() {
 		this.rfField = this.fbField.group({
 			name: ["", Validators.required],
+			textType: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
 			description: [""],
-			fieldType: ["", Validators.required],
-			displayFormat: ["", Validators.required],
-			pattern: ["", Validators.required]
+			database: ["", Validators.required],
 		});
 	}
 
@@ -137,13 +115,11 @@ export class TextFieldComponent implements OnInit {
 		let inputType = this.dialogRefData.valueView;
 		let isRequired = this.rfField.controls["required"].value;
 		let errorMessage = this.rfField.controls["errorMessage"].value;
-		let pattern = this.rfField.controls["pattern"].value;
-		let messagePattern = "Accept only text";
 		let isSecurity = this.rfField.controls["security"].value;
 		let isTracking = this.rfField.controls["tracking"].value;
-		let displayFormat = this.rfField.controls["displayFormat"].value;
-		let fieldType = this.rfField.controls["fieldType"].value;
 		let description = this.rfField.controls["description"].value;
+		let textType = this.rfField.controls["textType"].value;
+		let database = this.rfField.controls["database"].value;
 
 		let mergedObj: FieldConfigInterface = {
 			id:
@@ -158,9 +134,8 @@ export class TextFieldComponent implements OnInit {
 			security: isSecurity,
 			tracking: isTracking,
 			description: description,
-			displayFormat: displayFormat,
-			fieldType: fieldType,
-			pattern: pattern,
+			textType: textType,
+			database: database,
 			validations: []
 		};
 		if (isRequired === true) {
@@ -168,14 +143,6 @@ export class TextFieldComponent implements OnInit {
 				name: "required",
 				validator: Validators.required,
 				message: errorMessage
-			};
-			mergedObj.validations.push(objValidator);
-		}
-		if (pattern) {
-			let objValidator = {
-				name: "pattern",
-				validator: Validators.pattern(pattern),
-				message: messagePattern
 			};
 			mergedObj.validations.push(objValidator);
 		}
