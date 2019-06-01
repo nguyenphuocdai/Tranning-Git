@@ -64,6 +64,9 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 			this.rfFupload.controls["fieldType"].setValue(
 				this.valueEdit.fieldType
 			);
+			this.rfFupload.controls["database"].setValue(
+				this.valueEdit.database
+			);
 
 			this.dialogRefData.type = this.valueEdit.type;
 			this.dialogRefData.valueView = this.valueEdit.inputType;
@@ -90,7 +93,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
-			// description: [""],
+			database: ["", Validators.required],
 			fieldType: ["", Validators.required]
 		});
 	}
@@ -131,6 +134,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 		let errorMessage = this.rfFupload.controls["errorMessage"].value;
 		let isSecurity = this.rfFupload.controls["security"].value;
 		let isTracking = this.rfFupload.controls["tracking"].value;
+		let database = this.rfFupload.controls["database"].value;
 		let fieldType = this.rfFupload.controls["fieldType"].value;
 
 		let mergedObj: FieldConfigInterface = {
@@ -146,6 +150,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 			security: isSecurity,
 			tracking: isTracking,
 			fieldType: fieldType,
+			database: database,
 			textFupload: this.fuploadText,
 			validations: []
 		};

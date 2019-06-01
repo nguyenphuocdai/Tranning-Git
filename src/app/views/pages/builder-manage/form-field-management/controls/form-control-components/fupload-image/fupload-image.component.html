@@ -61,6 +61,13 @@
 										</mat-select>
 									</mat-form-field>
 								</div>
+
+								<div class="form-group kt-form__group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Enter database name" required [type]="'database'" [input]="rfFupload.get('database').value"  name="database" formControlName="database" />
+                                        <mat-hint align="start">Please enter database name</mat-hint>
+                                    </mat-form-field>
+                                </div>
 								<!--End::Label-->
 
 								<!--Begin::Required-->
