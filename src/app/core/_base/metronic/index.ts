@@ -7,6 +7,7 @@ export { OffcanvasDirective } from "./directives/offcanvas.directive";
 export { ScrollTopDirective } from "./directives/scroll-top.directive";
 export { TabClickEventDirective } from "./directives/tab-click-event.directive";
 export { ToggleDirective } from "./directives/toggle.directive";
+export { InputDirective } from "./directives/input.directive";
 // Models
 export { DataTableItemModel } from "./models/datatable-item.model";
 export { ExternalCodeExample } from "./models/external-code-example";

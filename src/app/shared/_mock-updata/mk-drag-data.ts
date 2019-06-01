@@ -3,11 +3,11 @@ import { DialogRefInterface } from "../_model-app/dialog-ref.interface";
 export const data: DialogRefInterface[] = [
 	{
 		type: "input",
-		valueView: "Text Field"
+		valueView: "Text"
 	},
 	{
 		type: "select",
-		valueView: "Select Option"
+		valueView: "Select"
 	},
 	{
 		type: "number",
@@ -15,7 +15,7 @@ export const data: DialogRefInterface[] = [
 	},
 	{
 		type: "lookup",
-		valueView: "Lookup Field"
+		valueView: "Lookup"
 	},
 	{
 		type: "fupload",
@@ -23,18 +23,18 @@ export const data: DialogRefInterface[] = [
 	},
 	{
 		type: "money",
-		valueView: "Money Field"
+		valueView: "Money"
 	},
 	{
 		type: "datepicker",
-		valueView: "Date Picker"
+		valueView: "Date"
 	},
 	{
 		type: "button",
 		valueView: "Button"
-	},
-	{
-		type: "radiobutton",
-		valueView: "Radio"
 	}
+	// {
+	// 	type: "radiobutton",
+	// 	valueView: "Radio"
+	// }
 ];
