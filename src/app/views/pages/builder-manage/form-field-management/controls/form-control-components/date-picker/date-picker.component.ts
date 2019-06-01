@@ -59,6 +59,18 @@ export class DatePickerComponent implements OnInit {
 			this.rfField.controls["fieldType"].setValue(
 				this.valueEdit.fieldType
 			);
+			this.dialogRefData.type = this.valueEdit.type;
+			this.dialogRefData.valueView = this.valueEdit.inputType;
+
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfField.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
 		}
 	}
 
@@ -125,6 +137,7 @@ export class DatePickerComponent implements OnInit {
 			security: isSecurity,
 			tracking: isTracking,
 			fieldType: fieldType,
+			required: isRequired,
 			database: database,
 			validations: []
 		};

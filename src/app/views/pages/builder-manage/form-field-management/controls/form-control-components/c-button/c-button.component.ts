@@ -54,6 +54,19 @@ export class CButtonComponent implements OnInit {
 			this.rfButton.controls["database"].setValue(
 				this.valueEdit.database
 			);
+
+			this.dialogRefData.type = this.valueEdit.type;
+			this.dialogRefData.valueView = this.valueEdit.inputType;
+
+			if (this.valueEdit.validations.length !== 0) {
+				this.valueEdit.validations.forEach((element, index) => {
+					if (element.name === "required") {
+						this.rfButton.controls["errorMessage"].setValue(
+							element.message
+						);
+					}
+				});
+			}
 		}
 	}
 
@@ -115,6 +128,7 @@ export class CButtonComponent implements OnInit {
 			label: label,
 			inputType: inputType,
 			name: label,
+			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			database: database,
