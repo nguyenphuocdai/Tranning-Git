@@ -1,32 +1,50 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import { NavigationEnd, Router } from '@angular/router';
-import * as objectPath from 'object-path';
-import { LayoutConfigService, MenuAsideService, MenuOptions } from '../../../../core/_base/layout';
-import { OffcanvasOptions } from '../../../../core/_base/metronic';
-import { HtmlClassService } from '../html-class.service';
+import { ModuleModel } from "./../../../../shared/_model-app/module.model";
+import { AppSettings } from "./../../../../shared/_constant/app-setting";
+import { LocalstorageService } from "./../../../../shared/_services/local-storage-service/localstorage.service";
+import { SolutionModel } from "./../../../../shared/_model-app/solution.model";
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	OnInit,
+	Renderer2,
+	ViewChild
+} from "@angular/core";
+import { filter } from "rxjs/operators";
+import { NavigationEnd, Router, ActivatedRoute } from "@angular/router";
+import * as objectPath from "object-path";
+import {
+	LayoutConfigService,
+	MenuAsideService,
+	MenuOptions
+} from "../../../../core/_base/layout";
+import { OffcanvasOptions } from "../../../../core/_base/metronic";
+import { HtmlClassService } from "../html-class.service";
 
 @Component({
-	selector: 'kt-aside-left',
-	templateUrl: './aside-left.component.html',
-	styleUrls: ['./aside-left.component.scss'],
+	selector: "kt-aside-left",
+	templateUrl: "./aside-left.component.html",
+	styleUrls: ["./aside-left.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AsideLeftComponent implements OnInit, AfterViewInit {
+	@ViewChild("asideMenu") asideMenu: ElementRef;
 
-	@ViewChild('asideMenu') asideMenu: ElementRef;
-
-	currentRouteUrl: string = '';
+	currentRouteUrl: string = "";
 	insideTm: any;
 	outsideTm: any;
 
+	listSolutions: SolutionModel[] = [];
+	listModules: ModuleModel[] = [];
+
 	menuCanvasOptions: OffcanvasOptions = {
-		baseClass: 'kt-aside',
+		baseClass: "kt-aside",
 		overlay: true,
-		closeBy: 'kt_aside_close_btn',
+		closeBy: "kt_aside_close_btn",
 		toggleBy: {
-			target: 'kt_aside_mobile_toggler',
-			state: 'kt-header-mobile__toolbar-toggler--active'
+			target: "kt_aside_mobile_toggler",
+			state: "kt-header-mobile__toolbar-toggler--active"
 		}
 	};
 
@@ -38,10 +56,10 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		submenu: {
 			desktop: {
 				// by default the menu mode set to accordion in desktop mode
-				default: 'dropdown',
+				default: "dropdown"
 			},
-			tablet: 'accordion', // menu set to accordion in tablet mode
-			mobile: 'accordion' // menu set to accordion in mobile mode
+			tablet: "accordion", // menu set to accordion in tablet mode
+			mobile: "accordion" // menu set to accordion in mobile mode
 		},
 
 		// accordion setup
@@ -55,30 +73,72 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		public menuAsideService: MenuAsideService,
 		public layoutConfigService: LayoutConfigService,
 		private router: Router,
-		private render: Renderer2
-	) {
-	}
+		private render: Renderer2,
+		private localstorageService: LocalstorageService,
+		private activatedRoute: ActivatedRoute,
+	) {}
 
-	ngAfterViewInit(): void {
-	}
+	ngAfterViewInit(): void {}
 
 	ngOnInit() {
 		this.currentRouteUrl = this.router.url.split(/[?#]/)[0];
 
 		this.router.events
 			.pipe(filter(event => event instanceof NavigationEnd))
-			.subscribe(event => this.currentRouteUrl = this.router.url.split(/[?#]/)[0]);
+			.subscribe(
+				event =>
+					(this.currentRouteUrl = this.router.url.split(/[?#]/)[0])
+			);
 
 		const config = this.layoutConfigService.getConfig();
 
-		if (objectPath.get(config, 'aside.menu.dropdown') !== true && objectPath.get(config, 'aside.self.fixed')) {
-			this.render.setAttribute(this.asideMenu.nativeElement, 'data-ktmenu-scroll', '1');
+		if (
+			objectPath.get(config, "aside.menu.dropdown") !== true &&
+			objectPath.get(config, "aside.self.fixed")
+		) {
+			this.render.setAttribute(
+				this.asideMenu.nativeElement,
+				"data-ktmenu-scroll",
+				"1"
+			);
 		}
 
-		if (objectPath.get(config, 'aside.menu.dropdown')) {
-			this.render.setAttribute(this.asideMenu.nativeElement, 'data-ktmenu-dropdown', '1');
+		if (objectPath.get(config, "aside.menu.dropdown")) {
+			this.render.setAttribute(
+				this.asideMenu.nativeElement,
+				"data-ktmenu-dropdown",
+				"1"
+			);
 			// tslint:disable-next-line:max-line-length
-			this.render.setAttribute(this.asideMenu.nativeElement, 'data-ktmenu-dropdown-timeout', objectPath.get(config, 'aside.menu.submenu.dropdown.hover-timeout'));
+			this.render.setAttribute(
+				this.asideMenu.nativeElement,
+				"data-ktmenu-dropdown-timeout",
+				objectPath.get(
+					config,
+					"aside.menu.submenu.dropdown.hover-timeout"
+				)
+			);
+		}
+
+		// module solution
+		this.listSolutions = this.localstorageService.get(
+			AppSettings.SOLUTIONSTORAGE
+		);
+		let arrModules = this.localstorageService.get(
+			AppSettings.MODULESTORAGE
+		);
+
+		for (let i = 0; i < this.listSolutions.length; i++) {
+			const itemSolution: SolutionModel = this.listSolutions[i];
+			for (let j = 0; j < arrModules.length; j++) {
+				const itemModule: ModuleModel = arrModules[j];
+				if (itemModule.solutionId === itemSolution.name) {
+					if (this.listSolutions[i].modules == undefined) {
+						this.listSolutions[i].modules = [];
+					}
+					this.listSolutions[i].modules.push(itemModule);
+				}
+			}
 		}
 	}
 
@@ -113,7 +173,7 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 	 */
 	mouseEnter(e: Event) {
 		// check if the left aside menu is fixed
-		if (document.body.classList.contains('kt-aside--fixed')) {
+		if (document.body.classList.contains("kt-aside--fixed")) {
 			if (this.outsideTm) {
 				clearTimeout(this.outsideTm);
 				this.outsideTm = null;
@@ -121,10 +181,19 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 
 			this.insideTm = setTimeout(() => {
 				// if the left aside menu is minimized
-				if (document.body.classList.contains('kt-aside--minimize') && KTUtil.isInResponsiveRange('desktop')) {
+				if (
+					document.body.classList.contains("kt-aside--minimize") &&
+					KTUtil.isInResponsiveRange("desktop")
+				) {
 					// show the left aside menu
-					this.render.removeClass(document.body, 'kt-aside--minimize');
-					this.render.addClass(document.body, 'kt-aside--minimize-hover');
+					this.render.removeClass(
+						document.body,
+						"kt-aside--minimize"
+					);
+					this.render.addClass(
+						document.body,
+						"kt-aside--minimize-hover"
+					);
 				}
 			}, 50);
 		}
@@ -135,7 +204,7 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 	 * @param e Event
 	 */
 	mouseLeave(e: Event) {
-		if (document.body.classList.contains('kt-aside--fixed')) {
+		if (document.body.classList.contains("kt-aside--fixed")) {
 			if (this.insideTm) {
 				clearTimeout(this.insideTm);
 				this.insideTm = null;
@@ -143,52 +212,67 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 
 			this.outsideTm = setTimeout(() => {
 				// if the left aside menu is expand
-				if (document.body.classList.contains('kt-aside--minimize-hover') && KTUtil.isInResponsiveRange('desktop')) {
+				if (
+					document.body.classList.contains(
+						"kt-aside--minimize-hover"
+					) &&
+					KTUtil.isInResponsiveRange("desktop")
+				) {
 					// hide back the left aside menu
-					this.render.removeClass(document.body, 'kt-aside--minimize-hover');
-					this.render.addClass(document.body, 'kt-aside--minimize');
+					this.render.removeClass(
+						document.body,
+						"kt-aside--minimize-hover"
+					);
+					this.render.addClass(document.body, "kt-aside--minimize");
 				}
 			}, 100);
 		}
 	}
 
 	getItemCssClasses(item) {
-		let classes = 'kt-menu__item';
+		let classes = "kt-menu__item";
 
-		if (objectPath.get(item, 'submenu')) {
-			classes += ' kt-menu__item--submenu';
+		if (objectPath.get(item, "submenu")) {
+			classes += " kt-menu__item--submenu";
 		}
 
 		if (!item.submenu && this.isMenuItemIsActive(item)) {
-			classes += ' kt-menu__item--active kt-menu__item--here';
+			classes += " kt-menu__item--active kt-menu__item--here";
 		}
 
 		if (item.submenu && this.isMenuItemIsActive(item)) {
-			classes += ' kt-menu__item--open kt-menu__item--here';
+			classes += " kt-menu__item--open kt-menu__item--here";
 		}
 
 		// custom class for menu item
-		if (objectPath.has(item, 'custom-class')) {
-			classes += ' ' + item['custom-class'];
+		if (objectPath.has(item, "custom-class")) {
+			classes += " " + item["custom-class"];
 		}
 
-		if (objectPath.get(item, 'icon-only')) {
-			classes += ' kt-menu__item--icon-only';
+		if (objectPath.get(item, "icon-only")) {
+			classes += " kt-menu__item--icon-only";
 		}
 
 		return classes;
 	}
 
 	getItemAttrSubmenuToggle(item) {
-		let toggle = 'hover';
-		if (objectPath.get(item, 'toggle') === 'click') {
-			toggle = 'click';
-		} else if (objectPath.get(item, 'submenu.type') === 'tabs') {
-			toggle = 'tabs';
+		let toggle = "hover";
+		if (objectPath.get(item, "toggle") === "click") {
+			toggle = "click";
+		} else if (objectPath.get(item, "submenu.type") === "tabs") {
+			toggle = "tabs";
 		} else {
 			// submenu toggle default to 'hover'
 		}
 
 		return toggle;
+	}
+
+	handleNavigate(item) {
+		const url = `${this.layoutConfigService.getCurrentMainRoute()}/management/sln/${
+			item.name
+		}`;
+		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
 	}
 }

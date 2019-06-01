@@ -1,13 +1,59 @@
 <!-- BEGIN: Left Aside -->
-<div ktOffcanvas [options]="menuCanvasOptions" class="kt-aside kt-aside--fixed kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
+<div ktOffcanvas [options]="menuCanvasOptions"
+	class="kt-aside kt-aside--fixed kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
 	<kt-brand></kt-brand>
 	<!-- BEGIN: Aside Menu -->
 	<div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
-		<div #asideMenu ktMenu [options]="menuOptions" [perfectScrollbar]="{wheelPropagation: false}" [ngStyle]="{'max-height': '90vh', 'position': 'relative'}" id="kt_aside_menu" class="kt-aside-menu"
+		<div #asideMenu ktMenu [options]="menuOptions" [perfectScrollbar]="{wheelPropagation: false}"
+			[ngStyle]="{'max-height': '90vh', 'position': 'relative'}" id="kt_aside_menu" class="kt-aside-menu"
 			[attr.data-ktmenu-vertical]="1" (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)"
 			[ngClass]="htmlClassService.getClasses('aside_menu', true)">
 			<ul class="kt-menu__nav" [ngClass]="htmlClassService.getClasses('aside_menu_nav', true)">
 				<ng-container [ngTemplateOutlet]="menuListTemplate"></ng-container>
+
+				<!-- module solution -->
+				<li class="kt-menu__section ">
+					<h4 class="kt-menu__section-text">Management Solution</h4>
+					<i class="kt-menu__section-icon flaticon-more-v2"></i>
+				</li>
+
+				<!-- kt-menu__item--open -->
+				<li class="kt-menu__item kt-menu__item--submenu kt-menu__item kt-menu__item--s"
+					aria-haspopup="true" data-ktmenu-submenu-toggle="hover" *ngFor="let solution of listSolutions">
+					<a href="javascript:;" class="kt-menu__link"
+						[ngClass]="{'kt-menu__toggle': solution.modules?.length > 0}">
+						<span class="kt-menu__link-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+								width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+									<path
+										d="M2.56066017,10.6819805 L4.68198052,8.56066017 C5.26776695,7.97487373 6.21751442,7.97487373 6.80330086,8.56066017 L8.9246212,10.6819805 C9.51040764,11.267767 9.51040764,12.2175144 8.9246212,12.8033009 L6.80330086,14.9246212 C6.21751442,15.5104076 5.26776695,15.5104076 4.68198052,14.9246212 L2.56066017,12.8033009 C1.97487373,12.2175144 1.97487373,11.267767 2.56066017,10.6819805 Z M14.5606602,10.6819805 L16.6819805,8.56066017 C17.267767,7.97487373 18.2175144,7.97487373 18.8033009,8.56066017 L20.9246212,10.6819805 C21.5104076,11.267767 21.5104076,12.2175144 20.9246212,12.8033009 L18.8033009,14.9246212 C18.2175144,15.5104076 17.267767,15.5104076 16.6819805,14.9246212 L14.5606602,12.8033009 C13.9748737,12.2175144 13.9748737,11.267767 14.5606602,10.6819805 Z"
+										id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+									<path
+										d="M8.56066017,16.6819805 L10.6819805,14.5606602 C11.267767,13.9748737 12.2175144,13.9748737 12.8033009,14.5606602 L14.9246212,16.6819805 C15.5104076,17.267767 15.5104076,18.2175144 14.9246212,18.8033009 L12.8033009,20.9246212 C12.2175144,21.5104076 11.267767,21.5104076 10.6819805,20.9246212 L8.56066017,18.8033009 C7.97487373,18.2175144 7.97487373,17.267767 8.56066017,16.6819805 Z M8.56066017,4.68198052 L10.6819805,2.56066017 C11.267767,1.97487373 12.2175144,1.97487373 12.8033009,2.56066017 L14.9246212,4.68198052 C15.5104076,5.26776695 15.5104076,6.21751442 14.9246212,6.80330086 L12.8033009,8.9246212 C12.2175144,9.51040764 11.267767,9.51040764 10.6819805,8.9246212 L8.56066017,6.80330086 C7.97487373,6.21751442 7.97487373,5.26776695 8.56066017,4.68198052 Z"
+										id="Combined-Shape" fill="#000000"></path>
+								</g>
+							</svg>
+						</span>
+						<span class="kt-menu__link-text">{{solution.name}}</span>
+						<i class="kt-menu__ver-arrow la la-angle-right" *ngIf="solution.modules?.length > 0"></i>
+					</a>
+					<div class="kt-menu__submenu " kt-hidden-height="200">
+						<span class="kt-menu__arrow"></span>
+						<ul class="kt-menu__subnav">
+							<li class="kt-menu__item " aria-haspopup="true" *ngFor="let module of solution.modules">
+								<a href="javascript:;" (click)="handleNavigate(module)"
+									class="kt-menu__link "><i
+										class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
+										class="kt-menu__link-text">{{module.name}}</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<!-- module solution -->
+
 			</ul>
 		</div>
 	</div>
@@ -27,15 +73,18 @@
 </ng-template>
 
 <ng-template #menuItemTemplate let-item="item" let-parentItem="parentItem">
-	<ng-container *ngIf="!item.permission" [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
+	<ng-container *ngIf="!item.permission" [ngTemplateOutlet]="menuItemInnerTemplate"
+		[ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
 	<ng-template *ngIf="item.permission" ngxPermissionsOnly="{{ item.permission }}">
-		<ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
+		<ng-container [ngTemplateOutlet]="menuItemInnerTemplate"
+			[ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
 	</ng-template>
 </ng-template>
 
+
+
 <ng-template #menuItemInnerTemplate let-item="item" let-parentItem="parentItem">
-	<li [attr.aria-haspopup]="true"
-		[attr.data-ktmenu-submenu-toggle]="getItemAttrSubmenuToggle(item)"
+	<li [attr.aria-haspopup]="true" [attr.data-ktmenu-submenu-toggle]="getItemAttrSubmenuToggle(item)"
 		[attr.data-ktmenu-submenu-mode]="item.mode"
 		[attr.data-ktmenu-dropdown-toggle-class]="item['dropdown-toggle-class']" [ngClass]="getItemCssClasses(item)"
 		[ngbTooltip]="item.tooltip" data-placement="right">
@@ -50,6 +99,8 @@
 			<ng-container [ngTemplateOutlet]="menuItemTextTemplate"
 				[ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
 		</a>
+
+
 
 		<!-- if menu item has submenu child then recursively call new menu item component -->
 		<div *ngIf="item.submenu" class="kt-menu__submenu">
@@ -68,6 +119,8 @@
 	</li>
 
 </ng-template>
+
+
 
 <ng-template #menuSubmenuTemplate let-item="item" let-parentItem="parentItem">
 	<ul class="kt-menu__subnav">
