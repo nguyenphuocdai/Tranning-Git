@@ -54,11 +54,14 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 			this.rfLookup.controls["security"].setValue(
 				this.valueEdit.security
 			);
+			this.rfLookup.controls["database"].setValue(
+				this.valueEdit.database
+			);
 			this.rfLookup.controls["tracking"].setValue(
 				this.valueEdit.tracking
 			);
-			this.rfLookup.controls["fieldType"].setValue(
-				this.valueEdit.fieldType
+			this.rfLookup.controls["description"].setValue(
+				this.valueEdit.description
 			);
 			this.rfLookup.controls["modules"].setValue(this.valueEdit.modules);
 			this.dialogRefData.type = this.valueEdit.type;
@@ -86,8 +89,8 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 			security: new FormControl(false),
 			tracking: new FormControl(false),
 			description: [""],
-			fieldType: ["", Validators.required],
-			modules: ["", Validators.required]
+			modules: ["", Validators.required],
+			database: ["", Validators.required]
 		});
 	}
 
@@ -134,8 +137,9 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 		let errorMessage = this.rfLookup.controls["errorMessage"].value;
 		let isSecurity = this.rfLookup.controls["security"].value;
 		let isTracking = this.rfLookup.controls["tracking"].value;
-		let fieldType = this.rfLookup.controls["fieldType"].value;
 		let modules = this.rfLookup.controls["modules"].value;
+		let database = this.rfLookup.controls["database"].value;
+		let description = this.rfLookup.controls["description"].value;
 
 		let mergedObj: FieldConfigInterface = {
 			id:
@@ -149,8 +153,9 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
-			fieldType: fieldType,
 			modules: modules,
+			database: database,
+			description:description,
 			validations: []
 		};
 		if (isRequired === true) {

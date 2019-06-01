@@ -29,16 +29,12 @@
                                 </div>
 
                                 <div class="form-group kt-form__group">
-                                    <mat-form-field class="demo-full-width">
-                                        <mat-label>Field Type</mat-label>
-                                        <mat-select required formControlName="fieldType" [(ngModel)]="optionDefault">
-                                            <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-								{{food.viewValue}}
-							  </mat-option> -->
-                                            <mat-option value="lookup">Look up</mat-option>
-                                        </mat-select>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Enter database name" required [type]="'database'" [input]="rfLookup.get('database').value"  name="database" formControlName="database" />
+                                        <mat-hint align="start">Please enter database name</mat-hint>
                                     </mat-form-field>
                                 </div>
+
                                 <!--End::Label-->
 	
 								<div class="form-group kt-form__group">
@@ -50,6 +46,14 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
+                                   <!--Begin::Description-->
+                                   <div class="form-group kt-form__group">
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput placeholder="Please enter description" formControlName="description" name="description" #descriptionRef></textarea>
+                                        <mat-hint align="start">Please enter description</mat-hint>
+                                    </mat-form-field>
+								</div>
+                              
                                 <!--Begin::Required-->
                                 <div class="form-group kt-form__group"  [ngClass]="{'form-group-flex': rfLookup.get('required').value}">
                                     <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
@@ -68,15 +72,7 @@
                                 <div class="form-group kt-form__group">
                                     <mat-checkbox class="example-margin" name="tracking" formControlName="tracking">Change Tracking</mat-checkbox>
                                 </div>
-                                <!--Begin::Description-->
-                                <div class="form-group kt-form__group">
-                                    <mat-form-field class="example-full-width">
-                                        <textarea matInput placeholder="Please enter description" formControlName="description" name="description" #descriptionRef></textarea>
-                                        <mat-hint align="start">Please enter description</mat-hint>
-                                    </mat-form-field>
-								</div>
-                              
-                                <!--End::Select-->
+                             
                             </div>
                         </div>
                     </div>

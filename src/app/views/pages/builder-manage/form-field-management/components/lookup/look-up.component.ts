@@ -4,7 +4,7 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 @Component({
 	selector: "app-lookup",
 	template: `
-		<div class="form-group kt-form__group">
+		<div class="">
 			<mat-form-field [formGroup]="group">
 				<mat-label>{{ field.label }}</mat-label>
 				<mat-select
@@ -24,6 +24,9 @@ import { FieldConfigInterface } from "./../../../../../../core/auth";
 					}}</mat-option>
 				</mat-select>
 			</mat-form-field>
+			<mat-icon *ngIf="field.description" color="primary" matSuffix matTooltip="{{
+				field.description
+			}}">help</mat-icon>
 		</div>
 	`,
 	styles: []
