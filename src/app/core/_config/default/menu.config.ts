@@ -123,18 +123,18 @@ export class MenuConfig {
 				// 	page: "my-page", // <= URL
 				// 	icon: "flaticon-line-graph" // <= Choose the icon
 				// },
-				{
-					title: "Management", // <= Title of the page
-					root: true,
-					bullet: "dot",
-					icon: "flaticon2-browser-2", // <= Choose the icon
-					submenu: [
-						{
-							title: "Solution",
-							page: "management"
-						}
-					]
-				},
+				// {
+				// 	title: "Management", // <= Title of the page
+				// 	root: true,
+				// 	bullet: "dot",
+				// 	icon: "flaticon2-browser-2", // <= Choose the icon
+				// 	submenu: [
+				// 		{
+				// 			title: "Solution",
+				// 			page: "management"
+				// 		}
+				// 	]
+				// },
 				{ section: "Applications" },
 				{
 					title: "Builder Management",
