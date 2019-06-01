@@ -64,7 +64,7 @@ export class ModuleAddComponent implements OnInit {
 			const name = this.rfModule.controls["name"].value.trim();
 			const pluralName = this.rfModule.controls["pluralName"].value.trim();
 			const accessType = this.rfModule.controls["accessType"].value.trim();
-			const database = this.rfModule.controls["database"].value.trim();
+			const database = this.rfModule.controls["database"].value.trim().toLowerCase();
 			const solutionId = this.solutionData.data.name;
 
 			let obj: ModuleModel = {
@@ -83,7 +83,7 @@ export class ModuleAddComponent implements OnInit {
 				5000
 			);
 			this.isSubmit = false;
-			this._dialogRef.close();
+			this._dialogRef.close(true);
 		}, 3000);
 
 		return event;
@@ -100,6 +100,5 @@ export class ModuleAddComponent implements OnInit {
 	}
 
 	onDatabaseChange(data) {
-		console.log(data);
 	}
 }
