@@ -28,21 +28,13 @@
                                   </mat-form-field>
                               </div>
 
-                              <!-- <div class="form-group kt-form__group">
-                <mat-form-field class="demo-full-width">
-                  <mat-label>Field Type</mat-label>
-                  <mat-select
-                    required
-                    formControlName="fieldType"
-                    [(ngModel)]="optionDefault"
-                  >
-                    <mat-option value="button"
-                      >Button Submit</mat-option
-                    >
-                  </mat-select>
-                </mat-form-field>
-              </div> -->
-                              <!--End::Label-->
+                              <div class="form-group kt-form__group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Enter database name" required [type]="'database'" [input]="rfField.get('database').value"  name="database" formControlName="database" />
+                                    <mat-hint align="start">Please enter database name</mat-hint>
+                                </mat-form-field>
+                            </div>
+
 
                               <!--Begin::Required-->
                               <div class="form-group kt-form__group " [ngClass]="{

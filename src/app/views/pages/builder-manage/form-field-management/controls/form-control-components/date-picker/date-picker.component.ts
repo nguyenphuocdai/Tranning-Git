@@ -49,6 +49,7 @@ export class DatePickerComponent implements OnInit {
 		this.createForm();
 		if (this.valueEdit) {
 			this.rfField.controls["name"].setValue(this.valueEdit.name);
+			this.rfField.controls["database"].setValue(this.valueEdit.database);
 			this.rfField.controls["required"].setValue(this.valueEdit.required);
 			this.rfField.controls["errorMessage"].setValue(
 				this.valueEdit.errorMessage
@@ -71,7 +72,8 @@ export class DatePickerComponent implements OnInit {
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
-			fieldType: ["datepicker", Validators.required]
+			fieldType: ["datepicker", Validators.required],
+			database: ["", Validators.required]
 		});
 	}
 
@@ -109,6 +111,7 @@ export class DatePickerComponent implements OnInit {
 		let isSecurity = this.rfField.controls["security"].value;
 		let isTracking = this.rfField.controls["tracking"].value;
 		let fieldType = this.rfField.controls["fieldType"].value;
+		let database = this.rfField.controls["database"].value;
 
 		let mergedObj: FieldConfigInterface = {
 			id:
@@ -122,6 +125,7 @@ export class DatePickerComponent implements OnInit {
 			security: isSecurity,
 			tracking: isTracking,
 			fieldType: fieldType,
+			database: database,
 			validations: []
 		};
 		if (isRequired === true) {
