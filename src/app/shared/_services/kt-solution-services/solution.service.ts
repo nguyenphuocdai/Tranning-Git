@@ -1,16 +1,15 @@
+import { AsideService } from "./../../../views/themes/default/aside-service.service";
 import { AppSettings } from "../../_constant/app-setting";
 import { SolutionModel } from "../../_model-app/solution.model";
 import { HttpUtilsService } from "./../../../core/_base/crud/utils/http-utils.service";
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { Subject, Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
 	providedIn: "root"
 })
 export class SolutionService {
-	// Public properties
-	// subjectSolution = new Subject<SolutionModel[]>();
 	listSln: SolutionModel[] = [];
 
 	sourceSolution: BehaviorSubject<SolutionModel[]> = new BehaviorSubject<
@@ -19,7 +18,8 @@ export class SolutionService {
 
 	constructor(
 		private http: HttpClient,
-		private httpUtils: HttpUtilsService
+		private httpUtils: HttpUtilsService,
+		private asideService: AsideService
 	) {}
 
 	/**
@@ -38,6 +38,7 @@ export class SolutionService {
 			JSON.stringify(this.listSln)
 		);
 		this.sourceSolution.next(this.listSln);
+		this.asideService.sendAllSolutions(this.listSln);
 	}
 	/**
 	 * get list solution
@@ -48,7 +49,7 @@ export class SolutionService {
 				JSON.parse(localStorage.getItem(AppSettings.SOLUTIONSTORAGE))
 			);
 		}
-		// todos
+		this.asideService.sendAllSolutions(this.listSln);
 		return this.sourceSolution.asObservable();
 	}
 

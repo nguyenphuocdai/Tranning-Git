@@ -1,4 +1,4 @@
-import { CardListComponent } from "../controls/card-list/card-list.component";
+import { AsideService } from "../../../../themes/default/aside-service.service";
 import { SolutionService } from "../../../../../shared/_services/kt-solution-services/solution.service";
 import { SolutionModel } from "../../../../../shared/_model-app/solution.model";
 import { SolutionAddComponent } from "../solution-add/solution-add.component";
@@ -9,7 +9,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef
 } from "@angular/core";
-import { MatDialog, MatDialogRef } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { Observable, Subscription } from "rxjs";
 
 @Component({

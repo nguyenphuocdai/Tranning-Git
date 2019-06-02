@@ -140,7 +140,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 					let token = response.Data["token"];
 
 					this.loading = false;
-					this.cdr.detectChanges();
+					// this.cdr.detectChanges();
 
 					this.store.dispatch(new Login({ authToken: token }));
 					this.router.navigateByUrl("/"); // Main page

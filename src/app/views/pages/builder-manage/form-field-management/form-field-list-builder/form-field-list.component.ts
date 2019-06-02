@@ -1,3 +1,4 @@
+import { AsideService } from "./../../../../themes/default/aside-service.service";
 import { DynamicFormComponent } from "./../../../../../shared/components/dynamic-form/dynamic-form.component";
 import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
 import { ActivatedRoute } from "@angular/router";
@@ -53,7 +54,8 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 		private _dialog: MatDialog,
 		private _ref: ChangeDetectorRef,
 		private _layoutUtilsService: LayoutUtilsService,
-		private _localstorageService: LocalstorageService
+		private _localstorageService: LocalstorageService,
+		private asideService: AsideService
 	) {}
 
 	/**
@@ -85,6 +87,7 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 				});
 			}
 		});
+		this.asideService.emitSolutions();
 	}
 
 	ngAfterViewInit() {

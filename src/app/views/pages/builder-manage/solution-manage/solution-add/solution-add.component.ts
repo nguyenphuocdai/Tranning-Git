@@ -7,7 +7,6 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { SolutionModel } from "../../../../../core/auth";
 
-
 @Component({
 	selector: "kt-solution-add",
 	templateUrl: "./solution-add.component.html",
@@ -87,8 +86,8 @@ export class SolutionAddComponent implements OnInit {
 				owner: owner,
 				version: version
 			};
-			this._solutionService.sendSolutionObs$(obj);
 
+			this._solutionService.sendSolutionObs$(obj);
 			this._snackBarService.openSnackBar(
 				"Add new solution successfully !",
 				5000

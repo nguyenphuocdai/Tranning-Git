@@ -6,8 +6,6 @@ import { BaseComponent } from "./base/base.component";
 import { ErrorPageComponent } from "./content/error-page/error-page.component";
 // Auth
 import { AuthGuard } from "../../../core/auth";
-// My Component
-import { MyPageComponent } from "./../../pages/my-page/my-page.component";
 
 const routes: Routes = [
 	{

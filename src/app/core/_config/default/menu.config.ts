@@ -143,7 +143,7 @@ export class MenuConfig {
 					icon: "flaticon2-delivery-package",
 					submenu: [
 						{
-							title: "Solution list",
+							title: "Solution",
 							page: "builder/solutions"
 						}
 					]

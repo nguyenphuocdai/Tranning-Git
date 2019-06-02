@@ -1,3 +1,4 @@
+import { AsideService } from './../../../views/themes/default/aside-service.service';
 import { Observable, Subject, BehaviorSubject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
@@ -17,7 +18,8 @@ export class ModuleService {
 	listModule = [];
 	constructor(
 		private http: HttpClient,
-		private httpUtils: HttpUtilsService
+		private httpUtils: HttpUtilsService,
+		private asideService: AsideService
 	) {}
 
 	/**
@@ -40,6 +42,7 @@ export class ModuleService {
 			JSON.stringify(this.listModule)
 		);
 		this.sourceModules.next(this.listModule);
+		this.asideService.emitSolutions();
 	}
 
 	/**
