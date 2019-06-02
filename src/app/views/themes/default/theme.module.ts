@@ -1,42 +1,53 @@
-import { NgxPermissionsModule } from 'ngx-permissions';
+import { SharedModule } from "./../../../shared/shared.module";
+import { NgxPermissionsModule } from "ngx-permissions";
 // Angular
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatProgressBarModule, MatTabsModule, MatTooltipModule } from '@angular/material';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import {
+	MatButtonModule,
+	MatProgressBarModule,
+	MatTabsModule,
+	MatTooltipModule
+} from "@angular/material";
 // NgBootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 // Translation
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from "@ngx-translate/core";
 // Loading bar
-import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarModule } from "@ngx-loading-bar/core";
 // NGRX
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 // Ngx DatePicker
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { NgxDaterangepickerMd } from "ngx-daterangepicker-material";
 // Perfect Scrollbar
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 // SVG inline
-import { InlineSVGModule } from 'ng-inline-svg';
+import { InlineSVGModule } from "ng-inline-svg";
 // Core Module
-import { CoreModule } from '../../../core/core.module';
-import { HeaderComponent } from './header/header.component';
-import { AsideLeftComponent } from './aside/aside-left.component';
-import { FooterComponent } from './footer/footer.component';
-import { SubheaderComponent } from './subheader/subheader.component';
-import { BrandComponent } from './header/brand/brand.component';
-import { TopbarComponent } from './header/topbar/topbar.component';
-import { MenuHorizontalComponent } from './header/menu-horizontal/menu-horizontal.component';
-import { PartialsModule } from '../../partials/partials.module';
-import { BaseComponent } from './base/base.component';
-import { PagesRoutingModule } from './pages-routing.module';
-import { PagesModule } from '../../pages/pages.module';
-import { HtmlClassService } from './html-class.service';
-import { HeaderMobileComponent } from './header/header-mobile/header-mobile.component';
-import { ErrorPageComponent } from './content/error-page/error-page.component';
-import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from '../../../core/auth';
+import { CoreModule } from "../../../core/core.module";
+import { HeaderComponent } from "./header/header.component";
+import { AsideLeftComponent } from "./aside/aside-left.component";
+import { FooterComponent } from "./footer/footer.component";
+import { SubheaderComponent } from "./subheader/subheader.component";
+import { BrandComponent } from "./header/brand/brand.component";
+import { TopbarComponent } from "./header/topbar/topbar.component";
+import { MenuHorizontalComponent } from "./header/menu-horizontal/menu-horizontal.component";
+import { PartialsModule } from "../../partials/partials.module";
+import { BaseComponent } from "./base/base.component";
+import { PagesRoutingModule } from "./pages-routing.module";
+import { PagesModule } from "../../pages/pages.module";
+import { HtmlClassService } from "./html-class.service";
+import { HeaderMobileComponent } from "./header/header-mobile/header-mobile.component";
+import { ErrorPageComponent } from "./content/error-page/error-page.component";
+import {
+	PermissionEffects,
+	permissionsReducer,
+	RoleEffects,
+	rolesReducer
+} from "../../../core/auth";
 
 @NgModule({
 	declarations: [
@@ -60,7 +71,7 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
 		// horizontal menu components
 		MenuHorizontalComponent,
 
-		ErrorPageComponent,
+		ErrorPageComponent
 	],
 	exports: [
 		BaseComponent,
@@ -83,17 +94,15 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
 		// horizontal menu components
 		MenuHorizontalComponent,
 
-		ErrorPageComponent,
+		ErrorPageComponent
 	],
-	providers: [
-		HtmlClassService,
-	],
+	providers: [HtmlClassService],
 	imports: [
 		CommonModule,
 		RouterModule,
 		NgxPermissionsModule.forChild(),
-		StoreModule.forFeature('roles', rolesReducer),
-		StoreModule.forFeature('permissions', permissionsReducer),
+		StoreModule.forFeature("roles", rolesReducer),
+		StoreModule.forFeature("permissions", permissionsReducer),
 		EffectsModule.forFeature([PermissionEffects, RoleEffects]),
 		PagesRoutingModule,
 		PagesModule,
@@ -109,8 +118,8 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
 		TranslateModule.forChild(),
 		LoadingBarModule,
 		NgxDaterangepickerMd,
-		InlineSVGModule
+		InlineSVGModule,
+		SharedModule
 	]
 })
-export class ThemeModule {
-}
+export class ThemeModule {}
