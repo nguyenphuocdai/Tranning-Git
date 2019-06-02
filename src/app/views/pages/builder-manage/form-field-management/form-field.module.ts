@@ -1,3 +1,4 @@
+import { SharedModule } from "./../../../../shared/shared.module";
 import { DirectiveModule } from "./../../../../core/_base/metronic/directives/directive.module";
 import {
 	NumericDirective,
@@ -16,20 +17,9 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { HighlightModule } from "ngx-highlightjs";
 import { ModalDialogComponent } from "./controls/modal-dialog/modal-dialog.component";
 import { FormFieldEditComponent } from "./form-field-edit/form-field-edit.component";
-// controls components dynamic
-import { InputComponent } from "./components/input/input.component";
-import { ButtonComponent } from "./components/button/button.component";
-import { SelectComponent } from "./components/select/select.component";
-import { DateComponent } from "./components/date/date.component";
-// import { RadiobuttonComponent } from "./components/radiobutton/radiobutton.component";
-import { CheckboxComponent } from "./components/checkbox/checkbox.component";
-import { DynamicFieldDirective } from "./components/dynamic-field/dynamic-field.directive";
-import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.component";
-// form control components
 import { TextFieldComponent } from "./controls/form-control-components/text-field/text-field.component";
 import { SelectOptionComponent } from "./controls/form-control-components/select-option/select-option.component";
 import { NumberFieldComponent } from "./controls/form-control-components/number-field/number-field.component";
-import { NumberComponent } from "./components/number/number.component";
 import {
 	MatSnackBarRef,
 	MAT_SNACK_BAR_DATA,
@@ -37,14 +27,9 @@ import {
 	MAT_DIALOG_DATA
 } from "@angular/material";
 import { LookUpComponent } from "./controls/form-control-components/look-up/look-up.component";
-import { LookupComponent } from "./components/lookup/look-up.component";
 import { FuploadImageComponent } from "./controls/form-control-components/fupload-image/fupload-image.component";
 import { MoneyComponent } from "./controls/form-control-components/money/money.component";
-import { MoneyDynamicComponent } from "./components/money/money.component";
-import { MaterialFileUploadComponent } from "./controls/material-file-upload/material-file-upload.component";
-import { FuploadDynamicComponent } from "./components/fupload-dynamic/fupload-dynamic.component";
 import { CButtonComponent } from "./controls/form-control-components/c-button/c-button.component";
-import { StickyControlComponent } from "./components/sticky-control/sticky-control.component";
 import { DatePickerComponent } from "./controls/form-control-components/date-picker/date-picker.component";
 import { CRadioComponent } from "./controls/form-control-components/c-radio/c-radio.component";
 
@@ -53,11 +38,6 @@ const routes: Routes = [
 		path: "",
 		component: FormFieldComponent,
 		children: [
-			// {
-			// 	path: "",
-			// 	redirectTo: "form-list",
-			// 	pathMatch: "full"
-			// },
 			{
 				path: "builder/:id",
 				component: FormFieldListComponent
@@ -79,27 +59,19 @@ const routes: Routes = [
 		HighlightModule,
 		RouterModule.forChild(routes),
 		MaterialModule,
-		DirectiveModule
+		DirectiveModule,
+		SharedModule
 	],
 	declarations: [
 		FormFieldComponent,
 		FormFieldListComponent,
 		FormFieldEditComponent,
 		ModalDialogComponent,
-		InputComponent,
-		NumberComponent,
-		ButtonComponent,
-		SelectComponent,
-		DateComponent,
-		LookupComponent,
-		MoneyDynamicComponent,
-		FuploadDynamicComponent,
+
 		DatePickerComponent,
 		CRadioComponent,
 		// RadiobuttonComponent,
-		CheckboxComponent,
-		DynamicFieldDirective,
-		DynamicFormComponent,
+
 		TextFieldComponent,
 		SelectOptionComponent,
 		NumberFieldComponent,
@@ -107,25 +79,11 @@ const routes: Routes = [
 		LookUpComponent,
 		FuploadImageComponent,
 		MoneyComponent,
-		MaterialFileUploadComponent,
 		CButtonComponent,
-		StickyControlComponent,
 		InputDirective
 	],
-	exports: [DynamicFieldDirective],
-	entryComponents: [
-		ModalDialogComponent,
-		InputComponent,
-		ButtonComponent,
-		SelectComponent,
-		DateComponent,
-		// RadiobuttonComponent,
-		CheckboxComponent,
-		NumberComponent,
-		LookupComponent,
-		MoneyDynamicComponent,
-		FuploadDynamicComponent
-	],
+	exports: [],
+	entryComponents: [ModalDialogComponent],
 	providers: [
 		{
 			provide: MatSnackBarRef,
