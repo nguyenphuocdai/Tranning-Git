@@ -1,10 +1,10 @@
+import { DynamicFormComponent } from "./../../../../../shared/components/dynamic-form/dynamic-form.component";
 import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
 import { ActivatedRoute } from "@angular/router";
 import { LocalstorageService } from "./../../../../../shared/_services/local-storage-service/localstorage.service";
 import { data } from "./../../../../../shared/_mock-updata/mk-drag-data";
 import { LayoutUtilsService } from "./../../../../../core/_base/crud";
 import { ModalDialogComponent } from "../controls/modal-dialog/modal-dialog.component";
-import { DynamicFormComponent } from "../components/dynamic-form/dynamic-form.component";
 import { FieldConfigInterface } from "../../../../../shared/_model-app/field.interface";
 import {
 	Component,

@@ -1,4 +1,4 @@
-import { DialogConfirmComponent } from './../../../core/material-services/dialog-confirm/dialog-confirm.component';
+import { DialogConfirmComponent } from "./../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { SharedModule } from "./../../../shared/shared.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -27,9 +27,6 @@ import { SmStepperComponent } from "./solution-manage/controls/sm-stepper/sm-ste
 import { ModuleListComponent } from "./module-manage/module-list/module-list.component";
 import { ModuleAddComponent } from "./module-manage/module-add/module-add.component";
 import { ModuleEditDialogComponent } from "./module-manage/module-edit/module-edit-dialog.component";
-
-// Field
-import { FormFieldEditComponent } from "./form-field-management/form-field-edit/form-field-edit.component";
 
 // Pipe, Directives
 import {
