@@ -26,16 +26,9 @@ export class AuthService {
 			username: email,
 			password: password
 		};
-
-		const user = this.http
-			.post(AppSettings.API_USER_LOGIN, data, { headers: httpHeaders })
-			.pipe(
-				map((response: Response) => {
-                    console.log(response);
-					// response.json();
-				})
-			);
-		return user;
+		return this.http.post(AppSettings.API_USER_LOGIN, data, {
+			headers: httpHeaders
+		});
 	}
 
 	getUserByToken(): Observable<User> {

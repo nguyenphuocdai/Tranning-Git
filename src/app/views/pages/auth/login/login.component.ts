@@ -1,3 +1,4 @@
+import { ResponseDTO } from "./../../../../shared/_model-app/response.interface";
 // Angular
 import {
 	ChangeDetectorRef,
@@ -19,15 +20,15 @@ import { AppState } from "../../../../core/reducers";
 // Auth
 import { AuthNoticeService, AuthService, Login } from "../../../../core/auth";
 
-/**
- * ! Just example => Should be removed in development
- */
-//root
-//123456789hhccC
-const DEMO_PARAMS = {
-	EMAIL: "projectxadmin@risotech.vn",
-	PASSWORD: "theAteamVD"
-};
+// /**
+//  * ! Just example => Should be removed in development
+//  */
+// //root
+// //123456789hhccC
+// const DEMO_PARAMS = {
+// 	EMAIL: "projectxadmin@risotech.vn",
+// 	PASSWORD: "theAteamVD"
+// };
 
 @Component({
 	selector: "kt-login",
@@ -92,30 +93,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 	 * Default params, validators
 	 */
 	initLoginForm() {
-		// demo message to show
-		// if (!this.authNoticeService.onNoticeChanged$.getValue()) {
-		// 	const initialNotice = `Use account
-		// 	<strong>${DEMO_PARAMS.EMAIL}</strong> and password
-		// 	<strong>${DEMO_PARAMS.PASSWORD}</strong> to continue.`;
-		// 	this.authNoticeService.setNotice(initialNotice, 'info');
-		// }
-
-		// this.loginForm = this.fb.group({
-		// 	email: [DEMO_PARAMS.EMAIL, Validators.compose([
-		// 		Validators.required,
-		// 		Validators.email,
-		// 		Validators.minLength(3),
-		// 		Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
-		// 	])
-		// 	],
-		// 	password: [DEMO_PARAMS.PASSWORD, Validators.compose([
-		// 		Validators.required,
-		// 		Validators.minLength(3),
-		// 		Validators.maxLength(100)
-		// 	])
-		// 	]
-		// });
-
 		this.loginForm = this.fb.group({
 			email: [
 				"",
@@ -123,7 +100,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 					Validators.required,
 					// Validators.email,
 					Validators.minLength(3),
-					Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+					Validators.maxLength(320)
 				])
 			],
 			password: [
@@ -158,56 +135,22 @@ export class LoginComponent implements OnInit, OnDestroy {
 		};
 		this.auth
 			.login(authData.email, authData.password)
-			.pipe(
-				tap(user => {
-					if (user) {
-						this.store.dispatch(
-							new Login({ authToken: user.accessToken })
-						);
-						this.router.navigateByUrl("/"); // Main page
-					} else {
-						this.authNoticeService.setNotice(
-							this.translate.instant(
-								"AUTH.VALIDATION.INVALID_LOGIN"
-							),
-							"danger"
-						);
-					}
-				}),
-				takeUntil(this.unsubscribe),
-				finalize(() => {
+			.subscribe((response: ResponseDTO) => {
+				if (response) {
+					let token = response.Data["token"];
+
 					this.loading = false;
 					this.cdr.detectChanges();
-				})
-			)
-			.subscribe();
 
-		// this.auth
-		// 	.login(authData.email, authData.password)
-		// 	.pipe(
-		// 		tap(data => {
-		// 			if (data) {
-		// 				alert(data);
-		// 				// this.store.dispatch(
-		// 				// 	new Login({ authToken: user.accessToken })
-		// 				// );
-		// 				// this.router.navigateByUrl("/"); // Main page
-		// 			} else {
-		// 				this.authNoticeService.setNotice(
-		// 					this.translate.instant(
-		// 						"AUTH.VALIDATION.INVALID_LOGIN"
-		// 					),
-		// 					"danger"
-		// 				);
-		// 			}
-		// 		}),
-		// 		takeUntil(this.unsubscribe),
-		// 		finalize(() => {
-		// 			this.loading = false;
-		// 			this.cdr.detectChanges();
-		// 		})
-		// 	)
-		// 	.subscribe();
+					this.store.dispatch(new Login({ authToken: token }));
+					this.router.navigateByUrl("/"); // Main page
+				} else {
+					this.authNoticeService.setNotice(
+						this.translate.instant("AUTH.VALIDATION.INVALID_LOGIN"),
+						"danger"
+					);
+				}
+			});
 	}
 
 	/**
