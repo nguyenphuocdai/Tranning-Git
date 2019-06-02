@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
-import { FieldConfigInterface } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "../../_model-app/field.interface";
 @Component({
 	selector: "app-select",
 	templateUrl: "select.component.html"

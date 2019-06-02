@@ -1,11 +1,4 @@
-import { AppSettings } from "../../../../../../shared/_constant/app-setting";
-import {
-	CdkDragDrop,
-	transferArrayItem,
-	CdkDragStart,
-	CdkDragEnd,
-	moveItemInArray
-} from "@angular/cdk/drag-drop";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import {
 	Component,
 	EventEmitter,
@@ -13,9 +6,7 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges,
-	ViewChild,
-	QueryList
+	SimpleChanges
 } from "@angular/core";
 import {
 	FormGroup,
@@ -23,7 +14,7 @@ import {
 	Validators,
 	FormControl
 } from "@angular/forms";
-import { FieldConfigInterface } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "../../_model-app/field.interface";
 @Component({
 	exportAs: "dynamicForm",
 	selector: "kt-dynamic-form",

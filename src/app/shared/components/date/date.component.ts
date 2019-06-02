@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfigInterface } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "../../_model-app/field.interface";
 
 @Component({
 	selector: "kt-app-date",

@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfigInterface } from "../../../../../../core/auth";
-import { TypesUtilsService } from "../../../../../../core/_base/crud";
+import { FieldConfigInterface } from "../../_model-app/field.interface";
 @Component({
 	selector: "app-number",
 	templateUrl: "number.component.html",

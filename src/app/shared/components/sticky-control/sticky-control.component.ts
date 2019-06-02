@@ -1,13 +1,13 @@
-import { LocalstorageService } from "./../../../../../../shared/_services/local-storage-service/localstorage.service";
-import { ModuleModel } from "./../../../../../../shared/_model-app/module.model";
-import { FieldConfigInterface } from "../../../../../../shared/_model-app/field.interface";
-import { AppSettings } from "../../../../../../shared/_constant/app-setting";
-import { LayoutUtilsService } from "./../../../../../../core/_base/crud";
+import { ModalDialogComponent } from "./../../../views/pages/builder-manage/form-field-management/controls/modal-dialog/modal-dialog.component";
+import { LayoutUtilsService } from "./../../../core/_base/crud/utils/layout-utils.service";
 import { Component, OnInit, Input, Output, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { MatDialog } from "@angular/material";
-import { ModalDialogComponent } from "../../controls/modal-dialog/modal-dialog.component";
 import { ActivatedRoute } from "@angular/router";
+import { LocalstorageService } from "../../_services/local-storage-service/localstorage.service";
+import { FieldConfigInterface } from "../../_model-app/field.interface";
+import { ModuleModel } from "../../_model-app/module.model";
+import { AppSettings } from "../../_constant/app-setting";
 // import { DynamicFormComponent } from "../dynamic-form/dynamic-form.component";
 
 @Component({

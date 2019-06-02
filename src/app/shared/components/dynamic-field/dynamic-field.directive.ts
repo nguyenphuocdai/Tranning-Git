@@ -7,7 +7,7 @@ import {
 	ViewContainerRef
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfigInterface } from "./../../../../../../core/auth";
+import { FieldConfigInterface } from "../../_model-app/field.interface";
 import { InputComponent } from "../input/input.component";
 import { ButtonComponent } from "../button/button.component";
 import { SelectComponent } from "../select/select.component";
