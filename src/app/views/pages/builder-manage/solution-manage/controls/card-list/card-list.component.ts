@@ -1,3 +1,4 @@
+import { AsideService } from "./../../../../../themes/default/aside-service.service";
 import { LayoutUtilsService } from "./../../../../../../core/_base/crud/utils/layout-utils.service";
 import { ModuleModel } from "./../../../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../../../shared/_constant/app-setting";
@@ -38,7 +39,8 @@ export class CardListComponent implements OnInit, OnChanges {
 		private dialog: MatDialog,
 		private _ref: ChangeDetectorRef,
 		private localstorageService: LocalstorageService,
-		private layoutUtilsService: LayoutUtilsService
+		private layoutUtilsService: LayoutUtilsService,
+		private asideService: AsideService
 	) {}
 
 	ngOnInit() {
@@ -96,14 +98,16 @@ export class CardListComponent implements OnInit, OnChanges {
 
 				let isDelete: boolean = false;
 				// check if solution contains module -> not delete
-
-				for (let i = 0; i < arrModule.length; i++) {
-					const moduleData = arrModule[i];
-					if (moduleData.solutionId === itemDelete.name) {
-						isDelete = true;
-						break;
+				if (arrModule) {
+					for (let i = 0; i < arrModule.length; i++) {
+						const moduleData = arrModule[i];
+						if (moduleData.solutionId === itemDelete.name) {
+							isDelete = true;
+							break;
+						}
 					}
 				}
+
 				if (isDelete) {
 					this.layoutUtilsService.showActionNotification(
 						messageNotDelete,
@@ -121,10 +125,9 @@ export class CardListComponent implements OnInit, OnChanges {
 									AppSettings.SOLUTIONSTORAGE,
 									arrSolution
 								);
-
 								this.items = arrSolution;
+								this.asideService.sendAllSolutions(this.items);
 								this._ref.detectChanges();
-
 								return;
 							}
 						}
