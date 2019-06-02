@@ -1,0 +1,31 @@
+<div class="container">
+	<!-- <kt-loading-request *ngIf="isSubmit"></kt-loading-request> -->
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+							<span class="kt-portlet__head-icon kt-hide">
+								<i class="la la-gear"></i>
+							</span>
+							<h3 class="kt-portlet__head-text">
+								{{ module.name }} - {{ module.solutionId }}
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="kt-form">
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__section--first">
+							<kt-management-dynamic-form
+								[fields]="items"
+								(submit)="dynamicFormSubmit($event)"
+							></kt-management-dynamic-form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
