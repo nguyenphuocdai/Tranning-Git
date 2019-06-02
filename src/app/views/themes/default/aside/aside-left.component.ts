@@ -1,3 +1,5 @@
+import { AsideService } from "../aside-service.service";
+import { SolutionService } from "./../../../../shared/_services/kt-solution-services/solution.service";
 import { ModuleModel } from "./../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../shared/_constant/app-setting";
 import { LocalstorageService } from "./../../../../shared/_services/local-storage-service/localstorage.service";
@@ -9,7 +11,11 @@ import {
 	ElementRef,
 	OnInit,
 	Renderer2,
-	ViewChild
+	ViewChild,
+	ChangeDetectorRef,
+	OnDestroy,
+	SimpleChanges,
+	OnChanges
 } from "@angular/core";
 import { filter } from "rxjs/operators";
 import { NavigationEnd, Router, ActivatedRoute } from "@angular/router";
@@ -21,6 +27,7 @@ import {
 } from "../../../../core/_base/layout";
 import { OffcanvasOptions } from "../../../../core/_base/metronic";
 import { HtmlClassService } from "../html-class.service";
+import { Subscription } from "rxjs";
 
 @Component({
 	selector: "kt-aside-left",
@@ -28,13 +35,14 @@ import { HtmlClassService } from "../html-class.service";
 	styleUrls: ["./aside-left.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AsideLeftComponent implements OnInit, AfterViewInit {
+export class AsideLeftComponent
+	implements OnInit, AfterViewInit, OnDestroy, OnChanges {
 	@ViewChild("asideMenu") asideMenu: ElementRef;
 
 	currentRouteUrl: string = "";
 	insideTm: any;
 	outsideTm: any;
-
+	_subscription: Subscription;
 	listSolutions: SolutionModel[] = [];
 	listModules: ModuleModel[] = [];
 
@@ -76,6 +84,9 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		private render: Renderer2,
 		private localstorageService: LocalstorageService,
 		private activatedRoute: ActivatedRoute,
+		private _solutionService: SolutionService,
+		private ref: ChangeDetectorRef,
+		private asideService: AsideService
 	) {}
 
 	ngAfterViewInit(): void {}
@@ -120,28 +131,48 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			);
 		}
 
-		// module solution
-		this.listSolutions = this.localstorageService.get(
-			AppSettings.SOLUTIONSTORAGE
-		);
-		let arrModules = this.localstorageService.get(
-			AppSettings.MODULESTORAGE
-		);
-
-		for (let i = 0; i < this.listSolutions.length; i++) {
-			const itemSolution: SolutionModel = this.listSolutions[i];
-			for (let j = 0; j < arrModules.length; j++) {
-				const itemModule: ModuleModel = arrModules[j];
-				if (itemModule.solutionId === itemSolution.name) {
-					if (this.listSolutions[i].modules == undefined) {
-						this.listSolutions[i].modules = [];
-					}
-					this.listSolutions[i].modules.push(itemModule);
+		this._subscription = this.asideService
+			.getAllSolutions()
+			.subscribe(arrSolutions => {
+				this.listSolutions = arrSolutions;
+				// first load AsideService not send all solution ( fix after)
+				if (arrSolutions.length === 0) {
+					this.listSolutions = this.localstorageService.get(
+						AppSettings.SOLUTIONSTORAGE
+					);
 				}
-			}
-		}
-	}
+				let arrModules = this.localstorageService.get(
+					AppSettings.MODULESTORAGE
+				);
 
+				if (!this.listSolutions) {
+					return;
+				}
+				for (let i = 0; i < this.listSolutions.length; i++) {
+					const itemSolution: SolutionModel = this.listSolutions[i];
+					if (!arrModules) {
+						continue;
+					}
+					for (let j = 0; j < arrModules.length; j++) {
+						const itemModule: ModuleModel = arrModules[j];
+						if (itemModule.solutionId === itemSolution.name) {
+							if (this.listSolutions[i].modules === undefined) {
+								this.listSolutions[i].modules = [];
+							}
+							this.listSolutions[i].modules.push(itemModule);
+						}
+					}
+				}
+				this.ref.detectChanges();
+			});
+	}
+	selectedNavItem(item: number) {
+		console.log(item);
+	}
+	ngOnChanges(changes: SimpleChanges): void {
+		console.log(this._subscription);
+		console.log(changes);
+	}
 	isMenuItemIsActive(item): boolean {
 		if (item.submenu) {
 			return this.isMenuRootItemIsActive(item);
@@ -274,5 +305,8 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			item.name
 		}`;
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
+	}
+	ngOnDestroy() {
+		this._subscription.unsubscribe();
 	}
 }
