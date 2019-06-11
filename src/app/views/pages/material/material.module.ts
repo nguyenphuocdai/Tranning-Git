@@ -109,6 +109,7 @@ import {
 } from "@angular/material-moment-adapter";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ModalBottomSheetComponent } from "./controls/modal-bottom-sheet/modal-bottom-sheet.component";
+import { CdkTableModule} from '@angular/cdk/table';
 
 const routes: Routes = [
 	{
@@ -185,7 +186,8 @@ const routes: Routes = [
 		MatRadioModule,
 		MatIconModule,
 		MatProgressBarModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		CdkTableModule
 	],
 	exports: [
 		RouterModule,
@@ -224,7 +226,10 @@ const routes: Routes = [
 		MatCheckboxModule,
 		MatRadioModule,
 		MatProgressBarModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		MatTableModule,
+		MatPaginatorModule,
+		CdkTableModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
