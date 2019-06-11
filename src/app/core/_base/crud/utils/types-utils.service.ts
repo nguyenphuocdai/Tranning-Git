@@ -228,4 +228,7 @@ export class TypesUtilsService {
 		return true;
 		// console.log(isEquivalent(bobaFett, jangoFett));
 	}
+	capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 }
