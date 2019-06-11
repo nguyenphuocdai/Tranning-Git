@@ -35,6 +35,7 @@ import {
 } from "../../../core/_base/metronic/index";
 import { FormFieldModule } from "./form-field-management/form-field.module";
 import { SolutionEditDialogComponent } from "./solution-manage/controls/solution-edit-dialog/solution-edit-dialog.component";
+import { ModuleDetailComponent } from "./module-manage/module-detail/module-detail.component";
 
 const routes: Routes = [
 	{
@@ -53,6 +54,10 @@ const routes: Routes = [
 			{
 				path: "solutions/edit/:id",
 				component: SolutionEditComponent
+			},
+			{
+				path: "solutions/module/:id",
+				component: ModuleDetailComponent
 			}
 		]
 	}
@@ -75,7 +80,8 @@ const routes: Routes = [
 		// Pipe
 		ReplaceSpacePipe,
 		// NumericDirective
-		DialogConfirmComponent
+		DialogConfirmComponent,
+		ModuleDetailComponent
 	],
 	entryComponents: [
 		SolutionAddComponent,
