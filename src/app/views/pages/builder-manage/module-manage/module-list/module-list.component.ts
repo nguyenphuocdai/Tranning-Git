@@ -63,17 +63,31 @@ export class ModuleListComponent implements OnInit {
 		}`;
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
 	}
+	/**
+	 * Initialize layout config
+	 * @param item: module
+	 */
+
+	handleDetail(item) {
+		const url = `${this.layoutConfigService.getCurrentMainRoute()}/builder/solutions/module/${
+			item.name
+		}`;
+		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
+	}
 
 	handleOpenModal() {
-		this.dialog.open(ModuleAddComponent, {
-			data: { data: this.solution },
-			panelClass: "",
-			maxHeight: "90vh"
-		}).afterClosed().subscribe(response => {
-			if(response){
-				this.ref.detectChanges();
-			}
-		});
+		this.dialog
+			.open(ModuleAddComponent, {
+				data: { data: this.solution },
+				panelClass: "",
+				maxHeight: "90vh"
+			})
+			.afterClosed()
+			.subscribe(response => {
+				if (response) {
+					this.ref.detectChanges();
+				}
+			});
 	}
 	onRemove(item) {
 		let title = "Alert Confirm";

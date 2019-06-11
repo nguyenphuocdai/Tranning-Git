@@ -102,8 +102,20 @@
 								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
 								id="kt_demo_panel_toggle"
 								data-placement="left"
+								(click)="handleDetail(item)"
+								matTooltip="Detail module"
+							>
+								<a href="javascript:;" class=""
+									><i class="flaticon2-list-2"></i
+								></a>
+							</li>
+
+							<li
+								class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success"
+								id="kt_demo_panel_toggle"
+								data-placement="left"
 								(click)="handleNavigate(item)"
-								matTooltip="Detail"
+								matTooltip="Main form"
 							>
 								<a href="javascript:;" class=""
 									><i class="flaticon2-browser"></i
