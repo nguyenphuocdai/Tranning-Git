@@ -202,4 +202,10 @@ export class SelectOptionComponent implements OnInit {
 			this.toppings.setValue(this.mySelections);
 		}
 	}
+	bindingDatabase() {
+		let value = this.rfSelectOption.controls["name"].value;
+		this.rfSelectOption.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
+	}
 }

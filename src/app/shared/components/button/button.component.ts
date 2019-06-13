@@ -5,9 +5,11 @@ import { FieldConfigInterface } from "../../_model-app/field.interface";
 	selector: "kt-app-button",
 	template: `
 		<div [formGroup]="group" class="cursor-pointer">
-			<button type="submit" mat-raised-button color="primary">
-				{{ field.label }}
-			</button>
+			<div class="form-group kt-form__group">
+				<button type="submit" mat-raised-button color="primary">
+					{{ field.label }}
+				</button>
+			</div>
 		</div>
 	`,
 	styles: []

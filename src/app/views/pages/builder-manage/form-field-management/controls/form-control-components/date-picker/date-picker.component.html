@@ -1,5 +1,5 @@
 <div class="container-fluid ">
-  <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfField">
+  <form class="kt-form" novalidate (ngSubmit)="onSubmit($event)" [formGroup]="rfDatePicker">
       <kt-loading-request *ngIf="isSubmit"></kt-loading-request>
       <div class="row">
           <div class="col-md-6">
@@ -23,14 +23,14 @@
                               <!--Begin::Label-->
                               <div class="form-group kt-form__group">
                                   <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Enter display name" required name="name" formControlName="name" #nameRef />
+                                      <input matInput (change)="bindingDatabase()" placeholder="Enter display name" required name="name" formControlName="name" #nameRef />
                                       <mat-hint align="start">Please enter display name</mat-hint>
                                   </mat-form-field>
                               </div>
 
                               <div class="form-group kt-form__group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Enter database name" required [type]="'database'" [input]="rfField.get('database').value"  name="database" formControlName="database" />
+                                    <input matInput placeholder="Enter database name" required [type]="'database'" [input]="rfDatePicker.get('database').value"  name="database" formControlName="database" />
                                     <mat-hint align="start">Please enter database name</mat-hint>
                                 </mat-form-field>
                             </div>
@@ -38,12 +38,12 @@
 
                               <!--Begin::Required-->
                               <div class="form-group kt-form__group " [ngClass]="{
-                  'form-group-flex': rfField.get(
+                  'form-group-flex': rfDatePicker.get(
                     'required'
                   ).value
                 }">
                                   <mat-checkbox #requiredRef class="example-margin" name="required" formControlName="required">Required</mat-checkbox>
-                                  <ng-container *ngIf="rfField.get('required').value">
+                                  <ng-container *ngIf="rfDatePicker.get('required').value">
                                       <mat-form-field class="example-full-width kt-margin-l-20">
                                           <input matInput placeholder="Enter error message" #errorMessageRef formControlName="errorMessage" />
                                           <mat-hint align="start">If field required, Please enter error message</mat-hint>
@@ -97,7 +97,7 @@
                           </div>
                           <div class="kt-portlet__foot kt-portlet__foot--border-top-0">
                               <div class="kt-form__actions kt-form__actions kt-form__actions--padding-left-0">
-                                  <button mat-raised-button color="primary" type="submit" [disabled]="!rfField.valid">
+                                  <button mat-raised-button color="primary" type="submit" [disabled]="!rfDatePicker.valid">
                                       Submit</button>&nbsp;
                                   <button mat-raised-button type="button">
                                       Cancel

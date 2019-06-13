@@ -31,6 +31,8 @@ import { catchError, last, map, tap } from "rxjs/operators";
 export class MaterialFileUploadComponent implements OnInit {
 	/** Link text */
 	@Input("Text") text: string = "Upload";
+	// Label default button
+	@Input("Label") label: string = "Choosen: ";
 	// single or multiple file upload
 	@Input() multiple: string = "single";
 	/** Name used in form which will be sent in HTTP request. */
@@ -53,7 +55,7 @@ export class MaterialFileUploadComponent implements OnInit {
 	constructor(private _http: HttpClient) {}
 
 	ngOnInit() {
-		console.log(this.controlName);
+		// console.log(this.controlName);
 	}
 
 	onClick() {
@@ -77,8 +79,8 @@ export class MaterialFileUploadComponent implements OnInit {
 
 				reader.onloadend = e => {
 					// this.image = reader.result;
-					console.log(reader.result);
-					console.log(this.files);
+					// console.log(reader.result);
+					// console.log(this.files);
 				};
 				reader.readAsDataURL(file);
 			}

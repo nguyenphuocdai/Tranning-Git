@@ -45,12 +45,18 @@ export class CButtonComponent implements OnInit {
 		this.createForm();
 		if (this.valueEdit) {
 			this.rfButton.controls["name"].setValue(this.valueEdit.name);
-			this.rfButton.controls["required"].setValue(this.valueEdit.required);
+			this.rfButton.controls["required"].setValue(
+				this.valueEdit.required
+			);
 			this.rfButton.controls["errorMessage"].setValue(
 				this.valueEdit.errorMessage
 			);
-			this.rfButton.controls["security"].setValue(this.valueEdit.security);
-			this.rfButton.controls["tracking"].setValue(this.valueEdit.tracking);
+			this.rfButton.controls["security"].setValue(
+				this.valueEdit.security
+			);
+			this.rfButton.controls["tracking"].setValue(
+				this.valueEdit.tracking
+			);
 			this.rfButton.controls["database"].setValue(
 				this.valueEdit.database
 			);
@@ -142,7 +148,14 @@ export class CButtonComponent implements OnInit {
 			};
 			mergedObj.validations.push(objValidator);
 		}
-		
+
 		return mergedObj;
+	}
+
+	bindingDatabase() {
+		let value = this.rfButton.controls["name"].value;
+		this.rfButton.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
 	}
 }

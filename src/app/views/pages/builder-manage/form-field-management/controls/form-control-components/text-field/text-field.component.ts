@@ -148,4 +148,10 @@ export class TextFieldComponent implements OnInit {
 		}
 		return mergedObj;
 	}
+	bindingDatabase() {
+		let value = this.rfField.controls["name"].value;
+		this.rfField.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
+	}
 }

@@ -1,4 +1,5 @@
 <div class="container-upload" [attr.formGroup]="formControlGroup ? 'formControlGroup' : null">
+  <label class="example-margin">{{label}}: </label>
   <button mat-raised-button color="primary" (click)="onClick()" type="button">
       <mat-icon class="customize-w-h-icon">file_upload</mat-icon>
       {{ text }}
@@ -6,7 +7,7 @@
   <span class="mat-hint mat-hint--f-size" *ngIf="files.length <= 0">{{requireMessage}}</span>
   <br />
   <br />
-  <ul>
+  <ul>  
       <li *ngFor="let file of files" [@fadeInOut]="file.state">
           <mat-progress-bar [value]="file.progress"></mat-progress-bar>
           <span class="process-bar-percent" [ngStyle]="{ left: file.progress + '%' }">{{ file.progress }}%</span

@@ -270,4 +270,10 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			this.previewInput = this.previewInput.concat(".").padEnd(this.previewInput.length + 1 + padEndNumber, "0");
 		}
 	}
+	bindingDatabase() {
+		let value = this.rfNumber.controls["name"].value;
+		this.rfNumber.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
+	}
 }

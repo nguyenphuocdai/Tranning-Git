@@ -23,7 +23,7 @@
                                     <!--Begin::Label-->
                                     <div class="form-group kt-form__group">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Enter display name" required name="name" formControlName="name" #nameRef />
+                                            <input matInput placeholder="Enter display name" required name="name" (change)="bindingDatabase()" formControlName="name" #nameRef />
                                             <mat-hint align="start">Please enter display name</mat-hint>
                                         </mat-form-field>
                                     </div>

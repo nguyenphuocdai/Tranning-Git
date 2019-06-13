@@ -168,4 +168,10 @@ export class LookUpComponent implements OnInit, AfterViewChecked {
 		}
 		return mergedObj;
 	}
+	bindingDatabase() {
+		let value = this.rfLookup.controls["name"].value;
+		this.rfLookup.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
+	}
 }

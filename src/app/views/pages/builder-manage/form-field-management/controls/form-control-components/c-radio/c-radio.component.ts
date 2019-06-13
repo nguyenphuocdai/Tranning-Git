@@ -116,7 +116,7 @@ export class CRadioComponent implements OnInit {
 			);
 			this.isSubmit = false;
 			this.submitForm.emit(mergedObj);
-			console.log(mergedObj);
+			// console.log(mergedObj);
 		}, 3000);
 	}
 

@@ -34,7 +34,6 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	@Output("fuploadComponentSubmit") submitForm = new EventEmitter<object>();
 
 	rfFupload: FormGroup;
-	fuploadText: string;
 	isSubmit: boolean = false;
 	constructor(
 		private _dialogRef: MatDialogRef<ModalDialogComponent>,
@@ -44,7 +43,6 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 		private _typesUtilsService: TypesUtilsService
 	) {}
 	ngAfterViewChecked(): void {
-		this.fuploadText = "Upload Image";
 		this._cdr.detectChanges();
 	}
 	ngOnInit() {
@@ -52,6 +50,12 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 
 		if (this.valueEdit) {
 			this.rfFupload.controls["name"].setValue(this.valueEdit.name);
+			this.rfFupload.controls["label"].setValue(this.valueEdit.label);
+			this.rfFupload.controls["textFupload"].setValue(
+				this.valueEdit.textFupload === undefined
+					? "Default"
+					: this.valueEdit.textFupload
+			);
 			this.rfFupload.controls["required"].setValue(
 				this.valueEdit.required
 			);
@@ -89,11 +93,13 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	createForm() {
 		this.rfFupload = this._fbFupload.group({
 			name: ["", Validators.required],
+			label: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
 			database: ["", Validators.required],
+			textFupload: ["", Validators.required],
 			fieldType: ["", Validators.required]
 		});
 	}
@@ -104,7 +110,6 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this._dialogRef.disableClose = true;
-		console.log(this.rfFupload.value);
 		if (this.rfFupload.invalid) {
 			this.isSubmit = false;
 			return;
@@ -118,8 +123,6 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 			);
 			this.isSubmit = false;
 			this.submitForm.emit(mergedObj);
-			// this.dialogRef.close(mergedObj);
-			console.log(mergedObj);
 		}, 3000);
 	}
 
@@ -127,7 +130,9 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let label = this.rfFupload.controls["name"].value;
+		let label = this.rfFupload.controls["label"].value;
+		let textFupload = this.rfFupload.controls["textFupload"].value;
+		let name = this.rfFupload.controls["name"].value;
 		let type = this.dialogRefData.type;
 		let inputType = this.dialogRefData.valueView;
 		let isRequired = this.rfFupload.controls["required"].value;
@@ -145,13 +150,13 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 			type: type,
 			label: label,
 			inputType: inputType,
-			name: label,
+			name: name,
 			required: isRequired,
 			security: isSecurity,
 			tracking: isTracking,
 			fieldType: fieldType,
 			database: database,
-			textFupload: this.fuploadText,
+			textFupload: textFupload,
 			validations: []
 		};
 		if (isRequired === true) {
@@ -167,5 +172,11 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	}
 	onFileComplete(data: any) {
 		console.log(data);
+	}
+	bindingDatabase() {
+		let value = this.rfFupload.controls["name"].value;
+		this.rfFupload.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
 	}
 }

@@ -33,7 +33,7 @@ export class DatePickerComponent implements OnInit {
 		object
 	>();
 
-	rfField: FormGroup;
+	rfDatePicker: FormGroup;
 	optionDefault: string = "button";
 	isSubmit: boolean = false;
 	events: string[] = [];
@@ -48,15 +48,15 @@ export class DatePickerComponent implements OnInit {
 	ngOnInit() {
 		this.createForm();
 		if (this.valueEdit) {
-			this.rfField.controls["name"].setValue(this.valueEdit.name);
-			this.rfField.controls["database"].setValue(this.valueEdit.database);
-			this.rfField.controls["required"].setValue(this.valueEdit.required);
-			this.rfField.controls["errorMessage"].setValue(
+			this.rfDatePicker.controls["name"].setValue(this.valueEdit.name);
+			this.rfDatePicker.controls["database"].setValue(this.valueEdit.database);
+			this.rfDatePicker.controls["required"].setValue(this.valueEdit.required);
+			this.rfDatePicker.controls["errorMessage"].setValue(
 				this.valueEdit.errorMessage
 			);
-			this.rfField.controls["security"].setValue(this.valueEdit.security);
-			this.rfField.controls["tracking"].setValue(this.valueEdit.tracking);
-			this.rfField.controls["fieldType"].setValue(
+			this.rfDatePicker.controls["security"].setValue(this.valueEdit.security);
+			this.rfDatePicker.controls["tracking"].setValue(this.valueEdit.tracking);
+			this.rfDatePicker.controls["fieldType"].setValue(
 				this.valueEdit.fieldType
 			);
 			this.dialogRefData.type = this.valueEdit.type;
@@ -65,7 +65,7 @@ export class DatePickerComponent implements OnInit {
 			if (this.valueEdit.validations.length !== 0) {
 				this.valueEdit.validations.forEach((element, index) => {
 					if (element.name === "required") {
-						this.rfField.controls["errorMessage"].setValue(
+						this.rfDatePicker.controls["errorMessage"].setValue(
 							element.message
 						);
 					}
@@ -78,7 +78,7 @@ export class DatePickerComponent implements OnInit {
 	 * create form builder
 	 */
 	createForm() {
-		this.rfField = this._fbField.group({
+		this.rfDatePicker = this._fbField.group({
 			name: ["", Validators.required],
 			required: new FormControl(false),
 			errorMessage: [""],
@@ -95,7 +95,7 @@ export class DatePickerComponent implements OnInit {
 	onSubmit(event) {
 		this.isSubmit = true;
 		this._dialogRef.disableClose = true;
-		if (this.rfField.invalid) {
+		if (this.rfDatePicker.invalid) {
 			this.isSubmit = false;
 			return;
 		}
@@ -115,15 +115,15 @@ export class DatePickerComponent implements OnInit {
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let label = this.rfField.controls["name"].value;
+		let label = this.rfDatePicker.controls["name"].value;
 		let type = this.dialogRefData.type;
 		let inputType = this.dialogRefData.valueView;
-		let isRequired = this.rfField.controls["required"].value;
-		let errorMessage = this.rfField.controls["errorMessage"].value;
-		let isSecurity = this.rfField.controls["security"].value;
-		let isTracking = this.rfField.controls["tracking"].value;
-		let fieldType = this.rfField.controls["fieldType"].value;
-		let database = this.rfField.controls["database"].value;
+		let isRequired = this.rfDatePicker.controls["required"].value;
+		let errorMessage = this.rfDatePicker.controls["errorMessage"].value;
+		let isSecurity = this.rfDatePicker.controls["security"].value;
+		let isTracking = this.rfDatePicker.controls["tracking"].value;
+		let fieldType = this.rfDatePicker.controls["fieldType"].value;
+		let database = this.rfDatePicker.controls["database"].value;
 
 		let mergedObj: FieldConfigInterface = {
 			id:
@@ -154,5 +154,11 @@ export class DatePickerComponent implements OnInit {
 	}
 	addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
 		this.events.push(`${type}: ${event.value}`);
+	}
+	bindingDatabase() {
+		let value = this.rfDatePicker.controls["name"].value;
+		this.rfDatePicker.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
 	}
 }

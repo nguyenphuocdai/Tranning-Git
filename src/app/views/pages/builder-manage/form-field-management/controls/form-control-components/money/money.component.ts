@@ -169,4 +169,10 @@ export class MoneyComponent implements OnInit {
 		}
 		return mergedObj;
 	}
+	bindingDatabase() {
+		let value = this.rfMoney.controls["name"].value;
+		this.rfMoney.controls["database"].setValue(
+			this._typesUtilsService.formatDatabaseInput(value)
+		);
+	}
 }
