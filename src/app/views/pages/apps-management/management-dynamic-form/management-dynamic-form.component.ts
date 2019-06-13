@@ -32,7 +32,6 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 	}
 	constructor(private fb: FormBuilder) {}
 	ngOnInit() {
-		console.log(this.fields);
 		this.form = this.createControl();
 	}
 	ngOnChanges(changes: SimpleChanges) {
@@ -45,6 +44,10 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 		event.stopPropagation();
 		if (this.form.valid) {
 			this.submit.emit(this.form.value);
+			// case submit clear data temp hard code
+			setTimeout(() => {
+				this.form.reset();
+			}, 3000);
 		} else {
 			this.validateAllFormFields(this.form);
 		}

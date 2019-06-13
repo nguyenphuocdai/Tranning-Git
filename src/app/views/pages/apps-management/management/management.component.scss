@@ -4,3 +4,19 @@ table {
 .kt-portlet__body{
 	position: relative;
 }
+.mat-table {
+	overflow: auto;
+	max-height: 500px;
+}
+
+mat-cell:first-of-type {
+	padding-right: 14px;
+}
+
+mat-header-cell:first-of-type {
+	padding-right: 14px;
+}
+
+.mat-column-id {
+	flex: 1 !important;
+}
