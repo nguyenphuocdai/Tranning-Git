@@ -1,3 +1,4 @@
+import { SolutionService } from './../../../../../shared/_services/kt-solution-services/solution.service';
 import { TypesUtilsService } from "./../../../../../core/_base/crud/utils/types-utils.service";
 import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
 import { ModuleService } from "./../../../../../shared/_services/kt-module-services/module.service";
@@ -27,7 +28,8 @@ export class ModuleDetailComponent implements OnInit, AfterViewInit {
 		private activatedRoute: ActivatedRoute,
 		private moduleService: ModuleService,
 		private typesUtilsService: TypesUtilsService,
-		private _location: Location
+		private _location: Location,
+		private _solutionService: SolutionService
 	) {}
 
 	ngOnInit() {
@@ -38,11 +40,17 @@ export class ModuleDetailComponent implements OnInit, AfterViewInit {
 					this.module = arrModules.find(x => x.name === id);
 					if (this.module.optionsField.length > 0) {
 						this.initColumn(this.module);
+						this.Initialize();
 					}
 				});
 			}
 		});
 	}
+
+	Initialize() {
+		this._solutionService.getListSolutionObs$();
+	}
+
 	initColumn(item: ModuleModel) {
 		let listOptions = item.optionsField;
 		for (let i = 0; i < listOptions.length; i++) {
