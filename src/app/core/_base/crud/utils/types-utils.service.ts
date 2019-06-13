@@ -231,4 +231,13 @@ export class TypesUtilsService {
 	capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
+	formatDatabaseInput(str) {
+		if (!str) {
+			return;
+		}
+		return str
+			.replace(/ /g, "_")
+			.trim()
+			.toLowerCase();
+	}
 }
