@@ -1,3 +1,4 @@
+import { SolutionService } from "./../../../../shared/_services/kt-solution-services/solution.service";
 import { ModuleModel } from "./../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../shared/_constant/app-setting";
 import { FieldConfigInterface } from "./../../../../shared/_model-app/field.interface";
@@ -12,6 +13,7 @@ import {
 	ChangeDetectorRef
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
 
 /**
  * @title Table with pagination
@@ -26,10 +28,13 @@ export class ManagementComponent implements OnInit, OnChanges, OnDestroy {
 	constructor(
 		private localstorageService: LocalstorageService,
 		private activatedRoute: ActivatedRoute,
-		private _ref: ChangeDetectorRef
+		private _solutionService: SolutionService,
+		private ref: ChangeDetectorRef
 	) {}
 	items: FieldConfigInterface[] = [];
 	module: ModuleModel;
+	isSubmit: boolean = false;
+
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params => {
 			const id = params["id"];
@@ -42,7 +47,8 @@ export class ManagementComponent implements OnInit, OnChanges, OnDestroy {
 					if (element.name === id) {
 						this.items = element.optionsField;
 						this.module = element;
-						this._ref.detectChanges();
+						this.Initialize();
+						this.ref.detectChanges();
 					}
 				}
 			}
@@ -53,13 +59,17 @@ export class ManagementComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param value
 	 */
 	dynamicFormSubmit(value: any) {
+		this.isSubmit = true;
 		console.log(value);
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		console.log(changes);
 	}
-	ngOnDestroy(): void {
-		console.log(1);
+	Initialize() {
+		this._solutionService.getListSolutionObs$();
+		this.isSubmit = false;
 	}
+
+	ngOnDestroy() {}
 }

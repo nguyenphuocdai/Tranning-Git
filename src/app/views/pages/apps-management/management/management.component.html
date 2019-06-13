@@ -1,5 +1,4 @@
 <div class="container">
-	<!-- <kt-loading-request *ngIf="isSubmit"></kt-loading-request> -->
 	<div class="row">
 		<div class="col-md-6 mx-auto">
 			<div class="kt-portlet">
@@ -16,6 +15,7 @@
 					</div>
 				</div>
 				<div class="kt-form">
+					<kt-loading-request *ngIf="isSubmit"></kt-loading-request>
 					<div class="kt-portlet__body">
 						<div class="kt-form__section kt-form__section--first">
 							<kt-management-dynamic-form
