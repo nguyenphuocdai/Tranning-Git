@@ -9,6 +9,7 @@ import { FieldConfigInterface } from "../../_model-app/field.interface";
 				(complete)="onFileComplete($event)"
 				[RequireMessage]="require?.message"
 				[multiple]="field.fieldType"
+				[Label]="field.label"
 				[Text]="field.textFupload"
 				[controlName]="formControl"
 				[controlGroup]="group"
