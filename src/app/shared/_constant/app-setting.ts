@@ -9,5 +9,6 @@ export class AppSettings {
 
 	public static SOLUTIONSTORAGE = "ListSolution";
 	public static MODULESTORAGE = "ListModule";
+	public static DATASTORAGE = "ListDataOfModule";
 	public static FIELDSTORAGE = "regConfig";
 }

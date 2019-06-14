@@ -15,7 +15,7 @@ import {
 	ViewChild,
 	AfterViewInit
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { MatPaginator, MatTableDataSource } from "@angular/material";
 import { Location } from "@angular/common";
 
@@ -51,8 +51,16 @@ export class ManagementComponent
 		private activatedRoute: ActivatedRoute,
 		private _solutionService: SolutionService,
 		private ref: ChangeDetectorRef,
-		private _location: Location
-	) {}
+		private _location: Location,
+		private router: Router
+	) {
+		router.events.subscribe(val => {
+			if (val instanceof NavigationEnd) {
+				this.columns = [];
+				this.initColumn(this.module);
+			}
+		});
+	}
 
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params => {
@@ -67,7 +75,6 @@ export class ManagementComponent
 						this.items = element.optionsField;
 						this.module = element;
 						this.initColumn(this.module);
-						this.Initialize();
 						this.ref.detectChanges();
 					}
 				}
@@ -96,6 +103,7 @@ export class ManagementComponent
 			this.dataForm.push(value);
 			this.isSubmit = false;
 			this.dataSource = new MatTableDataSource<any>(this.dataForm);
+			this.storeDataForm(value);
 			this.ref.detectChanges();
 		}, 3000);
 	}
@@ -105,17 +113,49 @@ export class ManagementComponent
 		this.isSubmit = false;
 	}
 
+	/**
+	 * Store data submit to local storage
+	 * @param value
+	 */
+	storeDataForm(value) {
+		if (!value) {
+			return;
+		}
+		let localData = this.localstorageService.get(AppSettings.DATASTORAGE);
+		if (!localData) {
+			localData = [
+				{
+					moduleId: this.module.id,
+					data: []
+				}
+			];
+		}
+		for (let i = 0; i < localData.length; i++) {
+			const element = localData[i];
+			if (element.moduleId === this.module.id) {
+				element.data.push(value);
+				this.localstorageService.set(
+					AppSettings.DATASTORAGE,
+					localData
+				);
+				return;
+			}
+		}
+	}
+
 	ngOnDestroy() {}
 
 	initColumn(item: ModuleModel) {
 		let listOptions = item.optionsField;
-
 		for (let i = 0; i < listOptions.length; i++) {
 			const objOptions = listOptions[i];
+
 			if (objOptions["type"] === "button") {
 				continue;
 			}
-
+			// if (i === 1) {
+			// 	return;
+			// }
 			// header column table (name of object optionsField)
 			let headerName = objOptions["name"];
 			// binding headerName to object
@@ -128,12 +168,30 @@ export class ManagementComponent
 			};
 
 			this.columns.push(obj);
+			window["test"] = this.columns;
 		}
-		this.displayedColumns = this.columns.map(c => c.columnDef);
 
+		this.displayedColumns = this.columns.map(c => c.columnDef);
 		this.displayedColumns.push("ACTIONS");
+		this.Initialize();
+
+		this.dataForm = this.getDataForm();
 		this.dataSource = new MatTableDataSource<any>(this.dataForm);
+		this.dataSource.paginator = this.paginator;
 	}
+
+	getDataForm() {
+		let localData = this.localstorageService.get(AppSettings.DATASTORAGE);
+		for (let i = 0; i < localData.length; i++) {
+			const element = localData[i];
+			if (element.moduleId === this.module.id) {
+				console.log(element.data);
+				return element.data;
+			}
+		}
+		return [];
+	}
+
 	backClicked() {
 		this._location.back();
 	}
