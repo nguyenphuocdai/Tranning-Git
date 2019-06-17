@@ -95,64 +95,61 @@ export class FormFieldListComponent implements OnInit, AfterViewInit {
 		// 	this._layoutUtilsService.showActionNotification("123123213")
 		// );
 	}
-	/**
-	 * event drop from source to preview (temp not use)
-	 * @param event CdkDragDrop
-	 */
-	drop(event: CdkDragDrop<string[]>) {}
 
 	/**
-	 * event drop from preview to source
+	 * Add item to main form
 	 * @param event CdkDragDrop
 	 */
-	dropFromPreview(event: CdkDragDrop<string[]>) {
-		if (event.previousContainer === event.container) {
-			return false;
-		} else {
-			this._dialog
-				.open(ModalDialogComponent, {
-					data: this.stableData[event.previousIndex],
-					width: "70%",
-					panelClass: "",
-					maxHeight: "90vh"
-				})
-				.beforeClosed()
-				.subscribe(response => {
-					if (response) {
-						transferArrayItem(
-							event.previousContainer.data,
-							event.container.data,
-							event.previousIndex,
-							event.currentIndex
-						);
+	addItem(index, item) {
+		console.log(item);
+		// if (event.previousContainer === event.container) {
+		// 	return false;
+		// } else {
+		this._dialog
+			.open(ModalDialogComponent, {
+				data: item,
+				width: "70%",
+				panelClass: "",
+				maxHeight: "90vh"
+			})
+			.beforeClosed()
+			.subscribe(response => {
+				if (response) {
+					// transferArrayItem(
+					// 	event.previousContainer.data,
+					// 	event.container.data,
+					// 	event.previousIndex,
+					// 	event.currentIndex
+					// );
 
-						this.items = this.getAllItems();
+					this.items = this.getAllItems();
 
-						this.items.push(response);
-						this.regConfig = this.items;
+					this.items.push(response);
+					this.regConfig = this.items;
 
-						// local strorage
-						let arrLocal = this.getAllItems();
+					// local strorage
+					let arrLocal = this.getAllItems();
 
-						if (arrLocal !== null && this.items.length === 0) {
-							this.items = this.items.concat(arrLocal);
-						}
-
-						for (let i = 0; i < this.items.length; i++) {
-							if (this.items[i].hasOwnProperty("valueView")) {
-								this.items.splice(i, 1);
-							}
-						}
-
-						this.afterSubmit(this.items);
-
-						this._ref.markForCheck();
-						this.resetList();
-						this.dynamicFormControl.ngOnInit();
+					if (arrLocal !== null && this.items.length === 0) {
+						this.items = this.items.concat(arrLocal);
 					}
-				});
-		}
+
+					for (let i = 0; i < this.items.length; i++) {
+						if (this.items[i].hasOwnProperty("valueView")) {
+							this.items.splice(i, 1);
+						}
+					}
+
+					this.afterSubmit(this.items);
+
+					this._ref.markForCheck();
+					this.resetList();
+					this.dynamicFormControl.ngOnInit();
+				}
+			});
+		// }
 	}
+
 	/** Predicate function that doesn't allow items to be dropped into a list. */
 	noReturnPredicate() {
 		return false;

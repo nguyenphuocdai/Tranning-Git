@@ -12,8 +12,20 @@
 					<i class="la la-arrow-left"></i>
 					<span class="kt-hidden-mobile">Back</span>
 				</a>
-				<button mat-raised-button color="primary" [disabled]="items.length === 0" (click)="onSubmit()">Save</button>&nbsp;
-				<button mat-raised-button type="button" [disabled]="items.length === 0" (click)="onReset()">
+				<button
+					mat-raised-button
+					color="primary"
+					[disabled]="items.length === 0"
+					(click)="onSubmit()"
+				>
+					Save</button
+				>&nbsp;
+				<button
+					mat-raised-button
+					type="button"
+					[disabled]="items.length === 0"
+					(click)="onReset()"
+				>
 					Reset
 				</button>
 			</div>
@@ -29,21 +41,19 @@
 							Basic
 						</mat-panel-title>
 					</mat-expansion-panel-header>
-					<div
-						cdkDropList
-						[cdkDropListData]="todo"
-						class="left-list"
-						(cdkDropListDropped)="drop($event)"
-						[cdkDropListEnterPredicate]="noReturnPredicate"
-						[cdkDropListDisabled]="isDragging"
-						(cdkDragStarted)="dragStarted($event)"
-						(cdkDragEnded)="dragEnded($event)"
-					>
+					<div class="left-list">
 						<div
-							class="example-box"
-							*ngFor="let item of todo"
-							cdkDrag
+							class="example-box kt-relative"
+							*ngFor="let item of todo; let i = index"
 						>
+							<div
+								class="icon-absolute"
+								(click)="addItem(i, item)"
+							>
+								<a href="javascript:;"
+									><i class="flaticon2-plus"></i
+								></a>
+							</div>
 							<div
 								class="example-custom-placeholder"
 								*cdkDragPlaceholder
@@ -51,9 +61,6 @@
 							{{ item.valueView }}
 						</div>
 					</div>
-					<!-- tree data in panel -->
-					<!-- <kt-tree></kt-tree> -->
-					<!-- tree data in panel -->
 				</mat-expansion-panel>
 
 				<mat-expansion-panel
@@ -96,12 +103,7 @@
 								<strong>Please </strong>&nbsp; Drag & Drop a
 								form component
 							</div>
-							<div
-								cdkDropList
-								[cdkDropListData]="regConfig"
-								class="example-list kt-min-height-400"
-								(cdkDropListDropped)="dropFromPreview($event)"
-							>
+							<div class="example-list kt-min-height-400">
 								<kt-dynamic-form
 									[fields]="items"
 									(submit)="dynamicFormSubmit($event)"

@@ -7,12 +7,6 @@
 	display: block;
 }
 
-.example-list {
-  min-height: 60px;
-	border-radius: 4px;
-	overflow: hidden;
-	display: block;
-}
 .left-list {
 	border: solid 1px #ccc;
 	min-height: 60px;
@@ -21,6 +15,19 @@
 	overflow: hidden;
 	display: block;
 }
+
+.icon-absolute {
+	position: absolute;
+	right: 10px;
+}
+
+.example-list {
+	min-height: 60px;
+	border-radius: 4px;
+	overflow: hidden;
+	display: block;
+}
+
 .example-box {
 	padding: 10px 10px;
 	border-bottom: solid 1px #ccc;
@@ -30,7 +37,6 @@
 	align-items: center;
 	justify-content: space-between;
 	box-sizing: border-box;
-	cursor: move;
 	background: white;
 	font-size: 14px;
 }
@@ -43,7 +49,7 @@
 }
 
 .cdk-drag-placeholder {
-	// opacity: 0;
+	opacity: 0;
 }
 
 .cdk-drag-animating {
@@ -57,9 +63,3 @@
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
 	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-.example-custom-placeholder {
-	background: #ccc;
-	border: dotted 3px #999;
-	min-height: 41px;
-	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
