@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 mx-auto py-5">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-caption">
+						<div class="kt-portlet__head-title">
+							<span class="kt-portlet__head-icon kt-hide">
+								<i class="la la-gear"></i>
+							</span>
+							<h3 class="kt-portlet__head-text">
+								{{ data.module.name }} -
+								{{ data.module.solutionId }}
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="kt-form">
+					<kt-loading-request *ngIf="isSubmit"></kt-loading-request>
+					<div class="kt-portlet__body">
+						<div class="kt-form__section kt-form__group kt-form__section--first">
+							<mat-checkbox
+								[(ngModel)]="hasMultiple"
+								class="example-margin"
+							>
+								<label style="margin-bottom: 0"
+									>If checked, {{ data.module.name }} isn't
+									close when submit data.
+								</label>
+							</mat-checkbox>
+						</div>
+						<div class="kt-form__section kt-form__section--first">
+							<kt-management-dynamic-form
+								[fields]="data.items"
+								(submit)="dynamicFormSubmit($event)"
+							>
+							</kt-management-dynamic-form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
