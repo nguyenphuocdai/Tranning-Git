@@ -18,7 +18,6 @@ export class ManagementModalComponent implements OnInit {
 	 * @param value
 	 */
 	dynamicFormSubmit(value: any) {
-		console.log(this.hasMultiple);
 		if (value.hasOwnProperty("Date Picker") === true) {
 			let result = value["Date Picker"].calendar();
 			value = { "Date Picker": result };
@@ -31,11 +30,7 @@ export class ManagementModalComponent implements OnInit {
 				value: value
 			};
 			this.submitClicked.emit(obj);
-			// this.dataForm.push(value);
 			this.isSubmit = false;
-			// this.dataSource = new MatTableDataSource<any>(this.dataForm);
-			// this.storeDataForm(value);
-			// this.ref.detectChanges();
 		}, 3000);
 	}
 }

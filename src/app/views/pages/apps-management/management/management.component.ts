@@ -1,4 +1,3 @@
-import { ModuleService } from "./../../../../shared/_services/kt-module-services/module.service";
 import { SolutionService } from "./../../../../shared/_services/kt-solution-services/solution.service";
 import { ModuleModel } from "./../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../shared/_constant/app-setting";
@@ -7,7 +6,6 @@ import { LocalstorageService } from "./../../../../shared/_services/local-storag
 import {
 	Component,
 	OnInit,
-	ChangeDetectionStrategy,
 	SimpleChanges,
 	OnChanges,
 	OnDestroy,
@@ -16,8 +14,9 @@ import {
 	AfterViewInit
 } from "@angular/core";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
-import { MatPaginator, MatTableDataSource } from "@angular/material";
+import { MatPaginator, MatTableDataSource, MatDialog } from "@angular/material";
 import { Location } from "@angular/common";
+import { ManagementModalComponent } from "../management-modal/management-modal.component";
 
 /**
  * @title Table with pagination
@@ -52,11 +51,15 @@ export class ManagementComponent
 		private _solutionService: SolutionService,
 		private ref: ChangeDetectorRef,
 		private _location: Location,
-		private router: Router
+		private router: Router,
+		private dialog: MatDialog
 	) {
 		router.events.subscribe(val => {
 			if (val instanceof NavigationEnd) {
 				this.columns = [];
+				if (!this.module) {
+					return;
+				}
 				this.initColumn(this.module);
 			}
 		});
@@ -72,10 +75,13 @@ export class ManagementComponent
 				for (let i = 0; i < listModule.length; i++) {
 					const element: ModuleModel = listModule[i];
 					if (element.name === id) {
-						this.items = element.optionsField;
+						this.items = this.bindDefaultButton(
+							element.optionsField
+						);
 						this.module = element;
 						this.initColumn(this.module);
-						this.ref.detectChanges();
+						return;
+						// this.ref.detectChanges();
 					}
 				}
 			}
@@ -83,7 +89,7 @@ export class ManagementComponent
 	}
 
 	ngAfterViewInit() {
-		if (this.module.optionsField.length > 0) {
+		if (this.module.optionsField.length > 0 && this.dataSource) {
 			this.dataSource.paginator = this.paginator;
 		}
 	}
@@ -92,21 +98,40 @@ export class ManagementComponent
 		console.log(changes);
 	}
 
-	/**
-	 * Data EventEmitter Dynamic Form
-	 * @param value
-	 */
-	dynamicFormSubmit(value: any) {
-		this.isSubmit = true;
-		// temp
-		setTimeout(() => {
-			this.dataForm.push(value);
-			this.isSubmit = false;
-			this.dataSource = new MatTableDataSource<any>(this.dataForm);
-			this.storeDataForm(value);
-			this.ref.detectChanges();
-		}, 3000);
+	bindDefaultButton(item: FieldConfigInterface[]): FieldConfigInterface[] {
+		let btn = {
+			database: "submit",
+			id: "mMARoiyfQraZzsai",
+			inputType: "Button",
+			label: "Submit",
+			name: "Submit",
+			required: false,
+			security: false,
+			tracking: false,
+			type: "button"
+		};
+
+		if (item.filter(x => x.type === "button").length === 1) {
+			return item;
+		}
+		return item.concat(btn);
 	}
+
+	// /**
+	//  * Data EventEmitter Dynamic Form
+	//  * @param value
+	//  */
+	// dynamicFormSubmit(value: any) {
+	// 	this.isSubmit = true;
+	// 	// temp
+	// 	setTimeout(() => {
+	// 		this.dataForm.push(value);
+	// 		this.isSubmit = false;
+	// 		this.dataSource = new MatTableDataSource<any>(this.dataForm);
+	// 		this.storeDataForm(value);
+	// 		// this.ref.detectChanges();
+	// 	}, 3000);
+	// }
 
 	Initialize() {
 		this._solutionService.getListSolutionObs$();
@@ -180,8 +205,31 @@ export class ManagementComponent
 		this.dataSource.paginator = this.paginator;
 	}
 
+	onCreateData() {
+		const dialogRef = this.dialog.open(ManagementModalComponent, {
+			data: { items: this.items, module: this.module }
+		});
+
+		dialogRef.componentInstance.submitClicked.subscribe(result => {
+			if (result.hasMultiple === false) {
+				dialogRef.close();
+			}
+
+			this.dataForm.push(result.value);
+			this.isSubmit = false;
+			this.dataSource = new MatTableDataSource<any>(this.dataForm);
+			this.storeDataForm(result.value);
+			this.ref.detectChanges();
+		});
+		// dialogSubmitSubscription.unsubscribe();
+	}
+
 	getDataForm() {
 		let localData = this.localstorageService.get(AppSettings.DATASTORAGE);
+		if (!localData) {
+			return [];
+		}
+
 		for (let i = 0; i < localData.length; i++) {
 			const element = localData[i];
 			if (element.moduleId === this.module.id) {
@@ -189,7 +237,6 @@ export class ManagementComponent
 				return element.data;
 			}
 		}
-		return [];
 	}
 
 	backClicked() {

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { PartialsModule } from "../../partials/partials.module";
-
 import {
 	ActionNotificationComponent,
 	DeleteEntityDialogComponent,
@@ -19,6 +18,7 @@ import { ManagementComponent } from "./management/management.component";
 import { ManagementEditComponent } from "./management-edit/management-edit.component";
 import { MaterialModule } from "../material/material.module";
 import { ManagementDynamicFormComponent } from "./management-dynamic-form/management-dynamic-form.component";
+import { ManagementModalComponent } from './management-modal/management-modal.component';
 
 @NgModule({
 	imports: [
@@ -37,13 +37,15 @@ import { ManagementDynamicFormComponent } from "./management-dynamic-form/manage
 		DeleteEntityDialogComponent,
 		FetchEntityDialogComponent,
 		UpdateStatusDialogComponent,
-		ManagementEditComponent
+		ManagementEditComponent,
+		ManagementModalComponent
 	],
 	declarations: [
 		ManagementComponent,
 		ManagementEditComponent,
 		AppsManagementComponent,
-		ManagementDynamicFormComponent
+		ManagementDynamicFormComponent,
+		ManagementModalComponent
 	]
 })
 export class AppsManagementModule {}
