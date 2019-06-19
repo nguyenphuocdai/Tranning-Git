@@ -1,3 +1,4 @@
+import { SolutionService } from './../../../../../../shared/_services/kt-solution-services/solution.service';
 import { AsideService } from "./../../../../../themes/default/aside-service.service";
 import { LayoutUtilsService } from "./../../../../../../core/_base/crud/utils/layout-utils.service";
 import { ModuleModel } from "./../../../../../../shared/_model-app/module.model";
@@ -40,7 +41,8 @@ export class CardListComponent implements OnInit, OnChanges {
 		private _ref: ChangeDetectorRef,
 		private localstorageService: LocalstorageService,
 		private layoutUtilsService: LayoutUtilsService,
-		private asideService: AsideService
+		private asideService: AsideService,
+		private solutionService: SolutionService
 	) {}
 
 	ngOnInit() {
@@ -152,6 +154,7 @@ export class CardListComponent implements OnInit, OnChanges {
 			this.items = this.localstorageService.get(
 				AppSettings.SOLUTIONSTORAGE
 			);
+			this.solutionService.getListSolutionObs$();
 			this._ref.detectChanges();
 		});
 	}

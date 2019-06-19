@@ -301,12 +301,13 @@ export class AsideLeftComponent
 	}
 
 	handleNavigate(item) {
-		const url = `${this.layoutConfigService.getCurrentMainRoute()}/management/sln/${
+		const url = `${this.layoutConfigService.getCurrentMainRoute()}/management/module/${
 			item.name
 		}`;
 		this.router.navigateByUrl(url, { relativeTo: this.activatedRoute });
 	}
-	ngOnDestroy() {
+
+	ngOnDestroy(): void {
 		this._subscription.unsubscribe();
 	}
 }

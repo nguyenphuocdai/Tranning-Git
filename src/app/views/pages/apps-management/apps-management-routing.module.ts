@@ -9,13 +9,8 @@ const routes: Routes = [
 		path: "",
 		component: AppsManagementComponent,
 		children: [
-			// {
-			// 	path: "",
-			// 	redirectTo: "sln/:id",
-			// 	pathMatch: "full"
-			// },
 			{
-				path: "sln/:id",
+				path: "module/:id",
 				component: ManagementComponent
 			}
 		]
