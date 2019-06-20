@@ -19,9 +19,10 @@ export class ManagementModalComponent implements OnInit {
 	 */
 	dynamicFormSubmit(value: any) {
 		if (value.hasOwnProperty("Date Picker") === true) {
-			let result = value["Date Picker"].calendar();
-			value = { "Date Picker": result };
+			let result = value["Date Picker"].toISOString();
+			value["Date Picker"] = new Date(result).toLocaleDateString();
 		}
+		console.log(value);
 		this.isSubmit = true;
 		// temp
 		setTimeout(() => {

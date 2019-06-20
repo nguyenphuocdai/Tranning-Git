@@ -233,6 +233,7 @@ export class ManagementComponent
 		for (let i = 0; i < localData.length; i++) {
 			const element = localData[i];
 			if (element.moduleId === this.module.id) {
+				console.log(element.data);
 				return element.data;
 			}
 		}
@@ -240,5 +241,11 @@ export class ManagementComponent
 
 	backClicked() {
 		this._location.back();
+	}
+	editItem(item) {
+		console.log(item);
+	}
+	deleteItem(item) {
+		console.log(item);
 	}
 }
