@@ -26,20 +26,42 @@ li {
 .process-bar-percent {
 	position: absolute;
 	top: 0;
-	margin-left: 2px;
+	margin-left: 10px;
 }
 mat-progress-bar {
 	height: 1.3rem;
+}
+.container-process {
+	margin: 0 auto;
+	width: 90%;    
+	padding-bottom: 10px;
 }
 .container-upload .customize-w-h-icon {
 	height: 18px;
 	width: 20px;
 }
-.mat-hint--f-size{
+.mat-hint--f-size {
 	font-size: 75%;
 	padding-left: 10px;
-	color: #ff4081
+	color: #ff4081;
 }
-.example-margin{
+.example-margin {
 	padding-right: 15px;
+}
+
+.icon-red {
+	color: red;
+}
+
+.process-icon {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.f-size-14 {
+	font-size: 14px;
+}
+
+.f-size-16 {
+	font-size: 16px;
 }

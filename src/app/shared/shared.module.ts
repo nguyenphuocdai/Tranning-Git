@@ -20,6 +20,7 @@ import { StickyControlComponent } from "./components/sticky-control/sticky-contr
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MaterialModule } from "../views/pages/material/material.module";
 import { MaterialFileUploadComponent } from "./components/material-file-upload/material-file-upload.component";
+import { PreviewImageComponent } from './components/preview-image/preview-image.component';
 
 @NgModule({
 	imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
@@ -38,7 +39,8 @@ import { MaterialFileUploadComponent } from "./components/material-file-upload/m
 		FuploadDynamicComponent,
 		StickyControlComponent,
 		DynamicFieldDirective,
-		MaterialFileUploadComponent
+		MaterialFileUploadComponent,
+		PreviewImageComponent
 	],
 	exports: [
 		CheckboxComponent,
@@ -54,7 +56,8 @@ import { MaterialFileUploadComponent } from "./components/material-file-upload/m
 		FuploadDynamicComponent,
 		StickyControlComponent,
 		DynamicFieldDirective,
-		MaterialFileUploadComponent
+		MaterialFileUploadComponent,
+		PreviewImageComponent
 	],
 	entryComponents: [
 		InputComponent,
@@ -65,7 +68,8 @@ import { MaterialFileUploadComponent } from "./components/material-file-upload/m
 		NumberComponent,
 		LookupComponent,
 		MoneyDynamicComponent,
-		FuploadDynamicComponent
+		FuploadDynamicComponent,
+		PreviewImageComponent
 	],
 	providers: [FormFieldService, ModuleService, SolutionService]
 })

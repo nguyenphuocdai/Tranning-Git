@@ -1,3 +1,4 @@
+import { MatDialog } from "@angular/material";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {
@@ -9,13 +10,13 @@ import {
 } from "@angular/animations";
 import {
 	HttpClient,
-	HttpResponse,
 	HttpRequest,
 	HttpEventType,
 	HttpErrorResponse
 } from "@angular/common/http";
 import { Subscription, of } from "rxjs";
 import { catchError, last, map, tap } from "rxjs/operators";
+import { PreviewImageComponent } from "../preview-image/preview-image.component";
 
 @Component({
 	selector: "app-material-file-upload",
@@ -52,7 +53,7 @@ export class MaterialFileUploadComponent implements OnInit {
 
 	files: Array<FileUploadModel> = [];
 
-	constructor(private _http: HttpClient) {}
+	constructor(private _http: HttpClient, private dialog: MatDialog) {}
 
 	ngOnInit() {
 		// console.log(this.controlName);
@@ -65,23 +66,21 @@ export class MaterialFileUploadComponent implements OnInit {
 		fileUpload.onchange = () => {
 			for (let index = 0; index < fileUpload.files.length; index++) {
 				const file = fileUpload.files[index];
-				console.log(file);
-				this.files.push({
+				let reader: FileReader = new FileReader();
+				let obj = {
 					data: file,
 					state: "in",
+					base64: reader.result,
 					inProgress: false,
 					progress: 0,
 					canRetry: false,
 					canCancel: true
-				});
-
-				let reader: FileReader = new FileReader();
+				};
 
 				reader.onloadend = e => {
-					// this.image = reader.result;
-					// console.log(reader.result);
-					// console.log(this.files);
+					obj.base64 = reader.result;
 				};
+				this.files.push(obj);
 				reader.readAsDataURL(file);
 			}
 			this.uploadFiles();
@@ -137,6 +136,8 @@ export class MaterialFileUploadComponent implements OnInit {
 			.subscribe((event: any) => {
 				if (typeof event === "object") {
 					// this.removeFileFromArray(file);
+					// console.log(this.files.toString());
+					event.body.files = this.files;
 					this.complete.emit(event.body);
 				}
 			});
@@ -161,11 +162,23 @@ export class MaterialFileUploadComponent implements OnInit {
 			this.files.splice(index, 1);
 		}
 	}
+	onPreviewImage(file) {
+		console.log(file);
+		this.dialog
+			.open(PreviewImageComponent, {
+				data: { file: file }
+			})
+			.afterClosed()
+			.subscribe(x => {
+				console.log(x);
+			});
+	}
 }
 
 export class FileUploadModel {
 	data: File;
 	state: string;
+	base64: ArrayBuffer | string;
 	inProgress: boolean;
 	progress: number;
 	canRetry: boolean;

@@ -1,35 +1,61 @@
-<div class="container-upload" [attr.formGroup]="formControlGroup ? 'formControlGroup' : null">
-  <label class="example-margin">{{label}}: </label>
-  <button mat-raised-button color="primary" (click)="onClick()" type="button">
-      <mat-icon class="customize-w-h-icon">file_upload</mat-icon>
-      {{ text }}
-  </button>
-  <span class="mat-hint mat-hint--f-size" *ngIf="files.length <= 0">{{requireMessage}}</span>
-  <br />
-  <br />
-  <ul>  
-      <li *ngFor="let file of files" [@fadeInOut]="file.state">
-          <mat-progress-bar [value]="file.progress"></mat-progress-bar>
-          <span class="process-bar-percent" [ngStyle]="{ left: file.progress + '%' }">{{ file.progress }}%</span
-    >
-    <span id="file-label">
-      {{ file.data.name }}
-      <a
-        title="Retry"
-        (click)="retryFile(file)"
-        *ngIf="file.canRetry"
-      >
-        <mat-icon>refresh</mat-icon>
-      </a>
-      <a
-        title="Cancel"
-        (click)="cancelFile(file)"
-        *ngIf="file.canCancel"
-      >
-        <mat-icon color="warn">cancel</mat-icon>
-      </a>
-    </span>
-      </li>
-  </ul>
-  <input type="file" id="fileUpload" [attr.formControlName]="controlName ? 'controlName' : null" name="fileUpload" [attr.multiple]="multiple === 'multiple' ? 'multiple' : null" accept="{{ accept }}" style="display:none;" />
+<div
+	class="container-upload"
+	[attr.formGroup]="formControlGroup ? 'formControlGroup' : null"
+>
+	<label class="example-margin">{{ label }}: </label>
+	<!-- <button mat-raised-button color="primary" (click)="onClick()" type="button">
+		<mat-icon class="customize-w-h-icon">file_upload</mat-icon>
+		{{ text }}
+  </button> -->
+	<button
+		type="button"
+		mat-mini-fab
+		aria-label="File upload image"
+		(click)="onClick()"
+	>
+		<mat-icon class="customize-w-h-icon">file_upload</mat-icon>
+	</button>
+	<span class="mat-hint mat-hint--f-size" *ngIf="files.length <= 0">{{
+		requireMessage
+	}}</span>
+	<br />
+	<br />
+	<ul>
+		<li *ngFor="let file of files" [@fadeInOut]="file.state" class="container-process">
+			<mat-progress-bar [value]="file.progress"></mat-progress-bar>
+			<span
+				class="process-bar-percent"
+				[ngStyle]="{ left: file.progress + '%' }"
+				>{{ file.progress }}%</span
+			>
+			<span id="file-label">
+				{{ file.data.name }}
+				<a
+					title="Retry"
+					(click)="retryFile(file)"
+					*ngIf="file.canRetry"
+				>
+					<mat-icon>refresh</mat-icon>
+				</a>
+				<a
+          title="Cancel"
+          class="process-icon"
+					(click)="cancelFile(file)"
+					*ngIf="file.canCancel"
+				>
+					<i class="flaticon-close f-size-14 icon-red"></i>
+				</a>
+				<a title="Preview" (click)="onPreviewImage(file)"><i class="flaticon-eye f-size-16"></i></a>
+			</span>
+		</li>
+	</ul>
+	<input
+		type="file"
+		id="fileUpload"
+		[attr.formControlName]="controlName ? 'controlName' : null"
+		name="fileUpload"
+		[attr.multiple]="multiple === 'multiple' ? 'multiple' : null"
+		accept="{{ accept }}"
+		style="display:none;"
+	/>
 </div>
