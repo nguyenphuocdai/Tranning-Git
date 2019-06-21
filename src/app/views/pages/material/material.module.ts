@@ -110,6 +110,7 @@ import {
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ModalBottomSheetComponent } from "./controls/modal-bottom-sheet/modal-bottom-sheet.component";
 import { CdkTableModule} from '@angular/cdk/table';
+import { LightboxModule } from 'ngx-lightbox';
 
 const routes: Routes = [
 	{
@@ -187,7 +188,8 @@ const routes: Routes = [
 		MatIconModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
-		CdkTableModule
+		CdkTableModule,
+		LightboxModule
 	],
 	exports: [
 		RouterModule,
@@ -229,7 +231,8 @@ const routes: Routes = [
 		MatProgressSpinnerModule,
 		MatTableModule,
 		MatPaginatorModule,
-		CdkTableModule
+		CdkTableModule,
+		LightboxModule
 	],
 	entryComponents: [
 		PizzaPartyComponent,
