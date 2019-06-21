@@ -1,8 +1,12 @@
-<div class="example-card">
-	<img
-		src="{{ file.base64 }}"
-		class="img-fluid"
-		alt="{{ file.data.name }}"
-		style="width: 100%"
-	/>
+<div class="container py-5">
+	<div class="row col-md-12">
+		<div class="col-md-4 pt-2" *ngFor="let image of _album; let i = index">
+			<img
+				[src]="image.thumb"
+				class="img-fluid"
+				(click)="open(i)"
+				style="width:100%; cursor: pointer;"
+			/>
+		</div>
+	</div>
 </div>
