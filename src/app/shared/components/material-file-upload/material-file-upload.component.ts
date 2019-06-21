@@ -163,10 +163,9 @@ export class MaterialFileUploadComponent implements OnInit {
 		}
 	}
 	onPreviewImage(file) {
-		console.log(file);
 		this.dialog
 			.open(PreviewImageComponent, {
-				data: { file: file }
+				data: { file: [file] }
 			})
 			.afterClosed()
 			.subscribe(x => {
