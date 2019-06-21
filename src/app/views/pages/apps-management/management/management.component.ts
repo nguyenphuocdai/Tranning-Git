@@ -1,3 +1,4 @@
+import { PreviewImageComponent } from "./../../../../shared/components/preview-image/preview-image.component";
 import { SolutionService } from "./../../../../shared/_services/kt-solution-services/solution.service";
 import { ModuleModel } from "./../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../shared/_constant/app-setting";
@@ -36,7 +37,8 @@ export class ManagementComponent
 	dataSource: any;
 	module: ModuleModel;
 	isSubmit: boolean = false;
-
+	specialColumnUpload: string = "";
+	specialColumnDate: string = "";
 	/**
 	 * Init
 	 * @param localstorageService
@@ -178,9 +180,12 @@ export class ManagementComponent
 			if (objOptions["type"] === "button") {
 				continue;
 			}
-			// if (i === 1) {
-			// 	return;
-			// }
+			if (objOptions["type"] === "fupload") {
+				this.specialColumnUpload = objOptions["name"];
+			}
+			if (objOptions["type"] === "datepicker") {
+				this.specialColumnDate = objOptions["name"];
+			}
 			// header column table (name of object optionsField)
 			let headerName = objOptions["name"];
 			// binding headerName to object
@@ -193,7 +198,6 @@ export class ManagementComponent
 			};
 
 			this.columns.push(obj);
-			window["test"] = this.columns;
 		}
 
 		this.displayedColumns = this.columns.map(c => c.columnDef);
@@ -247,5 +251,18 @@ export class ManagementComponent
 	}
 	deleteItem(item) {
 		console.log(item);
+	}
+
+	onPreviewImage(item) {
+		let dataFiles = item[this.specialColumnUpload].files;
+		this.dialog
+			.open(PreviewImageComponent, {
+				height: "70vh",
+				data: { file: dataFiles }
+			})
+			.afterClosed()
+			.subscribe(x => {
+				console.log(x);
+			});
 	}
 }

@@ -2,22 +2,13 @@
 <div class="alert fade show" role="alert">
 	<div class="alert-text">
 		<div class="kt-form__actions kt-form__actions kt-align-right">
-			<a
-				(click)="backClicked()"
-				class="btn btn-secondary kt-margin-r-10"
-				mat-raised-button
-				matTooltip="Back to the users list"
-			>
+			<a (click)="backClicked()" class="btn btn-secondary kt-margin-r-10" mat-raised-button
+				matTooltip="Back to the users list">
 				<i class="la la-arrow-left"></i>
 				<span class="kt-hidden-mobile">Back</span>
 			</a>
 
-			<button
-				mat-raised-button
-				color="primary"
-				(click)="onCreateData()"
-				matTooltip="Create new data"
-			>
+			<button mat-raised-button color="primary" (click)="onCreateData()" matTooltip="Create new data">
 				New Record
 			</button>
 		</div>
@@ -26,70 +17,80 @@
 
 <div class="example-container mat-elevation-z8">
 	<mat-table #table [dataSource]="dataSource">
-		<ng-container
-			*ngFor="let column of columns"
-			[cdkColumnDef]="column.columnDef"
-		>
-			<mat-header-cell *cdkHeaderCellDef>{{
+		<div *ngFor="let column of columns; let columnIndex = index">
+			<ng-container *ngIf="column.columnDef === specialColumnUpload" [cdkColumnDef]="column.columnDef">
+				<mat-header-cell *cdkHeaderCellDef>{{
 				column.header
 			}}</mat-header-cell>
-			<mat-cell *cdkCellDef="let row">{{ column.cell(row) }} </mat-cell>
-		</ng-container>
+				<mat-cell *cdkCellDef="let row"> <i class="fa fa-eye" aria-hidden="true" (click)="onPreviewImage(row)"></i></mat-cell>
+			</ng-container>
 
-		<ng-container matColumnDef="ACTIONS">
-			<mat-header-cell *matHeaderCellDef>ACTIONS</mat-header-cell>
-			<mat-cell *matCellDef="let item">
-				<button
-					mat-icon-button
-					color="primary"
-					matTooltip="Edit items"
-					(click)="editItem(item)"
-				>
-					<mat-icon>create</mat-icon></button
-				>&nbsp;
+			<!-- binding all (not specialColumnUpload) -->
+			<ng-container *ngIf="column.columnDef !== specialColumnUpload" [cdkColumnDef]="column.columnDef">
+					<mat-header-cell *cdkHeaderCellDef>{{
+					column.header
+				}}</mat-header-cell>
+					<mat-cell *cdkCellDef="let row">
+						<div *ngIf="column.columnDef !== specialColumnDate">
+								{{ column.cell(row) }} 
+						</div>
+						<div *ngIf="column.columnDef === specialColumnDate">
+								{{ column.cell(row) | date: 'dd/MM/yyyy' }}
+						</div>
+					</mat-cell>
+				</ng-container>
+		</div>
+			<ng-container matColumnDef="ACTIONS">
+				<mat-header-cell *matHeaderCellDef>ACTIONS</mat-header-cell>
+				<mat-cell *matCellDef="let item">
+					<button mat-icon-button color="primary" matTooltip="Edit items" (click)="editItem(item)">
+						<mat-icon>create</mat-icon>
+					</button>&nbsp;
 
-				<button
-					mat-icon-button
-					color="warn"
-					matTooltip="Delete items"
-					type="button"
-					(click)="deleteItem(item)"
-				>
-					<mat-icon>delete</mat-icon></button
-				>&nbsp;
+					<button mat-icon-button color="warn" matTooltip="Delete items" type="button"
+						(click)="deleteItem(item)">
+						<mat-icon>delete</mat-icon>
+					</button>&nbsp;
 
-				<button
-					mat-icon-button
-					[matMenuTriggerFor]="menu"
-					matTooltip="More actions"
-				>
-					<mat-icon>more_vert</mat-icon>
-				</button>
-				<mat-menu #menu="matMenu">
-					<button mat-menu-item>
-						<mat-icon>dialpad</mat-icon>
-						<span>Redial</span>
+					<button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="More actions">
+						<mat-icon>more_vert</mat-icon>
 					</button>
-					<button mat-menu-item disabled>
-						<mat-icon>voicemail</mat-icon>
-						<span>Check voicemail</span>
-					</button>
-					<button mat-menu-item>
-						<mat-icon>notifications_off</mat-icon>
-						<span>Disable alerts</span>
-					</button>
-				</mat-menu>
-			</mat-cell>
-		</ng-container>
+					<mat-menu #menu="matMenu">
+						<button mat-menu-item>
+							<mat-icon>dialpad</mat-icon>
+							<span>Redial</span>
+						</button>
+						<button mat-menu-item disabled>
+							<mat-icon>voicemail</mat-icon>
+							<span>Check voicemail</span>
+						</button>
+						<button mat-menu-item>
+							<mat-icon>notifications_off</mat-icon>
+							<span>Disable alerts</span>
+						</button>
+					</mat-menu>
+				</mat-cell>
+			</ng-container>
 
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 	</mat-table>
-	<mat-paginator
-		#paginator
-		[pageSize]="10"
-		[pageSizeOptions]="[5, 10, 20]"
-		[showFirstLastButtons]="true"
-	>
+	<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
 	</mat-paginator>
 </div>
+
+<div *ngFor="let displayedColumn of displayedColumns; let columnIndex = index">
+	<ng-container *ngIf="displayedColumn != 'actions'" matColumnDef="{{ displayedColumn }}">
+		<mat-header-cell *matHeaderCellDef mat-sort-header>{{
+			displayedColumn
+		}}</mat-header-cell>
+		<mat-cell *matCellDef="let element">
+			{{ element[displayedColumn] }}</mat-cell>
+	</ng-container>
+</div>
+<ng-container matColumnDef="actions">
+	<mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+	<mat-cell *matCellDef="let element">
+		<button mat-raised-button>Edit</button>
+	</mat-cell>
+</ng-container>

@@ -1,7 +1,7 @@
 table {
 	width: 100%;
 }
-.kt-portlet__body{
+.kt-portlet__body {
 	position: relative;
 }
 .mat-table {
@@ -19,4 +19,7 @@ mat-header-cell:first-of-type {
 
 .mat-column-id {
 	flex: 1 !important;
+}
+.fa fa-eye {
+	cursor: pointer;
 }
