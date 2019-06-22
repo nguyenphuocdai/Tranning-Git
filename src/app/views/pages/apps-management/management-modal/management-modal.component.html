@@ -9,8 +9,8 @@
 								<i class="la la-gear"></i>
 							</span>
 							<h3 class="kt-portlet__head-text">
-								{{ data.module.name }} -
-								{{ data.module.solutionId }}
+								{{ module.name }} -
+								{{ module.solutionId }}
 							</h3>
 						</div>
 					</div>
@@ -18,20 +18,21 @@
 				<div class="kt-form">
 					<kt-loading-request *ngIf="isSubmit"></kt-loading-request>
 					<div class="kt-portlet__body">
-						<div class="kt-form__section kt-form__group kt-form__section--first">
+						<div class="kt-form__section kt-form__group kt-form__section--first" *ngIf="isShowMultipleCheckbox">
 							<mat-checkbox
 								[(ngModel)]="hasMultiple"
 								class="example-margin"
 							>
 								<label style="margin-bottom: 0"
-									>If checked, {{ data.module.name }} isn't
+									>If checked, {{ module.name }} isn't
 									close when submit data.
 								</label>
 							</mat-checkbox>
 						</div>
 						<div class="kt-form__section kt-form__section--first">
 							<kt-management-dynamic-form
-								[fields]="data.items"
+								[fields]="fields"
+								[data]="rowData"
 								(submit)="dynamicFormSubmit($event)"
 							>
 							</kt-management-dynamic-form>
