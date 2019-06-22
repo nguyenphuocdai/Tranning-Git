@@ -1,4 +1,3 @@
-import { DialogConfirmComponent } from "./../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { SharedModule } from "./../../../shared/shared.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -80,7 +79,6 @@ const routes: Routes = [
 		// Pipe
 		ReplaceSpacePipe,
 		// NumericDirective
-		DialogConfirmComponent,
 		ModuleDetailComponent
 	],
 	entryComponents: [
@@ -88,7 +86,6 @@ const routes: Routes = [
 		ModuleAddComponent,
 		SolutionEditDialogComponent,
 		ModuleEditDialogComponent,
-		DialogConfirmComponent
 	],
 	imports: [
 		CommonModule,
