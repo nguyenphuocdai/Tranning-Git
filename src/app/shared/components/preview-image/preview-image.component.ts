@@ -16,11 +16,6 @@ export class PreviewImageComponent implements OnInit {
 		private _lightbox: Lightbox
 	) {
 		for (let i = 0; i < this.data.file.length; i++) {
-			// const src =
-			// 	"../../../../assets/media/products/product" + i + ".jpg";
-			// const caption = "Image " + i + " caption here";
-			// const thumb =
-			// 	"../../../../assets/media/products/product" + i + ".jpg";
 			const element = this.data.file[i];
 			const album = {
 				src: element.base64,
@@ -33,7 +28,6 @@ export class PreviewImageComponent implements OnInit {
 
 	ngOnInit() {
 		this.file = this.data.file;
-		console.log(this.data.file);
 	}
 
 	open(index: number): void {
