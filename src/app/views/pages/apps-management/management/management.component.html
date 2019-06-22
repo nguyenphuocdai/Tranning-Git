@@ -22,7 +22,7 @@
 				<mat-header-cell *cdkHeaderCellDef>{{
 				column.header
 			}}</mat-header-cell>
-				<mat-cell *cdkCellDef="let row"> <i class="fa fa-eye" aria-hidden="true" (click)="onPreviewImage(row)"></i></mat-cell>
+				<mat-cell *cdkCellDef="let row"> <i class="fa fa-eye cursor-pointer" aria-hidden="true" (click)="onPreviewImage(row)"></i></mat-cell>
 			</ng-container>
 
 			<!-- binding all (not specialColumnUpload) -->
@@ -52,10 +52,10 @@
 						<mat-icon>delete</mat-icon>
 					</button>&nbsp;
 
-					<button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="More actions">
+					<!-- <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="More actions">
 						<mat-icon>more_vert</mat-icon>
-					</button>
-					<mat-menu #menu="matMenu">
+					</button> -->
+					<!-- <mat-menu #menu="matMenu">
 						<button mat-menu-item>
 							<mat-icon>dialpad</mat-icon>
 							<span>Redial</span>
@@ -68,7 +68,7 @@
 							<mat-icon>notifications_off</mat-icon>
 							<span>Disable alerts</span>
 						</button>
-					</mat-menu>
+					</mat-menu> -->
 				</mat-cell>
 			</ng-container>
 

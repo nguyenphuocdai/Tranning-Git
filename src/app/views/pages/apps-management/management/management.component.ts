@@ -67,6 +67,9 @@ export class ManagementComponent
 		});
 	}
 
+	/**
+	 * OnInit
+	 */
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params => {
 			const id = params["id"];
@@ -90,6 +93,9 @@ export class ManagementComponent
 		});
 	}
 
+	/**
+	 * AfterViewInit
+	 */
 	ngAfterViewInit() {
 		if (this.module.optionsField.length > 0 && this.dataSource) {
 			this.dataSource.paginator = this.paginator;
@@ -118,22 +124,6 @@ export class ManagementComponent
 		}
 		return item.concat(btn);
 	}
-
-	// /**
-	//  * Data EventEmitter Dynamic Form
-	//  * @param value
-	//  */
-	// dynamicFormSubmit(value: any) {
-	// 	this.isSubmit = true;
-	// 	// temp
-	// 	setTimeout(() => {
-	// 		this.dataForm.push(value);
-	// 		this.isSubmit = false;
-	// 		this.dataSource = new MatTableDataSource<any>(this.dataForm);
-	// 		this.storeDataForm(value);
-	// 		// this.ref.detectChanges();
-	// 	}, 3000);
-	// }
 
 	Initialize() {
 		this._solutionService.getListSolutionObs$();
@@ -172,6 +162,10 @@ export class ManagementComponent
 
 	ngOnDestroy() {}
 
+	/**
+	 * InitColumn
+	 * @param item
+	 */
 	initColumn(item: ModuleModel) {
 		let listOptions = item.optionsField;
 		for (let i = 0; i < listOptions.length; i++) {
@@ -209,7 +203,11 @@ export class ManagementComponent
 		this.dataSource.paginator = this.paginator;
 	}
 
+	/**
+	 * CreateData
+	 */
 	onCreateData() {
+
 		const dialogRef = this.dialog.open(ManagementModalComponent, {
 			data: { items: this.items, module: this.module }
 		});
@@ -225,7 +223,6 @@ export class ManagementComponent
 			this.storeDataForm(result.value);
 			this.ref.detectChanges();
 		});
-		// dialogSubmitSubscription.unsubscribe();
 	}
 
 	getDataForm() {
@@ -237,7 +234,6 @@ export class ManagementComponent
 		for (let i = 0; i < localData.length; i++) {
 			const element = localData[i];
 			if (element.moduleId === this.module.id) {
-				console.log(element.data);
 				return element.data;
 			}
 		}
@@ -246,8 +242,12 @@ export class ManagementComponent
 	backClicked() {
 		this._location.back();
 	}
-	editItem(item) {
-		console.log(item);
+	editItem(dataRow) {
+		console.log(dataRow);
+		const dialogRef = this.dialog.open(ManagementModalComponent, {
+			data: { items: this.items, module: this.module, data: dataRow}
+		});
+
 	}
 	deleteItem(item) {
 		console.log(item);

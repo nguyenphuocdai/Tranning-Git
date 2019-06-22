@@ -30,15 +30,35 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 		}
 		return this.form.value;
 	}
+
+	/**
+	 * DI FormBuilder
+	 * @param fb
+	 */
 	constructor(private fb: FormBuilder) {}
+
+	/**
+	 * CreateControl
+	 */
 	ngOnInit() {
 		this.form = this.createControl();
+		console.log(this.form);
 	}
+
+	/**
+	 * Lifecycle Hook
+	 * @param changes
+	 */
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes.fields.currentValue !== changes.fields.previousValue) {
 			this.form = this.createControl();
 		}
 	}
+
+	/**
+	 * Submit Form
+	 * @param event
+	 */
 	onSubmit(event: Event) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -53,6 +73,9 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 		}
 	}
 
+	/**
+	 * CreateFormControl
+	 */
 	createControl() {
 		const group = this.fb.group({});
 		this.fields.forEach(field => {
@@ -68,6 +91,10 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 		return group;
 	}
 
+	/**
+	 * BindValidation
+	 * @param validations
+	 */
 	bindValidations(validations: any) {
 		if (validations.length > 0) {
 			const validList = [];
@@ -87,12 +114,20 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 		return null;
 	}
 
+	/**
+	 * Validate Field form
+	 */
 	validateAllFormFields(formGroup: FormGroup) {
 		Object.keys(formGroup.controls).forEach(field => {
 			const control = formGroup.get(field);
 			control.markAsTouched({ onlySelf: true });
 		});
 	}
+
+	/**
+	 * Delete Field
+	 * @param event
+	 */
 	onDelete(event) {
 		if (event) {
 			this.fields = event;

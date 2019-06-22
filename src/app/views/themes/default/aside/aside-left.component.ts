@@ -92,6 +92,44 @@ export class AsideLeftComponent
 	ngAfterViewInit(): void {}
 
 	ngOnInit() {
+
+		this._subscription = this.asideService
+			.getAllSolutions()
+			.subscribe(arrSolutions => {
+				this.listSolutions = arrSolutions;
+				// first load AsideService not send all solution ( fix after)
+				if (arrSolutions.length === 0) {
+					this.listSolutions = this.localstorageService.get(
+						AppSettings.SOLUTIONSTORAGE
+					);
+				}
+				let arrModules = this.localstorageService.get(
+					AppSettings.MODULESTORAGE
+				);
+
+				if (!this.listSolutions) {
+					this.ref.detectChanges();
+					return;
+				}
+				for (let i = 0; i < this.listSolutions.length; i++) {
+					const itemSolution: SolutionModel = this.listSolutions[i];
+					if (!arrModules) {
+						continue;
+					}
+					for (let j = 0; j < arrModules.length; j++) {
+						const itemModule: ModuleModel = arrModules[j];
+						if (itemModule.solutionId === itemSolution.name) {
+							if (this.listSolutions[i].modules === undefined) {
+								this.listSolutions[i].modules = [];
+							}
+							this.listSolutions[i].modules.push(itemModule);
+						}
+					}
+				}
+				this.ref.detectChanges();
+			});
+
+
 		this.currentRouteUrl = this.router.url.split(/[?#]/)[0];
 
 		this.router.events
@@ -131,40 +169,7 @@ export class AsideLeftComponent
 			);
 		}
 
-		this._subscription = this.asideService
-			.getAllSolutions()
-			.subscribe(arrSolutions => {
-				this.listSolutions = arrSolutions;
-				// first load AsideService not send all solution ( fix after)
-				if (arrSolutions.length === 0) {
-					this.listSolutions = this.localstorageService.get(
-						AppSettings.SOLUTIONSTORAGE
-					);
-				}
-				let arrModules = this.localstorageService.get(
-					AppSettings.MODULESTORAGE
-				);
-
-				if (!this.listSolutions) {
-					return;
-				}
-				for (let i = 0; i < this.listSolutions.length; i++) {
-					const itemSolution: SolutionModel = this.listSolutions[i];
-					if (!arrModules) {
-						continue;
-					}
-					for (let j = 0; j < arrModules.length; j++) {
-						const itemModule: ModuleModel = arrModules[j];
-						if (itemModule.solutionId === itemSolution.name) {
-							if (this.listSolutions[i].modules === undefined) {
-								this.listSolutions[i].modules = [];
-							}
-							this.listSolutions[i].modules.push(itemModule);
-						}
-					}
-				}
-				this.ref.detectChanges();
-			});
+		
 	}
 	selectedNavItem(item: number) {
 		console.log(item);
