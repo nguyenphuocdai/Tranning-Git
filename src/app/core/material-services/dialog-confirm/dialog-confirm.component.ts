@@ -6,13 +6,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 	templateUrl: "./dialog-confirm.component.html",
 	styleUrls: ["./dialog-confirm.component.scss"]
 })
-export class DialogConfirmComponent implements OnInit {
+export class DialogConfirmDeleteComponent implements OnInit {
 	title: string = "Alert";
 	message: string = "Message default ?!";
 	itemDelete: any;
 	ngOnInit(): void {}
 	constructor(
-		public dialogRef: MatDialogRef<DialogConfirmComponent>,
+		public dialogRef: MatDialogRef<DialogConfirmDeleteComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
 		this.title = data.title;
