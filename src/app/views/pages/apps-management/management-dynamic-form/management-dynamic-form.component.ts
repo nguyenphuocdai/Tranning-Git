@@ -22,6 +22,7 @@ import {
 export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 	@Input() fields: FieldConfigInterface[] = [];
 	@Output() submit: EventEmitter<any> = new EventEmitter<any>();
+	@Input() data: any;
 	form: FormGroup;
 
 	get value() {
@@ -42,7 +43,25 @@ export class ManagementDynamicFormComponent implements OnInit, OnChanges {
 	 */
 	ngOnInit() {
 		this.form = this.createControl();
-		console.log(this.form);
+
+		if (this.data) {
+			this.bindingDataEdit();
+		}
+	}
+
+	bindingDataEdit() {
+		let objControls = this.form.controls;
+		let dataInput = this.data;
+		let form = this.form;
+		for (let k in objControls) {
+			if (objControls.hasOwnProperty(k)) {
+				Object.keys(this.data).forEach(function(keyData) {
+					if (k === keyData) {
+						form.controls[k].setValue(dataInput[k]);
+					}
+				});
+			}
+		}
 	}
 
 	/**
