@@ -1,9 +1,4 @@
-import { PreviewImageComponent } from "./../../../../shared/components/preview-image/preview-image.component";
-import { SolutionService } from "./../../../../shared/_services/kt-solution-services/solution.service";
-import { ModuleModel } from "./../../../../shared/_model-app/module.model";
-import { AppSettings } from "./../../../../shared/_constant/app-setting";
-import { FieldConfigInterface } from "./../../../../shared/_model-app/field.interface";
-import { LocalstorageService } from "./../../../../shared/_services/local-storage-service/localstorage.service";
+import { DialogConfirmDeleteComponent } from "./../../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import {
 	Component,
 	OnInit,
@@ -17,11 +12,16 @@ import {
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { MatPaginator, MatTableDataSource, MatDialog } from "@angular/material";
 import { Location } from "@angular/common";
+import { Subscription } from "rxjs";
+import { ManagementService } from "./../../../../shared/_services/kt-management-services/management.service";
+import { PreviewImageComponent } from "./../../../../shared/components/preview-image/preview-image.component";
+import { SolutionService } from "./../../../../shared/_services/kt-solution-services/solution.service";
+import { ModuleModel } from "./../../../../shared/_model-app/module.model";
+import { AppSettings } from "./../../../../shared/_constant/app-setting";
+import { FieldConfigInterface } from "./../../../../shared/_model-app/field.interface";
+import { LocalstorageService } from "./../../../../shared/_services/local-storage-service/localstorage.service";
 import { ManagementModalComponent } from "../management-modal/management-modal.component";
 
-/**
- * @title Table with pagination
- */
 @Component({
 	selector: "kt-management",
 	templateUrl: "./management.component.html",
@@ -36,41 +36,57 @@ export class ManagementComponent
 	items: FieldConfigInterface[] = [];
 	dataSource: any;
 	module: ModuleModel;
-	isSubmit: boolean = false;
 	specialColumnUpload: string = "";
 	specialColumnDate: string = "";
+	dataModuleSubscription: Subscription;
+
 	/**
 	 * Init
 	 * @param localstorageService
 	 * @param activatedRoute
-	 * @param _solutionService
 	 * @param ref
+	 * @param router
+	 * @param dialog
+	 * @param managementService
 	 * @param _location
+	 * @param _solutionService
 	 */
 	constructor(
 		private localstorageService: LocalstorageService,
 		private activatedRoute: ActivatedRoute,
-		private _solutionService: SolutionService,
 		private ref: ChangeDetectorRef,
-		private _location: Location,
 		private router: Router,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private managementService: ManagementService,
+		private _location: Location,
+		private _solutionService: SolutionService
 	) {
-		router.events.subscribe(val => {
-			if (val instanceof NavigationEnd) {
-				this.columns = [];
-				if (!this.module) {
-					return;
-				}
-				this.initColumn(this.module);
-			}
-		});
+		this.refreshChangeRouter();
+		this.setModuleActiveRoute();
 	}
 
 	/**
 	 * OnInit
 	 */
-	ngOnInit() {
+	ngOnInit() {}
+
+	/**
+	 * AfterViewInit
+	 */
+	ngAfterViewInit() {
+		if (this.module.optionsField.length > 0 && this.dataSource) {
+			this.dataSource.paginator = this.paginator;
+		}
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		// console.log(changes);
+	}
+
+	/**
+	 * Set Module when Router Active
+	 */
+	setModuleActiveRoute() {
 		this.activatedRoute.params.subscribe(params => {
 			const id = params["id"];
 			if (id && id.length > 0) {
@@ -84,9 +100,23 @@ export class ManagementComponent
 							element.optionsField
 						);
 						this.module = element;
+
+						this.dataModuleSubscription = this.managementService.currentDataModules.subscribe(
+							listDataModules => {
+								if (!listDataModules) {
+									return;
+								}
+								let dataModule = listDataModules.find(
+									x => x.moduleId === this.module.id
+								);
+								this.dataForm = dataModule.data;
+								this.dataSource = new MatTableDataSource<any>(
+									this.dataForm
+								);
+							}
+						);
 						this.initColumn(this.module);
 						return;
-						// this.ref.detectChanges();
 					}
 				}
 			}
@@ -94,18 +124,24 @@ export class ManagementComponent
 	}
 
 	/**
-	 * AfterViewInit
+	 * refresh when change Router
 	 */
-	ngAfterViewInit() {
-		if (this.module.optionsField.length > 0 && this.dataSource) {
-			this.dataSource.paginator = this.paginator;
-		}
+	refreshChangeRouter() {
+		this.router.events.subscribe(val => {
+			if (val instanceof NavigationEnd) {
+				this.columns = [];
+				if (!this.module) {
+					return;
+				}
+				this.initColumn(this.module);
+			}
+		});
 	}
 
-	ngOnChanges(changes: SimpleChanges) {
-		console.log(changes);
-	}
-
+	/**
+	 * Create button default if data field's not contains button
+	 * @param item
+	 */
 	bindDefaultButton(item: FieldConfigInterface[]): FieldConfigInterface[] {
 		let btn = {
 			database: "submit",
@@ -125,42 +161,12 @@ export class ManagementComponent
 		return item.concat(btn);
 	}
 
+	/**
+	 * Initialize
+	 */
 	Initialize() {
 		this._solutionService.getListSolutionObs$();
-		this.isSubmit = false;
 	}
-
-	/**
-	 * Store data submit to local storage
-	 * @param value
-	 */
-	storeDataForm(value) {
-		if (!value) {
-			return;
-		}
-		let localData = this.localstorageService.get(AppSettings.DATASTORAGE);
-		if (!localData) {
-			localData = [
-				{
-					moduleId: this.module.id,
-					data: []
-				}
-			];
-		}
-		for (let i = 0; i < localData.length; i++) {
-			const element = localData[i];
-			if (element.moduleId === this.module.id) {
-				element.data.push(value);
-				this.localstorageService.set(
-					AppSettings.DATASTORAGE,
-					localData
-				);
-				return;
-			}
-		}
-	}
-
-	ngOnDestroy() {}
 
 	/**
 	 * InitColumn
@@ -198,7 +204,6 @@ export class ManagementComponent
 		this.displayedColumns.push("ACTIONS");
 		this.Initialize();
 
-		this.dataForm = this.getDataForm();
 		this.dataSource = new MatTableDataSource<any>(this.dataForm);
 		this.dataSource.paginator = this.paginator;
 	}
@@ -207,7 +212,6 @@ export class ManagementComponent
 	 * CreateData
 	 */
 	onCreateData() {
-
 		const dialogRef = this.dialog.open(ManagementModalComponent, {
 			data: { items: this.items, module: this.module }
 		});
@@ -217,42 +221,56 @@ export class ManagementComponent
 				dialogRef.close();
 			}
 
-			this.dataForm.push(result.value);
-			this.isSubmit = false;
-			this.dataSource = new MatTableDataSource<any>(this.dataForm);
-			this.storeDataForm(result.value);
+			this.managementService.addDataModule(result.value, this.module.id);
 			this.ref.detectChanges();
 		});
 	}
 
-	getDataForm() {
-		let localData = this.localstorageService.get(AppSettings.DATASTORAGE);
-		if (!localData) {
-			return [];
-		}
-
-		for (let i = 0; i < localData.length; i++) {
-			const element = localData[i];
-			if (element.moduleId === this.module.id) {
-				return element.data;
-			}
-		}
-	}
-
-	backClicked() {
-		this._location.back();
-	}
-	editItem(dataRow) {
-		console.log(dataRow);
+	/**
+	 * Edit Item
+	 * @param rowData
+	 */
+	editItem(rowData) {
 		const dialogRef = this.dialog.open(ManagementModalComponent, {
-			data: { items: this.items, module: this.module, data: dataRow}
+			data: { items: this.items, module: this.module, rowData: rowData }
 		});
 
-	}
-	deleteItem(item) {
-		console.log(item);
+		dialogRef.componentInstance.submitClicked.subscribe(result => {
+			dialogRef.close();
+			this.managementService.editDataModule(result.value, this.module.id);
+			this.ref.detectChanges();
+		});
 	}
 
+	/**
+	 * Delete Item
+	 * @param item
+	 */
+	deleteItem(item) {
+		let title = "Alert Confirm";
+		let message = "Are you sure delete item this?";
+
+		this.dialog
+			.open(DialogConfirmDeleteComponent, {
+				width: "400px",
+				data: { title: title, message: message, itemDelete: item }
+			})
+			.afterClosed()
+			.subscribe(itemDelete => {
+				if (itemDelete) {
+					this.managementService.deleteDataModule(
+						itemDelete,
+						this.module.id
+					);
+					this.ref.detectChanges();
+				}
+			});
+	}
+
+	/**
+	 * Preview Image
+	 * @param item
+	 */
 	onPreviewImage(item) {
 		let dataFiles = item[this.specialColumnUpload].files;
 		this.dialog
@@ -264,5 +282,18 @@ export class ManagementComponent
 			.subscribe(x => {
 				console.log(x);
 			});
+	}
+
+	/**
+	 * Back Clicked
+	 */
+	backClicked() {
+		this._location.back();
+	}
+	/**
+	 * On Destroy
+	 */
+	ngOnDestroy() {
+		this.dataModuleSubscription.unsubscribe();
 	}
 }
