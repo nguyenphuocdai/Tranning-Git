@@ -21,9 +21,11 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MaterialModule } from "../views/pages/material/material.module";
 import { MaterialFileUploadComponent } from "./components/material-file-upload/material-file-upload.component";
 import { PreviewImageComponent } from './components/preview-image/preview-image.component';
+import { DialogConfirmDeleteComponent } from "../core/material-services/dialog-confirm/dialog-confirm.component";
+import { PartialsModule } from "../views/partials/partials.module";
 
 @NgModule({
-	imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
+	imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule, PartialsModule],
 	declarations: [
 		SharedComponent,
 		CheckboxComponent,
@@ -40,7 +42,8 @@ import { PreviewImageComponent } from './components/preview-image/preview-image.
 		StickyControlComponent,
 		DynamicFieldDirective,
 		MaterialFileUploadComponent,
-		PreviewImageComponent
+		PreviewImageComponent,
+		DialogConfirmDeleteComponent
 	],
 	exports: [
 		CheckboxComponent,
@@ -57,7 +60,8 @@ import { PreviewImageComponent } from './components/preview-image/preview-image.
 		StickyControlComponent,
 		DynamicFieldDirective,
 		MaterialFileUploadComponent,
-		PreviewImageComponent
+		PreviewImageComponent,
+		DialogConfirmDeleteComponent
 	],
 	entryComponents: [
 		InputComponent,
@@ -69,7 +73,8 @@ import { PreviewImageComponent } from './components/preview-image/preview-image.
 		LookupComponent,
 		MoneyDynamicComponent,
 		FuploadDynamicComponent,
-		PreviewImageComponent
+		PreviewImageComponent,
+		DialogConfirmDeleteComponent
 	],
 	providers: [FormFieldService, ModuleService, SolutionService]
 })

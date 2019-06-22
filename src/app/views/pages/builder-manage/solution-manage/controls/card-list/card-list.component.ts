@@ -4,7 +4,7 @@ import { LayoutUtilsService } from "./../../../../../../core/_base/crud/utils/la
 import { ModuleModel } from "./../../../../../../shared/_model-app/module.model";
 import { AppSettings } from "./../../../../../../shared/_constant/app-setting";
 import { LocalstorageService } from "./../../../../../../shared/_services/local-storage-service/localstorage.service";
-import { DialogConfirmComponent } from "../../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
+import { DialogConfirmDeleteComponent } from "../../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { MatDialog } from "@angular/material";
 import { LayoutConfigService } from "../../../../../../core/_base/layout/services/layout-config.service";
 import { SolutionModel } from "../../../../../../core/auth";
@@ -84,7 +84,7 @@ export class CardListComponent implements OnInit, OnChanges {
 		let messageNotDelete =
 			"Delete is failed, Please delete all module in solution. ";
 
-		let dialogRef = this.dialog.open(DialogConfirmComponent, {
+		let dialogRef = this.dialog.open(DialogConfirmDeleteComponent, {
 			width: "400px",
 			data: { title: title, message: message, itemDelete: item }
 		});

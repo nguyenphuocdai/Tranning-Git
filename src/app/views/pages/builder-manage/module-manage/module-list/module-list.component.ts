@@ -1,7 +1,7 @@
 import { LayoutUtilsService } from "./../../../../../core/_base/crud/utils/layout-utils.service";
 import { ModuleModel } from "./../../../../../shared/_model-app/module.model";
 import { SolutionModel } from "./../../../../../shared/_model-app/solution.model";
-import { DialogConfirmComponent } from "./../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
+import { DialogConfirmDeleteComponent } from "./../../../../../core/material-services/dialog-confirm/dialog-confirm.component";
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material";
@@ -94,7 +94,7 @@ export class ModuleListComponent implements OnInit {
 		let message = "Are you sure delete item this?";
 		let messageNotDelete = "Delete module successfully !";
 
-		let dialogRef = this.dialog.open(DialogConfirmComponent, {
+		let dialogRef = this.dialog.open(DialogConfirmDeleteComponent, {
 			width: "400px",
 			data: { title: title, message: message, itemDelete: item }
 		});
