@@ -20,6 +20,15 @@ export class InputDirective implements OnChanges {
 		if (this.type === "database") {
 			let data = this.input
 				.replace(/ /g, "_")
+				.replace(/[^\w\s]/gi, "")
+				.trim()
+				.toLowerCase();
+			this.el.nativeElement.value = data;
+		}
+		if (this.el.nativeElement.value) {
+			let data = this.input
+				.replace(/ /g, "_")
+				.replace(/[^\w\s]/gi, "")
 				.trim()
 				.toLowerCase();
 			this.el.nativeElement.value = data;
