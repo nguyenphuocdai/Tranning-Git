@@ -30,22 +30,22 @@
 								</div>
 
 								<!--Begin::Label-->
-								<div class="form-group kt-form__group">
+								<!-- <div class="form-group kt-form__group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Enter label" required name="label"
 											formControlName="label" #labelRef />
 										<mat-hint align="start">Please enter label</mat-hint>
 									</mat-form-field>
-								</div>
+								</div> -->
 
 								<!--Begin::Label-->
-								<div class="form-group kt-form__group">
+								<!-- <div class="form-group kt-form__group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Enter text file upload" required name="textFupload"
 											formControlName="textFupload" #textFuploadRef />
 										<mat-hint align="start">Please enter text file upload</mat-hint>
 									</mat-form-field>
-								</div>
+								</div> -->
 
 								<div class="form-group kt-form__group">
 									<mat-form-field class="demo-full-width">
@@ -121,7 +121,7 @@
 							<div class="kt-form__section kt-form__section--first">
 								<div class="form-group kt-form__group">
 									<app-material-file-upload *ngIf="rfFupload.get('fieldType').value"
-										(complete)="onFileComplete($event)" [Text]="textFuploadRef.value" [Label]="labelRef.value"
+										(complete)="onFileComplete($event)" [Text]="nameRef.value" [Label]="nameRef.value"
 										[multiple]="rfFupload.get('fieldType').value" [RequireMessage]="
 											rfFupload.get('errorMessage').value
 										"></app-material-file-upload>

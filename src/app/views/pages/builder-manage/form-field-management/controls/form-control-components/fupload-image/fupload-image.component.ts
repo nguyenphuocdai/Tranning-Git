@@ -50,12 +50,12 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 
 		if (this.valueEdit) {
 			this.rfFupload.controls["name"].setValue(this.valueEdit.name);
-			this.rfFupload.controls["label"].setValue(this.valueEdit.label);
-			this.rfFupload.controls["textFupload"].setValue(
-				this.valueEdit.textFupload === undefined
-					? "Default"
-					: this.valueEdit.textFupload
-			);
+			// this.rfFupload.controls["label"].setValue(this.valueEdit.label);
+			// this.rfFupload.controls["textFupload"].setValue(
+			// 	this.valueEdit.textFupload === undefined
+			// 		? "Default"
+			// 		: this.valueEdit.textFupload
+			// );
 			this.rfFupload.controls["required"].setValue(
 				this.valueEdit.required
 			);
@@ -93,13 +93,13 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	createForm() {
 		this.rfFupload = this._fbFupload.group({
 			name: ["", Validators.required],
-			label: ["", Validators.required],
+			label: [""],
 			required: new FormControl(false),
 			errorMessage: [""],
 			security: new FormControl(false),
 			tracking: new FormControl(false),
 			database: ["", Validators.required],
-			textFupload: ["", Validators.required],
+			// textFupload: ["", Validators.required],
 			fieldType: ["", Validators.required]
 		});
 	}
@@ -130,8 +130,8 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 	 * build data fro @Output
 	 */
 	onBuildData() {
-		let label = this.rfFupload.controls["label"].value;
-		let textFupload = this.rfFupload.controls["textFupload"].value;
+		// let label = this.rfFupload.controls["label"].value;
+		// let textFupload = this.rfFupload.controls["textFupload"].value;
 		let name = this.rfFupload.controls["name"].value;
 		let type = this.dialogRefData.type;
 		let inputType = this.dialogRefData.valueView;
@@ -148,7 +148,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 					? this.valueEdit.id
 					: this._typesUtilsService.makeid(),
 			type: type,
-			label: label,
+			label: name,
 			inputType: inputType,
 			name: name,
 			required: isRequired,
@@ -156,7 +156,7 @@ export class FuploadImageComponent implements OnInit, AfterViewChecked {
 			tracking: isTracking,
 			fieldType: fieldType,
 			database: database,
-			textFupload: textFupload,
+			// textFupload: textFupload,
 			validations: []
 		};
 		if (isRequired === true) {

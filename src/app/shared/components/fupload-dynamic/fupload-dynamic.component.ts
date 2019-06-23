@@ -10,7 +10,7 @@ import { FieldConfigInterface } from "../../_model-app/field.interface";
 				[RequireMessage]="require?.message"
 				[multiple]="field.fieldType"
 				[Label]="field.label"
-				[Text]="field.textFupload"
+				[Text]="field.name"
 				[controlName]="formControl"
 				[controlGroup]="group"
 			></app-material-file-upload>
