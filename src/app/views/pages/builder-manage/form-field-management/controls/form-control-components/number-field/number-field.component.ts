@@ -124,7 +124,7 @@ export class NumberFieldComponent implements OnInit, AfterViewChecked {
 			tracking: new FormControl(false),
 			description: [""],
 			isDecimal: new FormControl(false),
-			numberDecimal: ["", Validators.required],
+			numberDecimal: [""],
 			database: ["", Validators.required]
 		});
 	}
