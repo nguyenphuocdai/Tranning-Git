@@ -20,12 +20,18 @@ import { StickyControlComponent } from "./components/sticky-control/sticky-contr
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MaterialModule } from "../views/pages/material/material.module";
 import { MaterialFileUploadComponent } from "./components/material-file-upload/material-file-upload.component";
-import { PreviewImageComponent } from './components/preview-image/preview-image.component';
+import { PreviewImageComponent } from "./components/preview-image/preview-image.component";
 import { DialogConfirmDeleteComponent } from "../core/material-services/dialog-confirm/dialog-confirm.component";
 import { PartialsModule } from "../views/partials/partials.module";
-
+import { NumericDirective, InputDirective } from "../core/_base/metronic/index";
 @NgModule({
-	imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule, PartialsModule],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		FormsModule,
+		MaterialModule,
+		PartialsModule
+	],
 	declarations: [
 		SharedComponent,
 		CheckboxComponent,
@@ -43,7 +49,9 @@ import { PartialsModule } from "../views/partials/partials.module";
 		DynamicFieldDirective,
 		MaterialFileUploadComponent,
 		PreviewImageComponent,
-		DialogConfirmDeleteComponent
+		DialogConfirmDeleteComponent,
+		NumericDirective,
+		InputDirective
 	],
 	exports: [
 		CheckboxComponent,
@@ -61,7 +69,9 @@ import { PartialsModule } from "../views/partials/partials.module";
 		DynamicFieldDirective,
 		MaterialFileUploadComponent,
 		PreviewImageComponent,
-		DialogConfirmDeleteComponent
+		DialogConfirmDeleteComponent,
+		NumericDirective,
+		InputDirective
 	],
 	entryComponents: [
 		InputComponent,

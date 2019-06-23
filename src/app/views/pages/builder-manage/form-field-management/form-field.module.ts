@@ -1,9 +1,5 @@
 import { SharedModule } from "./../../../../shared/shared.module";
 import { DirectiveModule } from "./../../../../core/_base/metronic/directives/directive.module";
-import {
-	NumericDirective,
-	InputDirective
-} from "../../../../core/_base/metronic/index";
 import { CoreModule } from "../../../../core/core.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -75,12 +71,12 @@ const routes: Routes = [
 		TextFieldComponent,
 		SelectOptionComponent,
 		NumberFieldComponent,
-		NumericDirective,
+		// NumericDirective,
 		LookUpComponent,
 		FuploadImageComponent,
 		MoneyComponent,
-		CButtonComponent,
-		InputDirective
+		CButtonComponent
+		// InputDirective
 	],
 	exports: [],
 	entryComponents: [ModalDialogComponent],

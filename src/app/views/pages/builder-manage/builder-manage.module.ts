@@ -28,10 +28,7 @@ import { ModuleAddComponent } from "./module-manage/module-add/module-add.compon
 import { ModuleEditDialogComponent } from "./module-manage/module-edit/module-edit-dialog.component";
 
 // Pipe, Directives
-import {
-	ReplaceSpacePipe
-	// NumericDirective
-} from "../../../core/_base/metronic/index";
+import { ReplaceSpacePipe } from "../../../core/_base/metronic/index";
 import { FormFieldModule } from "./form-field-management/form-field.module";
 import { SolutionEditDialogComponent } from "./solution-manage/controls/solution-edit-dialog/solution-edit-dialog.component";
 import { ModuleDetailComponent } from "./module-manage/module-detail/module-detail.component";
@@ -85,7 +82,7 @@ const routes: Routes = [
 		SolutionAddComponent,
 		ModuleAddComponent,
 		SolutionEditDialogComponent,
-		ModuleEditDialogComponent,
+		ModuleEditDialogComponent
 	],
 	imports: [
 		CommonModule,
