@@ -237,6 +237,7 @@ export class TypesUtilsService {
 		}
 		return str
 			.replace(/ /g, "_")
+			.replace(/[^\w\s]/gi, "")
 			.trim()
 			.toLowerCase();
 	}
