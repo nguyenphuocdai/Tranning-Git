@@ -73,7 +73,7 @@ export class ModuleDetailComponent implements OnInit, AfterViewInit {
 				};
 
 				this.columns.push(obj);
-				console.log(obj);
+				// console.log(obj);
 			}
 		}
 		this.displayedColumns = this.columns.map(c => c.columnDef);

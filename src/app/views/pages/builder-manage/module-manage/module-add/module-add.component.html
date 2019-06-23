@@ -70,6 +70,7 @@
 									formControlName="database"
 									placeholder="Enter database name"
 									(ngModelChange)="onDatabaseChange($event)"
+									[type]="'database'" [input]="rfModule.get('database').value"
 								/>
 								<mat-hint align="start"
 									>Module of database</mat-hint
